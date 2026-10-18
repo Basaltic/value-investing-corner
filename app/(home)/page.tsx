@@ -45,7 +45,7 @@ export default function HomePage() {
                 href="/knowledge"
                 className="inline-flex items-center gap-2 rounded-full bg-[var(--ink)] px-6 py-3 text-sm font-medium text-[var(--paper)] transition-transform hover:-translate-y-0.5"
               >
-                进入资料库
+                阅读基本理念
                 <ArrowUpRight className="size-4" />
               </Link>
               <Link
@@ -68,7 +68,7 @@ export default function HomePage() {
               <span className="site-muted text-xs uppercase tracking-[0.2em]">
                 当前整理
               </span>
-              <p className="mt-2 text-sm">投资框架 · 心智模型 · 长期思考</p>
+              <p className="mt-2 text-sm">大师资料 · 企业研究 · 长期思考</p>
             </div>
           </aside>
         </div>
@@ -139,10 +139,10 @@ export default function HomePage() {
                 01 / KNOWLEDGE
               </span>
               <h3 className="site-serif mt-3 text-3xl font-medium">
-                价值投资资料库
+                价值投资基本理念
               </h3>
               <p className="site-muted mt-3 max-w-md text-sm leading-7">
-                按主题整理的框架、概念与阅读线索，方便检索、回顾和持续补充。
+                从企业所有权、市场报价、安全边际和能力圈出发，建立长期投资的基础判断。
               </p>
             </div>
           </Link>

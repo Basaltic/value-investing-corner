@@ -28,7 +28,7 @@ export function baseOptions(): BaseLayoutProps {
     },
     links: [
       {
-        text: "投资资料",
+        text: "基本理念",
         url: knowledgeRoute,
         active: "nested-url",
       },

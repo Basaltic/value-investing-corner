@@ -17,9 +17,8 @@ pnpm dev
 
 ```text
 content/
-├── knowledge/         # 价值投资资料，按主题组织
-│   ├── frameworks/    # 投资框架
-│   └── mental-models/ # 心智模型
+├── knowledge/         # 价值投资基本理念与大师资料
+│   └── masters/       # 向大师学习，按人物组织
 └── blog/              # 个人思考札记
 ```
 
@@ -33,7 +32,7 @@ content/
 ---
 title: 标题
 description: 一句话摘要
-category: 投资框架
+category: 向大师学习
 updated: 2026-10-18
 tags: [护城河, 企业分析]
 ---
