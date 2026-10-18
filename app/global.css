@@ -1,0 +1,94 @@
+@import "tailwindcss";
+@import "fumadocs-ui/css/neutral.css";
+@import "fumadocs-ui/css/preset.css";
+
+:root {
+  --paper: #f4f1e8;
+  --paper-deep: #ebe5d8;
+  --ink: #17251d;
+  --ink-muted: #617066;
+  --forest: #1d4a35;
+  --forest-soft: #dce8df;
+  --line: rgba(29, 74, 53, 0.16);
+  --gold: #a87936;
+}
+
+.dark {
+  --paper: #111713;
+  --paper-deep: #18211b;
+  --ink: #edf2ed;
+  --ink-muted: #9dac9f;
+  --forest: #8cc6a4;
+  --forest-soft: #22392b;
+  --line: rgba(180, 214, 190, 0.14);
+  --gold: #d0aa6f;
+}
+
+html {
+  scrollbar-gutter: stable;
+}
+
+html > body[data-scroll-locked] {
+  margin-right: 0px !important;
+  --removed-body-scroll-bar-size: 0px !important;
+}
+
+body {
+  background: var(--paper);
+  color: var(--ink);
+  font-family:
+    "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC",
+    system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+}
+
+.site-serif {
+  font-family:
+    "Songti SC", "STSong", "Noto Serif CJK SC", "Source Han Serif SC", Georgia,
+    serif;
+}
+
+.site-paper {
+  background-color: var(--paper);
+}
+
+.site-ink {
+  color: var(--ink);
+}
+
+.site-muted {
+  color: var(--ink-muted);
+}
+
+.site-forest {
+  color: var(--forest);
+}
+
+.site-rule {
+  border-color: var(--line);
+}
+
+.site-hero-grid {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, black 5%, transparent 92%);
+}
+
+.site-noise {
+  background-image: radial-gradient(
+    circle at 20% 20%,
+    color-mix(in srgb, var(--gold) 14%, transparent),
+    transparent 42%
+  );
+}
+
+::selection {
+  background: color-mix(in srgb, var(--gold) 30%, transparent);
+}
+
+a,
+button {
+  -webkit-tap-highlight-color: transparent;
+}
