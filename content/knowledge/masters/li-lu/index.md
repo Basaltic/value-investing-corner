@@ -45,4 +45,4 @@ tags: [李录, 长期主义, 中国市场, 文明演进]
 - 用芒格的方法寻找认知偏差和跨学科解释。
 - 用段永平的视角理解商业模式与企业文化。
 
-继续阅读：[李录资料索引](./materials.md)
+继续阅读：[《李录谈现代化》全文](./li-lu-on-modernization-full.md) · [《价值投资在中国的展望》演讲全文](./value-investing-in-china-2015.md) · [《从人类文明史角度看当今中美关系走向》全文](./modernization-and-us-china-relations.md) · [《全球价值投资与时代》演讲及问答](./global-value-investing-and-the-times-2024.md) · [李录资料索引](./materials.md)
