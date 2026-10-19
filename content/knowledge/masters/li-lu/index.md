@@ -45,7 +45,7 @@ tags: [李录, 长期主义, 中国市场, 文明演进]
 - 用芒格的方法寻找认知偏差和跨学科解释。
 - 用段永平的视角理解商业模式与企业文化。
 
-继续阅读：[《李录谈现代化》全文](./li-lu-on-modernization-full.md) · [《价值投资在中国的展望》演讲全文](./value-investing-in-china-2015.md) · [《从人类文明史角度看当今中美关系走向》全文](./modernization-and-us-china-relations.md) · [《全球价值投资与时代》演讲及问答](./global-value-investing-and-the-times-2024.md) · [2019年年度书评《大衰退年代》全文](./annual-book-review-2019.md)
+继续阅读：[《李录谈现代化》全文](./li-lu-on-modernization-full.md) · [《价值投资在中国的展望》演讲全文](./value-investing-in-china-2015.md) · [《从人类文明史角度看当今中美关系走向》全文](./modernization-and-us-china-relations.md) · [《全球价值投资与时代》演讲及问答](./global-value-investing-and-the-times-2024.md) · [2019年年度书评《大衰退年代》全文](./annual-book-review-2019.md) · [公开演讲与访谈文字稿](./speeches/index.md)
 
 ## 资料索引
 
@@ -59,6 +59,7 @@ tags: [李录, 长期主义, 中国市场, 文明演进]
 | [《从人类文明史角度看当今中美关系走向》](./modernization-and-us-china-relations.md) | 2018年12月13日专题文章 | 文明演进、现代化、全球市场体系与中美关系 |
 | [《全球价值投资与时代》](./global-value-investing-and-the-times-2024.md) | 2024年12月北大课程十周年沙龙演讲及问答 | 时代挑战、财富与购买力、价值投资理念及投资实践 |
 | [2019年年度书评《大衰退年代》](./annual-book-review-2019.md) | 2019年11月19日书评全文 | 资产负债表衰退、全球化与不同发展阶段的宏观政策 |
+| [公开演讲与访谈文字稿](./speeches/index.md) | 演讲、问答、访谈与讲座笔记归档 | 完整文字稿、原文来源与资料类型 |
 | 北大光华等公开演讲 | 一手或经整理的演讲 | 价值投资常识、研究方法与长期判断 |
 | 喜马拉雅资本相关访谈 | 公开访谈 | 资本配置、风险与中国市场 |
 | 芒格与李录的对谈 | 对话记录 | 跨代际的投资理念与人生经验 |
