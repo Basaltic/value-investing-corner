@@ -1,13 +1,4 @@
 {
   "title": "李录",
-  "pages": [
-    "index",
-    "li-lu-on-modernization-full",
-    "value-investing-in-china-2015",
-    "modernization-and-us-china-relations",
-    "global-value-investing-and-the-times-2024",
-    "annual-book-review-2019",
-    "speeches",
-    "!materials"
-  ]
+  "pages": ["index", "articles", "speeches", "!materials"]
 }

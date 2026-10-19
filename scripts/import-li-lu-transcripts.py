@@ -26,6 +26,12 @@ ITEMS = [
 ]
 
 
+VISIBLE_ITEMS = ITEMS[:-1]
+MENU_PAGES = ["index", "../value-investing-in-china-2015"] + [x[1] for x in VISIBLE_ITEMS] + [
+    "../global-value-investing-and-the-times-2024", "!2024-global-value-investing-transcript"
+]
+
+
 def source_body(path):
     text = path.read_text(encoding="utf-8")
     assert "\ufffd" not in text
@@ -49,10 +55,11 @@ def verify(source):
         output.append({"file": filename, "article": str(path.relative_to(ROOT)), "original_characters": len(expected), "sha256": hashlib.sha256(body.encode()).hexdigest(), "original_preserved": True})
     menu = json.loads((DEST / "meta.json").read_text())
     assert menu["title"] == "公开演讲"
-    assert menu["pages"] == ["index"] + [x[1] for x in ITEMS]
+    assert menu["pages"] == MENU_PAGES
     assert len(list(DEST.glob("*.md"))) == 10
     index = (DEST / "index.md").read_text()
-    assert all(f"./{slug}.md" in index for _, slug, *_ in ITEMS)
+    assert all(f"./{slug}.md" in index for _, slug, *_ in VISIBLE_ITEMS)
+    assert "./2024-global-value-investing-transcript.md" not in index
     assert "../global-value-investing-and-the-times-2024.md" in index
     assert len(re.findall(r"(?m)^问\s*\d+：", source_body(source / ITEMS[2][0]))) == 39
     print(json.dumps({"articles_verified": len(output), "original_content_verification": output, "menu_and_index_verified": True, "source_images": 0}, ensure_ascii=False, indent=2))
@@ -88,26 +95,24 @@ updated: "2026-10-19"
 tags: ["李录", "公开演讲", "问答", "访谈"]
 ---
 
-本栏目收录本次提供的9篇李录文字稿，按年份排列。演讲、访谈和笔记按资料本身的类型标注，不将第三方笔记当作演讲逐字稿。原有PDF资料保留在原来的位置和网址。
+本栏目收录《价值投资在中国的展望》《全球价值投资与时代》两篇演讲及此前提供的8篇其他文字稿，按年份排列。演讲、访谈和笔记按资料本身的类型标注，不将第三方笔记当作演讲逐字稿。现代化文章与年度书评归入[重要文章](../articles/index.md)栏目，原有阅读网址不变。
 
-> 以下内容按用户材料归档，未做外部真实性核验。原文中的日期、历史观点、来源和编者说明保留；2024年《全球价值投资与时代》与已收录PDF版作为两个资料版本分别保存。
+> 以下内容按归档资料收录，原文中的日期、历史观点、来源和编者说明保留。2024年《全球价值投资与时代》在本栏目展示PDF版；另一文字稿版仅保留存档，不再列入菜单和栏目清单。
 '''
+    index += "\n## 2015\n\n- [《价值投资在中国的展望》2015年演讲全文](../value-investing-in-china-2015.md) — 公开演讲（PDF全文转换）。\n"
     prior = None
-    for filename, slug, title, year, kind, note in ITEMS:
+    for filename, slug, title, year, kind, note in VISIBLE_ITEMS:
         if year != prior:
             index += f"\n## {year}\n"
             prior = year
         index += f"\n- [{title}](./{slug}.md) — {kind}。\n"
     index += '''
-## 已收录的相关PDF资料
-
-- [《价值投资在中国的展望》2015年演讲全文](../value-investing-in-china-2015.md)
-- [《全球价值投资与时代》2024年PDF版全文及问答](../global-value-investing-and-the-times-2024.md)
+- [《全球价值投资与时代》2024年演讲全文及问答](../global-value-investing-and-the-times-2024.md) — 公开演讲（PDF全文转换）。
 
 [返回李录：核心思想与资料索引](../index.md)
 '''
     (DEST / "index.md").write_text(index, encoding="utf-8")
-    (DEST / "meta.json").write_text(json.dumps({"title": "公开演讲", "pages": ["index"] + [x[1] for x in ITEMS]}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    (DEST / "meta.json").write_text(json.dumps({"title": "公开演讲", "pages": MENU_PAGES}, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     verify(source)
 
 

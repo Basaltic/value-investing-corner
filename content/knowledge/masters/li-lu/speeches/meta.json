@@ -2,6 +2,7 @@
   "title": "公开演讲",
   "pages": [
     "index",
+    "../value-investing-in-china-2015",
     "2018-hongzhoukan-interview",
     "2019-peking-value-investing-practice",
     "2019-professional-investors-39-questions",
@@ -10,6 +11,7 @@
     "2021-36kr-interview",
     "2021-greenwald-dialogue",
     "2024-zhenghedao-interview",
-    "2024-global-value-investing-transcript"
+    "../global-value-investing-and-the-times-2024",
+    "!2024-global-value-investing-transcript"
   ]
 }
