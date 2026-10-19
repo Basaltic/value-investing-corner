@@ -45,7 +45,7 @@ export default function HomePage() {
                 href="/knowledge"
                 className="inline-flex items-center gap-2 rounded-full bg-[var(--ink)] px-6 py-3 text-sm font-medium text-[var(--paper)] transition-transform hover:-translate-y-0.5"
               >
-                阅读基本理念
+                浏览知识库
                 <ArrowUpRight className="size-4" />
               </Link>
               <Link
@@ -138,11 +138,9 @@ export default function HomePage() {
               <span className="site-muted text-xs tracking-[0.16em]">
                 01 / KNOWLEDGE
               </span>
-              <h3 className="site-serif mt-3 text-3xl font-medium">
-                价值投资基本理念
-              </h3>
+              <h3 className="site-serif mt-3 text-3xl font-medium">知识库</h3>
               <p className="site-muted mt-3 max-w-md text-sm leading-7">
-                从企业所有权、市场报价、安全边际和能力圈出发，建立长期投资的基础判断。
+                从投资人物、核心思想与原始资料出发，沿着清晰的学习路径进入价值投资。
               </p>
             </div>
           </Link>
