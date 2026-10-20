@@ -9,6 +9,7 @@ tags: ["查理·芒格", "公开演讲", "English", "Revised talk"]
 > Archive note: Source file: `2005_revised_The+Psychology+of+Human+Misjudment.pdf` (52 PDF pages). The source text is kept in English without translation, summary or paraphrase. Only paragraph wrapping, Markdown syntax and running layout elements are adjusted. Dates and provenance follow the supplied material and have not been independently verified. This 52-page FS.BLOG version is retained separately from the 27-page scanned version. Original introductory commentary is retained.
 
 [Back to Public Speeches](./index.md) · [Original PDF](/materials/charlie-munger/2005-human-misjudgment-revised.pdf)
+> 中文译本：[中文译本](./zh/2005-human-misjudgment-revised.md)
 
 ## Original English text
 

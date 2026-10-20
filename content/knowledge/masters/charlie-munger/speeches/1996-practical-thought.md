@@ -9,6 +9,7 @@ tags: ["查理·芒格", "公开演讲", "English", "Adapted informal talk"]
 > Archive note: Source file: `1996_Practical_thought_about_practical_thought_Mungers-analysis-to-build-a-Trillion-Dollar-Business-from-Scratch.pdf` (11 PDF pages). The source text is kept in English without translation, summary or paraphrase. Only paragraph wrapping, Markdown syntax and running layout elements are adjusted. Dates and provenance follow the supplied material and have not been independently verified. The PDF describes itself as an adaptation of Munger's July 20, 1996 informal talk. Original editorial material, source credit and footnotes are retained.
 
 [Back to Public Speeches](./index.md) · [Original PDF](/materials/charlie-munger/1996-practical-thought.pdf)
+> 中文译本：[中文译本](./zh/1996-practical-thought.md)
 
 ## Original English text
 

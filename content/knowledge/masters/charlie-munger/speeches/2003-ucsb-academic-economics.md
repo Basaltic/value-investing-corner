@@ -9,6 +9,7 @@ tags: ["查理·芒格", "公开演讲", "English", "Lecture and Q&A transcript"
 > Archive note: Source file: `2003-speech-by-charlie-munger-at-ucsb-academic-economics-strengths-and-faults-after-considering-interdisciplinary.pdf` (25 PDF pages). The source text is kept in English without translation, summary or paraphrase. Only paragraph wrapping, Markdown syntax and running layout elements are adjusted. Dates and provenance follow the supplied material and have not been independently verified. 
 
 [Back to Public Speeches](./index.md) · [Original PDF](/materials/charlie-munger/2003-ucsb-academic-economics.pdf)
+> 中文译本：[中文译本](./zh/2003-ucsb-academic-economics.md)
 
 ## Original English text
 

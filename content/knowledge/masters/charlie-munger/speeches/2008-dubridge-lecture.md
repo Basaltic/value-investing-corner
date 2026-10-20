@@ -9,6 +9,7 @@ tags: ["查理·芒格", "公开演讲", "English", "Conversation and audience Q
 > Archive note: Source file: `2008_DuBridge_Lecture.pdf` (12 PDF pages). The source text is kept in English without translation, summary or paraphrase. Only paragraph wrapping, Markdown syntax and running layout elements are adjusted. Dates and provenance follow the supplied material and have not been independently verified. This PDF is a printed web page. The full TRANSCRIPT section on PDF pages 1–11 is retained. Website menus, the video-player title, navigation icons and unrelated electronics-site footer (including page 12) are excluded. Source wording and apparent transcript errors are not rewritten.
 
 [Back to Public Speeches](./index.md) · [Original PDF](/materials/charlie-munger/2008-dubridge-lecture.pdf)
+> 中文译本：[中文译本](./zh/2008-dubridge-lecture.md)
 
 ## Original English text
 

@@ -9,6 +9,7 @@ tags: ["查理·芒格", "公开演讲", "English", "Satirical essay"]
 > Archive note: Source file: `2011-a-parody-about-the-great-recession.pdf` (6 PDF pages). The source text is kept in English without translation, summary or paraphrase. Only paragraph wrapping, Markdown syntax and running layout elements are adjusted. Dates and provenance follow the supplied material and have not been independently verified. This is an essay headed A Parody about the Great Recession, not a speech transcript. It is archived in this menu with its actual material type identified. The original afterword is retained.
 
 [Back to Public Speeches](./index.md) · [Original PDF](/materials/charlie-munger/2011-great-recession-parody.pdf)
+> 中文译本：[中文译本](./zh/2011-great-recession-parody.md)
 
 ## Original English text
 

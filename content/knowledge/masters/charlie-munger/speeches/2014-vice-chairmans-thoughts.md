@@ -9,6 +9,7 @@ tags: ["查理·芒格", "公开演讲", "English", "Shareholder commentary"]
 > Archive note: Source file: `2014-vice-chairmans-thoughts-past-and-future.pdf` (5 PDF pages). The source text is kept in English without translation, summary or paraphrase. Only paragraph wrapping, Markdown syntax and running layout elements are adjusted. Dates and provenance follow the supplied material and have not been independently verified. This is written commentary addressed to Berkshire Hathaway shareholders, not a speech transcript. The year follows the supplied filename; no external dating verification was performed.
 
 [Back to Public Speeches](./index.md) · [Original PDF](/materials/charlie-munger/2014-vice-chairmans-thoughts.pdf)
+> 中文译本：[中文译本](./zh/2014-vice-chairmans-thoughts.md)
 
 ## Original English text
 

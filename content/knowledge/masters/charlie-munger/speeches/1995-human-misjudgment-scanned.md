@@ -9,6 +9,7 @@ tags: ["查理·芒格", "公开演讲", "English", "Revised talk, scanned versi
 > Archive note: Source file: `1995-speech-by-charlie-munger-at-harvard-the-psychology-of-human-misjudgment.pdf` (27 PDF pages). The source text is kept in English without translation, summary or paraphrase. Only paragraph wrapping, Markdown syntax and running layout elements are adjusted. Dates and provenance follow the supplied material and have not been independently verified. Although the supplied filename says 1995, this PDF contains a preface and notes describing an extensive revision in 2005. It is not presented here as a verified 1995 verbatim transcript. All 27 scanned pages were recognized with English OCR, left column before right column. OCR is not a manually proofread transcription; residual recognition errors may remain. Consult the original PDF for exact wording.
 
 [Back to Public Speeches](./index.md) · [Original PDF](/materials/charlie-munger/1995-human-misjudgment-scanned.pdf)
+> 中文译本：[中文译本](./zh/1995-human-misjudgment-scanned.md)
 
 ## Original English text
 

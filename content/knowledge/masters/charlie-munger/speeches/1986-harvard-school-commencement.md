@@ -9,6 +9,7 @@ tags: ["查理·芒格", "公开演讲", "English", "Commencement address"]
 > Archive note: Source file: `1986-commencement-speech-by-charlie-munger-at-harvard-school-now-harvard-westlake.pdf` (4 PDF pages). The source text is kept in English without translation, summary or paraphrase. Only paragraph wrapping, Markdown syntax and running layout elements are adjusted. Dates and provenance follow the supplied material and have not been independently verified. 
 
 [Back to Public Speeches](./index.md) · [Original PDF](/materials/charlie-munger/1986-harvard-school-commencement.pdf)
+> 中文译本：[中文译本](./zh/1986-harvard-school-commencement.md)
 
 ## Original English text
 

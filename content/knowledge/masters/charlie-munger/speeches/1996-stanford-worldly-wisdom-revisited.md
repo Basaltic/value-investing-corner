@@ -9,6 +9,7 @@ tags: ["查理·芒格", "公开演讲", "English", "Lecture excerpts and notes"
 > Archive note: Source file: `1996-lecture-by-charlie-munger-at-stanford-law-school-worldly-wisdom-revisited-business-what-lawyers-should-know.pdf` (32 PDF pages). The source text is kept in English without translation, summary or paraphrase. Only paragraph wrapping, Markdown syntax and running layout elements are adjusted. Dates and provenance follow the supplied material and have not been independently verified. The filename says 1996, while the document labels Worldly Wisdom Revisited with December 29, 1997. The PDF starts on printed page 18 of the Worldly Wisdom collection, includes the end of a preceding lecture, and continues through other material. All supplied pages are retained; this is not labeled as an isolated complete Stanford transcript.
 
 [Back to Public Speeches](./index.md) · [Original PDF](/materials/charlie-munger/1996-stanford-worldly-wisdom-revisited.pdf)
+> 中文译本：[中文译本](./zh/1996-stanford-worldly-wisdom-revisited.md)
 
 ## Original English text
 

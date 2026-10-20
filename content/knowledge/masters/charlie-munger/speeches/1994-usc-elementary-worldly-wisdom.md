@@ -9,6 +9,7 @@ tags: ["查理·芒格", "公开演讲", "English", "Lecture transcript"]
 > Archive note: Source file: `1994-lecture-by-charlie-munger-at-usc-a-lesson-on-elementary-worldly-wisdom-as-it-relates-to-investment.pdf` (36 PDF pages). The source text is kept in English without translation, summary or paraphrase. Only paragraph wrapping, Markdown syntax and running layout elements are adjusted. Dates and provenance follow the supplied material and have not been independently verified. The PDF identifies its publication as Outstanding Investor Digest's May 5, 1995 edition. Its original table of contents is retained.
 
 [Back to Public Speeches](./index.md) · [Original PDF](/materials/charlie-munger/1994-usc-elementary-worldly-wisdom.pdf)
+> 中文译本：[中文译本](./zh/1994-usc-elementary-worldly-wisdom.md)
 
 ## Original English text
 

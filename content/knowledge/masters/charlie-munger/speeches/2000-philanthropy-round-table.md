@@ -9,6 +9,7 @@ tags: ["查理·芒格", "公开演讲", "English", "Breakfast meeting talk"]
 > Archive note: Source file: `2000-talk-of-charlie-munger-to-breakfast-meeting-of-the-philanthropy-round-table.pdf` (5 PDF pages). The source text is kept in English without translation, summary or paraphrase. Only paragraph wrapping, Markdown syntax and running layout elements are adjusted. Dates and provenance follow the supplied material and have not been independently verified. 
 
 [Back to Public Speeches](./index.md) · [Original PDF](/materials/charlie-munger/2000-philanthropy-round-table.pdf)
+> 中文译本：[中文译本](./zh/2000-philanthropy-round-table.md)
 
 ## Original English text
 
