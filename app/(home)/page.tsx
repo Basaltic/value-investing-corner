@@ -1,5 +1,12 @@
-import { ArrowUpRight, BookOpen, Compass, PenLine } from "lucide-react";
+import {
+  ArrowUpRight,
+  BookOpen,
+  Calculator,
+  Compass,
+  PenLine,
+} from "lucide-react";
 import Link from "next/link";
+import { toolsRoute } from "@/lib/shared";
 import { blogSource } from "@/lib/source";
 
 function formatDate(value: string) {
@@ -118,12 +125,12 @@ export default function HomePage() {
               Explore the archive
             </p>
             <h2 className="site-serif mt-3 text-3xl font-medium md:text-4xl">
-              两条路径，一个长期目标
+              三种方式，一个长期目标
             </h2>
           </div>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-2">
+        <div className="grid gap-5 lg:grid-cols-3">
           <Link
             href="/knowledge"
             className="group site-rule flex min-h-64 flex-col justify-between rounded-3xl border bg-[var(--paper-deep)] p-7 transition-colors hover:border-[var(--forest)] md:p-9"
@@ -162,6 +169,27 @@ export default function HomePage() {
               <h3 className="site-serif mt-3 text-3xl font-medium">思想札记</h3>
               <p className="site-muted mt-3 max-w-md text-sm leading-7">
                 用写作校准判断，留下观点形成的过程，而不只保存最后结论。
+              </p>
+            </div>
+          </Link>
+
+          <Link
+            href={toolsRoute}
+            className="group site-rule flex min-h-64 flex-col justify-between rounded-3xl border bg-[var(--paper-deep)] p-7 transition-colors hover:border-[var(--forest)] md:p-9"
+          >
+            <div className="flex items-start justify-between">
+              <span className="grid size-11 place-items-center rounded-full border border-[var(--line)] bg-[var(--paper)]">
+                <Calculator className="site-forest size-5" />
+              </span>
+              <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
+            </div>
+            <div>
+              <span className="site-muted text-xs tracking-[0.16em]">
+                03 / TOOLS
+              </span>
+              <h3 className="site-serif mt-3 text-3xl font-medium">小工具</h3>
+              <p className="site-muted mt-3 max-w-md text-sm leading-7">
+                用方便的小工具辅助独立判断，从现金流折现估值开始，让计算有据可查。
               </p>
             </div>
           </Link>

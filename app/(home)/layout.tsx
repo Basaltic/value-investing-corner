@@ -1,15 +1,16 @@
 import { HomeLayout } from "fumadocs-ui/layouts/home";
 import { baseOptions } from "@/lib/layout.shared";
-import { blogRoute, knowledgeRoute } from "@/lib/shared";
+import { siteSections } from "@/lib/shared";
 
 export default function Layout({ children }: LayoutProps<"/">) {
   return (
     <HomeLayout
       {...baseOptions()}
-      links={[
-        { text: "知识库", url: knowledgeRoute, active: "nested-url" },
-        { text: "思想札记", url: blogRoute, active: "nested-url" },
-      ]}
+      links={siteSections.map(({ label, url }) => ({
+        text: label,
+        url,
+        active: "nested-url",
+      }))}
     >
       {children}
     </HomeLayout>

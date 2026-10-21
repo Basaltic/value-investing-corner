@@ -2,12 +2,7 @@
 
 import { ChevronDown } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
-import { blogRoute, knowledgeRoute } from "@/lib/shared";
-
-const sections = [
-  { label: "知识库", url: knowledgeRoute },
-  { label: "思想札记", url: blogRoute },
-];
+import { siteSections as sections } from "@/lib/shared";
 
 export function SectionSelect() {
   const pathname = usePathname();

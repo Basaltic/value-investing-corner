@@ -10,6 +10,14 @@ export const knowledgeImageRoute = "/og/knowledge";
 export const knowledgeContentRoute = "/llms.mdx/knowledge";
 export const blogRoute = "/blog";
 export const blogContentRoute = "/llms.mdx/blog";
+export const toolsRoute = "/tools";
+export const dcfRoute = `${toolsRoute}/dcf`;
+
+export const siteSections = [
+  { label: "知识库", url: knowledgeRoute },
+  { label: "思想札记", url: blogRoute },
+  { label: "小工具", url: toolsRoute },
+];
 
 export const gitConfig = {
   user: "Basaltic",
