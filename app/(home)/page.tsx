@@ -52,7 +52,7 @@ export default function HomePage() {
                 href="/blog"
                 className="site-rule inline-flex items-center gap-2 rounded-full border bg-transparent px-6 py-3 text-sm font-medium transition-colors hover:bg-[var(--forest-soft)]"
               >
-                阅读思考札记
+                阅读思想札记
               </Link>
             </div>
           </div>
@@ -159,9 +159,7 @@ export default function HomePage() {
               <span className="site-muted text-xs tracking-[0.16em]">
                 02 / NOTES
               </span>
-              <h3 className="site-serif mt-3 text-3xl font-medium">
-                理性思考札记
-              </h3>
+              <h3 className="site-serif mt-3 text-3xl font-medium">思想札记</h3>
               <p className="site-muted mt-3 max-w-md text-sm leading-7">
                 用写作校准判断，留下观点形成的过程，而不只保存最后结论。
               </p>

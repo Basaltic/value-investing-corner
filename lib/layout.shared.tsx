@@ -1,11 +1,6 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
-import {
-  appEnglishName,
-  appName,
-  blogRoute,
-  gitConfig,
-  knowledgeRoute,
-} from "./shared";
+import { SectionSelect } from "@/components/section-select";
+import { appEnglishName, appName, gitConfig } from "./shared";
 
 export function baseOptions(): BaseLayoutProps {
   return {
@@ -28,14 +23,8 @@ export function baseOptions(): BaseLayoutProps {
     },
     links: [
       {
-        text: "知识库",
-        url: knowledgeRoute,
-        active: "nested-url",
-      },
-      {
-        text: "思考札记",
-        url: blogRoute,
-        active: "nested-url",
+        type: "custom",
+        children: <SectionSelect />,
       },
     ],
     githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
