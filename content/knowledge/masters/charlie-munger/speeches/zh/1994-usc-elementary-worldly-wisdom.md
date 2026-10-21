@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "中文译本", "讲座实录"]
 ---
 
-> 归档说明：来源文件 `1994-lecture-by-charlie-munger-at-usc-a-lesson-on-elementary-worldly-wisdom-as-it-relates-to-investment.pdf`（36 个 PDF 页）。资料类型：讲座实录（Lecture transcript）。PDF 标明其出版物为《杰出投资者文摘》（Outstanding Investor Digest, OID）1995 年 5 月 5 日版；文件名按讲座年份记作 1994，两者均照实保留，未作外部年份核验。原文为 PDF 文本层转换，无 OCR，未另搜替换版本；原始目录、编者按与文末 “--OID” 标记均保留。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../1994-usc-elementary-worldly-wisdom.md) · [原始 PDF](/materials/charlie-munger/1994-usc-elementary-worldly-wisdom.pdf)
 
 <!-- CHINESE TRANSLATION START -->

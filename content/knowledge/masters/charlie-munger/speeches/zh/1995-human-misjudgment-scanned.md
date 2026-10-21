@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "心理学", "人类误判心理学", "扫描版", "中文译本"]
 ---
 
-> 归档说明：来源文件 `1995-speech-by-charlie-munger-at-harvard-the-psychology-of-human-misjudgment.pdf`（PDF 共 27 页）。资料类型：**修订版讲稿（scanned version）**，不是经核验的1995年现场逐字记录。版本差异：尽管所供文件名为1995，本PDF含一篇序言（PREFACE）及若干注释，描述了2005年的一次大幅修订；译文照录本扫描件，**不使用另一份2005修订版替换**。提取方式：27页全部经 Apple Vision 英文OCR识别，**先左栏后右栏**；OCR非人工逐字校对，可能残留识别错误，确切措辞以原PDF为准。译者对可据原PDF确证的OCR错字在审计中留证，不确定处以【译者注】标明，不默默猜改。日期与出处照录所供材料，未作外部史实核验。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../1995-human-misjudgment-scanned.md) · [原始 PDF](/materials/charlie-munger/1995-human-misjudgment-scanned.pdf)
 
 ## 中文译文

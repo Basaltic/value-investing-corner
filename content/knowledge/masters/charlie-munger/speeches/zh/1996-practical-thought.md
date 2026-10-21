@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "中文译本", "改编非正式谈话"]
 ---
 
-> 归档说明：来源文件 `1996_Practical_thought_about_practical_thought_Mungers-analysis-to-build-a-Trillion-Dollar-Business-from-Scratch.pdf`（共 11 个 PDF 页）。资料类型：改编非正式谈话（PDF 自称改编自芒格 1996 年 7 月 20 日的非正式谈话）。文本层转写，无 OCR；原有编辑材料、出处署名与脚注全部保留并译出。日期与出处按所供材料照录，未独立核验。个别文本层疑似讹误（如 p8 的 "12034" 应为 2034、"out flavor" 应为 our flavor、"tis" 应为 its、"main's rationality" 应为 man's rationality 等）在译文中按上下文本意处理，并在审计记录中标注；英文原稿不改。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../1996-practical-thought.md) · [原始 PDF](/materials/charlie-munger/1996-practical-thought.pdf)
 
 <!-- CHINESE TRANSLATION START -->

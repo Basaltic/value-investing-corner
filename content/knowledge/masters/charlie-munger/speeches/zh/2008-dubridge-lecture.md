@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "中文译本", "对话与问答", "常识", "跨学科", "Lollapalooza效应"]
 ---
 
-> 归档说明：来源文件 `2008_DuBridge_Lecture.pdf`（12 个 PDF 页，实为打印的网页）。资料类型：对话与现场问答（Conversation and audience Q&A）。PDF 第 1–11 页完整保留为 TRANSCRIPT；网站菜单、视频播放器标题、导航图标以及无关电子网站页脚（含第 12 页整页）按导入审计排除，不补入。文本来自所供 PDF 文本层；记录稿的口语断裂、口误与明显转写错误（如 Kaynes、Ballhouse、Tom Tambrillo）原样保留于英文，译文按口语自然处理，不改写来源措辞。日期与出处沿用所供材料，未经独立核验。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../2008-dubridge-lecture.md) · [原始 PDF](/materials/charlie-munger/2008-dubridge-lecture.pdf)
 
 <!-- CHINESE TRANSLATION START -->

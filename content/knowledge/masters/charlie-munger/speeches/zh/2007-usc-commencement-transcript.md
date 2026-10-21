@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "中文译本", "毕业演讲", "人生智慧"]
 ---
 
-> 归档说明：来源文件 `2007-USC-Law-School-Commencement-Address-by-Charlie-Munger-Transcript.pdf`（16 个 PDF 页）。资料类型：毕业典礼演讲记录稿（Commencement transcript）。另有一份所供 PDF 记录同一场毕业演讲，措辞与版式不同，两个版本各自保留、不合并；本篇只译记录稿版。文本来自所供 PDF 文本层，无 OCR；日期与出处沿用所供材料，未经独立核验。记录稿原文把句首的 Well / And / What 等语气词单独成行，译文按自然口语连贯处理，内容不删。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../2007-usc-commencement-transcript.md) · [原始 PDF](/materials/charlie-munger/2007-usc-commencement-transcript.pdf)
 
 <!-- CHINESE TRANSLATION START -->

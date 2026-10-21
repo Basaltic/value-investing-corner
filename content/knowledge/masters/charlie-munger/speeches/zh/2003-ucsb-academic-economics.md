@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "经济学", "跨学科", "讲座与问答", "中文译本"]
 ---
 
-> 归档说明：来源文件 `2003-speech-by-charlie-munger-at-ucsb-academic-economics-strengths-and-faults-after-considering-interdisciplinary.pdf`（PDF 共 25 页；内文另有演讲内页码 -1-…-22- 与年报式页码 -101-…-124-，均为印刷页码，已按审计规则排除）。资料类型：**讲座与问答记录**（Herb Kay Undergraduate Lecture，现场发言 + Q&A），由 Whitney Tilson（T2 Partners LLC）初录并做轻度编辑、补充网络链接，后经演讲人轻度再编辑。提取方式：PDF 文字层（PyMuPDF），非扫描 OCR；仅排除印刷页码。原文照录的拼法/自造词（如 Kippling、Febezzlement、Niederhoffering、p25 转写人名 Rajneesh Mehta 与引言页 Rajnish Mehra 不一致）在译文中以【译者注】标明，不擅改。日期与出处照录所供材料，未作外部史实核验。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../2003-ucsb-academic-economics.md) · [原始 PDF](/materials/charlie-munger/2003-ucsb-academic-economics.pdf)
 
 ## 中文译文

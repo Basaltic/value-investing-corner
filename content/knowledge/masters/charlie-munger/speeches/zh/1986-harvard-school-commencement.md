@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "中文译本", "毕业典礼致辞"]
 ---
 
-> 归档说明：来源文件 `1986-commencement-speech-by-charlie-munger-at-harvard-school-now-harvard-westlake.pdf`（共 4 个 PDF 页）。资料类型：毕业典礼致辞。文本层转写，无 OCR 识别不确定性。日期与出处按所供材料照录，未独立核验。英文原稿保留在 `../1986-harvard-school-commencement.md`，本译文逐页对照，不做摘要、不加写结论。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../1986-harvard-school-commencement.md) · [原始 PDF](/materials/charlie-munger/1986-harvard-school-commencement.pdf)
 
 <!-- CHINESE TRANSLATION START -->

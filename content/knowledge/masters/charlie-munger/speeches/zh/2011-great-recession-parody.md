@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "中文译本", "讽刺文章"]
 ---
 
-> 归档说明：来源文件 `2011-a-parody-about-the-great-recession.pdf`（6 个 PDF 页）。资料类型：署名讽刺文章（文内标题 A Parody about the Great Recession），不是演讲实录；原书后记予以保留。英文原稿以文本层转换，无 OCR，未另搜替换版本。文中人名、国名均为作者虚构的讽喻名字，首次出现处附英文原词。日期与出处依所提供材料，未作外部核验。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../2011-great-recession-parody.md) · [原始 PDF](/materials/charlie-munger/2011-great-recession-parody.pdf)
 
 <!-- CHINESE TRANSLATION START -->

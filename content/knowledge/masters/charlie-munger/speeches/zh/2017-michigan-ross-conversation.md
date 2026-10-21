@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "中文译本", "对话记录", "沃伦·巴菲特", "伯克希尔·哈撒韦"]
 ---
 
-> 归档说明：来源文件 `2017-a-conversation-with-charlie-munger-at-university-of-michigan-ross.pdf`（13 个 PDF 页）。资料类型：对话记录（Conversation transcript），2017/12/20，对话人为芒格与密歇根罗斯商学院院长 Scott DeRue（斯科特·德鲁）。文本来自所供 PDF 文本层，无 OCR；日期与出处沿用所供材料，未经独立核验。记录稿中个别口语断裂、口误（如 nNo、hadn't had）按口语自然处理，数字与人名不改。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../2017-michigan-ross-conversation.md) · [原始 PDF](/materials/charlie-munger/2017-michigan-ross-conversation.pdf)
 
 <!-- CHINESE TRANSLATION START -->

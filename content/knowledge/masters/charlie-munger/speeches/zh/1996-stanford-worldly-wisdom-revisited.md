@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "中文译本", "讲座摘录与问答"]
 ---
 
-> 归档说明：来源文件 `1996-lecture-by-charlie-munger-at-stanford-law-school-worldly-wisdom-revisited-business-what-lawyers-should-know.pdf`（32 个 PDF 页）。资料类型：讲座摘录与学生问答（Lecture excerpts and notes）。**年份差异照实保留**：文件名按 1996 记录，而文内标题标注 WORLDLY WISDOM REVISITED 为 1997 年 12 月 29 日，二者均不改动。本 PDF 从《Worldly Wisdom》合集打印第 18 页开始，前半含前一篇讲座（1994 USC 讲座结尾）的残留段落，随后才是斯坦福讲座正文；所有 supplied 页面原样保留，本篇不是一份孤立完整的斯坦福实录。原文为 PDF 文本层转换，无 OCR，未另搜替换版本。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../1996-stanford-worldly-wisdom-revisited.md) · [原始 PDF](/materials/charlie-munger/1996-stanford-worldly-wisdom-revisited.pdf)
 
 <!-- CHINESE TRANSLATION START -->

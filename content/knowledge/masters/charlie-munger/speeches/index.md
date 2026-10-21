@@ -10,6 +10,8 @@ tags: ["查理·芒格", "公开演讲", "中文译本", "English"]
 
 ## 版本入口
 
+[中文译本](./zh/index.md) · [英文原文](./en/index.md)
+
 | 中文标题 | 资料类型 | 中文译本 | English | PDF |
 | --- | --- | --- | --- | --- |
 | 1986 — 在哈佛学校的演讲 | 毕业典礼致辞 | [中文译本](./zh/1986-harvard-school-commencement.md) | [English](./1986-harvard-school-commencement.md) | [PDF](/materials/charlie-munger/1986-harvard-school-commencement.pdf) |

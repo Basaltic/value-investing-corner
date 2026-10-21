@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "中文译本", "人类误判心理学", "心理倾向", "Lollapalooza效应", "多元思维模型"]
 ---
 
-> 归档说明：来源文件 `2005_revised_The+Psychology+of+Human+Misjudment.pdf`（52 个 PDF 页，FS.BLOG 文本层版本）。资料类型：修订版谈话（Revised talk）。本 52 页修订版与 27 页 1995 扫描版分别保留、不合并；不使用扫描版代替本修订版。文本来自所供 PDF 文本层，无 OCR；页眉标题与 FS.BLOG 页码按导入审计排除。日期与出处沿用所供材料，未经独立核验。开场编者按为原稿原有，完整保留。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../2005-human-misjudgment-revised.md) · [原始 PDF](/materials/charlie-munger/2005-human-misjudgment-revised.pdf)
 
 <!-- CHINESE TRANSLATION START -->

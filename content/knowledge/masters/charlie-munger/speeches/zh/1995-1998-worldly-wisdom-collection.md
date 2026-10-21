@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "中文译本", "演讲与笔记合集"]
 ---
 
-> 归档说明：来源文件 `1995_to_1998_Worldly-Wisdom-by-Munger.pdf`（共 50 个 PDF 页）。资料类型：演讲与笔记合集（非单一演讲），按原件照录。文本层转写，无 OCR；与其他 PDF 重叠的材料按本件分别保留，不做合并。每页运行页脚"Worldly Wisdom by Charlie Munger 1995-1998 N"属于导入时已排除的版式元素，不译。日期与出处按所供材料照录，未独立核验。个别文本层疑似讹误在译文中按上下文本意处理并在审计记录标注，英文原稿不改。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../1995-1998-worldly-wisdom-collection.md) · [原始 PDF](/materials/charlie-munger/1995-1998-worldly-wisdom-collection.pdf)
 
 <!-- CHINESE TRANSLATION START -->

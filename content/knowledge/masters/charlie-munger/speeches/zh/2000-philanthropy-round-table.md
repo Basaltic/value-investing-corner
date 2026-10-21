@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "中文译本", "财富效应", "慈善基金会"]
 ---
 
-> 归档说明：来源文件 `2000-talk-of-charlie-munger-to-breakfast-meeting-of-the-philanthropy-round-table.pdf`（5 个 PDF 页，原书页码 -83- 至 -87-，导入时已排除印刷页码）。资料类型：慈善圆桌会议早餐谈话（Breakfast meeting talk）。本文为 supplied PDF 文本层转写，无 OCR；日期与出处沿用所供材料，未经独立核验。原文个别自造词（bezzle、febezzle、foolexures）按上下文保留英文并加注；原文疑似拼写瑕疵（如 modem 应为 modern）在译文旁注说明，不改动英文原稿。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../2000-philanthropy-round-table.md) · [原始 PDF](/materials/charlie-munger/2000-philanthropy-round-table.pdf)
 
 <!-- CHINESE TRANSLATION START -->

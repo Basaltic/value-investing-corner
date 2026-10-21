@@ -6,8 +6,6 @@ updated: "2026-10-20"
 tags: ["查理·芒格", "公开演讲", "毕业典礼", "法学院", "中文译本"]
 ---
 
-> 归档说明：来源文件 `2007-commencement-speech-by-charlie-munger-at-usc-gould-school-of-law.pdf`（PDF 共 10 页）。资料类型：毕业典礼现场演讲（commencement address）。版本差异：另一份所供 PDF（`2007-usc-commencement-transcript`）记录同一场毕业典礼演讲，措辞与排版不同；两份版本各自保留、**未合并**，本稿仅译 Gould 版。提取方式：PDF 文字层（PyMuPDF），非扫描 OCR，无识别错误不确定性；原文个别照录的生僻拼法与自造词（如 Houseman、Aaron Rapids、impenured、non-egality、quick claim）在译文中以【译者注】标明，不擅改原文。日期与出处照录所供材料，未作外部史实核验。
-
 [返回中文公开演讲](./index.md) · [英文原稿](../2007-usc-gould-commencement.md) · [原始 PDF](/materials/charlie-munger/2007-usc-gould-commencement.pdf)
 
 ## 中文译文
