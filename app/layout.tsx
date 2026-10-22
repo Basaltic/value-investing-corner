@@ -1,8 +1,8 @@
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { RootProvider } from "fumadocs-ui/provider/next";
 import type { Metadata } from "next";
 import "./global.css";
+import { Providers } from "@/components/providers";
 import { appDescription, appName } from "@/lib/shared";
 
 export const metadata: Metadata = {
@@ -17,10 +17,12 @@ export const metadata: Metadata = {
 };
 
 export default function Layout({ children }: LayoutProps<"/">) {
+  const indexName = process.env.ALGOLIA_INDEX_NAME ?? "document";
+
   return (
     <html lang="zh-CN" suppressHydrationWarning>
       <body className="flex min-h-screen flex-col">
-        <RootProvider>{children}</RootProvider>
+        <Providers indexName={indexName}>{children}</Providers>
         <Analytics />
         <SpeedInsights />
       </body>

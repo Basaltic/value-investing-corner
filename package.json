@@ -4,7 +4,9 @@
   "description": "价投小角落（Value Investing Corner）：记录价值投资资料、理性思考与长期成长。",
   "private": true,
   "scripts": {
-    "build": "next build --webpack",
+    "build": "next build --webpack && pnpm search:sync --auto",
+    "search:sync": "node --env-file-if-exists=.env.local scripts/sync-content.mjs",
+    "search:test": "node --test scripts/sync-content.test.mjs",
     "dev": "next dev",
     "start": "next start",
     "types:check": "next typegen && tsc --noEmit",
@@ -16,6 +18,7 @@
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
+    "algoliasearch": "^5.60.0",
     "fumadocs-core": "16.17.5",
     "fumadocs-mdx": "15.4.7",
     "fumadocs-ui": "npm:@fumadocs/base-ui@16.17.5",
