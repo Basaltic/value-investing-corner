@@ -1,6 +1,6 @@
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { SectionSelect } from "@/components/section-select";
-import { appEnglishName, appName, gitConfig } from "./shared";
+import { appEnglishName, appName } from "./shared";
 
 export function baseOptions(): BaseLayoutProps {
   return {
@@ -27,6 +27,5 @@ export function baseOptions(): BaseLayoutProps {
         children: <SectionSelect />,
       },
     ],
-    githubUrl: `https://github.com/${gitConfig.user}/${gitConfig.repo}`,
   };
 }

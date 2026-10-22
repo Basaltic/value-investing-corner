@@ -68,7 +68,7 @@ ${await page.data.getText("processed")}`,
 });
 
 export async function getSearchIndexes() {
-  const pages = [...knowledgeSource.getPages(), ...blogSource.getPages()];
+  const pages = knowledgeSource.getPages();
 
   return Promise.all(
     pages.map(async (page) => ({

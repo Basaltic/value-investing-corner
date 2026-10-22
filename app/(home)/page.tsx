@@ -1,31 +1,8 @@
-import {
-  ArrowUpRight,
-  BookOpen,
-  Calculator,
-  Compass,
-  PenLine,
-} from "lucide-react";
+import { ArrowUpRight, BookOpen, Calculator } from "lucide-react";
 import Link from "next/link";
 import { toolsRoute } from "@/lib/shared";
-import { blogSource } from "@/lib/source";
-
-function formatDate(value: string) {
-  return new Intl.DateTimeFormat("zh-CN", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  }).format(new Date(`${value}T00:00:00+08:00`));
-}
 
 export default function HomePage() {
-  const latestNote = blogSource
-    .getPages()
-    .sort(
-      (left, right) =>
-        new Date(right.data.date).getTime() -
-        new Date(left.data.date).getTime(),
-    )[0];
-
   return (
     <main className="site-paper relative flex flex-1 flex-col overflow-hidden">
       <div className="site-hero-grid pointer-events-none absolute inset-0 opacity-70" />
@@ -54,12 +31,6 @@ export default function HomePage() {
               >
                 浏览知识库
                 <ArrowUpRight className="size-4" />
-              </Link>
-              <Link
-                href="/blog"
-                className="site-rule inline-flex items-center gap-2 rounded-full border bg-transparent px-6 py-3 text-sm font-medium transition-colors hover:bg-[var(--forest-soft)]"
-              >
-                阅读思想札记
               </Link>
             </div>
           </div>
@@ -125,12 +96,12 @@ export default function HomePage() {
               Explore the archive
             </p>
             <h2 className="site-serif mt-3 text-3xl font-medium md:text-4xl">
-              三种方式，一个长期目标
+              两种方式，一个长期目标
             </h2>
           </div>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-3">
+        <div className="grid gap-5 lg:grid-cols-2">
           <Link
             href="/knowledge"
             className="group site-rule flex min-h-64 flex-col justify-between rounded-3xl border bg-[var(--paper-deep)] p-7 transition-colors hover:border-[var(--forest)] md:p-9"
@@ -153,27 +124,6 @@ export default function HomePage() {
           </Link>
 
           <Link
-            href="/blog"
-            className="group site-rule flex min-h-64 flex-col justify-between rounded-3xl border bg-[var(--forest-soft)] p-7 transition-colors hover:border-[var(--forest)] md:p-9"
-          >
-            <div className="flex items-start justify-between">
-              <span className="grid size-11 place-items-center rounded-full border border-[var(--line)] bg-[var(--paper)]">
-                <PenLine className="site-forest size-5" />
-              </span>
-              <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-            </div>
-            <div>
-              <span className="site-muted text-xs tracking-[0.16em]">
-                02 / NOTES
-              </span>
-              <h3 className="site-serif mt-3 text-3xl font-medium">思想札记</h3>
-              <p className="site-muted mt-3 max-w-md text-sm leading-7">
-                用写作校准判断，留下观点形成的过程，而不只保存最后结论。
-              </p>
-            </div>
-          </Link>
-
-          <Link
             href={toolsRoute}
             className="group site-rule flex min-h-64 flex-col justify-between rounded-3xl border bg-[var(--paper-deep)] p-7 transition-colors hover:border-[var(--forest)] md:p-9"
           >
@@ -185,7 +135,7 @@ export default function HomePage() {
             </div>
             <div>
               <span className="site-muted text-xs tracking-[0.16em]">
-                03 / TOOLS
+                02 / TOOLS
               </span>
               <h3 className="site-serif mt-3 text-3xl font-medium">小工具</h3>
               <p className="site-muted mt-3 max-w-md text-sm leading-7">
@@ -194,31 +144,6 @@ export default function HomePage() {
             </div>
           </Link>
         </div>
-
-        {latestNote ? (
-          <Link
-            href={latestNote.url}
-            className="site-rule mt-5 flex flex-col gap-5 rounded-3xl border px-7 py-6 transition-colors hover:bg-[var(--forest-soft)] md:flex-row md:items-center md:justify-between md:px-9"
-          >
-            <div className="flex items-start gap-4">
-              <span className="mt-1 grid size-9 shrink-0 place-items-center rounded-full bg-[var(--ink)] text-[var(--paper)]">
-                <Compass className="size-4" />
-              </span>
-              <div>
-                <p className="site-muted text-xs tracking-[0.14em]">最近更新</p>
-                <h3 className="site-serif mt-1 text-xl font-medium">
-                  {latestNote.data.title}
-                </h3>
-              </div>
-            </div>
-            <time
-              className="site-muted text-sm"
-              dateTime={latestNote.data.date}
-            >
-              {formatDate(latestNote.data.date)}
-            </time>
-          </Link>
-        ) : null}
       </section>
     </main>
   );

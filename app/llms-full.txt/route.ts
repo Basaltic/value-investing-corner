@@ -1,12 +1,7 @@
-import { blogLlms, knowledgeLlms } from "@/lib/source";
+import { knowledgeLlms } from "@/lib/source";
 
 export const revalidate = false;
 
 export async function GET() {
-  const [knowledge, notes] = await Promise.all([
-    knowledgeLlms.full(),
-    blogLlms.full(),
-  ]);
-
-  return new Response(`${knowledge}\n\n${notes}`);
+  return new Response(await knowledgeLlms.full());
 }

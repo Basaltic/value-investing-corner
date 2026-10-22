@@ -10,7 +10,7 @@ import { createRelativeLink } from "fumadocs-ui/mdx";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { getMDXComponents } from "@/components/mdx";
-import { getBlogMarkdownUrl, gitConfig } from "@/lib/shared";
+import { getBlogMarkdownUrl } from "@/lib/shared";
 import { blogSource } from "@/lib/source";
 
 function formatDate(value: string) {
@@ -46,10 +46,7 @@ export default async function NotePage(props: PageProps<"/blog/[...slug]">) {
       </div>
       <div className="flex flex-row gap-2 items-center border-b pb-6">
         <MarkdownCopyButton markdownUrl={markdownUrl} />
-        <ViewOptionsPopover
-          markdownUrl={markdownUrl}
-          githubUrl={`https://github.com/${gitConfig.user}/${gitConfig.repo}/blob/${gitConfig.branch}/content/blog/${page.path}`}
-        />
+        <ViewOptionsPopover markdownUrl={markdownUrl} />
       </div>
       <DocsBody>
         <MDX
