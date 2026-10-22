@@ -1,5 +1,6 @@
 import * as fs from "node:fs/promises";
-import { pathToFileURL } from "node:url";
+import path from "node:path";
+import { fileURLToPath, pathToFileURL } from "node:url";
 import { algoliasearch } from "algoliasearch";
 import { sync } from "fumadocs-core/search/algolia";
 
@@ -65,8 +66,51 @@ export function validateDocuments(value) {
   return value;
 }
 
+const projectRoot = fileURLToPath(new URL("../", import.meta.url));
+
+export async function readDocuments({ root = projectRoot, indexFile } = {}) {
+  // Next adapters may move prerenders before the build command returns.
+  // An explicit path is authoritative; never silently fall back from it.
+  const candidates = indexFile
+    ? [indexFile]
+    : [
+        ".next/server/app/static.json.body",
+        ".vercel/output/static/static.json",
+        ".vercel/output/functions/static.json.prerender-fallback.body",
+      ];
+  const attempted = [];
+  for (const candidate of candidates) {
+    const filePath = path.resolve(root, candidate);
+    attempted.push(filePath);
+    let content;
+    try {
+      content = await fs.readFile(filePath, "utf-8");
+    } catch (error) {
+      if (error?.code === "ENOENT") continue;
+      throw error;
+    }
+    // A corrupt file is a build error, not a reason to sync an older fallback.
+    const documents = validateDocuments(JSON.parse(content));
+    return { documents, filePath };
+  }
+  throw new Error(
+    `未找到本次构建的 static.json 搜索索引。已检查：\n${attempted.join("\n")}\n` +
+      "请确认 app/static.json/route.ts 已提交并被预渲染；若适配器使用其他输出路径，请设置 ALGOLIA_INDEX_FILE。",
+  );
+}
+
 export async function main() {
   const automatic = process.argv.includes("--auto");
+  const dryRun = process.argv.includes("--dry-run");
+  if (dryRun) {
+    const { documents, filePath } = await readDocuments({
+      indexFile: process.env.ALGOLIA_INDEX_FILE,
+    });
+    console.log(
+      `Algolia：索引校验通过，${documents.length} 篇文档，来源 ${filePath}；未执行远端写入。`,
+    );
+    return;
+  }
   // Preview deployments must not replace the production search index.
   if (
     automatic &&
@@ -86,9 +130,10 @@ export async function main() {
     console.log("Algolia：本次构建已显式跳过索引同步。");
     return;
   }
-  const records = validateDocuments(
-    JSON.parse(await fs.readFile(".next/server/app/static.json.body", "utf-8")),
-  );
+  const { documents: records, filePath } = await readDocuments({
+    indexFile: process.env.ALGOLIA_INDEX_FILE,
+  });
+  console.log(`Algolia：从 ${filePath} 读取 ${records.length} 篇文档。`);
   const client = algoliasearch(config.appId, config.writeKey);
   await sync(client, { indexName: config.indexName, documents: records });
   console.log(

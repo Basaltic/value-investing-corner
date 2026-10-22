@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import { spawnSync } from "node:child_process";
+import * as fs from "node:fs/promises";
+import { tmpdir } from "node:os";
+import path from "node:path";
 import test from "node:test";
 import { sync } from "fumadocs-core/search/algolia";
+import * as syncContent from "./sync-content.mjs";
 import { getConfig, validateDocuments } from "./sync-content.mjs";
 
 const env = {
@@ -18,6 +22,104 @@ const document = {
     contents: [{ heading: "section", content: "价值投资" }],
   },
 };
+
+async function artifactFixture(t, files) {
+  const root = await fs.mkdtemp(path.join(tmpdir(), "algolia-artifact-test-"));
+  t.after(() => fs.rm(root, { recursive: true, force: true }));
+  for (const [name, contents] of Object.entries(files)) {
+    const file = path.join(root, name);
+    await fs.mkdir(path.dirname(file), { recursive: true });
+    await fs.writeFile(file, JSON.stringify(contents));
+  }
+  return root;
+}
+
+test("读取本地 Next.js 索引，不依赖进程工作目录", async (t) => {
+  const root = await artifactFixture(t, {
+    ".next/server/app/static.json.body": [document],
+  });
+  assert.equal(typeof syncContent.readDocuments, "function");
+  const result = await syncContent.readDocuments({ root });
+  assert.deepEqual(result.documents, [document]);
+  assert.equal(
+    result.filePath,
+    path.join(root, ".next/server/app/static.json.body"),
+  );
+});
+
+test("Next 内部产物缺失时读取 Vercel 静态输出", async (t) => {
+  const root = await artifactFixture(t, {
+    ".vercel/output/static/static.json": [document],
+  });
+  assert.equal(typeof syncContent.readDocuments, "function");
+  const result = await syncContent.readDocuments({ root });
+  assert.deepEqual(result.documents, [document]);
+  assert.match(result.filePath, /static[\\/]static\.json$/);
+});
+
+test("支持 Vercel prerender body 和自定义索引文件", async (t) => {
+  assert.equal(typeof syncContent.readDocuments, "function");
+  for (const file of [
+    ".vercel/output/functions/static.json.prerender-fallback.body",
+    "custom-search-export.json",
+  ]) {
+    const root = await artifactFixture(t, { [file]: [document] });
+    const result = await syncContent.readDocuments({
+      root,
+      indexFile: file === "custom-search-export.json" ? file : undefined,
+    });
+    assert.deepEqual(result.documents, [document]);
+  }
+});
+
+test("索引不存在时诊断所有路径，不能静默跳过", async (t) => {
+  const root = await artifactFixture(t, {});
+  assert.equal(typeof syncContent.readDocuments, "function");
+  await assert.rejects(
+    syncContent.readDocuments({ root }),
+    /未找到.*static\.json.*\.vercel/s,
+  );
+});
+
+test("损坏的本地产物不能被旧 Vercel 文件掩盖", async (t) => {
+  const root = await artifactFixture(t, {
+    ".next/server/app/static.json.body": [],
+    ".vercel/output/static/static.json": [document],
+  });
+  assert.equal(typeof syncContent.readDocuments, "function");
+  await assert.rejects(syncContent.readDocuments({ root }), /索引为空/);
+});
+
+test("显式索引路径错误时不读取默认产物", async (t) => {
+  const root = await artifactFixture(t, {
+    ".next/server/app/static.json.body": [document],
+  });
+  assert.equal(typeof syncContent.readDocuments, "function");
+  await assert.rejects(
+    syncContent.readDocuments({ root, indexFile: "missing.json" }),
+    /未找到.*missing\.json/s,
+  );
+});
+
+test("dry-run 在其他工作目录也能验证索引且不使用密钥", async (t) => {
+  const root = await artifactFixture(t, { "index.json": [document] });
+  const result = spawnSync(
+    process.execPath,
+    [path.resolve("scripts/sync-content.mjs"), "--dry-run"],
+    {
+      cwd: root,
+      env: {
+        ...process.env,
+        ALGOLIA_INDEX_FILE: path.join(root, "index.json"),
+        ALGOLIA_SEARCH_API_KEY: "same",
+        ALGOLIA_WRITE_API_KEY: "same",
+      },
+      encoding: "utf-8",
+    },
+  );
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /1 篇文档.*未执行远端写入/);
+});
 
 test("兼容现有变量名，默认 document 索引", () => {
   assert.deepEqual(getConfig(env), {

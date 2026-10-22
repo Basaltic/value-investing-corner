@@ -77,9 +77,12 @@ ALGOLIA_INDEX_NAME="document"
 
 - `pnpm build`：构建 `/static.json`，随后自动同步索引。
 - `pnpm search:sync`：将最近一次构建导出的文档同步到 Algolia。
+- `pnpm search:sync --dry-run`：只读取并校验构建索引，不检查密钥、不写入 Algolia。
 - `pnpm search:test`：验证配置、安全保护与索引结构，不访问远端服务。
 
-`/static.json` 只导出可公开资料的标题、链接及结构化内容；同步脚本读取 `.next/server/app/static.json.body`，用 Fumadocs `sync()` 设置搜索属性并替换目标索引的全部记录。**该索引应专供本站使用，勿指向已有其他业务的索引。** 脚本拒绝空数据、重复 ID/URL、异常结构和不完整凭据，配置完整时远端同步失败会使构建失败，避免默默上线过期搜索。
+`/static.json` 只导出可公开资料的标题、链接及结构化内容。同步脚本以脚本所在项目目录为基准，依次读取 `.next/server/app/static.json.body`、`.vercel/output/static/static.json`、`.vercel/output/functions/static.json.prerender-fallback.body`，兼容构建适配器整理后的产物。若使用其他布局，可通过 `ALGOLIA_INDEX_FILE` 指定相对项目目录的路径或绝对路径；显式路径无效时不会回退。找不到产物会打印已检查路径并使同步失败；发现空数据、损坏数据或重复 ID/URL 时不会用其他旧文件掩盖错误。
+
+读取后用 Fumadocs `sync()` 设置搜索属性并替换目标索引的全部记录。**该索引应专供本站使用，勿指向已有其他业务的索引。** 脚本拒绝不完整凭据，配置完整时远端同步失败会使构建失败，避免默默上线过期搜索。
 
 Vercel Preview 构建默认不写索引，避免覆盖生产搜索数据。需要预览搜索时应同时设置独立的 `ALGOLIA_INDEX_NAME` 和 `ALGOLIA_SYNC_PREVIEW=true`；`ALGOLIA_SKIP_SYNC=true` 可显式跳过自动同步（例如离线构建），手动 `pnpm search:sync` 不受该开关影响。新增或更新内容后重新构建；更换配置也需重建静态页面。
 
