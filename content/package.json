@@ -1,0 +1,10 @@
+{
+  "name": "@value-investing/content",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "共享原始资料；React 仅用于构建时 MDX 编译与索引导出",
+  "dependencies": {
+    "react": "^19.3.0"
+  }
+}

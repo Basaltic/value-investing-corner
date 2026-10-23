@@ -7,7 +7,16 @@
   },
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!node_modules", "!.next", "!dist", "!build", "!.source"]
+    "includes": [
+      "**",
+      "!**/node_modules",
+      "!**/.next",
+      "!**/dist",
+      "!**/build",
+      "!**/.source",
+      "!**/target",
+      "!**/gen"
+    ]
   },
   "formatter": {
     "enabled": true,
@@ -23,10 +32,15 @@
       }
     },
     "domains": {
-      "next": "recommended",
       "react": "recommended"
     }
   },
+  "overrides": [
+    {
+      "includes": ["apps/web/**"],
+      "linter": { "domains": { "next": "recommended" } }
+    }
+  ],
   "assist": {
     "actions": {
       "source": {

@@ -1,0 +1,31 @@
+{
+  "name": "@value-investing/desktop",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview",
+    "tauri": "tauri",
+    "types:check": "tsc --noEmit && tsc -p tsconfig.node.json --noEmit",
+    "test": "tsx --test src/adapters/native.test.ts"
+  },
+  "dependencies": {
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "@tauri-apps/api": "^2",
+    "@value-investing/valuation": "workspace:*",
+    "@value-investing/content-schema": "workspace:*",
+    "react-router-dom": "^7.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^6.0.2",
+    "typescript": "^7.0.2",
+    "vite": "^8.0.16",
+    "@tauri-apps/cli": "^2",
+    "@types/node": "^26.6.4"
+  }
+}

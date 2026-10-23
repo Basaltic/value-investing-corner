@@ -1,22 +1,16 @@
+import {
+  blogMetadataSchema,
+  knowledgeMetadataSchema,
+} from "@value-investing/content-schema";
 import { metaSchema, pageSchema } from "fumadocs-core/source/schema";
 import { defineDocs } from "fumadocs-mdx/macro";
-import { z } from "zod";
 
-const knowledgeSchema = pageSchema.extend({
-  category: z.string().optional(),
-  updated: z.string().optional(),
-  tags: z.array(z.string()).default([]),
-});
-
-const blogSchema = pageSchema.extend({
-  date: z.string(),
-  updated: z.string().optional(),
-  tags: z.array(z.string()).default([]),
-});
+const knowledgeSchema = pageSchema.extend(knowledgeMetadataSchema.shape);
+const blogSchema = pageSchema.extend(blogMetadataSchema.shape);
 
 // Shared by Next.js and the standalone Node index exporter.
 export const knowledgeCollection = defineDocs({
-  dir: "content/knowledge",
+  dir: "../../content/knowledge",
   docs: {
     schema: knowledgeSchema,
     postprocess: {
@@ -29,7 +23,7 @@ export const knowledgeCollection = defineDocs({
 });
 
 export const blogCollection = defineDocs({
-  dir: "content/blog",
+  dir: "../../content/blog",
   docs: {
     schema: blogSchema,
     postprocess: {

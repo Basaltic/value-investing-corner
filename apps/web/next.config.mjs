@@ -1,3 +1,4 @@
+import { fileURLToPath } from "node:url";
 import { createMDX } from "fumadocs-mdx/next";
 
 const withMDX = createMDX();
@@ -20,6 +21,11 @@ if (searchKey && writeKey && searchKey === writeKey) {
 /** @type {import('next').NextConfig} */
 const config = {
   reactStrictMode: true,
+  outputFileTracingRoot: fileURLToPath(new URL("../../", import.meta.url)),
+  transpilePackages: [
+    "@value-investing/valuation",
+    "@value-investing/content-schema",
+  ],
   // Only these two browser-safe credentials are exposed. Never map write keys.
   env: {
     NEXT_PUBLIC_ALGOLIA_APP_ID: appId,

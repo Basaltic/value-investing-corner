@@ -15,7 +15,7 @@ import pymupdf
 
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = "li-lu-on-modernization-full"
-PDF = ROOT / f"public/materials/li-lu/{SLUG}.pdf"
+PDF = ROOT / f"apps/web/public/materials/li-lu/{SLUG}.pdf"
 ASSETS = PDF.parent
 ARTICLE = ROOT / f"content/knowledge/masters/li-lu/{SLUG}.md"
 URL = "https://cdn.prod.website-files.com/5ef3c7300432b40ed865991a/5f0935ee7646e6ff74f6d311_%E6%9D%8E%E5%BD%95%E8%B0%88%E7%8E%B0%E4%BB%A3%E5%8C%96%20%EF%BC%88%E5%85%A8%E6%96%87%EF%BC%89%E5%A4%A7%E5%AD%97%E5%8F%B7.pdf"
@@ -79,7 +79,7 @@ def verify(doc):
     images = re.findall(r"!\[[^\]]*\]\(([^)]+)\)", md)
     assert len(images) == 23
     for image in images:
-        path = ROOT / "public" / image.lstrip("/")
+        path = ROOT / "apps/web/public" / image.lstrip("/")
         assert path.is_file(), image
         pix = pymupdf.Pixmap(str(path))
         assert pix.width > 0 and pix.height > 0

@@ -1,15 +1,18 @@
 # deps
-/node_modules
-/.pnpm-store
+node_modules/
+.pnpm-store/
 
 # generated content
-.source
+.source/
 
 # test & build
-/coverage
-/.next/
-/out/
-/build
+coverage/
+.next/
+out/
+dist/
+build/
+target/
+gen/
 *.tsbuildinfo
 
 # misc
@@ -23,6 +26,6 @@ yarn-error.log*
 
 # others
 .env*.local
-.vercel
+.vercel/
 next-env.d.ts
 .env*

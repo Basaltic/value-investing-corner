@@ -1,4 +1,4 @@
-import type { DcfInput, DcfValue } from "@/lib/dcf";
+import type { DcfInput, DcfValue } from "@value-investing/valuation";
 
 const numberFormat = new Intl.NumberFormat("zh-CN", {
   minimumFractionDigits: 2,

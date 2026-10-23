@@ -15,7 +15,7 @@ import pymupdf
 
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = "annual-book-review-2019"
-PDF = ROOT / f"public/materials/li-lu/{SLUG}.pdf"
+PDF = ROOT / f"apps/web/public/materials/li-lu/{SLUG}.pdf"
 ARTICLE = ROOT / f"content/knowledge/masters/li-lu/{SLUG}.md"
 TITLE = "李录2019年年度书评《大衰退年代：宏观经济学的另一半与全球化的宿命》"
 URL = "https://cdn.prod.website-files.com/5ef3c7300432b40ed865991a/5f09347783851614276c3fdb_%E6%9D%8E%E5%BD%952019%E5%B9%B4%E5%B9%B4%E5%BA%A6%E4%B9%A6%E8%AF%84%202019.11.19.pdf"

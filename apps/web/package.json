@@ -1,0 +1,46 @@
+{
+  "name": "@value-investing/web",
+  "version": "0.1.0",
+  "description": "价投小角落（Value Investing Corner）：记录价值投资资料、理性思考与长期成长。",
+  "private": true,
+  "scripts": {
+    "build": "corepack pnpm search:export && next build --webpack && corepack pnpm search:sync --auto",
+    "search:export": "node scripts/export-search.mjs",
+    "search:sync": "node --env-file-if-exists=.env.local scripts/sync-content.mjs",
+    "search:test": "node --test scripts/sync-content.test.mjs",
+    "dev": "next dev",
+    "start": "next start",
+    "types:check": "next typegen && tsc --noEmit",
+    "lint": "biome check .",
+    "format": "biome format --write",
+    "check": "biome check && corepack pnpm types:check",
+    "check:fix": "biome check --write",
+    "test": "node --test scripts/sync-content.test.mjs"
+  },
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1",
+    "@vercel/speed-insights": "^2.0.0",
+    "algoliasearch": "^5.60.0",
+    "fumadocs-core": "16.17.5",
+    "fumadocs-mdx": "15.4.7",
+    "fumadocs-ui": "npm:@fumadocs/base-ui@16.17.5",
+    "lucide-react": "^1.50.0",
+    "next": "16.3.8",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "zod": "^4.6.7",
+    "@value-investing/valuation": "workspace:*",
+    "@value-investing/content-schema": "workspace:*",
+    "@value-investing/content": "workspace:*"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.3",
+    "@types/mdx": "^2.0.14",
+    "@types/node": "^26.6.4",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "postcss": "^8.5.28",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^7.0.2"
+  }
+}

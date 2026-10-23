@@ -17,7 +17,7 @@ from pathlib import Path
 import pymupdf
 
 ROOT = Path(__file__).resolve().parents[1]
-ASSETS = ROOT / "public/materials/li-lu"
+ASSETS = ROOT / "apps/web/public/materials/li-lu"
 PDF = ASSETS / "value-investing-in-china-2015-10-23.pdf"
 MARKDOWN = ROOT / "content/knowledge/masters/li-lu/value-investing-in-china-2015.md"
 SOURCE_URL = (

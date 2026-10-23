@@ -15,7 +15,7 @@ import pymupdf
 
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = "modernization-and-us-china-relations"
-PDF = ROOT / f"public/materials/li-lu/{SLUG}.pdf"
+PDF = ROOT / f"apps/web/public/materials/li-lu/{SLUG}.pdf"
 ARTICLE = ROOT / f"content/knowledge/masters/li-lu/{SLUG}.md"
 TITLE = "李录谈现代化系列：从人类文明史角度看当今中美关系走向"
 URL = "https://cdn.prod.website-files.com/5ef3c7300432b40ed865991a/5f0934f93967fc62fa42c844_%E6%9D%8E%E5%BD%95%E8%B0%88%E7%8E%B0%E4%BB%A3%E5%8C%96-%E4%BB%8E%E4%BA%BA%E7%B1%BB%E6%96%87%E6%98%8E%E5%8F%B2%E8%A7%92%E5%BA%A6%E7%9C%8B%E5%BD%93%E4%BB%8A%E4%B8%AD%E7%BE%8E%E5%85%B3%E7%B3%BB%E8%B5%B0%E5%90%91.pdf"

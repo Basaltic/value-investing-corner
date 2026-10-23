@@ -15,7 +15,7 @@ import pymupdf
 
 ROOT = Path(__file__).resolve().parents[1]
 SLUG = "global-value-investing-and-the-times-2024"
-PDF = ROOT / "public/materials/li-lu/global-value-investing-and-the-times-2024-12.pdf"
+PDF = ROOT / "apps/web/public/materials/li-lu/global-value-investing-and-the-times-2024-12.pdf"
 ARTICLE = ROOT / f"content/knowledge/masters/li-lu/{SLUG}.md"
 URL = "https://cdn.prod.website-files.com/5ef3c7300432b40ed865991a/67a4f8e8160103c8a74017a7_%E5%85%A8%E7%90%83%E4%BB%B7%E5%80%BC%E6%8A%95%E8%B5%84%E4%B8%8E%E6%97%B6%E4%BB%A32024%E5%B9%B412%E6%9C%88.pdf"
 START = "<!-- 原文开始 -->"

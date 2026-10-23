@@ -1,0 +1,17 @@
+{
+  "name": "@value-investing/valuation",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "exports": {
+    ".": "./src/dcf.ts"
+  },
+  "scripts": {
+    "test": "tsx --test src/dcf.test.ts",
+    "types:check": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "^26.6.4",
+    "typescript": "^7.0.2"
+  }
+}

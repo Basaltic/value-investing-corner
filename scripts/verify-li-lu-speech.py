@@ -17,7 +17,7 @@ prose = "".join(
     if line and not line.startswith(("![", "*图"))
 )
 prose = re.sub(r"\s+", "", html.unescape(prose))
-source = pymupdf.open(ROOT / "public/materials/li-lu/value-investing-in-china-2015-10-23.pdf")
+source = pymupdf.open(ROOT / "apps/web/public/materials/li-lu/value-investing-in-china-2015-10-23.pdf")
 expected = ""
 position = 0
 checks = []
@@ -52,7 +52,7 @@ assert len(source) == 28
 images = re.findall(r"!\[[^\]]*\]\(([^)]+)\)", md)
 assert len(images) == 11
 for image in images:
-    path = ROOT / "public" / image.lstrip("/")
+    path = ROOT / "apps/web/public" / image.lstrip("/")
     assert path.is_file(), image
     decoded = pymupdf.Pixmap(str(path))
     assert decoded.width > 0 and decoded.height > 0

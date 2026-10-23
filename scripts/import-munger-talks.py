@@ -20,7 +20,7 @@ import pymupdf
 
 ROOT = Path(__file__).resolve().parents[1]
 DEST = ROOT / "content/knowledge/masters/charlie-munger/speeches"
-ASSETS = ROOT / "public/materials/charlie-munger"
+ASSETS = ROOT / "apps/web/public/materials/charlie-munger"
 AUDIT = ROOT / "scripts/munger-talks-import-audit.json.gz"
 START = "<!-- ORIGINAL ENGLISH TEXT START -->"
 END = "<!-- ORIGINAL ENGLISH TEXT END -->"
@@ -253,7 +253,11 @@ def verify(source):
     for entry in audit["items"]:
         path = source/entry["source"]
         assert sha(path.read_bytes()) == entry["source_sha256"], path
-        assert sha((ROOT/entry["pdf_output"]).read_bytes()) == entry["source_sha256"]
+        # Legacy audit records use public/...; assets now belong to apps/web.
+        pdf_output = Path(entry["pdf_output"])
+        if pdf_output.parts[0] == "public":
+            pdf_output = Path("apps/web") / pdf_output
+        assert sha((ROOT / pdf_output).read_bytes()) == entry["source_sha256"]
         doc, reread = extract_pages(path, ocr)
         text = (ROOT/entry["article"]).read_text(encoding="utf-8")
         body = text.split(START, 1)[1].split(END, 1)[0]

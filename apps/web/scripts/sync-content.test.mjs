@@ -57,10 +57,21 @@ test("独立索引异常不能回退到旧平台文件", async (t) => {
 });
 
 test("全新CI目录无Next产物和环境文件也能导出并校验", async (t) => {
-  const root = await artifactFixture(t, {});
-  for (const name of ["lib", "scripts", "content", "public"]) {
+  const repository = await artifactFixture(t, {});
+  const root = path.join(repository, "apps/web");
+  await fs.mkdir(root, { recursive: true });
+  for (const name of ["lib", "scripts", "public"]) {
     await fs.cp(path.resolve(name), path.join(root, name), { recursive: true });
   }
+  await fs.cp(path.resolve("../../content"), path.join(repository, "content"), {
+    recursive: true,
+    filter: (source) => !source.split(path.sep).includes("node_modules"),
+  });
+  await fs.symlink(
+    path.resolve("../../content/node_modules"),
+    path.join(repository, "content/node_modules"),
+    "dir",
+  );
   await fs.copyFile("package.json", path.join(root, "package.json"));
   await fs.symlink(
     path.resolve("node_modules"),

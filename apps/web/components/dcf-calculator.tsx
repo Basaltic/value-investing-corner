@@ -1,8 +1,12 @@
 "use client";
 
+import {
+  calculateDcf,
+  type DcfField,
+  type DcfInput,
+} from "@value-investing/valuation";
 import { useState } from "react";
 import { DcfResults } from "@/components/dcf-results";
-import { calculateDcf, type DcfField, type DcfInput } from "@/lib/dcf";
 
 type FormValues = Record<DcfField, string>;
 const emptyForm: FormValues = {
