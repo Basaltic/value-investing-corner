@@ -1,14 +1,15 @@
 import { createGetUrl } from "fumadocs-core/source";
+import { blogRoute, knowledgeRoute } from "./routes.mjs";
+
+export { blogRoute, knowledgeRoute };
 
 export const appName = "价投小角落";
 export const appEnglishName = "Value Investing Corner";
 export const appDescription =
   "价投小角落（Value Investing Corner）专注价值投资、记录理性思考与长期成长。";
 
-export const knowledgeRoute = "/knowledge";
 export const knowledgeImageRoute = "/og/knowledge";
 export const knowledgeContentRoute = "/llms.mdx/knowledge";
-export const blogRoute = "/blog";
 export const blogContentRoute = "/llms.mdx/blog";
 export const toolsRoute = "/tools";
 export const dcfRoute = `${toolsRoute}/dcf`;

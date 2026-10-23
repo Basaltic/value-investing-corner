@@ -1,47 +1,7 @@
 import { llms, loader } from "fumadocs-core/source";
 import { lucideIconsPlugin } from "fumadocs-core/source/lucide-icons";
-import { metaSchema, pageSchema } from "fumadocs-core/source/schema";
-import { defineDocs } from "fumadocs-mdx/macro";
-import { z } from "zod";
+import { blogCollection, knowledgeCollection } from "./content-collections.mjs";
 import { blogRoute, knowledgeRoute } from "./shared";
-
-const knowledgeSchema = pageSchema.extend({
-  category: z.string().optional(),
-  updated: z.string().optional(),
-  tags: z.array(z.string()).default([]),
-});
-
-const blogSchema = pageSchema.extend({
-  date: z.string(),
-  updated: z.string().optional(),
-  tags: z.array(z.string()).default([]),
-});
-
-const knowledgeCollection = defineDocs({
-  dir: "content/knowledge",
-  docs: {
-    schema: knowledgeSchema,
-    postprocess: {
-      includeProcessedMarkdown: true,
-    },
-  },
-  meta: {
-    schema: metaSchema,
-  },
-});
-
-const blogCollection = defineDocs({
-  dir: "content/blog",
-  docs: {
-    schema: blogSchema,
-    postprocess: {
-      includeProcessedMarkdown: true,
-    },
-  },
-  meta: {
-    schema: metaSchema,
-  },
-});
 
 export const knowledgeSource = loader({
   baseUrl: knowledgeRoute,

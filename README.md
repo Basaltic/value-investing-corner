@@ -75,12 +75,17 @@ ALGOLIA_INDEX_NAME="document"
 
 `next.config.mjs` 将应用 ID 和只读搜索密钥分别映射为 `NEXT_PUBLIC_ALGOLIA_APP_ID` 和 `NEXT_PUBLIC_ALGOLIA_SEARCH_API_KEY`，搜索组件直接读取这两个公开变量。也支持直接配置它们，并兼容旧 `NEXT_PUBLIC_ALGOLIA_SEARCH_KEY` 别名（优先级：新公开变量、旧公开别名、原始变量）。写入密钥支持 `ALGOLIA_WRITE_API_KEY` 和 `ALGOLIA_WRITE_KEY`，仅用于同步脚本，绝不加入 `next.config.mjs` 的 `env`，也不能使用 `NEXT_PUBLIC_` 前缀。配置层会拒绝搜索与写入密钥相同的情况；只读密钥不能拥有写入权限。
 
-- `pnpm build`：构建 `/static.json`，随后自动同步索引。
-- `pnpm search:sync`：将最近一次构建导出的文档同步到 Algolia。
+- `pnpm build`：先显式导出索引，再构建 Next.js，构建成功后自动同步。
+- `pnpm search:export`：用与资料库共享的 Fumadocs 内容集合生成 `build/search/algolia-documents.json`，不依赖 `.next` 或 `.vercel`，不需要 Algolia 凭据。
+- `pnpm search:sync`：将最近一次显式导出的文档同步到 Algolia。
 - `pnpm search:sync --dry-run`：只读取并校验构建索引，不检查密钥、不写入 Algolia。
 - `pnpm search:test`：验证配置、安全保护与索引结构，不访问远端服务。
 
-`/static.json` 只导出可公开资料的标题、链接及结构化内容。同步脚本以脚本所在项目目录为基准，依次读取 `.next/server/app/static.json.body`、`.vercel/output/static/static.json`、`.vercel/output/functions/static.json.prerender-fallback.body`，兼容构建适配器整理后的产物。若使用其他布局，可通过 `ALGOLIA_INDEX_FILE` 指定相对项目目录的路径或绝对路径；显式路径无效时不会回退。找不到产物会打印已检查路径并使同步失败；发现空数据、损坏数据或重复 ID/URL 时不会用其他旧文件掩盖错误。
+`/static.json` 仍用于公开资料的标题、链接及结构化内容导出，但不再作为自动同步的文件来源。`pnpm build` 在 Next.js 构建前通过独立 Node 脚本生成 `build/search/algolia-documents.json`，同步脚本优先读取该文件，避免依赖构建适配器的内部目录。导出与网站复用 `lib/content-collections.mjs`，使用 Fumadocs 官方 Node loader 和 `toDocuments()`，只在导出专用配置中关闭图片 import，不改变网站渲染。导出文件先写临时文件再原子替换，导出失败会中止构建，避免同步不完整数据。
+
+同步脚本以项目目录为基准，独立索引缺失时仍支持旧 `.next/server/app/static.json.body`、`.vercel/output/static/static.json`、`.vercel/output/functions/static.json.prerender-fallback.body`，供旧构建手动同步使用。`ALGOLIA_INDEX_FILE` 可指定相对项目目录的路径或绝对路径；显式路径无效时不会回退。找不到产物会打印检查过的路径；空数据、损坏数据或重复 ID/URL 不会被其他旧文件掩盖。
+
+部署平台的 Build Command 应使用 `pnpm build`，不能只执行 `next build`，否则会绕过显式导出。新的导出脚本、导出专用配置、共享集合和路由模块需一起纳入版本控制；生成的 `build/search` 目录已被忽略，无需提交。Vercel 中没有 `.env.local` 是可选文件提示，不影响已注入的环境变量。默认不必设置 `ALGOLIA_INDEX_FILE`；如先前指向平台内部路径，请移除该覆盖。
 
 读取后用 Fumadocs `sync()` 设置搜索属性并替换目标索引的全部记录。**该索引应专供本站使用，勿指向已有其他业务的索引。** 脚本拒绝不完整凭据，配置完整时远端同步失败会使构建失败，避免默默上线过期搜索。
 

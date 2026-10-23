@@ -34,6 +34,68 @@ async function artifactFixture(t, files) {
   return root;
 }
 
+test("构建显式生成独立索引，不依赖 Next 内部产物", async (t) => {
+  const pkg = JSON.parse(await fs.readFile("package.json", "utf-8"));
+  assert.match(pkg.scripts.build, /search:export.*next build.*search:sync/);
+  const root = await artifactFixture(t, {
+    "build/search/algolia-documents.json": [document],
+  });
+  const result = await syncContent.readDocuments({ root });
+  assert.deepEqual(result.documents, [document]);
+  assert.equal(
+    result.filePath,
+    path.join(root, "build/search/algolia-documents.json"),
+  );
+});
+
+test("独立索引异常不能回退到旧平台文件", async (t) => {
+  const root = await artifactFixture(t, {
+    "build/search/algolia-documents.json": [],
+    ".next/server/app/static.json.body": [document],
+  });
+  await assert.rejects(syncContent.readDocuments({ root }), /索引为空/);
+});
+
+test("全新CI目录无Next产物和环境文件也能导出并校验", async (t) => {
+  const root = await artifactFixture(t, {});
+  for (const name of ["lib", "scripts", "content", "public"]) {
+    await fs.cp(path.resolve(name), path.join(root, name), { recursive: true });
+  }
+  await fs.copyFile("package.json", path.join(root, "package.json"));
+  await fs.symlink(
+    path.resolve("node_modules"),
+    path.join(root, "node_modules"),
+    "dir",
+  );
+  const cleanEnv = Object.fromEntries(
+    Object.entries(process.env).filter(([key]) => !key.includes("ALGOLIA")),
+  );
+  const exported = spawnSync(process.execPath, ["scripts/export-search.mjs"], {
+    cwd: root,
+    env: cleanEnv,
+    encoding: "utf-8",
+    timeout: 120000,
+  });
+  assert.equal(exported.status, 0, exported.stderr);
+  for (const name of [".next", ".vercel", ".env.local"]) {
+    await assert.rejects(fs.access(path.join(root, name)), { code: "ENOENT" });
+  }
+  const result = await syncContent.readDocuments({ root });
+  assert.ok(result.documents.length > 0);
+  assert.match(result.filePath, /algolia-documents\.json$/);
+  const checked = spawnSync(
+    process.execPath,
+    [
+      "--env-file-if-exists=.env.local",
+      "scripts/sync-content.mjs",
+      "--dry-run",
+    ],
+    { cwd: root, env: cleanEnv, encoding: "utf-8" },
+  );
+  assert.equal(checked.status, 0, checked.stderr);
+  assert.match(checked.stdout, /未执行远端写入/);
+});
+
 test("读取本地 Next.js 索引，不依赖进程工作目录", async (t) => {
   const root = await artifactFixture(t, {
     ".next/server/app/static.json.body": [document],

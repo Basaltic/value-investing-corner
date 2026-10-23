@@ -69,11 +69,12 @@ export function validateDocuments(value) {
 const projectRoot = fileURLToPath(new URL("../", import.meta.url));
 
 export async function readDocuments({ root = projectRoot, indexFile } = {}) {
-  // Next adapters may move prerenders before the build command returns.
+  // Prefer our explicit build export; legacy layouts remain for manual sync.
   // An explicit path is authoritative; never silently fall back from it.
   const candidates = indexFile
     ? [indexFile]
     : [
+        "build/search/algolia-documents.json",
         ".next/server/app/static.json.body",
         ".vercel/output/static/static.json",
         ".vercel/output/functions/static.json.prerender-fallback.body",
@@ -95,7 +96,7 @@ export async function readDocuments({ root = projectRoot, indexFile } = {}) {
   }
   throw new Error(
     `未找到本次构建的 static.json 搜索索引。已检查：\n${attempted.join("\n")}\n` +
-      "请确认 app/static.json/route.ts 已提交并被预渲染；若适配器使用其他输出路径，请设置 ALGOLIA_INDEX_FILE。",
+      "请先执行 pnpm search:export，确认 scripts/export-search.mjs 及共享内容配置已提交；自定义产物路径可设置 ALGOLIA_INDEX_FILE。",
   );
 }
 
