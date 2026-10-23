@@ -39,5 +39,5 @@
 - 原 apps/web/.env.local 触发搜索密钥等于写入密钥的保护；保留原值，正式构建仍会阻止此配置。check:local/build:web:local 仅隔离验证子进程，不构成生产凭据验证。
 - Fumadocs/webpack 缓存动态 import 和 CSS ::highlight 优化器产生依赖层警告；Web 构建成功，未修改依赖库或禁用检查。后续需按框架版本升级排查缓存失效与 CSS 兼容性。
 - 未实现完整离线阅读、笔记、收藏、数据库、登录或自动更新。
-- 未提交、推送、发布或修改 Vercel。推送前应将既有 Vercel 项目根目录更新为 apps/web，并允许根目录外源码。
+- Vercel 既有项目已通过 CLI 修正：Root Directory=apps/web、Framework=nextjs、Build Command=corepack pnpm build、Install Command=corepack pnpm install --frozen-lockfile、Output Directory=自动、根目录外源码访问=true。新增 Corepack 支持变量到 Production/Preview；回读确认设置匹配、Git 关联和原有业务环境变量未变，Node 24.x 保留。从 apps/web 执行冻结锁文件安装成功。本次未提交、推送、主动部署或修改域名；尚未通过新的远端构建验证部署恢复。
 - Tauri 官方模板图标暂用于开发，未建立品牌安装包图标。

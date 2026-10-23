@@ -54,7 +54,7 @@ corepack pnpm build:web        # 正常 Web 构建，按原配置同步搜索
 
 ## Vercel 迁移
 
-远端配置本轮未修改，不推送或发布。迁移后更新现有 Vercel 项目：Root Directory=`apps/web`、Framework=Next.js、Build Command=`pnpm build`、Output Directory 保持自动；开启 Include source files outside of the Root Directory in the Build Step。统一锁文件及 packageManager 位于仓库根目录；如使用 Corepack 设置 ENABLE_EXPERIMENTAL_COREPACK=1。
+现有 Vercel 项目配置已通过 CLI 修正并回读验证：Root Directory=`apps/web`、Framework=Next.js、Build Command=`corepack pnpm build`、Install Command=`corepack pnpm install --frozen-lockfile`、Output Directory 保持自动；Include source files outside of the Root Directory in the Build Step 已开启。Production 和 Preview 已添加 ENABLE_EXPERIMENTAL_COREPACK=1，使用仓库根目录的统一锁文件与 packageManager。保留原有 Git 关联、生产分支、Node 24.x、域名及 Algolia 环境变量；本次没有主动重新部署、提交或推送。
 
 网站搜索脚本位于 `apps/web/scripts`；产物在 `apps/web/build/search`。共享包源码通过 transpilePackages 接入，outputFileTracingRoot 指向仓库根目录。不要构建 desktop，不要为 Web 配置 output: export。本次目录迁移需要与 Vercel 根目录更新配合后再推送，避免下一次自动部署仍读取旧根目录。
 
