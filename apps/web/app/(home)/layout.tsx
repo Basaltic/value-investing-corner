@@ -1,4 +1,5 @@
 import { HomeLayout } from "fumadocs-ui/layouts/home";
+import { AlgoliaAttribution } from "@/components/algolia-attribution";
 import { baseOptions } from "@/lib/layout.shared";
 import { siteSections } from "@/lib/shared";
 
@@ -13,6 +14,9 @@ export default function Layout({ children }: LayoutProps<"/">) {
       }))}
     >
       {children}
+      <footer className="site-rule mt-auto flex justify-center border-t px-6 py-5">
+        <AlgoliaAttribution />
+      </footer>
     </HomeLayout>
   );
 }

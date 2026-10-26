@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>桌面公司研究工作台 · 待确认评审方案</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231d4a35'/%3E%3Cpath d='M9 22V10h3v9h6v3H9zm10-12h4v12h-4z' fill='%23f4f1e8'/%3E%3C/svg%3E">
+<style>
+:root{
+  --paper:#f4f1e8; --surface:#ebe5d8; --panel:#fbf9f3; --ink:#17251d;
+  --muted:#617066; --forest:#1d4a35; --forest-deep:#143526; --soft:#dce8df;
+  --line:#cbd2c8; --error:#8d482f; --warn-bg:#f3e7dd;
+  --serif:"Songti SC","STSong","SimSun",serif;
+  --sans:-apple-system,"PingFang SC","Microsoft YaHei",system-ui,sans-serif;
+  --mono:ui-monospace,"SF Mono",Menlo,Consolas,monospace;
+}
+*{box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.8;-webkit-font-smoothing:antialiased;}
+a{color:var(--forest);overflow-wrap:anywhere;word-break:break-word;}
+.wrap{max-width:960px;margin:0 auto;padding:40px 24px 80px;}
+header.doc-head{border-bottom:1px solid var(--line);padding-bottom:24px;margin-bottom:28px;}
+.doc-kind{font-size:12px;letter-spacing:.14em;color:var(--muted);margin:0 0 10px;}
+h1{font-family:var(--serif);font-size:30px;font-weight:600;margin:0 0 12px;line-height:1.4;}
+.subtitle{color:var(--muted);font-size:15px;max-width:720px;margin:0;}
+.meta-row{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px;font-size:13px;color:var(--muted);}
+ul,ol{margin:10px 0;padding-left:24px;}
+li{margin:6px 0;}
+td code,li code,p code{font-family:var(--mono);font-size:12.5px;background:var(--surface);padding:1px 5px;border-radius:4px;white-space:normal;overflow-wrap:anywhere;word-break:break-word;}
+nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 22px;margin:24px 0 40px;}
+.meta-row code{font-family:var(--mono);font-size:12px;background:var(--surface);padding:2px 6px;border-radius:4px;}
+.evi li{margin:8px 0;}
+nav.toc h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;}
+nav.toc ol{margin:0;padding-left:22px;columns:2;column-gap:32px;}
+nav.toc li{margin:4px 0;font-size:14px;}
+section{margin:44px 0;}
+h2.sec{font-family:var(--serif);font-size:22px;font-weight:600;margin:0 0 6px;padding-top:8px;border-top:2px solid var(--forest);display:flex;align-items:baseline;gap:10px;}
+h2.sec .num{font-family:var(--mono);font-size:14px;color:var(--forest);font-weight:400;}
+h3{font-size:16px;margin:26px 0 10px;color:var(--forest-deep);}
+p{margin:10px 0;}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;table-layout:fixed;}
+th,td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;text-align:left;overflow-wrap:anywhere;word-break:break-word;}
+th{background:var(--soft);color:var(--forest-deep);font-weight:600;}
+.tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:999px;white-space:nowrap;}
+.tag-conf{background:var(--forest);color:var(--paper);}
+.tag-sug{background:var(--soft);color:var(--forest-deep);border:1px solid var(--forest);}
+.tag-pend{background:var(--panel);color:var(--muted);border:1px dashed var(--muted);}
+.tag-risk{background:var(--warn-bg);color:var(--error);border:1px solid var(--error);}
+.note{background:var(--panel);border-left:3px solid var(--forest);padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0;}
+.warn{background:var(--warn-bg);border-left:3px solid var(--error);padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0;}
+.src{font-size:11px;color:var(--forest);text-decoration:none;margin-left:2px;white-space:nowrap;}
+.src:hover{text-decoration:underline;}
+.figure{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px;margin:18px 0;overflow-x:auto;}
+.figure figcaption{font-size:13px;color:var(--muted);margin-top:10px;}
+.figure svg{display:block;margin:0 auto;max-width:100%;height:auto;}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:16px 0;}
+.grid4{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:16px 0;}
+@media(max-width:720px){.grid4{grid-template-columns:1fr;}}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;}
+.card h4{margin:0 0 8px;font-size:15px;}
+.card ul{margin:6px 0;padding-left:18px;}
+.stage{border:1px solid var(--line);border-radius:8px;padding:18px;margin:14px 0;background:var(--panel);}
+.stage h4{margin:0 0 6px;font-family:var(--serif);font-size:17px;color:var(--forest-deep);}
+.stage .stage-meta{font-size:13px;color:var(--muted);margin-bottom:8px;}
+.evi{font-size:13.5px;}
+footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;}
+@media(max-width:720px){
+  .wrap{padding:24px 16px 60px;}
+  nav.toc ol{columns:1;}
+  .grid3{grid-template-columns:1fr;}
+  table{font-size:13px;}
+  th,td{padding:8px;}
+  .src-table{table-layout:auto;}
+  .src-table th:first-child,.src-table td:first-child{min-width:104px;}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="doc-head">
+  <p class="doc-kind">待确认评审方案 · 阅读型文档 · 非批准 PRD · 不含实现代码</p>
+  <h1>桌面公司研究工作台方案</h1>
+  <p class="subtitle">在现有 React 19 / Vite / Tauri 2 桌面骨架上，构建单人本地优先的公司研究工作台：公司档案、证据归档、不可变正式判断与本地备份；自动采集按来源准入分级逐步接入，行情、自动估值与 AI 能力后置。</p>
+  <div class="meta-row">
+    <span>工程基线核对日期：2026-10-23</span>
+    <span>首验平台：macOS ARM64（建议）</span>
+    <span>日期：2026-10-23</span>
+  </div>
+  <div class="warn" style="margin-top:16px"><strong>本轮仅产出待确认评审方案：</strong>不开发功能、不改动业务代码；所有"建议"须经 §10 明确确认后才进入实现，未确认项一律不实施。</div>
+</header>
+
+<nav class="toc" aria-label="目录">
+  <h2>目录</h2>
+  <ol>
+    <li><a href="#sec1">决策摘要：已确认 / 建议 / 待确认</a></li>
+    <li><a href="#sec2">现状与目标、非目标</a></li>
+    <li><a href="#sec3">公司范围与三类数据覆盖矩阵</a></li>
+    <li><a href="#sec4">核心流程与页面</a></li>
+    <li><a href="#sec5">采集策略、归因版权、状态与恢复</a></li>
+    <li><a href="#sec6">数据模型与不可变判断、证据、财报修订</a></li>
+    <li><a href="#sec7">桌面架构与 Web 隔离、未来插件边界</a></li>
+    <li><a href="#sec8">资料、备份、安全</a></li>
+    <li><a href="#sec9">分阶段实施与可观测验收</a></li>
+    <li><a href="#sec10">关键确认项</a></li>
+    <li><a href="#sec11">来源证据</a></li>
+  </ol>
+</nav>
+
+<!-- ============ §1 决策摘要 ============ -->
+<section id="sec1">
+  <h2 class="sec"><span class="num">01</span>决策摘要：已确认 / 建议 / 待确认</h2>
+  <p>本文件是供研发评审的<strong>待确认方案</strong>，不是已批准可直接开工的 PRD，也不包含产品实现。条目分四类标注：<span class="tag tag-conf">已确认</span> 有本次只读核查的本地文件支持；<span class="tag tag-conf">用户已明确需求</span> 是需求方向、非实现批准；<span class="tag tag-sug">建议</span> 是技术与实现方案，待评审批准；<span class="tag tag-pend">待确认</span> 取决于评审拍板，集中列在 §10。</p>
+
+  <h3>推荐结论（建议）</h3>
+  <p>以现有桌面骨架为基础，单人本地优先，先做<strong>无网络也能闭环</strong>的部分：自由文本建档、资料库（文件 / 链接 / 笔记）、手工录入财务与自定义指标、可改的判断草稿、仅追加的正式判断、立即可用的指标看板与本地一致性备份。自动采集只在来源许可依据明确后按分级接入，首验 macOS ARM64；Web 与其他平台现状保留，行情、自动估值、AI 聊天 / 报告 / 模型配置全部后置为未来插件位。</p>
+
+  <div class="grid4">
+    <div class="card">
+      <h4><span class="tag tag-conf">已确认</span> 本地现状事实</h4>
+      <ul>
+        <li>pnpm monorepo：<code>apps/web</code>、<code>apps/desktop</code>、<code>packages/valuation</code>、<code>packages/content-schema</code>。</li>
+        <li>桌面端仅工作台（<code>app_info</code> 原生连接三态检查）与手动 DCF 计算页；输入不上传、不保存、离开清空。</li>
+        <li>Rust 仅 <code>tauri / serde / serde_json</code>，一个 <code>app_info</code> 命令；权限仅 <code>core:default</code>，未授予文件、网络、shell。</li>
+        <li>macOS ARM64 本地 <code>.app</code>/DMG 已构建并做基础窗口验证（精确范围见 §2.1）。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4><span class="tag tag-conf">用户已明确需求</span>（方向，非实现批准）</h4>
+      <ul>
+        <li>公司范围：A 股、港股、美股、非上市公司均可建档。</li>
+        <li>采集对象：定期财务、公司公告、新闻三类。</li>
+        <li>仅使用免费源；不含 AI 聊天 / 报告生成 / 模型配置调用，不含行情与自动估值采集。</li>
+        <li>以上为需求方向，须评审明确确认后才进入实现。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4><span class="tag tag-sug">建议</span> 技术与实现方案（待批准）</h4>
+      <ul>
+        <li>SQLite 本地库、资料库、指标观测、可配看板、不可变正式判断与证据快照、本地备份恢复。</li>
+        <li>来源准入分级、采集状态与幂等恢复、Rust 窄 Tauri 命令（SQLx / Tokio / reqwest）、TanStack Query / ECharts / Tiptap、运行时调度等技术方案。</li>
+        <li>阶段编排：P00 基线 + P01–P13 分阶段路线与每阶段验收（§9）；依赖可真并行，编号不强制开发排队，条件源不承诺必达。</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4><span class="tag tag-pend">待确认</span> 需评审拍板</h4>
+      <ul>
+        <li>四项关键确认见 §10；未确认前仅保留为建议，不实施。</li>
+      </ul>
+    </div>
+  </div>
+  <div class="warn"><strong>口径提醒：</strong>某免费源首次能访问，不等于获得稳定、可持续的授权；本方案不把"首次访问成功"写成稳定授权，所有外部源的条款与可访问性均标注为"待接入验证"（见 §3、§5）。</div>
+</section>
+
+<!-- ============ §2 现状与目标 ============ -->
+<section id="sec2">
+  <h2 class="sec"><span class="num">02</span>现状与目标、非目标</h2>
+
+  <h3>2.1 现状事实（本次只读核查，本地依据见 §11）</h3>
+  <table>
+    <colgroup><col style="width:22%"><col style="width:48%"><col style="width:30%"></colgroup>
+    <thead><tr><th>维度</th><th>已实现事实</th><th>本地依据</th></tr></thead>
+    <tbody>
+      <tr><td>仓库结构</td><td>pnpm workspace：<code>apps/web</code>（Next.js 16 + Fumadocs，知识库/博客/在线 DCF/Algolia 仅搜知识库）；<code>apps/desktop</code>（React 19 + Vite 8 + Tauri 2 + react-router-dom v7，HashRouter）；<code>packages/valuation</code>（纯 <code>calculateDcf</code> 算法与测试）；<code>packages/content-schema</code>（Zod 知识/博客元数据）。</td><td><code>README.md</code> 仓库结构节；<code>scripts/workspace.test.mjs</code></td></tr>
+      <tr><td>桌面端能力</td><td>仅工作台（运行环境检查，native / browser / error 三态）与手动 DCF 输入计算页；输入不上传、不保存，离开页面清空；"载入示例"明确标识为虚构数据，不对应任何公司。</td><td><code>apps/desktop/src/features/home/page.tsx</code>、<code>features/valuation/page.tsx</code></td></tr>
+      <tr><td>原生侧</td><td>Rust 仅依赖 <code>tauri / serde / serde_json</code>，仅一个 <code>app_info</code> 命令；capabilities 仅 <code>core:default</code>，明确不授予文件、网络或 shell 插件权限；CSP 限制 <code>connect-src</code> 为 ipc。</td><td><code>src-tauri/Cargo.toml</code>、<code>src/lib.rs</code>、<code>capabilities/default.json</code>、<code>tauri.conf.json</code></td></tr>
+      <tr><td>原生包验证范围（精确）</td><td>已做 macOS ARM64 本地 <code>.app</code>/DMG 构建与基础窗口验证：<code>tauri build --bundles app,dmg --ci</code> 退出码 0；打开打包 <code>.app</code>，WebView 为 <code>tauri://localhost</code>，工作台正常渲染并显示"价投小角落 · 0.1.0 · 原生连接正常"，重查连接、进入估值页、载入示例填值正常；<code>hdiutil verify</code> checksum VALID，包内二进制 cmp 一致。签名为 adhoc/linker-signed、无 TeamIdentifier，<strong>未使用 Developer ID 签名、未做 Apple 公证</strong>；DCF 结果区域未进一步验证，未宣称完整原生功能测试通过；Intel / Windows / Linux / 全新机器 Gatekeeper 流程未验证。</td><td><code>docs/tauri-monorepo-verification.md</code> 第 26–36 行；<code>README.md</code> 桌面端节</td></tr>
+      <tr><td>隔离边界</td><td>apps 之间不得互相导入；共享包不得依赖应用、Next.js 或 Tauri；不预先创建通用 UI 包；页面、导航、状态、搜索、存储各端独立维护。</td><td><code>README.md</code> 仓库结构与边界节；<code>scripts/workspace.test.mjs</code></td></tr>
+    </tbody>
+  </table>
+
+  <h3>2.2 目标（建议）</h3>
+  <ul>
+    <li>单人本地优先的公司研究工作台：围绕一家公司沉淀档案、资料库、财务与指标观测、公告证据、新闻线索、本人的正式判断，数据留在本机，离线可完成建档到判断闭环。</li>
+    <li>正式判断与证据快照不可被自动采集改写；所有财报修订保留版本，区分"当时已知"与"最新事实"。</li>
+    <li>提供一致性本地备份与可验证的恢复路径；首验 macOS ARM64，Web 与其他平台现状保留。</li>
+  </ul>
+
+  <h3>2.3 非目标（本期不做，附理由与重新考虑条件）</h3>
+  <table>
+    <colgroup><col style="width:26%"><col style="width:40%"><col style="width:34%"></colgroup>
+    <thead><tr><th>不做项</th><th>本期不做的理由</th><th>重新考虑条件</th></tr></thead>
+    <tbody>
+      <tr><td>实时行情、自动估值</td><td>现有 <code>packages/valuation</code> 仅保留手动 DCF；行情需要持续数据授权与口径维护，超出单人本地研究。</td><td>未来作为独立插件位单独评估授权与成本。</td></tr>
+      <tr><td>AI 聊天、报告生成、模型配置调用</td><td>涉及外部模型调用、凭据与成本，本轮明确后置。</td><td>本地闭环与证据规则稳定后，作为未来插件位评估。</td></tr>
+      <tr><td>登录、多端同步、多用户</td><td>前提为单人本地使用，无协作账号需求。</td><td>出现第二使用者或换机同步需求时再设计。</td></tr>
+      <tr><td>后台常驻服务 / 开机自启抓取</td><td>避免暗含脱离应用的后台进程；关机退出不跑。</td><td>确有定时补抓刚需时再评估系统级调度，且需单独评审。</td></tr>
+      <tr><td>付费数据源、自定义数据源接入</td><td>本期仅免费源；付费与自定义留插件边界。</td><td>许可与计费明确后，按 §7 插件边界接入。</td></tr>
+      <tr><td>任意拖拽的低代码看板平台</td><td>首期只需模板卡片显隐/排序与分组，不做通用搭建器。</td><td>模板无法覆盖需求时再评估，不提前建设。</td></tr>
+      <tr><td>Intel / Windows / Linux 适配、签名公证公开发布</td><td>首验 macOS ARM64；当前为本地验证包。</td><td>需要公开分发时单独做签名、公证与跨平台验证。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ §3 公司范围与覆盖矩阵 ============ -->
+<section id="sec3">
+  <h2 class="sec"><span class="num">03</span>公司范围与三类数据覆盖矩阵</h2>
+
+  <h3>3.1 公司与证券模型（建议）</h3>
+  <ul>
+    <li>以<strong>内部独立公司 ID</strong> 作为公司主键，支持自由文本建档，登记市场、注册地等基础信息；<strong>不以 ticker 作为公司主键</strong>。</li>
+    <li>证券单独建模为 listing：A 股 / H 股 / ADR 等多个证券可对应同一公司；退市、换代码、ADR 比例变化都挂在证券记录上，不污染公司主体。</li>
+    <li>非上市公司照常建档，无证券记录，财务与资料以人工录入为主。</li>
+    <li>初始跟踪名单后续试点时再填，不阻断本方案评审。</li>
+  </ul>
+
+  <h3>3.2 来源准入与数据形态分开标注</h3>
+  <p>本矩阵把两件事分开：<strong>来源准入等级</strong>（能不能从该来源取、取到什么程度）与<strong>数据形态</strong>（保存原始文档还是只存结构化值），二者不混为一谈。准入三级：</p>
+  <ul>
+    <li><span class="tag tag-sug">A 已文档支持 · 待接入验证</span>：有官方文档支持、免费无 key（如 SEC submissions / companyfacts），仍需目标公司与本机网络接入验收，条款与限频在接入时核对。</li>
+    <li><span class="tag tag-pend">B 条件适配</span>：需人工确认许可、格式或额外条件后才可取。</li>
+    <li><span class="tag tag-risk">C 仅人工</span>：不自动获取，由本人手工录入或粘贴。</li>
+  </ul>
+  <p>数据形态另标：<strong>原始文档</strong>（许可允许时落盘保存）/ <strong>结构化值</strong>（人工审核后入库的数值与字段）。</p>
+
+  <h3>3.3 覆盖矩阵（建议；各格准入状态见单元格，细则见 §5.5）</h3>
+  <table>
+    <colgroup><col style="width:14%"><col style="width:29%"><col style="width:29%"><col style="width:28%"></colgroup>
+    <thead><tr><th>市场</th><th>定期财务</th><th>公司公告</th><th>新闻</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>A 股</td>
+        <td>本轮未核实到可直接承诺的免费统一标准化官方 API；本期人工录入 / 手工导入，注明来源与口径</td>
+        <td>巨潮 cninfo 自用网站接口单次 JSON / PDF 可达，但无开放 API 文档、无公开限频与明确程序授权 → <strong>条件探索，默认不开启</strong><a class="src" href="#src-s11">[S11]</a>；先核实许可，再按自选公司低频验收。SSE / SZSE 允许个人非商业阅读下载<a class="src" href="#src-s12">[S12]</a><a class="src" href="#src-s13">[S13]</a>，不据此承诺内部接口稳定授权</td>
+        <td>条件候选（同美股新闻条件）；未满足启用条件前手工链接，显式未自动覆盖</td>
+      </tr>
+      <tr>
+        <td>港股</td>
+        <td>本轮未核实到可直接承诺的免费统一标准化官方 API；本期人工录入 / 手工导入。报告期按板块及发行人实际披露期，不套用统一季报假设</td>
+        <td>HKEX 通用条款有明确程序化限制<a class="src" href="#src-s5">[S5]</a>；<strong>HKEXnews 具体通道许可尚未核定</strong><a class="src" href="#src-s6">[S6]</a>，未取得明确依据前不启用自动采集（不绝对判定港股任何渠道非法）。默认仅指向原站书签；人工导入以用户本人有权留存、不批量、保留原始链接为边界，不构建系统性文档数据库，不承诺自动本地全文入库。官方个人邮件提醒（注册未验证）仅作外部辅助，<strong>不是产品自动采集</strong></td>
+        <td>手工链接，显式未自动覆盖</td>
+      </tr>
+      <tr>
+        <td>美股</td>
+        <td>SEC submissions + companyfacts：文档支持、免费、无 key 的首选官方源<a class="src" href="#src-s1">[S1]</a>；XBRL 仅 us-gaap / ifrs-full / dei / srt，自定义标签不入 API；FPI 年报 20-F / 40-F，6-K 非定期季度，不强求 10-Q。待少量关注 CIK 与本机网络接入验收；结构化值人工审核</td>
+        <td>SEC submissions 列表与 /Archives 原文；第三方附件权利不等于 SEC 授权，原文归档受 §5 许可边界约束 + 元数据</td>
+        <td>GNews Free 条件候选（须满足 §5.5）；Finnhub 仅后续备选、不进首版；未满足条件则手工链接，显式未自动覆盖</td>
+      </tr>
+      <tr>
+        <td>非上市</td>
+        <td>全部公司仍可建档；本轮未核实到覆盖任意主体的统一免费财务 / 公告自动源，按注册地、披露义务与用户授权分流。GSXT 公示范围与披露义务本轮未读原文、<strong>待验证</strong>，不作为法律结论，不泛化到全球；新三板仅人工<a class="src" href="#src-s14">[S14]</a><a class="src" href="#src-s15">[S15]</a></td>
+        <td>本轮未核实到统一免费自动源；本人留存材料 / 自发布 BP、招股、融资材料手工导入，注明来源</td>
+        <td>本轮未核实到统一免费自动源；手工维护链接清单（建议）</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">准入速览：美股 SEC submissions + companyfacts 为文档支持、免费、无 key 的首选官方源，仍需少量关注 CIK 与本机网络接入验收；A 股公告为条件探索、默认不开启，先核实许可再按自选公司低频验收；港股通用条款有程序化限制、HKEXnews 通道许可尚未核定，未取得依据前不启用自动采集；非上市本轮未核实到统一免费自动源，按披露义务与用户授权分流。新闻条件源须满足 §5.5 启用条件，否则手工链接并显式标注未自动覆盖。</div>
+  <div class="warn"><strong>显式取舍：</strong>本轮未核实到可直接承诺免费统一标准化官方 API 的市场 / 数据类，属于<strong>需用户同意的来源缺口</strong>，不是"已自动覆盖"。手工录入、手工导入、人工链接<strong>不等于自动采集验收通过</strong>；未覆盖的自动需求在 §9 保留降级验收行，不以手工路径顶替自动验收。</div>
+</section>
+
+<!-- ============ §4 核心流程与页面 ============ -->
+<section id="sec4">
+  <h2 class="sec"><span class="num">04</span>核心流程与页面</h2>
+
+  <h3>4.1 核心流程（建议）</h3>
+  <figure class="figure">
+    <svg viewBox="0 0 880 400" width="880" height="400" role="img" aria-label="公司研究核心流程示意图：手动主路径与联网旁路">
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6 Z" fill="#1d4a35"/>
+        </marker>
+        <marker id="arrowDash" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto">
+          <path d="M0,0 L7,3 L0,6 Z" fill="#8d482f"/>
+        </marker>
+      </defs>
+      <text x="60" y="24" font-family="sans-serif" font-size="13" fill="#143526" font-weight="600">本地主路径（不联网即可完成）</text>
+      <!-- main lane -->
+      <g font-family="sans-serif" font-size="13" fill="#17251d">
+        <rect x="60" y="36" width="230" height="52" rx="8" fill="#dce8df" stroke="#1d4a35"/>
+        <text x="175" y="58" text-anchor="middle">建档：公司 + 证券 listing</text>
+        <text x="175" y="76" text-anchor="middle" font-size="11" fill="#617066">内部公司 ID，ticker 非主键</text>
+        <line x1="175" y1="88" x2="175" y2="118" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="60" y="122" width="230" height="52" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="175" y="144" text-anchor="middle">资料库 / 指标 / 本人笔记</text>
+        <text x="175" y="162" text-anchor="middle" font-size="11" fill="#617066">手动文件、链接、文本、自定义指标</text>
+        <line x1="175" y1="174" x2="175" y2="204" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="60" y="208" width="230" height="52" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="175" y="230" text-anchor="middle">判断草稿（自由正文，可改）</text>
+        <text x="175" y="248" text-anchor="middle" font-size="11" fill="#617066">证据可选，缺证不阻止；自动保存</text>
+        <line x1="175" y1="260" x2="175" y2="290" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="60" y="294" width="230" height="52" rx="8" fill="#1d4a35"/>
+        <text x="175" y="316" text-anchor="middle" fill="#f4f1e8">正式判断（仅追加）</text>
+        <text x="175" y="334" text-anchor="middle" font-size="11" fill="#dce8df">修订复制新版本，不可回写</text>
+      </g>
+      <!-- board lane right of main -->
+      <g font-family="sans-serif" font-size="13">
+        <line x1="290" y1="320" x2="335" y2="320" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="340" y="294" width="210" height="52" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="445" y="316" text-anchor="middle">指标看板 / 公司详情</text>
+        <text x="445" y="334" text-anchor="middle" font-size="11" fill="#617066">卡片显隐排序、最近正式判断</text>
+      </g>
+      <!-- network bypass -->
+      <text x="610" y="24" font-family="sans-serif" font-size="13" fill="#8d482f" font-weight="600">联网旁路（可选，仅应用运行时）</text>
+      <g font-family="sans-serif" font-size="13" fill="#17251d">
+        <rect x="610" y="36" width="220" height="50" rx="8" fill="#fbf9f3" stroke="#cbd2c8" stroke-dasharray="5,4"/>
+        <text x="720" y="58" text-anchor="middle">来源登记 / 运行时检查</text>
+        <text x="720" y="76" text-anchor="middle" font-size="11" fill="#617066">退出关机不跑，无后台服务</text>
+        <line x1="720" y1="86" x2="720" y2="114" stroke="#8d482f" stroke-dasharray="5,4" marker-end="url(#arrowDash)"/>
+        <rect x="610" y="118" width="220" height="50" rx="8" fill="#f3e7dd" stroke="#8d482f"/>
+        <text x="720" y="140" text-anchor="middle">许可判定闸门</text>
+        <text x="720" y="158" text-anchor="middle" font-size="11" fill="#8d482f">无许可连元数据也不自动取</text>
+        <line x1="720" y1="168" x2="720" y2="196" stroke="#8d482f" stroke-dasharray="5,4" marker-end="url(#arrowDash)"/>
+        <rect x="610" y="200" width="220" height="50" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="720" y="222" text-anchor="middle">候选归档 / 元数据 → 人工审核</text>
+        <text x="720" y="240" text-anchor="middle" font-size="11" fill="#617066">去重幂等，只新增候选不改动正式判断</text>
+        <line x1="610" y1="225" x2="490" y2="148" stroke="#8d482f" stroke-dasharray="5,4" marker-end="url(#arrowDash)"/>
+        <text x="560" y="180" font-size="11" fill="#8d482f">审核后回流资料 / 指标</text>
+      </g>
+      <!-- backup lane -->
+      <g font-family="sans-serif" font-size="12" fill="#617066">
+        <rect x="610" y="294" width="220" height="52" rx="8" fill="#fbf9f3" stroke="#cbd2c8" stroke-dasharray="5,4"/>
+        <text x="720" y="316" text-anchor="middle">旁路：一致性备份 / 恢复（§8）</text>
+        <text x="720" y="334" text-anchor="middle">校验 → 暂存预览 → 切换</text>
+      </g>
+    </svg>
+    <figcaption>图 1：建档、资料、指标、笔记、判断、看板是不联网即可完成的主路径；联网来源检查只是旁路，许可闸门只作用于旁路——无许可时连元数据的自动访问 / 存储也不进行，仅人工书签；旁路候选经人工审核后才回流，自动采集不进入正式判断改写路径。</figcaption>
+  </figure>
+
+  <h3>4.2 页面清单（建议，按主任务组织）</h3>
+  <table>
+    <colgroup><col style="width:18%"><col style="width:26%"><col style="width:24%"><col style="width:32%"></colgroup>
+    <thead><tr><th>页面</th><th>主任务</th><th>输入</th><th>可见结果与异常去向</th></tr></thead>
+    <tbody>
+      <tr><td>工作台首页</td><td>进入常用公司、看待办（待读 / 待补数据）、查看采集与备份状态。</td><td>无强输入</td><td>展示本地状态；无数据时给出空态引导，不制造推荐内容。</td></tr>
+      <tr><td>公司列表 / 建档</td><td>自由文本建公司、登记市场与注册地、新增证券 listing。</td><td>公司名称、市场、注册地、证券代码（可空）</td><td>生成内部公司 ID；代码重复不阻断，归并到已有公司由人工确认。</td></tr>
+      <tr><td>公司详情</td><td>集中查看档案、财务版本、指标、资料、公告、新闻线索、判断时间线与证据。</td><td>选择公司</td><td>最新事实视图与历史当时已知分开呈现（§6）；证据缺失显示缺口。</td></tr>
+      <tr><td>判断编辑</td><td>自由正文写草稿，可选提纲块与证据引用，转正式、发起修订新版本。</td><td>判断正文、可选证据引用</td><td>草稿可改、自动保存失败保留内容；转正式后仅追加；缺证不阻止；自动采集不改动正式判断。</td></tr>
+      <tr><td>资料库</td><td>添加 / 编辑 / 归档文件、链接、文本笔记，标签搜索，本地预览。</td><td>本地文件 / 链接 / 文本</td><td>不支持形式只留元数据与入口；内部复制 / 外部引用按 §6.7 规则。</td></tr>
+      <tr><td>指标看板</td><td>选内置 / 自定义指标放卡片，设时间范围，模板卡片显隐 / 排序、公司分组、待读 / 待补、最近正式判断。</td><td>本地布局偏好、所选指标</td><td>缺值不按 0、不连线；未审核值标注；布局重启保持；不做低代码搭建。</td></tr>
+      <tr><td>采集状态</td><td>手动触发补抓、查看任务成功 / 失败 / 跳过（许可不足）与原因。</td><td>选择来源 / 公司、手动触发</td><td>失败可重试；重复运行幂等去重；许可不足明确标降级。</td></tr>
+      <tr><td>备份与恢复</td><td>执行一致性备份、查看清单 hash、校验并预览后恢复。</td><td>备份位置选择（许可目录）</td><td>恢复先到暂存验证再切换；不兼容拒绝并保留原库（§8）。</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ §5 采集策略 ============ -->
+<section id="sec5">
+  <h2 class="sec"><span class="num">05</span>采集策略、归因版权、状态与恢复</h2>
+
+  <h3>5.1 来源准入与自动下载的许可依据（建议）</h3>
+  <ul>
+    <li>自动访问 / 存储任何内容（含元数据）前，必须在来源登记中记录许可依据（官方条款原文或公开披露说明）；<code>robots</code> 只是需附加遵守的技术规则，不是许可依据。无许可时连元数据的 API 访问 / 存储也不自动进行，只能人工书签，不得借"仅元数据"绕过闸门。</li>
+    <li>准入等级（A/B/C，见 §3.2）描述"能不能取"；原始文档 / 结构化值描述"存什么"，二者独立标注。</li>
+    <li>条款与用途限制以官方原文（§11）为准；本机连通、目标公司低频验收与 key 留存条款仍为<strong>待接入验证</strong>，不得在接入前写成"已授权可抓取"。</li>
+    <li>免费套餐 / 公开渠道的用途限制，需在接入验收时区分"个人本地日常研究"与"商用 / production"场景并按条款如实标注；证据不足时既不写成"个人使用即不得进入产品"，也不默认全部可用。</li>
+  </ul>
+
+  <h3>5.2 归因与版权</h3>
+  <ul>
+    <li>每条记录保存：来源名称、原始 URL、来源发布时间 <code>published_at</code>、本机采集时间 <code>first_seen_at / collected_at</code>、许可标记、内容 hash。</li>
+    <li>新闻默认只存元数据（标题 / 来源 / 原链接 / 时间），<strong>不默认抓取全文</strong>；全文仅在许可允许时归档。</li>
+    <li>URL + 内容 hash 不能被称为"全文快照"；证据必须显式标 <code>full</code>（已存原文）或 <code>metadata_only</code>（仅元数据），写明缺口。</li>
+  </ul>
+
+  <h3>5.3 调度策略（建议）</h3>
+  <ul>
+    <li>仅在应用运行时按到期时间补抓；应用退出或关机不跑，不注册后台常驻服务、不开机自启。</li>
+    <li>下次启动时补上错过的到期任务；补抓顺序与限频由任务记录控制，避免集中请求。</li>
+  </ul>
+
+  <h3>5.4 任务状态与失败恢复（建议）</h3>
+  <table>
+    <colgroup><col style="width:20%"><col style="width:40%"><col style="width:40%"></colgroup>
+    <thead><tr><th>状态</th><th>含义</th><th>恢复 / 去向</th></tr></thead>
+    <tbody>
+      <tr><td>排队 / 运行中</td><td>已登记待执行或正在执行。</td><td>应用退出后标记为未完成，下次启动重新排队。</td></tr>
+      <tr><td>成功</td><td>按准入等级完成归档或元数据入库。</td><td>记录来源、时间、hash；重复运行按 URL + hash 幂等去重，不产生重复记录。</td></tr>
+      <tr><td>失败</td><td>网络、格式或解析错误。</td><td>保留错误原因，可手动重试；不自动无限重试。</td></tr>
+      <tr><td>跳过（许可不足）</td><td>许可依据缺失，或不允许该级别的自动访问 / 存储。</td><td>有元数据许可才存元数据；连元数据也无许可时仅人工书签，记录原因，不伪装成已归档。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>5.5 分来源准入细则（建议）</h3>
+  <table class="src-table">
+    <colgroup><col style="width:20%"><col style="width:42%"><col style="width:38%"></colgroup>
+    <thead><tr><th>来源</th><th>已核实要点</th><th>准入与边界</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>美股 SEC（首选官方源）</td>
+        <td>submissions + companyfacts 文档支持、免费、无 key；companyfacts 仅 us-gaap / ifrs-full / dei / srt 标签，自定义标签不入 API；FPI 年报 20-F / 40-F，6-K 非定期季度，不强求 10-Q。<a class="src" href="#src-s1">[S1]</a><a class="src" href="#src-s2">[S2]</a><a class="src" href="#src-s3">[S3]</a><a class="src" href="#src-s4">[S4]</a></td>
+        <td>先验证少量关注 CIK 与本机网络；UA 声明含名称 + 联系邮箱；10 req/s 是平台上限而非默认值，建议更低串行 + 退避。SEC 隐私政策允许信息可取回复制，<strong>不等于对外全文发布或许可第三方版权</strong>；第三方附件权利不等于 SEC 授权，公开发布 / 再分发需自行判断版权；不使用 SEC 印章 / Logo 作商号。</td>
+      </tr>
+      <tr>
+        <td>A 股公告（cninfo 等）</td>
+        <td>巨潮自用网站接口单次 JSON / PDF 可达，但无开放 API 文档、无公开限频与明确程序授权；SSE / SZSE 允许个人非商业阅读下载。<a class="src" href="#src-s11">[S11]</a><a class="src" href="#src-s12">[S12]</a><a class="src" href="#src-s13">[S13]</a></td>
+        <td><strong>条件探索，默认不开启</strong>；先核实许可，再按自选公司低频验收；不把"单次可达"写成稳定授权，不据交易所阅读条款承诺内部接口稳定授权。</td>
+      </tr>
+      <tr>
+        <td>港股 HKEXnews</td>
+        <td>通用 ToU 有明确程序化限制，并禁止创作衍生作品 / 合集 / 衍生数据库；HKEXnews 具体通道条款本轮未独立核实，许可尚未核定，通用限制对该通道的适用未下绝对结论。<a class="src" href="#src-s5">[S5]</a><a class="src" href="#src-s6">[S6]</a></td>
+        <td>未取得明确依据前不启用自动采集，不绝对判定港股任何渠道非法；默认仅指向原站书签，人工导入以用户有权留存、不批量、保留原始链接为边界，不建系统性文档数据库，不承诺自动本地全文入库；个人邮件提醒（注册未验证）为外部辅助，非自动采集。</td>
+      </tr>
+      <tr>
+        <td>非上市</td>
+        <td>本轮未核实到覆盖任意主体的统一免费财务 / 公告自动源；GSXT 原文本轮未读取，公示范围与披露义务<strong>待验证</strong>，不下法律结论；新三板自动访问受阻。<a class="src" href="#src-s14">[S14]</a><a class="src" href="#src-s15">[S15]</a></td>
+        <td>全部可建档，按注册地 / 披露义务 / 用户授权分流；本人材料手工导入并注明来源，不泛化全球公示范围。</td>
+      </tr>
+      <tr>
+        <td>GNews Free（条件候选）</td>
+        <td>新版 Free 允许个人持续非商用使用（非 dev-only）<a class="src" href="#src-s7">[S7]</a>；配额 100 请求 / 日、12h 延迟、30 天可检索历史、每请求 ≤10 篇短摘录<a class="src" href="#src-s8">[S8]</a>；<strong>30 天是可检索历史窗口，不等于允许留存的期限</strong>；条款原文仅允许性能合理缓存（法律事实）；配额由全公司任务队列共享；中文覆盖未实测。</td>
+        <td>须用户确认用途、自注册自有免费 key、逐源核定留存条款后启用；<strong>“定向短期缓存 / 元数据、非全量、不永久存档”是我们的保守产品建议，非条款原文许可</strong>；不再分发 / 转售。</td>
+      </tr>
+      <tr>
+        <td>Finnhub（备选）</td>
+        <td>Personal Use；<strong>订阅结束要求删除全部数据，与不可变证据永久存储冲突</strong>。<a class="src" href="#src-s9">[S9]</a></td>
+        <td><strong>不进首版主源，仅后续备选</strong>；不共享访问、不再分发衍生结果。</td>
+      </tr>
+      <tr>
+        <td>NewsAPI / BBC</td>
+        <td>NewsAPI 仅允许 dev / test 联调，禁止 staging / production（含公司内部环境）<a class="src" href="#src-s10">[S10]</a>；BBC 仅作备选说明。</td>
+        <td>NewsAPI 不进首版正式主源；BBC 不进首期。</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="note">个人本地非商用研究不等同商用产品：GNews Free 在个人持续非商用下可用（非 dev-only），Finnhub 因订阅结束删除全部数据与不可变存储冲突，仅后续备选；二者均不默认全量长期归档、再分发或商用。条件性新闻在用户确认用途、自注册免费 key 与逐源留存条款前保持手工链接并标注"未自动覆盖"。</div>
+</section>
+
+<!-- ============ §6 数据模型 ============ -->
+<section id="sec6">
+  <h2 class="sec"><span class="num">06</span>数据模型与不可变判断、证据、财报修订</h2>
+  <p>本节为领域模型建议，只列实体与关键规则，不写建表语句；本期公司领域模型留在 desktop 内部（§7）。</p>
+
+  <h3>6.1 核心实体（建议）</h3>
+  <table>
+    <colgroup><col style="width:20%"><col style="width:44%"><col style="width:36%"></colgroup>
+    <thead><tr><th>实体</th><th>职责</th><th>关键规则</th></tr></thead>
+    <tbody>
+      <tr><td>Company 公司</td><td>内部公司 ID、名称、市场、注册地、自由简介、自定义标签。</td><td>ID 独立生成，不使用 ticker 作主键；可关联资料、指标、判断。</td></tr>
+      <tr><td>Listing 证券</td><td>挂在公司下的 A / H / ADR 等证券、代码、状态。</td><td>多证券对一公司；退市换码只改证券记录。</td></tr>
+      <tr><td>FinancialFact 财务值</td><td>一条带完整口径的财务数值（见 6.2）。</td><td>带审核状态；缺失不等于 0；保留修订版本。</td></tr>
+      <tr><td>MetricDefinition 指标定义</td><td>内置原始项映射（直接引用已审核 FinancialFact，不复制）+ 少量固定纯函数（派生，公式 / 口径写死、版本化）；自定义数值 / 文本指标定义。</td><td>无用户自定义计算，<strong>不建公式 DSL</strong>；派生结果保留输入版本与公式版本。</td></tr>
+      <tr><td>MetricObservation 指标观测</td><td>自定义数值 / 文本指标在某公司某期间的取值、口径、审核状态与来源指针。</td><td>未审核值默认不进已审核趋势，可切待核视图灰显；数值缺值留空、图上断点；文本仅卡片展示、不进趋势图。</td></tr>
+      <tr><td>Material 资料库条目</td><td>手动文件 / 链接 / 文本笔记，可挂标签、公司、归档状态。</td><td>本人自写内容不受第三方撤销隔离规则限制（§8.2）。</td></tr>
+      <tr><td>MaterialVersion / Attachment</td><td>资料版本与附件；内部复制落盘或外部引用二选一记录。</td><td>原件迁移 / 重命名后，内部复制仍可用，外部引用记录原位置。</td></tr>
+      <tr><td>Tag 标签</td><td>跨公司、资料、指标、判断的自由标签。</td><td>用于搜索与分组，不承担层级权限。</td></tr>
+      <tr><td>Announcement 公告</td><td>公司公告 / 备案文件的元数据与可选原文引用。</td><td>原文仅许可允许时归档；标 full / metadata_only；可带 restricted 指针。</td></tr>
+      <tr><td>NewsItem 新闻线索</td><td>标题 / 来源 / 原链接 / 时间。</td><td>默认 metadata_only，不默认抓全文；可带 restricted 指针。</td></tr>
+      <tr><td>JudgmentDraft 判断草稿</td><td>本人可反复修改的自由正文判断。</td><td>可改可删；证据可选引用，缺证不阻止保存或转正式（见 6.5）。</td></tr>
+      <tr><td>JudgmentOfficial 正式判断</td><td>转正式后的判断版本链。</td><td><strong>仅追加，不可回写</strong>；修订复制新版本，可填可选修订原因。</td></tr>
+      <tr><td>Evidence 证据</td><td>结构化采用值与版本引用，可选归档文件。</td><td>自动采集不得改写已正式判断与证据快照；可带 restricted 指针。</td></tr>
+      <tr><td>TakedownEvent 撤销事件</td><td>最小留痕：关联负载 hash、来源、原因、时间、许可状态。</td><td>只追加不覆盖；非核心路径、非日常审批中心（§6.4）。</td></tr>
+      <tr><td>SourceLicense 来源登记</td><td>准入等级、许可依据、限频与降级记录。</td><td>无依据不得自动下载。</td></tr>
+      <tr><td>CollectionRun 采集任务</td><td>一次采集的状态、错误、hash 与时间。</td><td>幂等去重；失败 / 跳过可追溯。</td></tr>
+      <tr><td>DashboardConfig / CardConfig</td><td>看板布局、卡片显隐 / 排序 / 分组与所选指标。</td><td>本地配置，重启保持；不做低代码搭建器。</td></tr>
+      <tr><td>BackupManifest 备份清单</td><td>备份范围、文件清单与 hash。</td><td>恢复先校验清单一致性（§8）。</td></tr>
+    </tbody>
+  </table>
+
+  <h3>6.2 财务值最小字段（建议）</h3>
+  <p>每条财务值至少携带：币种、单位、期间起止、财年、季度或累计（Q1 / 半年 / Q3 / 全年）、合并口径（合并 / 母公司）、会计准则、源字段名 + 标签、来源发布时间 <code>published_at</code>、首次入库时间 <code>first_seen_at</code>、修订版本号、审核状态。</p>
+  <ul>
+    <li>缺失字段留空并标注，<strong>不得按 0 处理</strong>；不强行做跨市场、跨口径可比。SEC companyfacts 缺某标签只表示该申报未提供该口径，<strong>不等于公司未披露该项</strong><a class="src" href="#src-s1">[S1]</a>。</li>
+    <li><code>published_at</code> 为来源发布时间；<code>first_seen_at</code> 为本机首次入库时间，写入后不可变；<code>collected_at</code> 为本次采集时间，记在 CollectionRun 上，二者用途不同，不混同。</li>
+  </ul>
+
+  <h3>6.3 不可变判断与版本保留（建议）</h3>
+  <figure class="figure">
+    <svg viewBox="0 0 880 250" width="880" height="250" role="img" aria-label="判断追加与财报版本保留示意图">
+      <g font-family="sans-serif" font-size="13">
+        <text x="20" y="30" fill="#143526" font-weight="600">正式判断：仅追加，旧版本永不回写</text>
+        <rect x="20" y="50" width="180" height="52" rx="8" fill="#1d4a35"/>
+        <text x="110" y="74" text-anchor="middle" fill="#f4f1e8">正式判断 v1</text>
+        <text x="110" y="92" text-anchor="middle" font-size="11" fill="#dce8df">冻结，只读</text>
+        <line x1="200" y1="76" x2="245" y2="76" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="250" y="50" width="180" height="52" rx="8" fill="#1d4a35"/>
+        <text x="340" y="74" text-anchor="middle" fill="#f4f1e8">正式判断 v2（修订）</text>
+        <text x="340" y="92" text-anchor="middle" font-size="11" fill="#dce8df">由 v1 复制出新版本</text>
+        <line x1="430" y1="76" x2="475" y2="76" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="480" y="50" width="180" height="52" rx="8" fill="#dce8df" stroke="#1d4a35"/>
+        <text x="570" y="74" text-anchor="middle">正式判断 v3（当前）</text>
+        <text x="570" y="92" text-anchor="middle" font-size="11" fill="#617066">后续修订再追加 v4</text>
+
+        <text x="20" y="150" fill="#143526" font-weight="600">财报修订：保留全部版本，最新事实视图 ≠ 历史当时已知</text>
+        <rect x="20" y="170" width="180" height="52" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="110" y="194" text-anchor="middle">原始发布版本</text>
+        <text x="110" y="212" text-anchor="middle" font-size="11" fill="#617066">published_at 时点冻结</text>
+        <line x1="200" y1="196" x2="245" y2="196" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="250" y="170" width="180" height="52" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="340" y="194" text-anchor="middle">第一次修订版本</text>
+        <text x="340" y="212" text-anchor="middle" font-size="11" fill="#617066">不覆盖原始版本</text>
+        <line x1="430" y1="196" x2="475" y2="196" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="480" y="170" width="180" height="52" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="570" y="194" text-anchor="middle">最新事实版本</text>
+        <text x="570" y="212" text-anchor="middle" font-size="11" fill="#617066">仅供当前视图，不回写历史</text>
+      </g>
+    </svg>
+    <figcaption>图 2：上排为正式判断版本链（只追加）；下排为财报修订版本链（全保留，最新视图单独标注）。自动采集只新增候选与新版本，不改动已冻结内容。</figcaption>
+  </figure>
+
+  <h3>6.4 证据规则（建议）</h3>
+  <ul>
+    <li>证据保存结构化采用值与版本引用；归档文件仅在许可允许时落盘。</li>
+    <li>每条证据显式标 <code>full</code>（已存原文）或 <code>metadata_only</code>（仅元数据），写清缺口；URL + hash 不等于全文快照。</li>
+    <li>自动采集不改变已正式判断与证据快照；采集到的新事实只进入候选 / 新版本，由人工决定是否采用。</li>
+    <li><strong>依法撤销留痕（逻辑版本不覆盖，最小原则）：</strong>授权到期或法律要求清理时，正式人工判断的文字与版本仍不回写；仅第三方证据负载可依法删除，撤销 / 受限事件落 TakedownEvent（含内容 hash、来源、原因、时间、许可状态），证据 / 公告 / 新闻以 restricted 指针关联，并保留缺证状态。该机制只在触发清理时记录，<strong>不是核心路径必经操作，也不做用户日常审批中心</strong>。备份中的受限第三方负载不恢复，不保证所有快照永远可读。</li>
+  </ul>
+
+  <h3>6.5 判断书写（建议：自由正文优先）</h3>
+  <ul>
+    <li><strong>自由正文为主体</strong>：判断以本人书写的正文为主；护城河、管理层、资本配置、风险等只是<strong>可选提纲块</strong>，不强制分段、不缺项不可保存。</li>
+    <li><strong>证据可选</strong>：可引用证据与采用值版本，<strong>转正式（冻结版本）不以附证据为前提，缺证不阻断</strong>；未附证据的判断仅标注"未附证据"，由本人负责。不设强制的 Comment / Draft / Official 三流。</li>
+    <li><strong>自动保存仅限草稿与正文内批注</strong>：编辑内容本地暂存；正式冻结版只读，不进入自动保存。保存失败时保留已输入内容并显示失败 / 可重试状态，提供手动重试，离开 / 切换前先保护未保存内容，不丢字。</li>
+    <li><strong>时间线与版本差异</strong>：草稿、转正式、修订按时间排列；正式判断版本之间可查看差异；修订原因可选填，非必填。</li>
+    <li>转正式后整段冻结，修订复制为新版本，不回写旧版（§6.3）。</li>
+  </ul>
+
+  <h3>6.6 指标与看板观测（建议）</h3>
+  <ul>
+    <li><strong>两类内置项分开处理：</strong>原始项通过映射直接引用已审核 FinancialFact，<strong>不复制数值</strong>；少量派生项走<strong>固定纯函数</strong>（内置、公式与口径预先写死、可版本化），<strong>不提供用户自定义计算、不建公式 DSL</strong>。派生结果保留所引用输入事实的版本号与公式版本号，输入修订后按新版本重算，不改写历史结果；任一输入缺口径则该项当期不展示，不强行跨准则 / 跨市场映射可比。</li>
+    <li><strong>建议首批内置清单</strong>（原始映射 / 固定派生见下表；口径来源在接入时按申报报表如实标注，无口径不展示）：</li>
+  </ul>
+  <table>
+    <colgroup><col style="width:20%"><col style="width:18%"><col style="width:44%"><col style="width:18%"></colgroup>
+    <thead><tr><th>内置指标</th><th>类型</th><th>固定口径 / 公式</th><th>说明</th></tr></thead>
+    <tbody>
+      <tr><td>营收</td><td>原始映射</td><td>直接引用营业收入事实值。</td><td>币种 / 期间随事实。</td></tr>
+      <tr><td>归母净利润 / 净利润</td><td>原始映射</td><td>分别引用归母净利润与净利润事实值，不混同。</td><td>按申报口径。</td></tr>
+      <tr><td>经营现金流（CFO）</td><td>原始映射</td><td>直接引用经营活动现金流量净额。</td><td>—</td></tr>
+      <tr><td>总资产 / 总负债</td><td>原始映射</td><td>直接引用资产负债表期末值。</td><td>—</td></tr>
+      <tr><td>归母权益 / 股东权益</td><td>原始映射</td><td>分别引用归母权益与股东权益，不混同。</td><td>—</td></tr>
+      <tr><td>自由现金流</td><td>固定派生</td><td>CFO − 资本开支（资本开支取购建固定资产 / 无形资产等支出，固定口径）。</td><td>输入缺一即不展示。</td></tr>
+      <tr><td>ROE</td><td>固定派生</td><td>归母净利润 / 归母权益（期末口径，不自行年化或改平均口径）。</td><td>输入缺一即不展示。</td></tr>
+      <tr><td>毛利率</td><td>固定派生</td><td>（营收 − 营业成本）/ 营收。</td><td>输入缺一即不展示。</td></tr>
+      <tr><td>净利率</td><td>固定派生</td><td>净利润 / 营收。</td><td>输入缺一即不展示。</td></tr>
+      <tr><td>资产负债率</td><td>固定派生</td><td>总负债 / 总资产。</td><td>输入缺一即不展示。</td></tr>
+    </tbody>
+  </table>
+  <ul>
+    <li><strong>自定义数值 / 文本指标直接存 MetricObservation</strong>，由本人填值与口径，不参与内置派生。数值取值带币种、单位、期间口径，可选时间范围进图表；<strong>文本指标只以文本卡片展示，不进入趋势图</strong>。</li>
+    <li><strong>未审核值默认不进入已审核趋势</strong>；允许明确切换到待核视图灰显，与已审核值不混同；缺值留空、不按 0，图表在缺值处断点、不连线。</li>
+    <li>指标定义、观测、标签与看板 / 卡片配置（DashboardConfig / CardConfig）统一存 SQLite 并进入备份；本地搜索只在本机进行，<strong>不送 Algolia、不与 Web 端互通</strong>（§7）。布局重启保持，不做任意拖拽低代码平台。</li>
+  </ul>
+
+  <h3>6.7 资料库（建议）</h3>
+  <ul>
+    <li>条目类型：手动文件、链接、文本笔记；建议支持 PDF / 图片 / TXT / Markdown 本地预览，CSV 仅作带列映射确认的结构化导入边界。</li>
+    <li>不支持的形式不强行解析，仅保留元数据与打开入口；条目、标签与归档状态存 SQLite，进入备份；标签搜索只在本机进行，不送 Algolia、不与 Web 端互通。</li>
+    <li><strong>原件去向规则</strong>：内部复制落盘的资料不受原件迁移 / 重命名影响；选外部引用的记录原位置，失效时提示重新定位。</li>
+    <li>本人自写笔记与自有资料不属于"受来源限制的第三方负载"，备份可正常恢复（§8.2）。</li>
+  </ul>
+</section>
+
+<!-- ============ §7 架构与隔离 ============ -->
+<section id="sec7">
+  <h2 class="sec"><span class="num">07</span>桌面架构与 Web 隔离、未来插件边界</h2>
+
+  <h3>7.1 推荐技术路线（建议，单一选择；以下均为拟新增，非当前已装）</h3>
+  <p><strong>推荐：网络、文件、数据库统一由 Rust 侧完成，通过窄 Tauri 命令暴露给前端；前端不同时引入 http / fs 插件。</strong></p>
+  <table>
+    <colgroup><col style="width:18%"><col style="width:24%"><col style="width:34%"><col style="width:24%"></colgroup>
+    <thead><tr><th>层</th><th>拟新增依赖（建议）</th><th>用途</th><th>取舍</th></tr></thead>
+    <tbody>
+      <tr><td>Rust 原生侧</td><td>SQLx（SQLite）</td><td>本地库读写、迁移与校验；资料 / 指标 / 标签 / 看板配置一并入库并进入备份。</td><td>不另起服务端数据库，保持单机文件库。</td></tr>
+      <tr><td>Rust 原生侧</td><td>Tokio + reqwest</td><td>异步运行时与 HTTP，采集 / 备份 / 许可检查集中在此。</td><td>不使用前端 http 插件；限频、退避、UA 在原生侧统一控制。</td></tr>
+      <tr><td>前端</td><td>TanStack Query</td><td>窄命令返回数据的缓存、失效与重试状态。</td><td>不引入全局状态重型库。</td></tr>
+      <tr><td>前端</td><td>ECharts</td><td>指标时间范围图表，缺值断点、待核灰显。</td><td>仅渲染固定纯函数结果，无用户计算引擎。</td></tr>
+      <tr><td>前端</td><td>Tiptap</td><td>判断自由正文与可选提纲块编辑、草稿自动保存。</td><td>正式冻结版只读，不进编辑器。</td></tr>
+    </tbody>
+  </table>
+  <ul>
+    <li>选择理由：权限集中在 Rust 侧，便于按命令审计许可与目录边界；与现有 <code>core:default</code> 最小授权一致，避免前端直接持有网络与文件能力；浏览器预览不伪装原生；CSP 可保持严格。</li>
+    <li>窄命令原则：每条命令只做一件明确的事（如取一家公司的公告列表、落盘一个已许可文件、写一条审核后的财务值），不在前端拼装裸请求。现有 React 19 / Vite / Tauri 2 / react-router-dom 保留，<code>packages/valuation</code> 手动 DCF 不动。</li>
+  </ul>
+
+  <figure class="figure">
+    <svg viewBox="0 0 880 330" width="880" height="330" role="img" aria-label="桌面与 Web 隔离架构示意图">
+      <g font-family="sans-serif" font-size="13">
+        <text x="20" y="28" fill="#143526" font-weight="600">桌面端 apps/desktop（独立迭代）</text>
+        <rect x="20" y="44" width="500" height="56" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="270" y="68" text-anchor="middle">React 视图层（建档 / 详情 / 判断 / 看板 / 备份）</text>
+        <text x="270" y="88" text-anchor="middle" font-size="11" fill="#617066">HashRouter，不直接发请求、不直接读写文件</text>
+        <line x1="270" y1="100" x2="270" y2="132" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="20" y="138" width="500" height="52" rx="8" fill="#dce8df" stroke="#1d4a35"/>
+        <text x="270" y="162" text-anchor="middle">窄 Tauri 命令层（每个命令职责单一）</text>
+        <text x="270" y="180" text-anchor="middle" font-size="11" fill="#617066">权限在 capabilities 中按命令最小授予</text>
+        <line x1="270" y1="190" x2="270" y2="222" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="20" y="228" width="240" height="64" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="140" y="254" text-anchor="middle">Rust 服务：采集 / 存储 / 备份</text>
+        <text x="140" y="274" text-anchor="middle" font-size="11" fill="#617066">网络 · 文件 · SQLite 集中在此</text>
+        <rect x="280" y="228" width="240" height="64" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="400" y="254" text-anchor="middle">本地 SQLite + 已许可归档目录</text>
+        <text x="400" y="274" text-anchor="middle" font-size="11" fill="#617066">库与归档分离，清单可校验</text>
+
+        <text x="580" y="28" fill="#143526" font-weight="600">Web 端 apps/web（独立迭代，现状保留）</text>
+        <rect x="580" y="44" width="280" height="120" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="720" y="74" text-anchor="middle">Next.js 站点：知识库 / 博客</text>
+        <text x="720" y="98" text-anchor="middle">在线手动 DCF / Algolia 搜索</text>
+        <text x="720" y="122" text-anchor="middle" font-size="11" fill="#617066">不读桌面本地库，不共享账号</text>
+        <text x="720" y="146" text-anchor="middle" font-size="11" fill="#8d482f">不从桌面拉取，也不向桌面推送</text>
+
+        <rect x="580" y="228" width="280" height="64" rx="8" fill="#ebe5d8" stroke="#cbd2c8" stroke-dasharray="5,4"/>
+        <text x="720" y="254" text-anchor="middle">仅共享稳定无平台能力</text>
+        <text x="720" y="274" text-anchor="middle" font-size="11" fill="#617066">packages/valuation · packages/content-schema</text>
+      </g>
+    </svg>
+    <figcaption>图 3：桌面与 Web 各自独立迭代；两端只共享已抽取的稳定包，公司领域模型本期不进共享包。</figcaption>
+  </figure>
+
+  <h3>7.2 共享边界（建议）</h3>
+  <ul>
+    <li><code>packages/valuation</code> 仅保留手动 DCF 计算，不拉取行情、不做自动估值。</li>
+    <li><code>packages/content-schema</code> 局限于知识库 / 博客元数据，不强塞公司领域模型。</li>
+    <li>本期公司领域模型留在 desktop 内部；未来双端真正复用时再评估提取，不预先建通用 UI 包。</li>
+  </ul>
+
+  <h3>7.3 未来插件边界（本期不做，仅预留接口位置）</h3>
+  <p>未来扩展只预留<strong>接口边界</strong>：不建插件市场，不加载 / 执行任意第三方代码，新能力经来源登记与单独评审后以受控命令接入。</p>
+  <table>
+    <colgroup><col style="width:26%"><col style="width:44%"><col style="width:30%"></colgroup>
+    <thead><tr><th>未来插件位</th><th>边界说明</th><th>本期状态</th></tr></thead>
+    <tbody>
+      <tr><td>付费数据源</td><td>许可与计费明确后，按来源登记接入，不混入免费源策略。</td><td>不做</td></tr>
+      <tr><td>自定义数据源</td><td>本人自定义格式 / 地址，经许可登记后接入。</td><td>不做</td></tr>
+      <tr><td>AI 聊天 / 报告 / 模型配置</td><td>外部模型调用、凭据、成本单独评审。</td><td>不做</td></tr>
+      <tr><td>行情 / 自动估值</td><td>持续数据授权与口径维护，独立评估。</td><td>不做</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ============ §8 资料/备份/安全 ============ -->
+<section id="sec8">
+  <h2 class="sec"><span class="num">08</span>资料、备份、安全</h2>
+
+  <h3>8.1 资料库与第三方归档（建议）</h3>
+  <ul>
+    <li><strong>本人资料库</strong>（§6.7：手动文件 / 链接 / 文本笔记）与<strong>第三方许可归档</strong>分开管理；前者是用户自有内容，后者仅在许可允许时落盘。</li>
+    <li>第三方归档目录与 SQLite 库分离，便于单独校验与备份；非许可内容只保留元数据与引用，不私自缓存全文。</li>
+  </ul>
+
+  <h3>8.2 一致性备份（建议）</h3>
+  <ul>
+    <li>备份范围：本地 SQLite 库（含资料、指标、标签、看板配置）+ 已允许归档的文件 + 本地配置 + 备份清单（逐项 hash）。</li>
+    <li><strong>本期无 AI 密钥、无登录</strong>；条件新闻（如 GNews）若启用，用户自有免费 key 由<strong>系统凭据库管理、不进入普通备份</strong>；换机 / 恢复后由用户重新输入，<strong>本方案不另建密钥备份</strong>。</li>
+    <li><strong>隔离范围仅限受来源限制的第三方负载</strong>：本人草稿 / 正文内批注、笔记与自有资料不属于受限负载，正常备份、正常恢复，不因个别第三方条目受限而整包拒绝。</li>
+    <li><strong>新备份排除：</strong>生成新备份时，已标记受限 / 依法应删除的第三方负载不进入新快照。</li>
+    <li><strong>旧备份恢复过滤：</strong>旧快照可能仍含已撤销的第三方负载；恢复时先与独立累积的受限清单比对，仅命中项隔离不复活，其余内容照常恢复，而非假定旧包全部合法。</li>
+    <li><strong>受限清单独立于备份快照保留</strong>当前累积内容（内容 hash + 来源 + 撤销事件指针）；恢复旧包前取当前清单与旧包记录的并集。<strong>清单丢失 / 新机恢复时不整包拒绝</strong>：本人草稿 / 批注、笔记与自有资料照常恢复，仅把许可无法确认的第三方负载隔离，其余内容切换。</li>
+    <li>备份为一致性快照：清单记录每个文件的 hash，恢复前先核对清单与实际文件一致。</li>
+  </ul>
+
+  <h3>8.3 恢复流程（建议，不默认合并覆盖）</h3>
+  <figure class="figure">
+    <svg viewBox="0 0 880 240" width="880" height="240" role="img" aria-label="备份恢复三分支示意图：通过切换、清单丢失新机降级恢复、失败拒绝">
+      <g font-family="sans-serif" font-size="13">
+        <rect x="20" y="94" width="150" height="52" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="95" y="118" text-anchor="middle">读取备份清单</text>
+        <text x="95" y="136" text-anchor="middle" font-size="11" fill="#617066">逐项 hash 校验</text>
+        <line x1="170" y1="120" x2="215" y2="120" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="220" y="94" width="180" height="52" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="310" y="116" text-anchor="middle">暂存预览 + 受限清单比对</text>
+        <text x="310" y="134" text-anchor="middle" font-size="11" fill="#8d482f">仅隔离命中的第三方撤销负载</text>
+        <line x1="400" y1="120" x2="455" y2="120" stroke="#1d4a35"/>
+        <circle cx="455" cy="120" r="3" fill="#1d4a35"/>
+        <!-- A: hash 通过，上 -->
+        <line x1="455" y1="120" x2="455" y2="58" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <text x="466" y="64" font-size="11" fill="#1d4a35">hash 校验通过</text>
+        <rect x="470" y="34" width="200" height="50" rx="8" fill="#dce8df" stroke="#1d4a35"/>
+        <text x="570" y="56" text-anchor="middle">命中第三方受限项先隔离，其余切换</text>
+        <text x="570" y="74" text-anchor="middle" font-size="11" fill="#617066">原库先保留为回滚副本</text>
+        <!-- B: 清单丢失 / 新机，中 -->
+        <line x1="455" y1="120" x2="500" y2="120" stroke="#617066" stroke-dasharray="5,4" marker-end="url(#arrow)"/>
+        <rect x="505" y="96" width="200" height="48" rx="8" fill="#ebe5d8" stroke="#617066"/>
+        <text x="605" y="116" text-anchor="middle">清单丢失 / 新机：不整包拒绝</text>
+        <text x="605" y="134" text-anchor="middle" font-size="11" fill="#617066">个人内容恢复，第三方不确定项隔离</text>
+        <!-- C: hash 失败 / 不兼容，下 -->
+        <line x1="455" y1="120" x2="455" y2="186" stroke="#8d482f" marker-end="url(#arrowDash)"/>
+        <text x="466" y="182" font-size="11" fill="#8d482f">hash 失败 / 不兼容</text>
+        <rect x="470" y="164" width="200" height="50" rx="8" fill="#f3e7dd" stroke="#8d482f"/>
+        <text x="570" y="186" text-anchor="middle">拒绝恢复，不做部分写入</text>
+        <text x="570" y="204" text-anchor="middle" font-size="11" fill="#8d482f">完整保留原库，自有资料不受影响</text>
+      </g>
+    </svg>
+    <figcaption>图 4：三条路径互不串联——hash 校验通过则命中第三方受限项先隔离、其余切换（原库留回滚）；清单丢失 / 新机时不整包拒绝，个人内容恢复、第三方不确定项隔离后切换；仅 hash 失败 / 不兼容才拒绝并完整保留原库。不默认合并覆盖当前库，重复导入幂等。</figcaption>
+  </figure>
+  <ul>
+    <li>重复导入 / 重复恢复按内部 ID + hash 幂等处理，不产生重复记录。</li>
+    <li><strong>清单丢失 / 新机</strong>：本人草稿 / 批注、笔记与自有资料照常恢复，仅隔离许可无法确认的第三方负载，其余切换，不整包拒绝。</li>
+    <li>备份 hash 失败或不兼容时拒绝恢复，并完整保留原库，不做部分写入。</li>
+  </ul>
+
+  <h3>8.4 安全（建议）</h3>
+  <ul>
+    <li>数据默认留在本机，不上传本人判断与研究资料；本期无 AI 密钥、无登录、无云端同步；本地搜索只在本机进行，不送 Algolia、不与 Web 端互通。</li>
+    <li>原生权限按命令最小授予，沿用现有严格 CSP；采集网络访问限定在已登记来源；条件新闻自有 key 由系统凭据库管理，不进普通备份、不另建密钥备份，换机后由用户重新输入。</li>
+  </ul>
+</section>
+
+<!-- ============ §9 分阶段实施与验收 ============ -->
+<section id="sec9">
+  <h2 class="sec"><span class="num">09</span>分阶段实施与可观测验收</h2>
+  <p><strong>本轮只产出方案，不进入实现；以下阶段与验收均为建议，须经 §10 明确确认后才实施。</strong>P00 为已具备的事实基线，<strong>计划实施阶段为 P01–P13</strong>（共 13 个），总览图展示 P00–P13 共 14 个节点。编号是计划编排顺序，<strong>不强制开发排队</strong>：本地写作各带真并行，分源接入彼此独立可停；条件源（P12）不承诺必达。外部自动需求在来源未核定前统一保留降级验收行，不留空；A 股 / 港股 / 非上市未核定源维持"条件探索 / 未自动覆盖"，不纳入本次必达阶段。不预设工期与人力。</p>
+
+  <figure class="figure">
+    <svg viewBox="0 0 880 455" width="880" height="455" role="img" aria-label="阶段路线图：P00 基线与 P01 至 P13 依赖与并行带">
+      <defs>
+        <marker id="arrow" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#1d4a35"/></marker>
+        <marker id="arrowDash" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#8d482f"/></marker>
+      </defs>
+      <g font-family="sans-serif" font-size="12" fill="#17251d">
+        <!-- 地基带 -->
+        <text x="14" y="30" font-size="11" fill="#617066">地基带 · 安全先行</text>
+        <rect x="14" y="40" width="120" height="40" rx="8" fill="#1d4a35"/>
+        <text x="74" y="57" text-anchor="middle" fill="#f4f1e8">P00 现有骨架</text>
+        <text x="74" y="72" text-anchor="middle" font-size="10" fill="#dce8df">已具备 · 事实基线</text>
+        <line x1="134" y1="60" x2="176" y2="60" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="182" y="40" width="150" height="40" rx="8" fill="#ebe5d8" stroke="#cbd2c8"/>
+        <text x="257" y="57" text-anchor="middle">P01 存储与迁移安全</text>
+        <text x="257" y="72" text-anchor="middle" font-size="10" fill="#617066">技术地基 · 不供日常使用</text>
+        <line x1="332" y1="60" x2="374" y2="60" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="380" y="40" width="150" height="40" rx="8" fill="#ebe5d8" stroke="#cbd2c8"/>
+        <text x="455" y="57" text-anchor="middle">P02 基本备份 / 恢复</text>
+        <text x="455" y="72" text-anchor="middle" font-size="10" fill="#617066">通用清单 hash · 幂等</text>
+        <!-- 本地研究带 -->
+        <text x="14" y="112" font-size="11" fill="#617066">本地研究带 · 真并行，早期可用</text>
+        <line x1="455" y1="80" x2="455" y2="100" stroke="#1d4a35"/>
+        <line x1="455" y1="100" x2="74" y2="100" stroke="#1d4a35"/>
+        <rect x="14" y="110" width="120" height="40" rx="8" fill="#fbf9f3" stroke="#1d4a35"/>
+        <text x="74" y="127" text-anchor="middle">P03 公司 / listing</text>
+        <text x="74" y="142" text-anchor="middle" font-size="10" fill="#617066">内部 ID · 多证券</text>
+        <line x1="134" y1="130" x2="176" y2="130" stroke="#1d4a35" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+        <rect x="182" y="110" width="120" height="40" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="242" y="127" text-anchor="middle">P04 资料库</text>
+        <text x="242" y="142" text-anchor="middle" font-size="10" fill="#617066">文件 / 链接 / 文本</text>
+        <rect x="312" y="110" width="120" height="40" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="372" y="127" text-anchor="middle">P05 自由判断 / 历史</text>
+        <text x="372" y="142" text-anchor="middle" font-size="10" fill="#617066">仅追加 · 版本差异</text>
+        <rect x="442" y="110" width="130" height="40" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="507" y="127" text-anchor="middle">P06 手工财务与指标</text>
+        <text x="507" y="142" text-anchor="middle" font-size="10" fill="#617066">内置映射 + 固定纯函数</text>
+        <line x1="572" y1="130" x2="614" y2="130" stroke="#1d4a35" stroke-dasharray="4,3" marker-end="url(#arrow)"/>
+        <rect x="620" y="110" width="150" height="40" rx="8" fill="#dce8df" stroke="#1d4a35"/>
+        <text x="695" y="127" text-anchor="middle">P07 指标看板</text>
+        <text x="695" y="142" text-anchor="middle" font-size="10" fill="#617066">模板卡片 · 配置重启保持</text>
+        <!-- 采集前置带 -->
+        <text x="14" y="192" font-size="11" fill="#617066">采集前置带 · 与本地写作独立推进</text>
+        <line x1="74" y1="150" x2="74" y2="178" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="14" y="186" width="160" height="40" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="94" y="203" text-anchor="middle">P08 来源登记 / 凭据 / 任务</text>
+        <text x="94" y="218" text-anchor="middle" font-size="10" fill="#617066">许可闸门 · 状态可见</text>
+        <line x1="174" y1="206" x2="216" y2="206" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="222" y="186" width="170" height="40" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="307" y="203" text-anchor="middle">P09 存储边界 / 恢复校验</text>
+        <text x="307" y="218" text-anchor="middle" font-size="10" fill="#617066">落盘准入 · 最小 Takedown</text>
+        <!-- 分源接入带 -->
+        <text x="14" y="266" font-size="11" fill="#617066">分源接入带 · 三者并行独立可停</text>
+        <line x1="307" y1="226" x2="307" y2="250" stroke="#1d4a35"/>
+        <line x1="94" y1="250" x2="660" y2="250" stroke="#1d4a35"/>
+        <line x1="120" y1="250" x2="120" y2="268" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="30" y="268" width="180" height="40" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="120" y="285" text-anchor="middle">P10 SEC 财务</text>
+        <text x="120" y="300" text-anchor="middle" font-size="10" fill="#617066">companyfacts · 人工审核</text>
+        <line x1="330" y1="250" x2="330" y2="268" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="240" y="268" width="180" height="40" rx="8" fill="#fbf9f3" stroke="#cbd2c8"/>
+        <text x="330" y="285" text-anchor="middle">P11 SEC 公告</text>
+        <text x="330" y="300" text-anchor="middle" font-size="10" fill="#617066">原文 / metadata_only</text>
+        <line x1="560" y1="250" x2="560" y2="268" stroke="#8d482f" stroke-dasharray="5,4" marker-end="url(#arrowDash)"/>
+        <rect x="470" y="268" width="190" height="40" rx="8" fill="#f3e7dd" stroke="#8d482f" stroke-dasharray="5,4"/>
+        <text x="565" y="285" text-anchor="middle">P12 GNews 条件新闻</text>
+        <text x="565" y="300" text-anchor="middle" font-size="10" fill="#8d482f">前提不满足即不启用 · 可停留</text>
+        <!-- 收敛带：P10 / P11 / P12 任一验收即汇合至 P13 -->
+        <text x="14" y="352" font-size="11" fill="#617066">收敛带 · 任一适配器验收即可，不等三项全完成</text>
+        <line x1="120" y1="308" x2="120" y2="340" stroke="#1d4a35"/>
+        <line x1="330" y1="308" x2="330" y2="340" stroke="#1d4a35"/>
+        <line x1="565" y1="308" x2="565" y2="340" stroke="#8d482f" stroke-dasharray="5,4"/>
+        <line x1="120" y1="340" x2="565" y2="340" stroke="#1d4a35"/>
+        <line x1="330" y1="340" x2="330" y2="382" stroke="#1d4a35" marker-end="url(#arrow)"/>
+        <rect x="240" y="390" width="180" height="42" rx="8" fill="#dce8df" stroke="#1d4a35"/>
+        <text x="330" y="408" text-anchor="middle">P13 运行时调度恢复</text>
+        <text x="330" y="423" text-anchor="middle" font-size="10" fill="#617066">调度延后 · 手动取数仍可用</text>
+      </g>
+    </svg>
+    <figcaption>图 5：P00 为已具备基线；P01–P13 为计划实施阶段（编号不强制开发排队）。虚线箭头表真并行依赖：P04/P05/P06 并行，P08/P09 与本地写作带独立推进、不等 P07 完成；P10/P11/P12 分源独立，经底部汇合线"任一已验收适配器即可"进入 P13，P12 为条件阶段、不承诺必达。详细依赖、交付物与验收边界以各阶段卡为准；未核定源（A 股 / 港股 / 非上市）不在本图必达路径内。</figcaption>
+  </figure>
+
+  <div class="stage">
+    <h4>P00 · 现有骨架（已具备，事实基线）</h4>
+    <p class="stage-meta">依赖：无（基线）｜可停止点：基线与回归门始终通过即可。</p>
+    <ul>
+      <li>交付物：桌面工作台与手动 DCF 可运行，原生连接三态可检查；作为后续所有阶段的只读基线与回归门。</li>
+      <li>范围 / 不做：维持现有隔离边界，不新增网络 / 文件权限；P 编号是计划编排顺序，<strong>不代表串行开发排队</strong>。</li>
+      <li>验收成功：<code>pnpm test</code>、<code>types:check</code>、桌面前端构建通过；Tauri 窗口返回 native，浏览器预览返回 browser 且明确提示"原生功能仅在 Tauri 窗口中可用"。</li>
+      <li>验收边界：回归门失败时暂停后续阶段，先修复基线，不在基线上叠加新功能。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P01 · 本地存储与迁移安全（建议，技术地基）</h4>
+    <p class="stage-meta">依赖：P00｜可停止点：迁移与窄命令合同稳定后即可停，本阶段不供日常研究使用。</p>
+    <ul>
+      <li>交付物：Rust 窄 Tauri 命令通道 + SQLite（SQLx）：<strong>迁移脚本与命令接口合同先行定义</strong>；capabilities 维持 <code>core:default</code> 最小授予；浏览器预览不伪装原生。</li>
+      <li>范围 / 不做：只做存储与迁移底座，不含业务页面；<strong>技术地基阶段，标"不供日常使用"</strong>。</li>
+      <li>验收成功：库读写与迁移可重复跑且结果一致；迁移 / 命令合同文档化，后续阶段按合同接入。</li>
+      <li>验收边界：迁移校验不一致时拒绝启动并保留旧库文件；不新增网络权限。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P02 · 基本备份 / 恢复（建议）</h4>
+    <p class="stage-meta">依赖：P01｜可停止点：代表夹具往返验证通过即放行后续阶段，不等全模块。</p>
+    <ul>
+      <li>交付物：数据库 + 附件<strong>通用清单</strong>的一致性备份：逐项 hash、暂存预览后切换、不合并覆盖、重复导入幂等。</li>
+      <li>范围 / 不做：用<strong>含库 + 附件的代表夹具</strong>做往返验证与 hash / 不兼容失败验证后放行 P03；<strong>不说"空库已验证所有真实模块"</strong>——后续每新增实体自带备份回归。第三方受限负载的三分支完整验收不在本阶段，放 P09。</li>
+      <li>验收成功：夹具备份 hash 校验通过，暂存预览无误后切换，原库留回滚副本。</li>
+      <li>验收边界：人为破坏 hash / 注入不兼容结构时拒绝恢复并完整保留原库，不做部分写入。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P03 · 公司 / listing 档案（建议）</h4>
+    <p class="stage-meta">依赖：P01 + P02 安全放行后开始｜可停止点：档案可建档查询即停。</p>
+    <ul>
+      <li>交付物：自由文本建公司、内部独立公司 ID、listing 多证券（A / H / ADR）、公司列表与搜索。</li>
+      <li>范围 / 不做：不自动归并重名公司；不接行情。</li>
+      <li>验收成功：建档生成内部公司 ID，同一公司可挂多个证券；代码重复不阻断建档。</li>
+      <li>验收边界：重名 / 重复代码仅提示人工确认，不静默合并；本阶段完成后该实体自动进入下一次 P02 式备份回归。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P04 · 资料库（建议）</h4>
+    <p class="stage-meta">依赖：P03 + P02｜可停止点：资料可管可预览即停，与 P05 / P06 并行不互等。</p>
+    <ul>
+      <li>交付物：手动文件 / 链接 / 文本笔记、标签、本地预览边界（PDF / 图片 / TXT / MD，CSV 带列映射导入）、内部复制 vs 外部引用规则。<strong>P04 / P05 / P06 为功能实现独立并行；数据库追加迁移集中串行合并与回归</strong>。</li>
+      <li>范围 / 不做：不做全文搜索引擎；不解析不支持的格式。</li>
+      <li>验收成功：内部复制的资料在原件改名 / 迁移后仍可预览；标签搜索本机可用。</li>
+      <li>验收边界：外部引用失效时提示重新定位；不支持形式只留元数据与入口；完成后自带备份回归。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P05 · 自由判断 / 历史（建议）</h4>
+    <p class="stage-meta">依赖：P03 + P02（证据可选，不依赖 P04）｜可停止点：判断链可用即停。</p>
+    <ul>
+      <li>交付物：判断草稿自由正文（可选提纲块）、自动保存仅限草稿与正文内批注、转正式仅追加、时间线排序、版本差异、修订复制新版本。<strong>证据引用接口预留且可空，不提前堆叠公告 / 新闻表</strong>。</li>
+      <li>范围 / 不做：不设强制 Comment / Draft / Official 三流；缺证不阻断转正式。</li>
+      <li>验收成功：转正式后旧版只读，修订得到 v2，正式版本间可查看差异。</li>
+      <li>验收边界：模拟自动保存失败后正文不丢字、显示失败 / 可重试状态并可手动重试，离开 / 切换前给出未保存提示；完成后自带备份回归。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P06 · 手工财务与指标（建议）</h4>
+    <p class="stage-meta">依赖：P03 + P02（不依赖 P04 / P05）｜可停止点：手工财务与观测可用即停，自动采集待 P10 起。</p>
+    <ul>
+      <li>交付物：FinancialFact 手工录入（币种 / 单位 / 期间 / 口径 / 审核状态）；内置原始映射 + 固定纯函数派生（§6.6 清单）；自定义数值 / 文本 Observation；待核视图灰显、缺值断点不连线。</li>
+      <li>范围 / 不做：不做用户公式 DSL；不跨准则强行可比。</li>
+      <li>验收成功：缺失字段留空不当 0；未审核值默认不进已审核趋势；数值指标进趋势、文本仅卡片。</li>
+      <li>验收边界：口径缺失的内置指标当期不展示，不编造；完成后自带备份回归。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P07 · 指标看板（建议）</h4>
+    <p class="stage-meta">依赖：P03 + P06 即可验收｜可停止点：看板可用，形成无网络闭环。</p>
+    <ul>
+      <li>交付物：模板卡片显隐 / 排序 / 公司分组、所选指标入卡、时间范围、待读 / 待补、最近正式判断；配置存 SQLite 进备份、重启保持。<strong>"最近正式判断""待读"等卡片在 P05 / P04 可用时接上</strong>。</li>
+      <li>范围 / 不做：不做任意拖拽低代码平台；<strong>P04 / P05 尚未完成时，缺依赖卡片显示空态，指标选择 / 趋势 / 重启保持仍可正常验收，不整体卡住看板</strong>。</li>
+      <li>验收成功：自定义指标与卡片配置重启后保持；缺依赖卡显示空态引导而非报错。</li>
+      <li>验收边界：无数据时空态引导，不制造推荐内容；完成后自带备份回归。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P08 · 来源登记 / 凭据 / 手动采集通道及任务状态（建议）</h4>
+    <p class="stage-meta">依赖：P01 + P02 + P03（可与 P04–P07 独立推进）｜可停止点：闸门与任务状态契约稳定即停。</p>
+    <ul>
+      <li>交付物：<strong>统一 CollectionRun 状态机</strong>（排队 / 运行 / 成功 / 失败 / 跳过及原因）、准入登记与凭据管理、单次手动队列 / 限额 / 重试幂等契约；条件源自有 key 入系统凭据库。<strong>P10 / P11 / P12 只注册适配器，不各自另建队列</strong>。</li>
+      <li>范围 / 不做：不默认启用任何外部源；key 不进普通备份、不另建密钥备份。</li>
+      <li>验收成功：无登记依据的任务被跳过并记录原因，不伪装已归档；同一任务重复运行幂等去重。</li>
+      <li>验收边界：许可缺失连元数据也不自动取，仅人工书签并留痕。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P09 · 第三方存储边界与备份恢复校验（建议）</h4>
+    <p class="stage-meta">依赖：P02 + P08｜可停止点：落盘准入与三分支恢复演练通过即停。</p>
+    <ul>
+      <li>交付物：源数据落盘准入测试（许可允许才落盘原文，否则 metadata_only）；最小 Takedown 留痕（TakedownEvent、restricted 指针）；受限清单独立累积；<strong>备份 / 恢复三分支完整验收</strong>（hash 通过先隔离受限项其余切换；清单丢失 / 新机个人内容照恢复；hash 失败 / 不兼容拒绝保留原库）。</li>
+      <li>范围 / 不做：不做日常审批中心；不等源数据已进入后才补安全。</li>
+      <li>验收成功：新备份不含已标记受限负载；旧包恢复命中项不复活，个人草稿 / 批注 / 资料照常恢复。</li>
+      <li>验收边界：清单丢失 / 新机时不整包拒绝，仅隔离许可无法确认的第三方负载。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P10 · SEC 财务（建议，须确认后实施）</h4>
+    <p class="stage-meta">依赖：P06 + P08 + P09｜可停止点：SEC 财务单独验收通过即停，不与公告 / 新闻绑定。</p>
+    <ul>
+      <li>交付物：companyfacts 只读试点：少量关注 CIK、UA 声明（名称 + 联系邮箱）、低于平台上限的串行请求与退避；结构化值人工审核入库；published_at / first_seen_at、修订版本全保留。</li>
+      <li>范围 / 不做：不强求 10-Q；不取第三方附件；不承诺接入成功；<strong>作为 P08 队列的一个适配器注册，不另建队列</strong>。</li>
+      <li>验收成功：按登记等级取到结构化候选，带来源 / hash；重复运行幂等。</li>
+      <li>验收边界：本机不通 / 被限频时保持手工录入，不降级冒充自动成功；companyfacts 缺标签只表示该申报未提供，不等于公司未披露。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P11 · SEC 公告（建议，须确认后实施）</h4>
+    <p class="stage-meta">依赖：P04 + P08 + P09｜可停止点：独立可停，不阻塞 P10 / P12。</p>
+    <ul>
+      <li>交付物：submissions 公告列表 + /Archives 原文：许可允许时落盘，否则 metadata_only；幂等去重；人工审核后回流资料库。</li>
+      <li>范围 / 不做：不把 URL + hash 称全文快照；作为 P08 队列的一个适配器注册。</li>
+      <li>验收成功：公告候选按时入列并带来源 / 时间 / hash。</li>
+      <li>验收边界：第三方附件权利不足时只存元数据并标注缺口。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P12 · GNews 条件新闻（建议，须确认后实施；不承诺必达）</h4>
+    <p class="stage-meta">依赖：P04 + P08 + P09 + 个人用途确认 / 自有免费 key / 逐源许可前提｜可停止点：条件阶段，可长期停留手工态；成功与否不阻塞 P10 / P11。</p>
+    <ul>
+      <li>交付物：前提全满足后，按 P08 共享队列与配额（100 请求 / 日、12h 延迟、30 天可检索历史窗口）取短摘录，默认 metadata_only。</li>
+      <li>范围 / 不做：不永久全量存档；"短期 / 元数据、非全量"是保守产品建议，非条款原文许可；作为 P08 队列的一个适配器注册。</li>
+      <li>验收成功：前提满足后按队列取到短摘录并带来源链接。</li>
+      <li>验收边界：前提任一不满足即不启用，新闻保持手工链接并显式标注"未自动覆盖"，不静默掉线。</li>
+    </ul>
+  </div>
+
+  <div class="stage">
+    <h4>P13 · 应用运行时调度恢复（建议）</h4>
+    <p class="stage-meta">依赖：P08 + <strong>至少一个已验收的 P10 / P11 / P12 适配器</strong>｜可停止点：调度与失败恢复收敛即停。</p>
+    <ul>
+      <li>交付物：应用运行时到期补抓、退出 / 崩溃后再启动重排队、任务错误原因可见、手动重试不无限。<strong>不固定强制依赖某一适配器</strong>：建议以已验收的 SEC 公告（P11）作样例验证；未就绪时调度延后，但手动取数仍可用。</li>
+      <li>范围 / 不做：不开后台常驻服务 / 开机自启；不要求 GNews 成功，不被三项全阻塞。</li>
+      <li>验收成功：退出 / 崩溃后再启动，错过任务重新排队。</li>
+      <li>验收边界：任一适配器失败不阻塞其余；调度未就绪期间手动取数不被阻断。</li>
+    </ul>
+  </div>
+
+  <div class="note"><strong>未核定源与后置项（不纳入本次必达阶段）：</strong>A 股 cninfo（条件探索，默认不开启）、港股 HKEXnews（通道许可未核定）、非上市来源分流维持原文口径，均<strong>需用户单独批准后才接入</strong>，手工录入 / 导入 / 人工链接不替代自动采集验收；未批准项保留降级验收行并显式标注。付费数据源、自定义数据源、AI 聊天 / 报告 / 模型配置、行情 / 自动估值按 §7.3 接口边界后置，不排期、不进 P01–P13。</div>
+
+  <h3>9.1 可观测（建议）</h3>
+  <ul>
+    <li>本地可见：采集任务运行记录、失败原因、跳过（许可不足）原因、备份清单校验结果；不依赖远端监控。</li>
+    <li>本期不设业务指标与灰度；基线未知时先定义口径，不承诺数值提升。</li>
+  </ul>
+</section>
+
+<!-- ============ §10 关键确认项 ============ -->
+<section id="sec10">
+  <h2 class="sec"><span class="num">10</span>关键确认项</h2>
+  <p>以下四项会改变方向或范围，评审需拍板；其余低风险细节已按建议暂定，可在实现时按调整条件校准。</p>
+  <table>
+    <colgroup><col style="width:6%"><col style="width:26%"><col style="width:42%"><col style="width:26%"></colgroup>
+    <thead><tr><th>#</th><th>确认项</th><th>建议立场</th><th>未确认时</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>范围 + 分阶段</td><td>单人本地优先：P01–P02 存储与基本备份先行，P03–P07 本地研究闭环（可真并行），P08–P09 采集前置，P10–P12 分源并行验收（P12 条件、不承诺必达），P13 调度收敛；未核定源不纳入必达阶段。</td><td>仅保留为建议，不实施，等待明确确认。</td></tr>
+      <tr><td>2</td><td>自动覆盖与降级</td><td>来源准入分级；无许可连元数据也不自动取，仅在有元数据许可时降级存元数据，否则人工书签，并保留验收行。</td><td>仅保留为建议，不实施，等待明确确认。</td></tr>
+      <tr><td>3</td><td>正式判断 / 归档 / 备份规则</td><td>正式判断仅追加、修订出新版本；原文仅许可允许归档；备份一致性、恢复暂存预览不合并覆盖。</td><td>仅保留为建议，不实施，等待明确确认。</td></tr>
+      <tr><td>4</td><td>本机平台 / 看板建议</td><td>首验 macOS ARM64；看板用模板卡片显隐排序，不做低代码搭建器。</td><td>仅保留为建议，不实施，等待明确确认。</td></tr>
+    </tbody>
+  </table>
+  <div class="note">初始跟踪公司名单在试点接入时再填，不阻断本方案评审。</div>
+</section>
+
+<!-- ============ §11 来源证据 ============ -->
+<section id="sec11">
+  <h2 class="sec"><span class="num">11</span>来源证据</h2>
+  <h3>11.1 本地依据文件（本次只读核查）</h3>
+  <ul class="evi">
+    <li>仓库结构、隔离边界、桌面命令与验证说明：<code>README.md</code>（"仓库结构与边界""桌面端""本地验证与生产构建"节）。</li>
+    <li>迁移实施清单：<code>docs/tauri-monorepo-plan.md</code>。</li>
+    <li>原生窗口与 macOS 打包验证：<code>docs/tauri-monorepo-verification.md</code> 第 26–36 行（构建退出码、基础窗口验证；adhoc/linker-signed，<strong>未 Developer ID 签名、未公证</strong>；DCF 结果区域未进一步验证；hdiutil checksum VALID、DMG SHA-256、产物路径）。</li>
+    <li>桌面现状：<code>apps/desktop/src/App.tsx</code>、<code>src/app/layout.tsx</code>、<code>src/features/home/page.tsx</code>、<code>src/features/valuation/page.tsx</code>、<code>src/adapters/native.ts</code> 与 <code>native.test.ts</code>。</li>
+    <li>原生侧：<code>apps/desktop/src-tauri/Cargo.toml</code>、<code>src/lib.rs</code>、<code>tauri.conf.json</code>、<code>capabilities/default.json</code>。</li>
+    <li>共享包：<code>packages/valuation/src/dcf.ts</code>、<code>packages/content-schema/src/index.ts</code>。</li>
+    <li>结构边界测试：<code>scripts/workspace.test.mjs</code>。</li>
+  </ul>
+  <h3>11.2 外部来源官方文档（本轮文档层面核查；正文就近编号 [S#] 对应下表）</h3>
+  <table class="src-table">
+    <colgroup><col style="width:8%"><col style="width:30%"><col style="width:62%"></colgroup>
+    <thead><tr><th>编号</th><th>用途</th><th>官方 URL 与访问局限</th></tr></thead>
+    <tbody>
+      <tr id="src-s1"><td>[S1]</td><td>SEC API（submissions / companyfacts）</td><td><a href="https://www.sec.gov/search-filings/edgar-application-programming-interfaces" target="_blank" rel="noopener noreferrer">https://www.sec.gov/search-filings/edgar-application-programming-interfaces</a></td></tr>
+      <tr id="src-s2"><td>[S2]</td><td>SEC 访问要求与 UA 声明</td><td><a href="https://www.sec.gov/os/accessing-edgar-data" target="_blank" rel="noopener noreferrer">https://www.sec.gov/os/accessing-edgar-data</a></td></tr>
+      <tr id="src-s3"><td>[S3]</td><td>SEC 开发者与公平访问</td><td><a href="https://www.sec.gov/developer" target="_blank" rel="noopener noreferrer">https://www.sec.gov/developer</a></td></tr>
+      <tr id="src-s4"><td>[S4]</td><td>SEC 信息可取回复制说明（≠对外全文 / 第三方版权许可）</td><td><a href="https://www.sec.gov/privacy.htm#dissemination" target="_blank" rel="noopener noreferrer">https://www.sec.gov/privacy.htm#dissemination</a></td></tr>
+      <tr id="src-s5"><td>[S5]</td><td>HKEX 通用使用条款（程序化限制，通道许可未核定）</td><td><a href="https://www.hkex.com.hk/global/exchange/terms-of-use?sc_lang=zh-HK" target="_blank" rel="noopener noreferrer">https://www.hkex.com.hk/global/exchange/terms-of-use?sc_lang=zh-HK</a></td></tr>
+      <tr id="src-s6"><td>[S6]</td><td>HKEXnews 标题检索（通道条款未独立核实，仅人工入口）</td><td><a href="https://www1.hkexnews.hk/search/titlesearch.xhtml" target="_blank" rel="noopener noreferrer">https://www1.hkexnews.hk/search/titlesearch.xhtml</a></td></tr>
+      <tr id="src-s7"><td>[S7]</td><td>GNews 服务条款（个人持续非商用）</td><td><a href="https://gnews.io/legal/terms-of-service" target="_blank" rel="noopener noreferrer">https://gnews.io/legal/terms-of-service</a></td></tr>
+      <tr id="src-s8"><td>[S8]</td><td>GNews 配额（100 请求 / 日、12h 延迟、30 天可检索历史窗口）</td><td><a href="https://gnews.io/pricing" target="_blank" rel="noopener noreferrer">https://gnews.io/pricing</a></td></tr>
+      <tr id="src-s9"><td>[S9]</td><td>Finnhub 服务条款（Personal Use；订阅结束删全部数据，仅备选）</td><td><a href="https://finnhub.io/terms-of-service" target="_blank" rel="noopener noreferrer">https://finnhub.io/terms-of-service</a></td></tr>
+      <tr id="src-s10"><td>[S10]</td><td>NewsAPI 条款（仅 dev / test，禁 staging / production）</td><td><a href="https://newsapi.org/terms" target="_blank" rel="noopener noreferrer">https://newsapi.org/terms</a></td></tr>
+      <tr id="src-s11"><td>[S11]</td><td>巨潮资讯（人工阅读入口，程序授权未核实）</td><td><a href="https://www.cninfo.com.cn/" target="_blank" rel="noopener noreferrer">https://www.cninfo.com.cn/</a></td></tr>
+      <tr id="src-s12"><td>[S12]</td><td>上交所公告（个人非商业阅读下载）</td><td><a href="https://www.sse.com.cn/disclosure/listedinfo/announcement/" target="_blank" rel="noopener noreferrer">https://www.sse.com.cn/disclosure/listedinfo/announcement/</a></td></tr>
+      <tr id="src-s13"><td>[S13]</td><td>深交所公告（个人非商业阅读下载）</td><td><a href="https://www.szse.cn/disclosure/listed/notice/index.html" target="_blank" rel="noopener noreferrer">https://www.szse.cn/disclosure/listed/notice/index.html</a></td></tr>
+      <tr id="src-s14"><td>[S14]</td><td>国家企业信用信息公示系统（本轮访问 521 未取到内容，仅人工，义务待验证）</td><td><a href="https://www.gsxt.gov.cn/" target="_blank" rel="noopener noreferrer">https://www.gsxt.gov.cn/</a></td></tr>
+      <tr id="src-s15"><td>[S15]</td><td>全国股转 / 新三板公告（自动访问受阻，仅人工）</td><td><a href="https://www.neeq.com.cn/disclosure/announcement.html" target="_blank" rel="noopener noreferrer">https://www.neeq.com.cn/disclosure/announcement.html</a></td></tr>
+    </tbody>
+  </table>
+  <h3>11.3 已核查与未核查范围</h3>
+  <ul class="evi">
+    <li><strong>本轮已在文档层面核查：</strong>SEC 官方 API / 访问要求 / 开发者页、HKEX 通用使用条款、GNews 服务条款与配额页、Finnhub 与 NewsAPI 条款（备选 / 受限说明）。</li>
+    <li><strong>本轮未核查、属接入验收项：</strong>本机网络连通与少量关注 CIK 低频验收；免费 key 自注册与逐源留存条款核定；HKEXnews 具体通道条款；A 股各入口的程序授权；<code>gsxt.gov.cn</code> 本轮访问 521 未取到内容，<code>neeq.com.cn</code> 自动访问受阻，二者仅作人工渠道指引。</li>
+  </ul>
+  <h3>11.4 边界声明</h3>
+  <ul class="evi">
+    <li>本方案不把任何单次访问成功写成稳定授权；文档支持的免费源仍需接入验收，条款 / 限频 / 用途限制以官方原文为准。</li>
+    <li>本文件为待确认评审方案，非批准 PRD、非产品实现；文中"建议"条目需经 §10 确认后才可进入研发。</li>
+    <li>本地既有改动 <code>content/knowledge/masters/warren-buffett/letters/zh/1980s/1983.md</code> 不属于本方案，保持原样未改动。</li>
+  </ul>
+</section>
+
+<footer>
+  桌面公司研究工作台 · 待确认评审方案 · 2026-10-23 · 阅读型文档，不含实现代码
+</footer>
+
+</div>
+</body>
+</html>

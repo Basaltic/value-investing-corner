@@ -1,0 +1,154 @@
+$ node scripts/verify-local.mjs check
+$ corepack pnpm lint && corepack pnpm types:check
+$ biome check .
+docs/desktop-research-plan.html:37:4 lint/style/noDescendingSpecificity ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Descending specificity selector found. This selector specificity is (0, 0, 1)
+  
+    35 │ h3{font-size:16px;margin:26px 0 10px;color:var(--forest-deep);}
+    36 │ p{margin:10px 0;}
+  > 37 │ ul,ol{margin:10px 0;padding-left:24px;}
+       │    ^^
+    38 │ li{margin:6px 0;}
+    39 │ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;table-layout:fixed;}
+  
+  i This selector specificity is (0, 1, 2)
+  
+    28 │ nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 22px;margin:24px 0 40px;}
+    29 │ nav.toc h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;}
+  > 30 │ nav.toc ol{margin:0;padding-left:22px;columns:2;column-gap:32px;}
+       │ ^^^^^^^^^^
+    31 │ nav.toc li{margin:4px 0;font-size:14px;}
+    32 │ section{margin:44px 0;}
+  
+  i Descending specificity selector may not be applied. Consider rearranging the order of the selectors. See MDN web docs for more details.
+  
+
+docs/desktop-research-plan.html:38:1 lint/style/noDescendingSpecificity ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Descending specificity selector found. This selector specificity is (0, 0, 1)
+  
+    36 │ p{margin:10px 0;}
+    37 │ ul,ol{margin:10px 0;padding-left:24px;}
+  > 38 │ li{margin:6px 0;}
+       │ ^^
+    39 │ table{width:100%;border-collapse:collapse;margin:14px 0;font-size:14px;table-layout:fixed;}
+    40 │ th,td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;text-align:left;overflow-wrap:anywhere;word-break:break-word;}
+  
+  i This selector specificity is (0, 1, 2)
+  
+    29 │ nav.toc h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;}
+    30 │ nav.toc ol{margin:0;padding-left:22px;columns:2;column-gap:32px;}
+  > 31 │ nav.toc li{margin:4px 0;font-size:14px;}
+       │ ^^^^^^^^^^
+    32 │ section{margin:44px 0;}
+    33 │ h2.sec{font-family:var(--serif);font-size:22px;font-weight:600;margin:0 0 6px;padding-top:8px;border-top:2px solid var(--forest);display:flex;align-items:baseline;gap:10px;}
+  
+  i Descending specificity selector may not be applied. Consider rearranging the order of the selectors. See MDN web docs for more details.
+  
+
+docs/desktop-research-plan.html:42:1 lint/style/noDescendingSpecificity ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Descending specificity selector found. This selector specificity is (0, 0, 2)
+  
+    40 │ th,td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;text-align:left;overflow-wrap:anywhere;word-break:break-word;}
+    41 │ th{background:var(--soft);color:var(--forest-deep);font-weight:600;}
+  > 42 │ td code,li code,p code{font-family:var(--mono);font-size:12.5px;background:var(--surface);padding:1px 5px;border-radius:4px;white-space:normal;overflow-wrap:anywhere;word-break:break-word;}
+       │ ^^^^^^^
+    43 │ .tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:999px;white-space:nowrap;}
+    44 │ .tag-conf{background:var(--forest);color:var(--paper);}
+  
+  i This selector specificity is (0, 1, 1)
+  
+    25 │ .subtitle{color:var(--muted);font-size:15px;max-width:720px;margin:0;}
+    26 │ .meta-row{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px;font-size:13px;color:var(--muted);}
+  > 27 │ .meta-row code{font-family:var(--mono);font-size:12px;background:var(--surface);padding:2px 6px;border-radius:4px;}
+       │ ^^^^^^^^^^^^^^
+    28 │ nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 22px;margin:24px 0 40px;}
+    29 │ nav.toc h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;}
+  
+  i Descending specificity selector may not be applied. Consider rearranging the order of the selectors. See MDN web docs for more details.
+  
+
+docs/desktop-research-plan.html:42:9 lint/style/noDescendingSpecificity ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Descending specificity selector found. This selector specificity is (0, 0, 2)
+  
+    40 │ th,td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;text-align:left;overflow-wrap:anywhere;word-break:break-word;}
+    41 │ th{background:var(--soft);color:var(--forest-deep);font-weight:600;}
+  > 42 │ td code,li code,p code{font-family:var(--mono);font-size:12.5px;background:var(--surface);padding:1px 5px;border-radius:4px;white-space:normal;overflow-wrap:anywhere;word-break:break-word;}
+       │         ^^^^^^^
+    43 │ .tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:999px;white-space:nowrap;}
+    44 │ .tag-conf{background:var(--forest);color:var(--paper);}
+  
+  i This selector specificity is (0, 1, 1)
+  
+    25 │ .subtitle{color:var(--muted);font-size:15px;max-width:720px;margin:0;}
+    26 │ .meta-row{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px;font-size:13px;color:var(--muted);}
+  > 27 │ .meta-row code{font-family:var(--mono);font-size:12px;background:var(--surface);padding:2px 6px;border-radius:4px;}
+       │ ^^^^^^^^^^^^^^
+    28 │ nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 22px;margin:24px 0 40px;}
+    29 │ nav.toc h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;}
+  
+  i Descending specificity selector may not be applied. Consider rearranging the order of the selectors. See MDN web docs for more details.
+  
+
+docs/desktop-research-plan.html:42:17 lint/style/noDescendingSpecificity ━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Descending specificity selector found. This selector specificity is (0, 0, 2)
+  
+    40 │ th,td{border:1px solid var(--line);padding:10px 12px;vertical-align:top;text-align:left;overflow-wrap:anywhere;word-break:break-word;}
+    41 │ th{background:var(--soft);color:var(--forest-deep);font-weight:600;}
+  > 42 │ td code,li code,p code{font-family:var(--mono);font-size:12.5px;background:var(--surface);padding:1px 5px;border-radius:4px;white-space:normal;overflow-wrap:anywhere;word-break:break-word;}
+       │                 ^^^^^^
+    43 │ .tag{display:inline-block;font-size:12px;padding:2px 10px;border-radius:999px;white-space:nowrap;}
+    44 │ .tag-conf{background:var(--forest);color:var(--paper);}
+  
+  i This selector specificity is (0, 1, 1)
+  
+    25 │ .subtitle{color:var(--muted);font-size:15px;max-width:720px;margin:0;}
+    26 │ .meta-row{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:16px;font-size:13px;color:var(--muted);}
+  > 27 │ .meta-row code{font-family:var(--mono);font-size:12px;background:var(--surface);padding:2px 6px;border-radius:4px;}
+       │ ^^^^^^^^^^^^^^
+    28 │ nav.toc{background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:18px 22px;margin:24px 0 40px;}
+    29 │ nav.toc h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;}
+  
+  i Descending specificity selector may not be applied. Consider rearranging the order of the selectors. See MDN web docs for more details.
+  
+
+docs/desktop-research-plan.html:65:1 lint/style/noDescendingSpecificity ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  ! Descending specificity selector found. This selector specificity is (0, 1, 1)
+  
+    63 │ .stage .stage-meta{font-size:13px;color:var(--muted);margin-bottom:8px;}
+    64 │ .evi{font-size:13.5px;}
+  > 65 │ .evi li{margin:8px 0;}
+       │ ^^^^^^^
+    66 │ footer{margin-top:60px;padding-top:18px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;}
+    67 │ @media(max-width:720px){
+  
+  i This selector specificity is (0, 1, 2)
+  
+    29 │ nav.toc h2{font-family:var(--serif);font-size:16px;margin:0 0 10px;}
+    30 │ nav.toc ol{margin:0;padding-left:22px;columns:2;column-gap:32px;}
+  > 31 │ nav.toc li{margin:4px 0;font-size:14px;}
+       │ ^^^^^^^^^^
+    32 │ section{margin:44px 0;}
+    33 │ h2.sec{font-family:var(--serif);font-size:22px;font-weight:600;margin:0 0 6px;padding-top:8px;border-top:2px solid var(--forest);display:flex;align-items:baseline;gap:10px;}
+  
+  i Descending specificity selector may not be applied. Consider rearranging the order of the selectors. See MDN web docs for more details.
+  
+
+Checked 104 files in 113ms. No fixes applied.
+Found 6 warnings.
+$ corepack pnpm -r types:check
+packages/content-schema types:check$ tsc --noEmit
+packages/valuation types:check$ tsc --noEmit
+packages/valuation types:check: Done
+packages/content-schema types:check: Done
+apps/desktop types:check$ tsc --noEmit && tsc -p tsconfig.node.json --noEmit
+apps/web types:check$ next typegen && tsc --noEmit
+apps/desktop types:check: Done
+apps/web types:check: Generating route types...
+apps/web types:check: ✓ Types generated successfully
+apps/web types:check: Done

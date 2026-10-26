@@ -1,0 +1,21 @@
+$ corepack pnpm -r types:check
+packages/content-schema types:check$ tsc --noEmit
+packages/valuation types:check$ tsc --noEmit
+packages/valuation types:check: Done
+packages/content-schema types:check: Done
+apps/desktop types:check$ tsc --noEmit && tsc -p tsconfig.node.json --noEmit
+apps/web types:check$ next typegen && tsc --noEmit
+apps/desktop types:check: Done
+apps/web types:check: 
+apps/web types:check: > Unexpected error while generating route types. Original error:
+apps/web types:check: 
+apps/web types:check: Error: Algolia 搜索密钥不能与写入密钥相同。
+apps/web types:check:     at <unknown> (next.config.mjs:18:9)
+apps/web types:check: Failed
+[ELIFECYCLE] Command failed with exit code 1.
+Error: ERR_PNPM_RECURSIVE_RUN_FIRST_FAIL
+
+  × "pnpm recursive run" failed in /Users/bytedance/Desktop/work/code/value-
+  │ investing-corner/apps/web
+
+[ELIFECYCLE] Command failed with exit code 1.

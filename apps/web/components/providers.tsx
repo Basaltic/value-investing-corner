@@ -1,11 +1,10 @@
 "use client";
 
 import { liteClient } from "algoliasearch/lite";
-import AlgoliaSearchDialog from "fumadocs-ui/components/dialog/search-algolia";
 import type { SharedProps } from "fumadocs-ui/contexts/search";
 import { RootProvider } from "fumadocs-ui/provider/next";
-import Image from "next/image";
 import { type ReactNode, useCallback, useMemo } from "react";
+import AlgoliaSearchDialog from "./algolia-search-dialog";
 
 export function Providers({
   children,
@@ -26,20 +25,7 @@ export function Providers({
       if (!client) return null;
 
       return (
-        <AlgoliaSearchDialog
-          {...props}
-          searchOptions={{ client, indexName }}
-          showAlgolia
-          footer={
-            <Image
-              src="/algolia.svg"
-              alt="Algolia"
-              width={20}
-              height={20}
-              unoptimized
-            />
-          }
-        />
+        <AlgoliaSearchDialog {...props} searchOptions={{ client, indexName }} />
       );
     },
     [client, indexName],

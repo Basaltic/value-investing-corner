@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>桌面工作台 · 实施进度与逐阶段确认记录</title>
+<style>
+:root{--paper:#f4f1e8;--surface:#ebe5d8;--panel:#fbf9f3;--ink:#17251d;--muted:#617066;--forest:#1d4a35;--soft:#dce8df;--line:#cbd2c8;--error:#8d482f;--warn-bg:#f3e7dd}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"PingFang SC","Songti SC",serif;line-height:1.75}
+.wrap{max-width:860px;margin:0 auto;padding:48px 24px 96px}
+h1{font-size:26px;margin:0 0 4px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:32px}
+h2{font-size:19px;margin:40px 0 12px;padding-top:16px;border-top:1px solid var(--line)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--panel)}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+.badge{display:inline-block;padding:1px 10px;border-radius:999px;font-size:12px;border:1px solid var(--line)}
+.b-green{background:var(--soft);color:var(--forest);border-color:var(--forest)}
+.b-warn{background:var(--warn-bg);color:var(--error);border-color:var(--error)}
+.b-gray{background:var(--surface);color:var(--muted)}
+code{background:var(--surface);padding:1px 6px;border-radius:4px;font-size:13px}
+ul{margin:6px 0}
+.muted{color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>桌面工作台 · 实施进度与逐阶段确认记录</h1>
+<div class="sub">单一权威进度记录 · 最近执行轮：2026-10-26（P00 基线回归）· 配套方案见 <code>desktop-research-plan.html</code><br>本记录首次建立于本轮检查完成之后；未预先落盘"执行中"状态，也不倒填过程。</div>
+
+<h2>当前总状态</h2>
+<div class="card">
+<p><strong>当前方案（P00–P13）已获批准；执行授权仍逐阶段授予。本轮范围仅 P00，P01 及后续阶段均未授权。</strong>本轮完成了所列检查不等于 P00 全项通过——原生窗口界面目视这一客观条件未满足，P00 不得宣布通过；该缺口补验完成后，才交用户放行下一阶段。</p>
+<table>
+<tr><th>阶段</th><th>状态</th><th>说明</th></tr>
+<tr><td>P00 现有骨架（基线）</td><td><span class="badge b-warn">未完成</span></td><td>首轮命令验证与第二轮复跑均已完成，浏览器通道补验通过；原生窗口及其导航仍待实际观察；当前不能宣告 P00 通过，不要求用户代做。</td></tr>
+<tr><td>P01 本地存储与迁移安全</td><td><span class="badge b-warn">未授权</span></td><td>逐阶段确认硬约束：P00 验收通过前不启动 P01。</td></tr>
+<tr><td>P02–P13</td><td><span class="badge b-gray">未开始</span></td><td>不预做、不跨阶段并行；后续按用户逐阶段放行。</td></tr>
+</table>
+<p class="muted">计划本体（P00–P13 依赖、范围与验收边界）以 <code>desktop-research-plan.html</code> §9 为准；本文件只记录执行事实、逐阶段确认与工作区变化，不重复计划内容。历史文档 <code>tauri-monorepo-verification.md</code>（macOS ARM64 打包与窗口抽验）为更早迁移阶段的历史记录，不充当本轮 P00 证据。</p>
+</div>
+
+<h2>P00 首轮验证记录（2026-10-26，历史结果；第二轮复跑见上方段落）</h2>
+<div class="card">
+<p><strong>第二轮补验（记录整理期）</strong>：在当前工作树重跑 <code>test</code> / <code>check:local</code> / <code>build:desktop</code>，全部退出 0（apps/web 本轮实跑 24/24，含新增的 algolia-layout 测试）；首版 6 条 biome <code>noDescendingSpecificity</code> 警告经定位确认全部位于本仓库文档 <code>desktop-research-plan.html</code> 的样式块（非用户业务源码），已做最小等价重排修复，复跑后警告消除（Checked 108 files，0 warnings）。日志：<a href="p00-verification-logs/p00-rerun-test.log">p00-rerun-test.log</a>、<a href="p00-verification-logs/p00-rerun-check-local.log">p00-rerun-check-local.log</a>、<a href="p00-verification-logs/p00-rerun-build-desktop.log">p00-rerun-build-desktop.log</a>。浏览器通道补验：工作台 browser 态提示、连接重检、估值工具空态与导航已观察确认，转录见 <a href="p00-verification-logs/browser-observation-2026-10-26.md">browser-observation-2026-10-26.md</a>。<strong>桌面原生窗口观察：原生窗口及其导航仍待实际观察；当前不能宣告 P00 通过，不要求用户代做。</strong></p>
+<table>
+<tr><th>#</th><th>命令 / 入口</th><th>结果</th><th>说明</th></tr>
+<tr><td>1</td><td><code>corepack pnpm test</code></td><td><span class="badge b-green">退出 0</span></td><td>workspace 节点测试 3/3；valuation 8/8；content-schema 2/2；desktop 原生适配单测 2/2；<strong>apps/web 21/21</strong> 全部通过。</td></tr>
+<tr><td>2</td><td><code>corepack pnpm types:check</code></td><td><span class="badge b-warn">失败（环境保护）</span></td><td>仅 apps/web <code>next typegen</code> 触发 <code>next.config.mjs</code> 保护：“Algolia 搜索密钥不能与写入密钥相同”。此为仓库既定凭据保护，非代码缺陷；不修、不绕过。改用 README 规定的隔离入口。</td></tr>
+<tr><td>3</td><td><code>corepack pnpm check:local</code></td><td><span class="badge b-green">退出 0</span></td><td>隔离 Algolia 凭据后执行：biome 检查 104 文件（<strong>当时 6 项告警，后核实均为本任务方案 <code>desktop-research-plan.html</code> 自身样式规则，并在第二轮修复消除</strong>）；全部 workspace 类型检查通过，apps/web 路由类型生成成功。</td></tr>
+<tr><td>4</td><td><code>corepack pnpm build:desktop</code></td><td><span class="badge b-green">退出 0</span></td><td>仅构建桌面前端 dist（不调用网站同步、不写远端）；vite 126 模块，输出 index.js 344.88 kB。</td></tr>
+<tr><td>5</td><td><code>corepack pnpm dev:desktop:web</code>（localhost:28743 浏览器预览）</td><td><span class="badge b-green">本轮实读确认</span></td><td>页面实读文本：“浏览器预览：原生功能仅在 Tauri 窗口中可用”——browser 态提示正常显示。</td></tr>
+<tr><td>6</td><td><code>PATH=/opt/homebrew/bin:$PATH corepack pnpm dev:desktop</code>（原生窗口）</td><td><span class="badge b-green">debug 构建 / 进程启动成功</span> / <span class="badge b-warn">窗口界面未验证</span></td><td>首次启动因预览服务占用 28743 报 beforeDevCommand 端口冲突（首轮日志未单独留存，此为操作观察）；停预览后重启，debug 编译 1m12s，窗口进程 <code>target/debug/value-investing-desktop</code> 正常运行后关闭。<strong>原生窗口内 native 态的目视验证本轮未完成</strong>；浏览器/原生三态区分逻辑由单测 #1 覆盖。</td></tr>
+</table>
+<p class="muted">日志（相对本记录同目录）：<a href="p00-verification-logs/p00-test.log">p00-test.log</a>、<a href="p00-verification-logs/p00-types.log">p00-types.log</a>、<a href="p00-verification-logs/p00-check-local.log">p00-check-local.log</a>、<a href="p00-verification-logs/p00-build-desktop.log">p00-build-desktop.log</a>、<a href="p00-verification-logs/p00-dev-desktop-web.log">p00-dev-desktop-web.log</a>、<a href="p00-verification-logs/p00-dev-desktop.log">p00-dev-desktop.log</a>。日志保留原始错误输出，未做结果改动；已检查无凭据值。</p>
+</div>
+
+<h2>未验证项与边界（如实保留）</h2>
+<div class="card">
+<ul>
+<li>原生窗口内 native 状态（app_info 返回）的目视抽看：本轮未完成，仅进程启动 + 单测覆盖；原生窗口及其导航仍待实际观察，不要求用户代做。<strong>主会话按公开桌面工具调用重试两个入口：① 应用枚举后按 <code>value-investing</code> / <code>价投</code> / <code>tauri</code> 筛选；② 按 <code>cu.get_app_state('/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri/target/release/bundle/macos/价投小角落.app', screenshot=True)</code> 取窗口状态与截图。</strong>两者控制层均返回原文「Subagent暂不支持操作电脑相关操作，请在MainAgent完成」，未返回应用列表、AX 树或截图——这是桌面控制入口的能力层阻塞，非应用错误；原生工作台 app_info / native 状态与导航观察未完成，当前不能宣告 P00 通过。</li>
+<li>release 重打包 / DMG：本轮未执行（历史产物签名口径：adhoc/linker-signed，未 Developer ID 签名、未公证）。</li>
+<li>Intel / Windows / Linux：未验证，维持历史口径。</li>
+<li>未新增网络 / 文件权限、未装依赖、未改业务代码；未提交、未推送、未发布、未安装到 Applications。</li>
+</ul>
+</div>
+
+<h2>工作区变化核对</h2>
+<div class="card">
+<p>执行前 <code>git status</code>：仅用户既有 <code>M content/knowledge/masters/warren-buffett/letters/zh/1980s/1983.md</code> 与未跟踪 <code>docs/desktop-research-plan.html</code>。</p>
+<p>执行后 <code>git status</code>：在上述基础上新增未跟踪 <code>docs/desktop-implementation-progress.html</code>（本记录）与 <code>docs/p00-verification-logs/</code>（6 份日志副本）。<strong>本阶段（P00 执行期间）无业务代码 diff</strong>；构建产物落于 gitignore 的 <code>node_modules</code> / <code>apps/desktop/src-tauri/target</code> / <code>dist</code>，不影响版本库。</p>
+<p><strong>检查完成后、记录整理期间，观察到额外的 Web / Algolia 修改（来源未确认，非本阶段修改）：</strong>已修改 <code>apps/web/app/(home)/layout.tsx</code>、<code>apps/web/app/knowledge/layout.tsx</code>、<code>apps/web/components/providers.tsx</code>、<code>apps/web/package.json</code>；新增未跟踪 <code>apps/web/components/algolia-attribution.tsx</code>、<code>apps/web/components/algolia-search-dialog.tsx</code>、<code>apps/web/scripts/algolia-layout.test.mjs</code>。<strong>（首轮当时结论）</strong>该批变更未经回滚或修复；<strong>第二轮测试 / 类型 / 桌面构建在当时工作树执行</strong>；另以 12 个关键配置和变更文件哈希核对复跑窗口稳定性，未对整树作完整快照，不能声称整树未变。</p>
+<p class="muted">其它来源的工作区变化（本阶段未修改；第二轮命令覆盖按上文，未做超出 P00 的业务验收）：上述 apps/web Algolia 相关 4 项修改 + 3 项新增文件，以及用户既有 <code>M content/knowledge/masters/warren-buffett/letters/zh/1980s/1983.md</code> 与未跟踪 <code>docs/desktop-research-plan.html</code>。</p>
+
+<h2>复跑时源码指纹（sha256，采样集合）</h2>
+<div class="card">
+<p class="muted">仅采样本轮相关的已变更源码 / 配置集合（12 个文件），并把未跟踪的 web 源码一并纳入；<strong>不是整树全量枚举，不能据此声称整树无变化</strong>。记录复跑执行前后该采样集合哈希一致、未再变动；排除生成物目录（node_modules / target / dist），不输出内容，仅记录哈希。</p>
+<table>
+<tr><th>文件</th><th>sha256（前 12 位）</th></tr>
+<tr><td>package.json</td><td><code>41c2725217bd</code></td></tr>
+<tr><td>pnpm-workspace.yaml</td><td><code>e2ec20dcb5c6</code></td></tr>
+<tr><td>biome.json</td><td><code>98fd2cd6a9b0</code></td></tr>
+<tr><td>apps/web/package.json</td><td><code>1c08c37b35f5</code></td></tr>
+<tr><td>apps/web/components/providers.tsx</td><td><code>46037b694efd</code></td></tr>
+<tr><td>apps/web/app/(home)/layout.tsx</td><td><code>ed6a499f6a10</code></td></tr>
+<tr><td>apps/web/app/knowledge/layout.tsx</td><td><code>3b39677a4613</code></td></tr>
+<tr><td>apps/web/components/algolia-attribution.tsx</td><td><code>c70cd6fd7c56</code></td></tr>
+<tr><td>apps/web/components/algolia-search-dialog.tsx</td><td><code>c82bc2733902</code></td></tr>
+<tr><td>apps/web/scripts/algolia-layout.test.mjs</td><td><code>d5ea9f44837f</code></td></tr>
+<tr><td>apps/desktop/src-tauri/tauri.conf.json</td><td><code>8ee4109af352</code></td></tr>
+<tr><td>apps/desktop/package.json</td><td><code>a52ea90b13a2</code></td></tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

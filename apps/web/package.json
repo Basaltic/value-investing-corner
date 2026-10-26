@@ -15,7 +15,7 @@
     "format": "biome format --write",
     "check": "biome check && corepack pnpm types:check",
     "check:fix": "biome check --write",
-    "test": "node --test scripts/sync-content.test.mjs"
+    "test": "node --test scripts/sync-content.test.mjs scripts/algolia-layout.test.mjs"
   },
   "dependencies": {
     "@vercel/analytics": "^2.0.1",
