@@ -5,8 +5,9 @@ use sqlx::{
     sqlite::{SqliteConnectOptions, SqliteJournalMode},
 };
 
-const SUPPORTED_SCHEMA_VERSION: i64 = 1;
+pub(crate) const SUPPORTED_SCHEMA_VERSION: i64 = 2;
 const INITIAL_MIGRATION_SQL: &str = include_str!("../migrations/0001_storage_foundation.sql");
+const COMPANY_MIGRATION_SQL: &str = include_str!("../migrations/0002_company_archives.sql");
 
 #[derive(Debug, serde::Serialize, PartialEq, Eq)]
 pub struct StorageStatus {
@@ -18,6 +19,39 @@ pub async fn initialize_database(path: &Path) -> Result<StorageStatus, String> {
     if let Some(parent) = path.parent() {
         std::fs::create_dir_all(parent)
             .map_err(|error| format!("无法创建数据目录 {}：{error}", parent.display()))?;
+    }
+
+    // Validate existing files read-only before opening a writer or changing WAL mode.
+    if path.exists() {
+        let mut existing = SqliteConnection::connect_with(
+            &SqliteConnectOptions::new().filename(path).read_only(true),
+        )
+        .await
+        .map_err(|error| format!("无法读取旧数据库：{error}"))?;
+        let version: i64 = sqlx::query_scalar("PRAGMA user_version")
+            .fetch_one(&mut existing)
+            .await
+            .map_err(|error| format!("无法读取数据库版本：{error}"))?;
+        if version > SUPPORTED_SCHEMA_VERSION {
+            return Err(format!(
+                "数据库版本 {version} 高于当前支持版本 {SUPPORTED_SCHEMA_VERSION}，已拒绝启动且未修改原库"
+            ));
+        }
+        if version > 0 {
+            let metadata: i64 = sqlx::query_scalar(
+                "SELECT schema_version FROM storage_metadata WHERE singleton = 1",
+            )
+            .fetch_one(&mut existing)
+            .await
+            .map_err(|error| format!("数据库元数据校验失败：{error}"))?;
+            if metadata != version {
+                return Err("数据库迁移校验不一致，旧库未修改".into());
+            }
+        }
+        existing
+            .close()
+            .await
+            .map_err(|error| format!("关闭旧数据库失败：{error}"))?;
     }
 
     let options = SqliteConnectOptions::new()
@@ -40,25 +74,39 @@ pub async fn initialize_database(path: &Path) -> Result<StorageStatus, String> {
         ));
     }
 
-    if current_version == 0 {
+    if current_version < SUPPORTED_SCHEMA_VERSION {
+        if current_version == 1 {
+            let snapshot = path.with_extension("v1-backup.sqlite3");
+            if snapshot.exists() {
+                return Err(format!(
+                    "升级前备份已存在，拒绝覆盖：{}",
+                    snapshot.display()
+                ));
+            }
+            sqlx::query("VACUUM INTO ?")
+                .bind(snapshot.to_string_lossy().as_ref())
+                .execute(&mut connection)
+                .await
+                .map_err(|error| format!("升级前备份失败，拒绝迁移：{error}"))?;
+        }
         let mut transaction = connection
             .begin()
             .await
             .map_err(|error| format!("无法开始数据库迁移：{error}"))?;
-        for statement in INITIAL_MIGRATION_SQL
-            .split(';')
-            .map(str::trim)
-            .filter(|statement| !statement.is_empty())
-        {
-            sqlx::query(statement)
+        if current_version == 0 {
+            sqlx::raw_sql(INITIAL_MIGRATION_SQL)
                 .execute(&mut *transaction)
                 .await
-                .map_err(|error| format!("数据库迁移失败，原库文件已保留：{error}"))?;
+                .map_err(|error| format!("数据库初始化失败：{error}"))?;
         }
+        sqlx::raw_sql(COMPANY_MIGRATION_SQL)
+            .execute(&mut *transaction)
+            .await
+            .map_err(|error| format!("公司档案迁移失败，原库已保留：{error}"))?;
         transaction
             .commit()
             .await
-            .map_err(|error| format!("数据库迁移提交失败，原库文件已保留：{error}"))?;
+            .map_err(|error| format!("数据库迁移提交失败：{error}"))?;
     }
 
     let schema_version: i64 = sqlx::query("PRAGMA user_version")
@@ -93,6 +141,119 @@ mod tests {
     use tempfile::tempdir;
 
     #[tokio::test]
+    async fn upgrades_v1_with_data_and_keeps_pre_upgrade_snapshot() {
+        let temp = tempdir().unwrap();
+        let path = temp.path().join("research.sqlite3");
+        let mut connection = SqliteConnection::connect_with(
+            &SqliteConnectOptions::new()
+                .filename(&path)
+                .create_if_missing(true),
+        )
+        .await
+        .unwrap();
+        sqlx::raw_sql(super::INITIAL_MIGRATION_SQL)
+            .execute(&mut connection)
+            .await
+            .unwrap();
+        sqlx::query("CREATE TABLE legacy_fixture (value TEXT)")
+            .execute(&mut connection)
+            .await
+            .unwrap();
+        sqlx::query("INSERT INTO legacy_fixture VALUES ('keep')")
+            .execute(&mut connection)
+            .await
+            .unwrap();
+        drop(connection);
+        let status = initialize_database(&path).await.unwrap();
+        assert_eq!(status.schema_version, 2);
+        let mut current =
+            SqliteConnection::connect_with(&SqliteConnectOptions::new().filename(&path))
+                .await
+                .unwrap();
+        assert_eq!(
+            sqlx::query_scalar::<_, String>("SELECT value FROM legacy_fixture")
+                .fetch_one(&mut current)
+                .await
+                .unwrap(),
+            "keep"
+        );
+        let snapshot = path.with_extension("v1-backup.sqlite3");
+        assert!(snapshot.is_file());
+        let mut old = SqliteConnection::connect_with(
+            &SqliteConnectOptions::new()
+                .filename(snapshot)
+                .read_only(true),
+        )
+        .await
+        .unwrap();
+        assert_eq!(
+            sqlx::query_scalar::<_, i64>("PRAGMA user_version")
+                .fetch_one(&mut old)
+                .await
+                .unwrap(),
+            1
+        );
+        assert_eq!(
+            sqlx::query_scalar::<_, String>("SELECT value FROM legacy_fixture")
+                .fetch_one(&mut old)
+                .await
+                .unwrap(),
+            "keep"
+        );
+    }
+
+    #[tokio::test]
+    async fn conflicting_v1_schema_rolls_back_migration_and_preserves_data() {
+        let temp = tempdir().unwrap();
+        let path = temp.path().join("research.sqlite3");
+        let mut connection = SqliteConnection::connect_with(
+            &SqliteConnectOptions::new()
+                .filename(&path)
+                .create_if_missing(true),
+        )
+        .await
+        .unwrap();
+        sqlx::raw_sql(super::INITIAL_MIGRATION_SQL)
+            .execute(&mut connection)
+            .await
+            .unwrap();
+        sqlx::raw_sql(
+            "CREATE TABLE companies (legacy TEXT); INSERT INTO companies VALUES ('untouched');",
+        )
+        .execute(&mut connection)
+        .await
+        .unwrap();
+        drop(connection);
+        assert!(initialize_database(&path).await.is_err());
+        let mut current =
+            SqliteConnection::connect_with(&SqliteConnectOptions::new().filename(&path))
+                .await
+                .unwrap();
+        assert_eq!(
+            sqlx::query_scalar::<_, i64>("PRAGMA user_version")
+                .fetch_one(&mut current)
+                .await
+                .unwrap(),
+            1
+        );
+        assert_eq!(
+            sqlx::query_scalar::<_, i64>("SELECT schema_version FROM storage_metadata")
+                .fetch_one(&mut current)
+                .await
+                .unwrap(),
+            1
+        );
+        assert_eq!(
+            sqlx::query_scalar::<_, String>("SELECT legacy FROM companies")
+                .fetch_one(&mut current)
+                .await
+                .unwrap(),
+            "untouched"
+        );
+        assert!(path.with_extension("v1-backup.sqlite3").is_file());
+    }
+
+    #[tokio::test]
     async fn initializes_and_reopens_the_same_schema() {
         let dir = tempdir().expect("temp dir");
         let path = dir.path().join("research.sqlite3");
@@ -100,8 +261,8 @@ mod tests {
         let first = initialize_database(&path).await.expect("first init");
         let second = initialize_database(&path).await.expect("second init");
 
-        assert_eq!(first.schema_version, 1);
-        assert_eq!(second.schema_version, 1);
+        assert_eq!(first.schema_version, 2);
+        assert_eq!(second.schema_version, 2);
         assert_eq!(first.database_path, path.display().to_string());
         assert_eq!(first, second);
 

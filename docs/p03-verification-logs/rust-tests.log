@@ -1,0 +1,43 @@
+   Compiling objc2-exception-helper v0.1.1
+   Compiling objc2 v0.6.5
+   Compiling libsqlite3-sys v0.30.1
+   Compiling objc2-foundation v0.3.2
+   Compiling wry v0.57.0
+   Compiling block2 v0.6.2
+   Compiling objc2-core-foundation v0.3.2
+   Compiling dispatch2 v0.3.1
+   Compiling sqlx-sqlite v0.8.6
+   Compiling sqlx v0.8.6
+   Compiling objc2-quartz-core v0.3.2
+   Compiling objc2-app-kit v0.3.2
+   Compiling objc2-web-kit v0.3.2
+   Compiling tao v0.37.1
+   Compiling window-vibrancy v0.8.1
+   Compiling muda v0.20.0
+   Compiling tauri-runtime v2.12.2
+   Compiling tauri-runtime-wry v2.12.3
+   Compiling tauri v2.12.5
+   Compiling value-investing-desktop v0.1.0 (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 29.05s
+     Running unittests src/lib.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop_lib-c700de4d1cd522fa)
+
+running 16 tests
+test storage::tests::refuses_an_inconsistent_schema_without_repairing_it ... ok
+test companies::tests::rejects_empty_name_invalid_listing_and_unknown_parent_without_partial_data ... ok
+test storage::tests::initializes_and_reopens_the_same_schema ... ok
+test storage::tests::conflicting_v1_schema_rolls_back_migration_and_preserves_data ... ok
+test tests::native_info_matches_package_version ... ok
+test storage::tests::refuses_an_unknown_future_schema_without_modifying_it ... ok
+test backup::tests::rejects_tampered_payload_without_changing_current_data ... ok
+test backup::tests::v1_backup_restores_and_migrates_only_staging ... ok
+test backup::tests::includes_committed_wal_data_and_rejects_path_traversal ... ok
+test backup::tests::rejects_unknown_format_and_future_schema_without_changing_current_data ... ok
+test storage::tests::upgrades_v1_with_data_and_keeps_pre_upgrade_snapshot ... ok
+test tests::company_commands_use_fixed_storage_and_return_confirmation ... ok
+test companies::tests::independent_ids_and_multiple_listings_survive_reopen_and_search ... ok
+test companies::tests::duplicate_name_and_code_require_confirmation_and_never_merge ... ok
+test companies::tests::company_and_listing_backup_round_trip_keeps_ids_and_foreign_keys ... ok
+test backup::tests::round_trips_database_and_attachments_and_keeps_rollback ... ok
+
+test result: ok. 16 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.18s
+

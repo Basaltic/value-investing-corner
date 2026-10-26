@@ -14,7 +14,8 @@
 
 - 应用启动时由 Rust 原生侧打开数据库并运行内嵌迁移。
 - SQLite 使用 WAL 日志模式并开启外键约束。
-- 当前支持 schema version `1`。
+- P01 原始 schema 为 `1`；P03 起当前 schema 为 `2`，新增公司/证券表。升级前保存 `research.v1-backup.sqlite3`，事务迁移失败回滚，已有同名升级备份不会覆盖。
+- v2 完整命令与迁移边界见 `docs/desktop-company-contract.md`；P01 原始验收范围仍按下文保留。
 - 重复启动和重复运行迁移必须幂等，数据库版本保持一致。
 - 若数据库 `user_version` 高于应用支持版本，拒绝启动且不修改原库。
 - 迁移完成后同时校验 `PRAGMA user_version` 与 `storage_metadata.schema_version`；不一致时拒绝启动。

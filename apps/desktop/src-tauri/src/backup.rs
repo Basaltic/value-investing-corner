@@ -146,13 +146,30 @@ async fn restore_into_staging(
             .map_err(|error| format!("无法复制恢复负载 {}：{error}", file.path))?;
     }
 
-    let status = initialize_database(&staging.join(DATABASE_FILE)).await?;
-    if status.schema_version != manifest.schema_version {
+    let database = staging.join(DATABASE_FILE);
+    let mut readonly = SqliteConnection::connect_with(
+        &sqlx::sqlite::SqliteConnectOptions::new()
+            .filename(&database)
+            .read_only(true),
+    )
+    .await
+    .map_err(|error| format!("无法预检恢复数据库：{error}"))?;
+    let actual_version: i64 = sqlx::query_scalar("PRAGMA user_version")
+        .fetch_one(&mut readonly)
+        .await
+        .map_err(|error| format!("无法读取恢复数据库版本：{error}"))?;
+    readonly
+        .close()
+        .await
+        .map_err(|error| format!("无法关闭预检连接：{error}"))?;
+    if actual_version != manifest.schema_version {
         return Err(format!(
-            "恢复数据库版本与清单不一致：database={}，manifest={}",
-            status.schema_version, manifest.schema_version
+            "恢复数据库版本与清单不一致：database={actual_version}，manifest={}",
+            manifest.schema_version
         ));
     }
+    // Old backups are migrated only in staging, never in the current data directory.
+    initialize_database(&database).await?;
     Ok(())
 }
 
@@ -160,7 +177,7 @@ fn validate_manifest(backup_dir: &Path, manifest: &BackupManifest) -> Result<(),
     if manifest.format_version != BACKUP_FORMAT_VERSION {
         return Err(format!("不支持的备份格式版本：{}", manifest.format_version));
     }
-    if manifest.schema_version != 1 {
+    if !(1..=crate::storage::SUPPORTED_SCHEMA_VERSION).contains(&manifest.schema_version) {
         return Err(format!(
             "不支持的数据库 schema 版本：{}",
             manifest.schema_version
@@ -449,6 +466,71 @@ mod tests {
             .expect_err("path traversal must fail");
         assert!(error.contains("路径穿越") || error.contains("非法路径"));
         assert_eq!(read_marker(&data).await, "wal");
+    }
+
+    #[tokio::test]
+    async fn v1_backup_restores_and_migrates_only_staging() {
+        use sqlx::sqlite::SqliteConnectOptions;
+        let temp = tempdir().unwrap();
+        let backup = temp.path().join("legacy-backup");
+        let payload = backup.join("payload");
+        std::fs::create_dir_all(payload.join("attachments")).unwrap();
+        std::fs::write(payload.join("attachments/legacy.txt"), "旧版附件").unwrap();
+        let database = payload.join("research.sqlite3");
+        let mut connection = SqliteConnection::connect_with(
+            &SqliteConnectOptions::new()
+                .filename(&database)
+                .create_if_missing(true),
+        )
+        .await
+        .unwrap();
+        sqlx::raw_sql(include_str!("../migrations/0001_storage_foundation.sql"))
+            .execute(&mut connection)
+            .await
+            .unwrap();
+        connection.close().await.unwrap();
+        let manifest = BackupManifest {
+            format_version: 1,
+            schema_version: 1,
+            files: super::collect_manifest_files(&payload, &backup).unwrap(),
+        };
+        std::fs::write(
+            backup.join("manifest.json"),
+            serde_json::to_vec(&manifest).unwrap(),
+        )
+        .unwrap();
+        let data = temp.path().join("current");
+        restore_backup(&backup, &data).await.unwrap();
+        let mut restored = SqliteConnection::connect_with(
+            &SqliteConnectOptions::new().filename(data.join("research.sqlite3")),
+        )
+        .await
+        .unwrap();
+        assert_eq!(
+            sqlx::query_scalar::<_, i64>("PRAGMA user_version")
+                .fetch_one(&mut restored)
+                .await
+                .unwrap(),
+            2
+        );
+        assert_eq!(
+            std::fs::read_to_string(data.join("attachments/legacy.txt")).unwrap(),
+            "旧版附件"
+        );
+        let mut original = SqliteConnection::connect_with(
+            &SqliteConnectOptions::new()
+                .filename(database)
+                .read_only(true),
+        )
+        .await
+        .unwrap();
+        assert_eq!(
+            sqlx::query_scalar::<_, i64>("PRAGMA user_version")
+                .fetch_one(&mut original)
+                .await
+                .unwrap(),
+            1
+        );
     }
 
     #[tokio::test]

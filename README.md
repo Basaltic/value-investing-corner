@@ -37,9 +37,9 @@ corepack pnpm dev:desktop       # Rust 工具链可用后启动 Tauri 窗口
 corepack pnpm bundle:desktop    # 构建原生安装包
 ```
 
-当前基础版本包含工作台、运行环境状态、原生 app_info 调用适配、独立 DCF 页面，以及桌面端 SQLite 存储、迁移和内部备份恢复底座。研究数据尚未接入：输入默认为空；载入示例会明确标识为虚构数据，不上传、不保存。SQLite 由 Rust 原生侧在应用数据目录初始化，当前仅含 schema 元数据与只读 `storage_status` 诊断命令；迁移合同见 `docs/desktop-storage-contract.md`。备份核心可为数据库与附件目录生成带 SHA-256 清单的一致性快照，并在暂存校验后整体恢复、保留原目录回滚副本；当前尚未提供用户界面或任意路径命令，合同见 `docs/desktop-backup-contract.md`。HashRouter 使桌面导航不依赖服务端重写；Vite base 为相对路径。
+当前桌面端已包含公司列表、新建公司、详情、多证券和名称/代码搜索；研究档案写入本地 SQLite，重名/重复证券先提示、用户确认后创建独立记录，不自动合并。新增 schema v2，v1 升级前保存数据库副本并事务迁移。合同见 `docs/desktop-company-contract.md`。DCF 仍保持输入不上传、不保存；公司数据与网站独立，不送 Algolia。工作台、HashRouter、相对 Vite base 和独立估值页保留。Rust 内部备份核心已经覆盖公司与证券往返、v1 备份暂存升级；尚无用户备份页面。
 
-本轮未接入完整离线资料阅读、收藏笔记、公司等业务数据表、备份恢复页面、登录或自动更新。浏览器预览不具备原生能力。已核实 Homebrew 安装的 Rust/Cargo 1.94.1 位于 `/opt/homebrew/bin`；此前是执行终端 PATH 未包含该目录，并非机器未安装。临时补齐 PATH 后，`cargo fmt --check`、`cargo clippy --all-targets -- -D warnings` 和 `cargo test` 全部通过（8 项 Rust 单元测试）。未修改系统环境。macOS ARM64 release `.app` 与 DMG 为较早基线构建产物；当时已验证原生窗口工作台、app_info 连接、估值导航与载入示例，DMG 校验和有效，镜像内应用二进制与当时构建产物一致；这些历史产物尚未包含本轮 SQLite 与备份变更。本地验证包未进行 Developer ID 签名或 Apple 公证；未验证 Intel/Windows/Linux。若终端找不到 Cargo，可在当前终端运行 `export PATH="/opt/homebrew/bin:$PATH"` 后重试。
+P03 已验证 Rust 16/16、桌面适配 4/4、Web 24/24、类型/lint 与桌面构建，以及独立验收应用中的创建、重复确认、多证券、重启和代码搜索。浏览器预览明确禁用本地档案读写，不以浏览器存储冒充数据库。Tauri capabilities 与 CSP 未变；未提交、推送、安装或发布。原始资料阅读、笔记/判断、指标、采集、备份页面、AI 等尚未接入。旧 release `.app`/DMG 为历史产物，不包含当前阶段；本轮 debug 验收包仅用于隔离测试，不作正式发布。未 Developer ID 签名/公证或验证 Intel/Windows/Linux。
 
 ## 本地验证与生产构建
 

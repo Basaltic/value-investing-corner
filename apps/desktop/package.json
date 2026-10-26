@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "tauri": "tauri",
     "types:check": "tsc --noEmit && tsc -p tsconfig.node.json --noEmit",
-    "test": "tsx --test src/adapters/native.test.ts"
+    "test": "tsx --test src/adapters/native.test.ts src/adapters/companies.test.ts"
   },
   "dependencies": {
     "react": "^19.1.0",

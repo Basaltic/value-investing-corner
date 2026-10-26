@@ -1,0 +1,35 @@
+$ tsx --test src/adapters/native.test.ts src/adapters/companies.test.ts
+TAP version 13
+# Subtest: 浏览器预览不能调用建档命令
+ok 1 - 浏览器预览不能调用建档命令
+  ---
+  duration_ms: 0.521125
+  type: 'test'
+  ...
+# Subtest: 建档与证券命令不携带路径或SQL并保留确认状态
+ok 2 - 建档与证券命令不携带路径或SQL并保留确认状态
+  ---
+  duration_ms: 0.356541
+  type: 'test'
+  ...
+# Subtest: 浏览器预览不调用原生命令
+ok 3 - 浏览器预览不调用原生命令
+  ---
+  duration_ms: 0.629208
+  type: 'test'
+  ...
+# Subtest: 原生窗口返回应用版本且处理连接失败
+ok 4 - 原生窗口返回应用版本且处理连接失败
+  ---
+  duration_ms: 0.201
+  type: 'test'
+  ...
+1..4
+# tests 4
+# suites 0
+# pass 4
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 225.694625

@@ -172,6 +172,68 @@ dd {
   font-size: 22px;
   font-variant-numeric: tabular-nums;
 }
+.company-fields {
+  border: 0;
+  padding: 0;
+  margin: 0 0 20px;
+  min-width: 0;
+}
+.company-fields select {
+  width: 100%;
+  min-height: 44px;
+  font: inherit;
+  padding: 10px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.checkbox-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 44px;
+  margin-top: 24px;
+}
+.checkbox-field input {
+  width: 20px;
+  min-height: 20px;
+}
+.company-section-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+}
+.company-list {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+}
+.company-card,
+.listing-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.company-card {
+  text-decoration: none;
+}
+.company-card strong {
+  font-size: 18px;
+}
+.company-card:hover strong {
+  text-decoration: underline;
+}
+.duplicate-notice {
+  background: var(--surface);
+}
+.toolbar {
+  flex-wrap: wrap;
+}
 @media (max-width: 720px) {
   .app-shell {
     grid-template-columns: 1fr;
