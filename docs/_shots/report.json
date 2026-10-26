@@ -1,12 +1,8 @@
 {
-  "src": "docs/desktop-implementation-progress.html",
+  "src": "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/desktop-implementation-progress.html",
   "url": "file:///Users/bytedance/Desktop/work/code/value-investing-corner/docs/desktop-implementation-progress.html",
   "outdir": "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots",
-  "include": [
-    "lint",
-    "screenshots",
-    "structure"
-  ],
+  "include": ["lint", "screenshots", "structure"],
   "shots": {
     "desktop": {
       "slices": [
@@ -24,16 +20,16 @@
         },
         "fullpage": {
           "w": 1440,
-          "h": 6625
+          "h": 8020
         },
         "counts": {
           "section": 0,
           "h1": 1,
-          "h2": 8,
+          "h2": 9,
           "img": 0,
           "canvas": 0,
           "svg": 0,
-          "links": 17,
+          "links": 24,
           "buttons": 0
         }
       },
@@ -52,18 +48,16 @@
   "chromiumExec": "/Users/bytedance/Library/Caches/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-mac-arm64/chrome-headless-shell",
   "engineDegraded": true,
   "engineDegradedReason": "playwright 未装",
-  "elapsedSec": 8.4,
+  "elapsedSec": 4.69,
   "schemaVersion": 2,
   "status": "warning",
   "engineInfo": {
     "name": "chrome_cli",
     "degraded": true,
-    "degradedReasons": [
-      "playwright 未装"
-    ]
+    "degradedReasons": ["playwright 未装"]
   },
   "input": {
-    "original": "docs/desktop-implementation-progress.html",
+    "original": "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/desktop-implementation-progress.html",
     "resolvedPath": "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/desktop-implementation-progress.html",
     "baseUrl": "file:///Users/bytedance/Desktop/work/code/value-investing-corner/docs/desktop-implementation-progress.html",
     "protocol": "file",

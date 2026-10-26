@@ -481,7 +481,7 @@ mod tests {
         let manifest = create_backup(&data, &temp.path().join("backup"))
             .await
             .unwrap();
-        assert_eq!(manifest.schema_version, 2);
+        assert_eq!(manifest.schema_version, 3);
         restore_backup(&temp.path().join("backup"), &target)
             .await
             .unwrap();

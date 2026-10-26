@@ -234,6 +234,68 @@ dd {
 .toolbar {
   flex-wrap: wrap;
 }
+.material-fields textarea,
+.material-fields select {
+  width: 100%;
+  font: inherit;
+  padding: 10px;
+  color: var(--ink);
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  min-height: 44px;
+}
+.material-fields label {
+  margin-top: 18px;
+}
+.material-fields textarea {
+  resize: vertical;
+}
+.toolbar button[aria-pressed="true"] {
+  background: var(--forest);
+  color: var(--paper);
+}
+.material-text {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+}
+.material-markdown {
+  overflow-wrap: anywhere;
+}
+.material-markdown pre {
+  overflow: auto;
+}
+.material-image {
+  max-width: 100%;
+  height: auto;
+}
+.pdf-preview canvas {
+  width: 100%;
+  height: auto;
+}
+.pdf-preview .toolbar {
+  align-items: center;
+}
+.csv-scroll {
+  overflow: auto;
+  max-height: 480px;
+  margin-top: 20px;
+}
+.csv-scroll table {
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.csv-scroll th,
+.csv-scroll td {
+  padding: 10px;
+  min-width: 130px;
+  border: 1px solid var(--line);
+  white-space: pre-wrap;
+}
+.csv-scroll th {
+  background: var(--soft);
+}
 @media (max-width: 720px) {
   .app-shell {
     grid-template-columns: 1fr;

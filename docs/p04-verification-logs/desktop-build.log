@@ -1,0 +1,14 @@
+$ corepack pnpm --filter @value-investing/desktop build
+$ tsc && vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 294 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              0.46 kB │ gzip:   0.33 kB
+dist/assets/pdf.worker.min-yatZIOMy.mjs  1,375.83 kB
+dist/assets/index-py_txfTR.css               4.22 kB │ gzip:   1.46 kB
+dist/assets/pdf-preview-BbyTTLwW.js        330.01 kB │ gzip:  97.61 kB
+dist/assets/index-DrjHXtU_.js              486.04 kB │ gzip: 151.08 kB
+
+✓ built in 192ms

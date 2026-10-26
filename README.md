@@ -37,9 +37,9 @@ corepack pnpm dev:desktop       # Rust 工具链可用后启动 Tauri 窗口
 corepack pnpm bundle:desktop    # 构建原生安装包
 ```
 
-当前桌面端已包含公司列表、新建公司、详情、多证券和名称/代码搜索；研究档案写入本地 SQLite，重名/重复证券先提示、用户确认后创建独立记录，不自动合并。新增 schema v2，v1 升级前保存数据库副本并事务迁移。合同见 `docs/desktop-company-contract.md`。DCF 仍保持输入不上传、不保存；公司数据与网站独立，不送 Algolia。工作台、HashRouter、相对 Vite base 和独立估值页保留。Rust 内部备份核心已经覆盖公司与证券往返、v1 备份暂存升级；尚无用户备份页面。
+当前桌面端包含公司列表、新建公司、详情、多证券与名称/代码搜索，以及公司详情中的本地资料库：文件/链接/文本笔记、编辑、标签搜索、归档恢复、PDF/图片/TXT/Markdown预览和CSV列映射确认。资料存SQLite，复制文件存附件目录；外部引用不复制原件，失效可重新定位同内容文件。schema v3支持v1/v2安全升级，详细合同见 `docs/desktop-material-contract.md`。CSV只作为资料结构，不写财务/指标。公司数据与Web独立，不送Algolia；DCF仍不保存或上传输入。基本备份核心覆盖公司证券与资料往返，但尚无用户备份页面。
 
-P03 已验证 Rust 16/16、桌面适配 4/4、Web 24/24、类型/lint 与桌面构建，以及独立验收应用中的创建、重复确认、多证券、重启和代码搜索。浏览器预览明确禁用本地档案读写，不以浏览器存储冒充数据库。Tauri capabilities 与 CSP 未变；未提交、推送、安装或发布。原始资料阅读、笔记/判断、指标、采集、备份页面、AI 等尚未接入。旧 release `.app`/DMG 为历史产物，不包含当前阶段；本轮 debug 验收包仅用于隔离测试，不作正式发布。未 Developer ID 签名/公证或验证 Intel/Windows/Linux。
+P04 Rust24/24、桌面适配7/7、Web24/24、Clippy、类型/lint及桌面前端/debug构建通过；原生实看建档、笔记保存/Markdown、PDF导入与字体修复、两页翻页、重启保留与归档恢复。图片/CSV/外部重定位未逐项GUI实看，文件与SQLite测试覆盖数据路径；浏览器控制未返回观察，本轮不能宣称浏览器目视通过。capabilities仍core:default，CSP仅扩展本地blob/同源字体与worker，不开放远程网络。资料笔记手动保存，不是正式判断历史；判断版本、指标、采集、AI仍未接入。未提交、推送、安装或发布；release/DMG仍为历史产物，独立P04 debug包只用于隔离验收，未签名公证或验证其他平台。
 
 ## 本地验证与生产构建
 

@@ -1,0 +1,46 @@
+$ tauri build --debug --bundles app --config '{"identifier":"com.valueinvestingcorner.p04validation","productName":"价投小角落 P04验收"}'
+        Info Looking up installed tauri packages to check mismatched versions...
+     Running beforeBuildCommand `corepack pnpm build`
+$ tsc && vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 294 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                              0.46 kB │ gzip:   0.33 kB
+dist/assets/pdf.worker.min-yatZIOMy.mjs  1,375.83 kB
+dist/assets/index-py_txfTR.css               4.22 kB │ gzip:   1.46 kB
+dist/assets/pdf-preview-DtUuY8Wc.js        330.19 kB │ gzip:  97.68 kB
+dist/assets/index-Q6pxZ7Lf.js              486.09 kB │ gzip: 151.10 kB
+
+✓ built in 445ms
+   Compiling objc2-exception-helper v0.1.1
+   Compiling libsqlite3-sys v0.30.1
+   Compiling value-investing-desktop v0.1.0 (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri)
+   Compiling objc2 v0.6.5
+   Compiling sqlx-sqlite v0.8.6
+   Compiling block2 v0.6.2
+   Compiling objc2-core-foundation v0.3.2
+   Compiling dispatch2 v0.3.1
+   Compiling objc2-foundation v0.3.2
+   Compiling sqlx v0.8.6
+   Compiling objc2-quartz-core v0.3.2
+   Compiling objc2-app-kit v0.3.2
+   Compiling objc2-web-kit v0.3.2
+   Compiling tao v0.37.1
+   Compiling window-vibrancy v0.8.1
+   Compiling muda v0.20.0
+   Compiling rfd v0.16.1
+   Compiling wry v0.57.0
+   Compiling tauri-runtime v2.12.2
+   Compiling tauri-runtime-wry v2.12.3
+   Compiling tauri v2.12.5
+   Compiling tauri-plugin-fs v2.7.1
+   Compiling tauri-plugin-opener v2.7.2
+   Compiling tauri-plugin-dialog v2.8.3
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 34.08s
+       Built application at: /Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri/target/debug/value-investing-desktop
+    Bundling 价投小角落 P04验收.app (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P04验收.app)
+    Finished 1 bundle at:
+        /Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P04验收.app (33.82 MiB)
+

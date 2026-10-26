@@ -467,6 +467,12 @@ export function CompanyDetailPage() {
               {new Date(company.created_at).toLocaleString("zh-CN")}
             </p>
           </header>
+          <Link
+            className="action-link"
+            to={`/companies/${encodeURIComponent(id)}/materials`}
+          >
+            打开公司资料库
+          </Link>
           <section className="panel">
             <h2>证券档案</h2>
             <p className="muted">

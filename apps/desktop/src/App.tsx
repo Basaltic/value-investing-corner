@@ -1,5 +1,6 @@
 import { HashRouter, Link, Route, Routes } from "react-router-dom";
 import { AppLayout } from "./app/layout";
+import { MaterialsPage } from "./features/companies/materials-page";
 import { CompaniesPage, CompanyDetailPage } from "./features/companies/page";
 import { HomePage } from "./features/home/page";
 import { ValuationPage } from "./features/valuation/page";
@@ -13,6 +14,7 @@ export default function App() {
           <Route index element={<HomePage />} />
           <Route path="companies" element={<CompaniesPage />} />
           <Route path="companies/:id" element={<CompanyDetailPage />} />
+          <Route path="companies/:id/materials" element={<MaterialsPage />} />
           <Route path="valuation" element={<ValuationPage />} />
           <Route
             path="*"

@@ -1,5 +1,6 @@
 pub mod backup;
 mod companies;
+mod materials;
 mod storage;
 
 use tauri::{Manager, State};
@@ -69,9 +70,160 @@ async fn listing_add(
     .await
 }
 
+#[tauri::command]
+async fn material_create(
+    status: State<'_, storage::StorageStatus>,
+    company_id: String,
+    kind: String,
+    input: materials::MaterialInput,
+) -> Result<materials::Material, String> {
+    materials::create_text(
+        std::path::Path::new(&status.database_path),
+        &company_id,
+        &kind,
+        input,
+    )
+    .await
+}
+#[tauri::command]
+async fn material_list(
+    status: State<'_, storage::StorageStatus>,
+    company_id: String,
+    query: String,
+    archived: bool,
+) -> Result<Vec<materials::Material>, String> {
+    materials::list(
+        std::path::Path::new(&status.database_path),
+        &company_id,
+        &query,
+        archived,
+    )
+    .await
+}
+#[tauri::command]
+async fn material_get(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+) -> Result<materials::Material, String> {
+    materials::get(std::path::Path::new(&status.database_path), &id).await
+}
+#[tauri::command]
+async fn material_update(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+    input: materials::MaterialInput,
+) -> Result<materials::Material, String> {
+    materials::update(std::path::Path::new(&status.database_path), &id, input).await
+}
+#[tauri::command]
+async fn material_archive(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+    archived: bool,
+) -> Result<materials::Material, String> {
+    materials::archive(std::path::Path::new(&status.database_path), &id, archived).await
+}
+#[tauri::command]
+async fn material_preview(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+) -> Result<materials::Preview, String> {
+    materials::preview(std::path::Path::new(&status.database_path), &id).await
+}
+#[tauri::command]
+async fn material_csv_mapping(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+    mapping: Vec<String>,
+) -> Result<materials::Material, String> {
+    materials::set_csv_mapping(std::path::Path::new(&status.database_path), &id, mapping).await
+}
+async fn pick_material_file(app: &tauri::AppHandle) -> Result<Option<std::path::PathBuf>, String> {
+    use tauri_plugin_dialog::{DialogExt, FilePath};
+    let picker = app
+        .dialog()
+        .file()
+        .set_title("选择公司研究资料（单个文件）");
+    let picker = if let Some(window) = app.get_webview_window("main") {
+        picker.set_parent(&window)
+    } else {
+        picker
+    };
+    let picked = tauri::async_runtime::spawn_blocking(move || picker.blocking_pick_file())
+        .await
+        .map_err(|e| e.to_string())?;
+    match picked {
+        None => Ok(None),
+        Some(FilePath::Path(path)) => Ok(Some(path)),
+        _ => Err("仅支持本地文件路径".into()),
+    }
+}
+#[tauri::command]
+async fn material_import_file(
+    app: tauri::AppHandle,
+    status: State<'_, storage::StorageStatus>,
+    company_id: String,
+    mode: String,
+    input: materials::MaterialInput,
+) -> Result<Option<materials::Material>, String> {
+    let db = std::path::Path::new(&status.database_path);
+    companies::get_company(db, &company_id).await?;
+    let Some(path) = pick_material_file(&app).await? else {
+        return Ok(None);
+    };
+    materials::import_file(db, &company_id, &path, &mode, input)
+        .await
+        .map(Some)
+}
+#[tauri::command]
+async fn material_relocate(
+    app: tauri::AppHandle,
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+) -> Result<Option<materials::Material>, String> {
+    let db = std::path::Path::new(&status.database_path);
+    let row = materials::get(db, &id).await?;
+    if row.file_mode != "reference" {
+        return Err("只有外部引用可重新定位".into());
+    }
+    let Some(path) = pick_material_file(&app).await? else {
+        return Ok(None);
+    };
+    materials::relocate(db, &id, &path).await.map(Some)
+}
+#[tauri::command]
+async fn material_reveal(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+) -> Result<(), String> {
+    let path = materials::file_path(std::path::Path::new(&status.database_path), &id).await?;
+    if !path.is_file() {
+        return Err("文件失效，请重新定位外部引用".into());
+    }
+    // Reveal only, never execute an arbitrary imported file.
+    tauri_plugin_opener::reveal_item_in_dir(path).map_err(|e| e.to_string())
+}
+#[tauri::command]
+async fn material_open_source(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+) -> Result<(), String> {
+    let row = materials::get(std::path::Path::new(&status.database_path), &id).await?;
+    let url = tauri::Url::parse(&row.url).map_err(|_| "没有有效来源链接")?;
+    if !matches!(url.scheme(), "http" | "https")
+        || url.host_str().is_none()
+        || !url.username().is_empty()
+        || url.password().is_some()
+    {
+        return Err("来源链接不在允许范围".into());
+    }
+    tauri_plugin_opener::open_url(url.as_str(), None::<&str>).map_err(|e| e.to_string())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_dialog::init())
         .setup(|app| {
             let database_path = app
                 .path()
@@ -90,7 +242,18 @@ pub fn run() {
             company_create,
             company_list,
             company_get,
-            listing_add
+            listing_add,
+            material_create,
+            material_list,
+            material_get,
+            material_update,
+            material_archive,
+            material_preview,
+            material_csv_mapping,
+            material_import_file,
+            material_relocate,
+            material_reveal,
+            material_open_source
         ])
         .run(tauri::generate_context!())
         .expect("无法启动价投小角落桌面端");
@@ -113,7 +276,14 @@ mod tests {
                 super::company_create,
                 super::company_list,
                 super::company_get,
-                super::listing_add
+                super::listing_add,
+                super::material_create,
+                super::material_list,
+                super::material_get,
+                super::material_update,
+                super::material_archive,
+                super::material_preview,
+                super::material_csv_mapping
             ])
             .build(mock_context(noop_assets()))
             .unwrap();
@@ -155,6 +325,32 @@ mod tests {
         assert_eq!(added["kind"], "saved");
         let list = request("company_list", serde_json::json!({"query":"12345"})).unwrap();
         assert_eq!(list.as_array().unwrap().len(), 1);
+        let material_input =
+            serde_json::json!({"title":"IPC资料","body":"资料正文","url":"","tags":["护城河"]});
+        let material = request(
+            "material_create",
+            serde_json::json!({"companyId":id,"kind":"note","input":material_input}),
+        )
+        .unwrap();
+        let material_id = material["id"].as_str().unwrap();
+        let preview = request("material_preview", serde_json::json!({"id":material_id})).unwrap();
+        assert_eq!(preview["text"], "资料正文");
+        let filtered = request(
+            "material_list",
+            serde_json::json!({"companyId":id,"query":"护城河","archived":false}),
+        )
+        .unwrap();
+        assert_eq!(filtered.as_array().unwrap().len(), 1);
+        request(
+            "material_archive",
+            serde_json::json!({"id":material_id,"archived":true}),
+        )
+        .unwrap();
+        assert_eq!(
+            request("material_get", serde_json::json!({"id":material_id})).unwrap()["archived"],
+            true
+        );
+        assert!(request("material_create",serde_json::json!({"companyId":id,"kind":"note","input":{"title":"","body":"","url":"","tags":[]}})).is_err());
         assert!(request("company_create", serde_json::json!({"input": {"name":"", "market":"private", "registration":"", "listings":[]}, "confirmDuplicates":false})).is_err());
     }
 

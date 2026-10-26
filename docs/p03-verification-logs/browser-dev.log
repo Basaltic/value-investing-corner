@@ -3,3 +3,53 @@ $ vite
   VITE v8.3.5  ready in 391 ms
 
   ➜  Local:   http://localhost:28743/
+3:58:46 PM [vite] (client) hmr update /src/App.tsx
+3:58:48 PM [vite] (client) hmr update /src/features/companies/page.tsx
+3:59:32 PM [vite] (client) hmr update /src/App.tsx
+3:59:32 PM [vite] (client) dependencies optimized: pdfjs-dist, react-markdown
+3:59:32 PM [vite] (client) optimized dependencies changed. reloading
+3:59:33 PM [vite] (client) hmr update /src/App.css
+4:01:18 PM [vite] (client) hmr update /src/App.tsx
+4:01:18 PM [vite] (client) hmr update /src/features/companies/materials-page.tsx, /src/features/companies/material-preview.tsx
+4:01:18 PM [vite] (client) hmr update /src/App.css
+4:01:18 PM [vite] (client) hmr update /src/features/companies/material-preview.tsx
+4:01:18 PM [vite] (client) hmr update /src/features/companies/pdf-preview.tsx
+4:01:18 PM [vite] (client) hmr update /src/features/companies/page.tsx
+4:01:18 PM [vite] (client) hmr update /src/features/companies/materials-page.tsx
+4:02:41 PM [vite] (client) hmr update /src/features/companies/material-preview.tsx
+4:02:54 PM [vite] (client) hmr update /src/features/companies/material-preview.tsx
+4:03:07 PM [vite] (client) hmr update /src/features/companies/material-preview.tsx
+4:03:08 PM [vite] (client) hmr update /src/features/companies/material-preview.tsx
+4:03:10 PM [vite] (client) hmr update /src/features/companies/material-preview.tsx
+4:03:11 PM [vite] (client) hmr update /src/features/companies/materials-page.tsx
+4:03:11 PM [vite] Internal server error: Transform failed with 1 error:
+
+[31m[PARSE_ERROR] [0mExpected corresponding JSX closing tag for 'fieldset'.
+     [38;5;246m╭[0m[38;5;246m─[0m[38;5;246m[[0m src/features/companies/materials-page.tsx:200:17 [38;5;246m][0m
+     [38;5;246m│[0m
+ [38;5;246m189 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m<[0mfieldset[38;5;249m [0m[38;5;249mc[0m[38;5;249ml[0m[38;5;249ma[0m[38;5;249ms[0m[38;5;249ms[0m[38;5;249mN[0m[38;5;249ma[0m[38;5;249mm[0m[38;5;249me[0m[38;5;249m=[0m[38;5;249m"[0m[38;5;249mt[0m[38;5;249mo[0m[38;5;249mo[0m[38;5;249ml[0m[38;5;249mb[0m[38;5;249ma[0m[38;5;249mr[0m[38;5;249m [0m[38;5;249mc[0m[38;5;249mo[0m[38;5;249mm[0m[38;5;249mp[0m[38;5;249ma[0m[38;5;249mn[0m[38;5;249my[0m[38;5;249m-[0m[38;5;249mf[0m[38;5;249mi[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249md[0m[38;5;249ms[0m[38;5;249m"[0m[38;5;249m [0m[38;5;249ma[0m[38;5;249mr[0m[38;5;249mi[0m[38;5;249ma[0m[38;5;249m-[0m[38;5;249ml[0m[38;5;249ma[0m[38;5;249mb[0m[38;5;249me[0m[38;5;249ml[0m[38;5;249m=[0m[38;5;249m"[0m[38;5;249m资[0m[38;5;249m料[0m[38;5;249m类[0m[38;5;249m型[0m[38;5;249m"[0m[38;5;249m>[0m
+ [38;5;240m    │[0m                ────┬───  
+ [38;5;240m    │[0m                    ╰───── Opened here
+ [38;5;240m    │[0m 
+ [38;5;246m200 │[0m [38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m [0m[38;5;249m<[0m[38;5;249m/[0mdiv[38;5;249m>[0m
+ [38;5;240m    │[0m                 ─┬─  
+ [38;5;240m    │[0m                  ╰─── Expected `</fieldset>`
+[38;5;246m─────╯[0m
+
+  Plugin: vite:oxc
+  File: /Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src/features/companies/materials-page.tsx
+      at transformWithOxc (file:///Users/bytedance/Desktop/work/code/value-investing-corner/node_modules/.pnpm/vite@8.3.5_@types+node@26.6.5_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:7618:19)
+      at TransformPluginContext.transform (file:///Users/bytedance/Desktop/work/code/value-investing-corner/node_modules/.pnpm/vite@8.3.5_@types+node@26.6.5_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:7690:26)
+      at EnvironmentPluginContainer.transform (file:///Users/bytedance/Desktop/work/code/value-investing-corner/node_modules/.pnpm/vite@8.3.5_@types+node@26.6.5_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:8582:51)
+      at async loadAndTransform (file:///Users/bytedance/Desktop/work/code/value-investing-corner/node_modules/.pnpm/vite@8.3.5_@types+node@26.6.5_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:20155:26)
+      at async viteTransformMiddleware (file:///Users/bytedance/Desktop/work/code/value-investing-corner/node_modules/.pnpm/vite@8.3.5_@types+node@26.6.5_esbuild@0.28.2_jiti@2.7.0_tsx@4.23.15_yaml@2.9.1/node_modules/vite/dist/node/chunks/node.js:20375:20)
+4:03:13 PM [vite] (client) hmr update /src/features/companies/materials-page.tsx
+4:03:26 PM [vite] (client) hmr update /src/features/companies/material-preview.tsx
+4:03:26 PM [vite] (client) hmr update /src/features/companies/materials-page.tsx
+4:11:59 PM [vite] (client) hmr update /src/features/companies/material-preview.tsx
+4:12:01 PM [vite] (client) hmr update /src/features/companies/material-preview.tsx
+4:12:02 PM [vite] (client) hmr update /src/features/companies/material-preview.tsx
+4:12:28 PM [vite] (client) hmr update /src/features/companies/material-preview.tsx
+4:16:24 PM [vite] (client) hmr update /src/features/home/page.tsx
+4:29:12 PM [vite] (client) hmr update /src/features/companies/pdf-preview.tsx
+4:29:41 PM [vite] (client) hmr update /src/features/companies/pdf-preview.tsx

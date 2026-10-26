@@ -28,20 +28,46 @@ ul{margin:6px 0}
 <body>
 <div class="wrap">
 <h1>桌面工作台 · 实施进度与逐阶段确认记录</h1>
-<div class="sub">单一权威进度记录 · 最近执行轮：2026-10-26（P03 公司与证券档案）· 配套方案见 <code>desktop-research-plan.html</code><br>阶段必须逐一经用户确认后继续；本记录保留历史失败与未验证项，不用后续授权改写历史事实。</div>
+<div class="sub">单一权威进度记录 · 最近执行轮：2026-10-26（P04 本地资料库）· 配套方案见 <code>desktop-research-plan.html</code><br>阶段必须逐一经用户确认后继续；本记录保留历史失败与未验证项，不用后续授权改写历史事实。</div>
 
 <h2>当前总状态</h2>
 <div class="card">
-<p><strong>当前方案（P00–P13）已获批准，执行授权逐阶段授予。用户已确认 P01 并放行 P02；P00 的原生窗口目视缺口保留在历史记录中。</strong>P02 已经用户确认；本轮授权仅 P03 公司与证券档案，已完成核心实现与验收，待用户确认。P04 及后续阶段未授权；未提交或推送。</p>
+<p><strong>当前方案（P00–P13）已获批准，执行授权逐阶段授予。用户已确认 P01 并放行 P02；P00 的原生窗口目视缺口保留在历史记录中。</strong>P03 已经用户确认；本轮授权仅 P04 本地资料库，核心实现与验收已完成，停止等待用户确认。P05 及后续阶段未授权；未提交或推送。</p>
 <table>
 <tr><th>阶段</th><th>状态</th><th>说明</th></tr>
 <tr><td>P00 现有骨架（基线）</td><td><span class="badge b-warn">带已知缺口放行</span></td><td>测试、类型检查、构建与浏览器通道已验证；原生窗口目视受桌面控制入口阻塞，历史缺口继续保留。</td></tr>
 <tr><td>P01 本地存储与迁移安全</td><td><span class="badge b-green">已确认</span></td><td>SQLite 初始化、schema v1 迁移、异常版本保护与只读状态命令已完成。</td></tr>
 <tr><td>P02 基本备份 / 恢复</td><td><span class="badge b-green">已确认</span></td><td>内部核心已确认，P03新增公司与证券备份回归通过；尚无用户备份界面。</td></tr>
-<tr><td>P03 公司 / listing 档案</td><td><span class="badge b-green">完成，待用户确认</span></td><td>本地建档、列表搜索、详情、多证券、重复确认与迁移备份验收已完成。原生跨市场下拉及ADR选择未完整实看，自动化仓储覆盖。</td></tr>
-<tr><td>P04–P13</td><td><span class="badge b-gray">未开始</span></td><td>不预做、不跨阶段并行；后续按用户逐阶段放行。</td></tr>
+<tr><td>P03 公司 / listing 档案</td><td><span class="badge b-green">已确认</span></td><td>本地建档、列表搜索、详情、多证券、重复确认与迁移备份验收已完成。原生跨市场下拉及ADR选择未完整实看，自动化仓储覆盖。</td></tr>
+<tr><td>P04 本地资料库</td><td><span class="badge b-green">完成，待用户确认</span></td><td>文件、链接、文本笔记、标签、预览与备份回归已验收；保留未逐项GUI实看限制，停止等待确认。</td></tr>
+<tr><td>P05–P13</td><td><span class="badge b-gray">未开始</span></td><td>不预做、不跨阶段并行；后续按用户逐阶段放行。</td></tr>
 </table>
 <p class="muted">计划本体（P00–P13 依赖、范围与验收边界）以 <code>desktop-research-plan.html</code> §9 为准；本文件只记录执行事实、逐阶段确认与工作区变化，不重复计划内容。历史文档 <code>tauri-monorepo-verification.md</code>（macOS ARM64 打包与窗口抽验）为更早迁移阶段的历史记录，不充当本轮 P00 证据。</p>
+</div>
+
+<h2>P04 本地资料库（2026-10-26）</h2>
+<div class="card">
+<p><strong>交付：</strong>公司详情新增资料库入口；手动文件、链接、文本笔记可添加、编辑、挂标签、标题/标签搜索、归档与恢复在用。内部复制进入附件备份；外部引用只记录位置，失效提示重新定位同内容文件。手动笔记不等同 P05 正式判断历史。</p>
+<ul>
+<li>schema v3 新增资料与标签表；v1/v2升级前保存当前版本快照，不覆盖同名旧快照，事务迁移及重启幂等。备份格式仍v1、schema兼容v1–v3，资料ID/正文/来源链接/标签/归档/CSV映射/复制件往返已测试；外部原件不在备份中。</li>
+<li>PDF、PNG/JPEG/GIF/WebP、UTF-8 TXT/Markdown本地预览；CSV真实解析、列映射确认，保留前导零/空值/引号，不执行公式、不写财务或指标。未知格式只提供文件位置。单文件50 MiB，预览20 MiB；不做OCR或全文搜索。</li>
+<li>前端只传资料ID，不传任意路径/SQL；文件选择由Rust原生对话框完成，取消不写。内部复制路径与hash校验、引用内容变化拒绝静默采用、符号链接/路径越界拒绝。通用前端fs/dialog/opener权限未授予，capabilities仍core:default；CSP仅增加本地blob/字体/worker及同源资源读取，不开放远程网络。</li>
+<li>自动验证：Rust24/24（含真实Tauri IPC JSON与SQLite）、桌面适配7/7、Web24/24、Clippy -D warnings、类型/lint、前端与独立debug构建通过。PDF按需加载，原大chunk warning已消除。</li>
+<li>原生实看：虚构公司→笔记保存/标签→原生文件选择框→导入PDF。路径快捷键两次无效，由用户接管选虚构sample.pdf后，实际资料数1→2。首次PDF缺字被发现，不算通过；补本地字体/CMap后重新打包、退出重启，同资料第一页文字与第二页翻页正常。笔记Markdown和归档/恢复正常。</li>
+<li><strong>验收限制：</strong>图片、CSV列映射、TXT、外部引用重定位未逐一GUI实看，真实文件/SQLite测试覆盖。浏览器控制两次仅返回completed，未提供DOM/截图，所以不声称浏览器目视通过；前端无原生命令的browser边界有单测与禁用代码。无签名公证、release/DMG或其他系统验收。</li>
+<li>未改Web、共享包或正式应用标识，未安装到Applications；P05–P13未开始，AI不入本期。未提交、推送、发布。</li>
+<li>工作区附带变化：旧P03预览进程继续向p03-verification-logs/browser-dev.log写P04热更新与中间JSX报错，日志原文保留；全树diff --check因该新增日志尾空格失败，不删改日志。P04源码/合同限定diff检查另行通过。旧_shots/report.json仅等价JSON格式化满足lint，结论未改。</li>
+</ul>
+<p>合同：<a href="desktop-material-contract.md">desktop-material-contract.md</a>。核心观察：<a href="p04-verification-logs/ui-observation.md">ui-observation.md</a>；<a href="p04-verification-logs/rust-tests.log">Rust测试</a>、<a href="p04-verification-logs/rust-clippy.log">Clippy</a>、<a href="p04-verification-logs/workspace-tests.log">工作区测试</a>、<a href="p04-verification-logs/check-local.log">类型/lint</a>、<a href="p04-verification-logs/native-debug-build.log">隔离debug构建</a>。</p>
+<p><strong>打开方式：</strong>正式本地开发执行<code>corepack pnpm dev:desktop</code>；隔离验收应用位于<code>apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P04验收.app</code>，双击后进入公司研究→公司档案→资料库；数据与正式应用不相通。</p>
+<p><strong>Commit描述（自动生成，不提交）：</strong></p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere;">feat(desktop): add local company material library
+
+- add file, link and note entries with tags and archive controls
+- support ID-scoped local previews and CSV column mapping
+- preserve copied files and safely relocate external references
+- migrate schema v3 and verify material backup round trips
+- bundle offline PDF fonts and document P04 acceptance limits</pre>
 </div>
 
 <h2>P03 公司与证券档案（2026-10-26）</h2>
