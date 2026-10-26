@@ -37,9 +37,9 @@ corepack pnpm dev:desktop       # Rust 工具链可用后启动 Tauri 窗口
 corepack pnpm bundle:desktop    # 构建原生安装包
 ```
 
-当前基础版本包含工作台、运行环境状态、原生 app_info 调用适配与独立 DCF 页面。输入默认为空；载入示例会明确标识为虚构数据。不上传、不保存输入。HashRouter 使桌面导航不依赖服务端重写；Vite base 为相对路径。
+当前基础版本包含工作台、运行环境状态、原生 app_info 调用适配、独立 DCF 页面，以及桌面端 SQLite 存储与迁移底座。研究数据尚未接入：输入默认为空；载入示例会明确标识为虚构数据，不上传、不保存。SQLite 由 Rust 原生侧在应用数据目录初始化，当前仅含 schema 元数据与只读 `storage_status` 诊断命令；迁移与命令合同见 `docs/desktop-storage-contract.md`。HashRouter 使桌面导航不依赖服务端重写；Vite base 为相对路径。
 
-本轮未接入完整离线资料阅读、收藏笔记、数据库、登录或自动更新。浏览器预览不具备原生能力。已核实 Homebrew 安装的 Rust/Cargo 1.94.1 位于 `/opt/homebrew/bin`；此前是执行终端 PATH 未包含该目录，并非机器未安装。临时补齐 PATH 后，`cargo fmt --check`、`cargo check` 和 `cargo test` 全部通过（1 项 Rust 单元测试）。未修改系统环境。macOS ARM64 release `.app` 与 DMG 已构建成功；已通过原生窗口验证工作台、app_info 连接、估值导航与载入示例。DMG 校验和有效，镜像内应用二进制与构建产物一致。产物为本地验证包，未进行 Developer ID 签名或 Apple 公证；未验证 Intel/Windows/Linux。产物位于 `apps/desktop/src-tauri/target/release/bundle/macos/价投小角落.app` 和 `apps/desktop/src-tauri/target/release/bundle/dmg/价投小角落_0.1.0_aarch64.dmg`。若终端找不到 Cargo，可在当前终端运行 `export PATH="/opt/homebrew/bin:$PATH"` 后重试。
+本轮未接入完整离线资料阅读、收藏笔记、公司等业务数据表、登录或自动更新。浏览器预览不具备原生能力。已核实 Homebrew 安装的 Rust/Cargo 1.94.1 位于 `/opt/homebrew/bin`；此前是执行终端 PATH 未包含该目录，并非机器未安装。临时补齐 PATH 后，`cargo fmt --check`、`cargo clippy --all-targets -- -D warnings` 和 `cargo test` 全部通过（3 项 Rust 单元测试）。未修改系统环境。macOS ARM64 release `.app` 与 DMG 为较早基线构建产物；当时已验证原生窗口工作台、app_info 连接、估值导航与载入示例，DMG 校验和有效，镜像内应用二进制与当时构建产物一致；这些历史产物尚未包含本轮 SQLite 变更。本地验证包未进行 Developer ID 签名或 Apple 公证；未验证 Intel/Windows/Linux。若终端找不到 Cargo，可在当前终端运行 `export PATH="/opt/homebrew/bin:$PATH"` 后重试。
 
 ## 本地验证与生产构建
 
