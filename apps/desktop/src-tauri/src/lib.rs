@@ -1,3 +1,4 @@
+pub mod backup;
 mod storage;
 
 use tauri::{Manager, State};
