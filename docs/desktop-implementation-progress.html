@@ -28,11 +28,11 @@ ul{margin:6px 0}
 <body>
 <div class="wrap">
 <h1>桌面工作台 · 实施进度与逐阶段确认记录</h1>
-<div class="sub">单一权威进度记录 · 最近执行轮：P06 手工财务与指标（核心已实现，原生补验未完成）· 配套方案见 <code>desktop-research-plan.html</code><br>阶段必须逐一经用户确认后继续；本记录保留历史失败与未验证项，不用后续授权改写历史事实。</div>
+<div class="sub">单一权威进度记录 · 最近执行轮：P07 指标看板（核心验收完成，待用户确认）· 配套方案见 <code>desktop-research-plan.html</code><br>阶段必须逐一经用户确认后继续；本记录保留历史失败与未验证项，不用后续授权改写历史事实。</div>
 
 <h2>当前总状态</h2>
 <div class="card">
-<p><strong>当前方案（P00–P13）已获批准，执行授权逐阶段授予。用户已确认 P01 并放行 P02；P00 的原生窗口目视缺口保留在历史记录中。</strong>用户明确“进入 P06”，本轮只授权手工财务与指标；P05核心已实现但关闭/恢复补验缺口保留，不视作全项通过。P06核心已实现，自动验证与原生AX回读已完成；录入交互和趋势图形实看仍未完成，不标全项通过。停止等待用户验收，P07及后续未授权；commit描述已生成，不提交或推送。</p>
+<p><strong>当前方案（P00–P13）已获批准，执行授权逐阶段授予。用户已确认 P01 并放行 P02；P00 的原生窗口目视缺口保留在历史记录中。</strong>用户明确“继续 P07”，本轮授权指标看板；P05/P06原生补验缺口继续保留，不标历史全项通过。P07实现与核心原生验收完成（详细未逐项覆盖范围见下），停止等待用户确认；P08–P13未授权。commit描述已生成，不提交或推送。</p>
 <table>
 <tr><th>阶段</th><th>状态</th><th>说明</th></tr>
 <tr><td>P00 现有骨架（基线）</td><td><span class="badge b-warn">带已知缺口放行</span></td><td>测试、类型检查、构建与浏览器通道已验证；原生窗口目视受桌面控制入口阻塞，历史缺口继续保留。</td></tr>
@@ -41,13 +41,44 @@ ul{margin:6px 0}
 <tr><td>P03 公司 / listing 档案</td><td><span class="badge b-green">已确认</span></td><td>本地建档、列表搜索、详情、多证券、重复确认与迁移备份验收已完成。原生跨市场下拉及ADR选择未完整实看，自动化仓储覆盖。</td></tr>
 <tr><td>P04 本地资料库</td><td><span class="badge b-green">已确认</span></td><td>文件、链接、文本笔记、标签、预览与备份回归已验收；保留未逐项GUI实看限制，停止等待确认。</td></tr>
 <tr><td>P05 自由判断与历史</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>v1→v2、差异、失败保护、重启判断页已实看；保存成功后关闭与恢复副本仍待补验；用户后来明确进入P06，历史缺口不改写。</td></tr>
-<tr><td>P06 手工财务与指标</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>自动回归和原生读数通过；手动录入/审核交互与图形实看仍待验证。停止待确认，不进入P07。</td></tr>
-<tr><td>P07–P13</td><td><span class="badge b-gray">未开始</span></td><td>不预做、不跨阶段并行；后续按用户逐阶段放行。</td></tr>
+<tr><td>P06 手工财务与指标</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>自动回归和原生读数通过；手动录入/审核交互与图形实看仍待验证。用户后来明确继续P07；本阶段原生未全验限制保留。</td></tr>
+<tr><td>P07 指标看板</td><td><span class="badge b-green">核心验收完成，待确认</span></td><td>配置、模板卡、分组、显隐排序、研究事项与重启保持实测；不宣称GUI逐项全覆盖，P08未开始。</td></tr>
+<tr><td>P08–P13</td><td><span class="badge b-gray">未开始</span></td><td>不预做、不跨阶段并行；后续按用户逐阶段放行。</td></tr>
 </table>
 <p class="muted">计划本体（P00–P13 依赖、范围与验收边界）以 <code>desktop-research-plan.html</code> §9 为准；本文件只记录执行事实、逐阶段确认与工作区变化，不重复计划内容。历史文档 <code>tauri-monorepo-verification.md</code>（macOS ARM64 打包与窗口抽验）为更早迁移阶段的历史记录，不充当本轮 P00 证据。</p>
 </div>
 
-<h2>P06 手工财务与指标观测</h2>
+<h2>P07 指标看板</h2>
+<div class="card">
+<p><strong>实现与核心验收完成，停止等待用户确认。</strong>只执行P07；P08–P13未授权，不做采集、AI、低代码拖拽或发布，自动生成commit描述但不提交。</p>
+<ul>
+<li>新增独立指标看板入口与公司详情跳转。全局配置按公司分组，支持组/组内公司/卡片按钮排序、模板卡显隐、指标选择、时间范围和待核设置。未分组新公司保持可见，空公司/空卡片/无数据明确引导，不制造推荐。</li>
+<li>schema v6：dashboard_config配置单例（revision比较交换）与research_items显式待读/待补状态。组和卡片存配置，不复制财务值；指标引用具体原始事实/固定派生口径/自定义定义，数值依P06规则保留null断点，文本仅卡片。最近正式判断取最大正式version，不展示草稿冒充正式。</li>
+<li>同一公司最多一个自定义组，卡片顺序数组保存。旧版配置/过期事项修订、非法日期/范围、未知公司/跨公司指标锚点、重复卡ID/分组公司拒绝写入；保存成功但刷新失败明确区分。待读仅由本人显式标记、待补本人输入/勾完成；所选指标的数据缺口单独显示为“不是自动任务”。移除卡不删事项。</li>
+<li>旧v1–v5升级先留当前版本一致快照，事务冲突回滚，旧迁移不改；v5成功与v6冲突保留旧财务测试已运行。配置revision、组/公司顺序、卡显隐/所选指标/日期/待核及研究事项完成状态全进入基本备份；格式仍1、兼容schema1–6，源备份只staging升级、不改原包。</li>
+<li><strong>测试先行：</strong>原生首批4个配置/迁移/备份测试首次因未实现失败；另1个显式事项测试首次失败，实现后通过。前端数据模型2个断点/分组断言首次因空实现失败后通过；适配边界与缺引用测试当时已通过，不把它们说成红灯。后补指标归属、日期/修订空值和保存读状态断言通过。</li>
+<li><strong>自动验证：</strong>Rust45通过/0失败、2个GUI夹具默认ignored；P07夹具显式隔离运行1/1通过。桌面27/27、Web24/24、workspace3/3、共享估值8/8、元数据2/2；严格Clippy、check:local（142文件，类型/lint）、独立debug构建退出0，主chunk406.89kB、看板19.31kB、趋势479.51kB，无大chunk警告。未扩正式CSP/capabilities/identifier或新增依赖。</li>
+<li><strong>原生实测主路径：</strong>虚构看板v1→指标卡上移/待读隐藏→保存v2→重新载入保持；实际截图确认2023/2024/2025营收100/缺值/140及缺值处无跨点连线。新增“需要补证”组、公司移入、待核显示/待读恢复显示保存v3，标记资料已完成，输入新增待补。退出重启后v3、分组/卡顺序/待核列/资料完成状态/新增事项/正式v1实际回读保留。</li>
+<li><strong>验收限制：</strong>指标菜单指针项点击被控制工具归属检查拒绝（not_dispatched），关闭菜单后公司组通过当前菜单键盘选择成功；不把打开菜单当全部指标选择通过。日期控件逐项输入、自定义数值/文本指标原生菜单切换、多公司组内排序、非空待核灰点与窄屏未逐项GUI验证，自动回归覆盖数据路径。关闭动作回执uncertain，只确认随后无运行实例并重启数据保留，不回写P05/P06旧缺口。收尾一次点击遇桌面锁屏状态变化，已停止GUI，不重放；不影响之前保存重启证据。</li>
+<li>配置手动保存，未保存导航有阻断与关闭前提示，不承诺Cmd+Q/强制退出不丢配置；未提交事项输入不保证跨分组/重新载入保留。只测试macOS ARM64标准窗口，不重打release/DMG、安装、公证或发布。</li>
+<li>工作区保护：开工HEAD为P06外部提交，Main未提交；初始用户1990.md修改及期间1990–1999股东信变化均未触碰/回滚、不归入P07，测试仅代表命令执行时状态，不覆盖随后并发改动。Web/共享包/批准方案本体未改；本轮仅桌面、合同/记录/README和预览产物。</li>
+</ul>
+<p>合同：<a href="desktop-dashboard-contract.md">desktop-dashboard-contract.md</a>；<a href="p07-verification-logs/ui-observation.md">原生观察及覆盖边界</a>；<a href="p07-verification-logs/rust-tests.log">Rust测试</a>、<a href="p07-verification-logs/rust-clippy.log">Clippy</a>、<a href="p07-verification-logs/frontend-tests.log">桌面测试</a>、<a href="p07-verification-logs/workspace-tests.log">工作区测试</a>、<a href="p07-verification-logs/check-local.log">类型/lint</a>、<a href="p07-verification-logs/native-debug-build.log">独立debug构建</a>、<a href="p07-verification-logs/fixture-tests.log">虚构隔离夹具</a>。</p>
+<p><strong>打开方式：</strong>双击项目内 <code>apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P07验收.app</code>，点击“指标看板”验收虚构数据；正式开发使用 <code>corepack pnpm dev:desktop</code>，浏览器预览不能读写SQLite，旧release不含P07。</p>
+<p><strong>Commit描述（自动生成，不提交）</strong></p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere;">feat(desktop): add configurable local research dashboard
+
+- persist dashboard groups, company order and card configuration in schema v6
+- add metric, reading, supplement and latest official judgment cards
+- retain metric references, time ranges and review-aware gap trends
+- support explicit reading status and personal research follow-up items
+- protect configuration and item updates with revision checks
+- verify native IPC, v5 migration rollback and backup round trips
+- validate card visibility, ordering, grouping and restart persistence
+- document acceptance coverage without adding collection or AI</pre>
+</div>
+
+<h2>P06 手工财务与指标观测（历史执行结果）</h2>
 <div class="card">
 <p><strong>核心已实现，自动回归与原生读数通过；原生录入及图形实看验收未完成，不是全项通过。</strong>用户只授权P06，本轮停在待确认；P07看板、采集、AI均未实现，未提交或推送。</p>
 <ul>

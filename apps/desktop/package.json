@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "tauri": "tauri",
     "types:check": "tsc --noEmit && tsc -p tsconfig.node.json --noEmit",
-    "test": "tsx --test src/adapters/native.test.ts src/adapters/companies.test.ts src/adapters/materials.test.ts src/adapters/judgments.test.ts src/features/companies/draft-session.test.ts src/adapters/finance.test.ts src/features/companies/finance-series.test.ts"
+    "test": "tsx --test src/adapters/native.test.ts src/adapters/companies.test.ts src/adapters/materials.test.ts src/adapters/judgments.test.ts src/features/companies/draft-session.test.ts src/adapters/finance.test.ts src/features/companies/finance-series.test.ts src/adapters/dashboard.test.ts src/features/companies/dashboard-model.test.ts"
   },
   "dependencies": {
     "@tauri-apps/api": "^2",

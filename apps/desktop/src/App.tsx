@@ -28,6 +28,13 @@ const router = createHashRouter([
             .FinancePage,
         }),
       },
+      {
+        path: "dashboard",
+        lazy: async () => ({
+          Component: (await import("./features/companies/dashboard-page"))
+            .DashboardPage,
+        }),
+      },
       { path: "valuation", element: <ValuationPage /> },
       {
         path: "*",

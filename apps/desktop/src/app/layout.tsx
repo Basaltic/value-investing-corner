@@ -3,6 +3,7 @@ import { NavLink, Outlet } from "react-router-dom";
 const navigation = [
   { to: "/", label: "工作台", end: true },
   { to: "/companies", label: "公司研究", end: false },
+  { to: "/dashboard", label: "指标看板", end: false },
   { to: "/valuation", label: "估值工具", end: false },
 ];
 

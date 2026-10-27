@@ -1,3 +1,33 @@
+.dashboard-cards {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 16px;
+}
+.dashboard-card {
+  margin: 0;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.dashboard-company {
+  padding: 20px 0;
+  border-top: 1px solid var(--line);
+}
+.dashboard-group {
+  margin: 40px 0;
+}
+.dashboard-select {
+  min-height: 44px;
+  width: 100%;
+  font: inherit;
+  background: var(--surface);
+  color: var(--ink);
+  padding: 10px;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.dashboard-card h3 {
+  margin-top: 0;
+}
 :root {
   --paper: #f4f1e8;
   --surface: #ebe5d8;
@@ -259,6 +289,13 @@ dd {
   white-space: pre-wrap;
   overflow-wrap: anywhere;
   line-height: 1.8;
+}
+.dashboard-card .material-text {
+  max-height: 260px;
+  overflow: auto;
+}
+.dashboard-company .company-section-heading {
+  flex-wrap: wrap;
 }
 .material-markdown {
   overflow-wrap: anywhere;

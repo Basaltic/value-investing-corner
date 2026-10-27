@@ -5,7 +5,8 @@ use sqlx::{
     sqlite::{SqliteConnectOptions, SqliteJournalMode},
 };
 
-pub(crate) const SUPPORTED_SCHEMA_VERSION: i64 = 5;
+pub(crate) const SUPPORTED_SCHEMA_VERSION: i64 = 6;
+const DASHBOARD_MIGRATION_SQL: &str = include_str!("../migrations/0006_dashboard.sql");
 const INITIAL_MIGRATION_SQL: &str = include_str!("../migrations/0001_storage_foundation.sql");
 const COMPANY_MIGRATION_SQL: &str = include_str!("../migrations/0002_company_archives.sql");
 const MATERIAL_MIGRATION_SQL: &str = include_str!("../migrations/0003_material_library.sql");
@@ -120,10 +121,16 @@ pub async fn initialize_database(path: &Path) -> Result<StorageStatus, String> {
                 .await
                 .map_err(|error| format!("判断历史迁移失败，原库已保留：{error}"))?;
         }
-        sqlx::raw_sql(FINANCE_MIGRATION_SQL)
+        if current_version < 5 {
+            sqlx::raw_sql(FINANCE_MIGRATION_SQL)
+                .execute(&mut *transaction)
+                .await
+                .map_err(|error| format!("财务观测迁移失败，原库已保留：{error}"))?;
+        }
+        sqlx::raw_sql(DASHBOARD_MIGRATION_SQL)
             .execute(&mut *transaction)
             .await
-            .map_err(|error| format!("财务观测迁移失败，原库已保留：{error}"))?;
+            .map_err(|error| format!("看板迁移失败，原库已保留：{error}"))?;
         transaction
             .commit()
             .await
@@ -186,7 +193,7 @@ mod tests {
             .unwrap();
         drop(connection);
         let status = initialize_database(&path).await.unwrap();
-        assert_eq!(status.schema_version, 5);
+        assert_eq!(status.schema_version, 6);
         let mut current =
             SqliteConnection::connect_with(&SqliteConnectOptions::new().filename(&path))
                 .await
@@ -295,7 +302,7 @@ mod tests {
             .unwrap();
         sqlx::query("INSERT INTO companies (id,name,market,registration) VALUES ('same-id','keep','private','')").execute(&mut db).await.unwrap();
         drop(db);
-        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 5);
+        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 6);
         assert!(path.with_extension("v2-backup.sqlite3").exists());
         let mut db = SqliteConnection::connect_with(&SqliteConnectOptions::new().filename(&path))
             .await
@@ -307,7 +314,7 @@ mod tests {
                 .unwrap(),
             "same-id"
         );
-        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 5);
+        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 6);
     }
 
     #[tokio::test]
@@ -338,7 +345,7 @@ mod tests {
             .await
             .unwrap();
         drop(db);
-        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 5);
+        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 6);
         assert!(path.with_extension("v3-backup.sqlite3").exists());
         let mut db = SqliteConnection::connect_with(&SqliteConnectOptions::new().filename(&path))
             .await
@@ -350,7 +357,7 @@ mod tests {
                 .unwrap(),
             "keep-id"
         );
-        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 5);
+        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 6);
     }
 
     #[tokio::test]
@@ -389,7 +396,7 @@ mod tests {
             if conflict {
                 assert!(result.is_err());
             } else {
-                assert_eq!(result.unwrap().schema_version, 5);
+                assert_eq!(result.unwrap().schema_version, 6);
             }
             assert!(path.with_extension("v4-backup.sqlite3").exists());
             let mut con =
@@ -408,7 +415,7 @@ mod tests {
                     .fetch_one(&mut con)
                     .await
                     .unwrap(),
-                if conflict { 4 } else { 5 }
+                if conflict { 4 } else { 6 }
             );
         }
     }
@@ -421,8 +428,8 @@ mod tests {
         let first = initialize_database(&path).await.expect("first init");
         let second = initialize_database(&path).await.expect("second init");
 
-        assert_eq!(first.schema_version, 5);
-        assert_eq!(second.schema_version, 5);
+        assert_eq!(first.schema_version, 6);
+        assert_eq!(second.schema_version, 6);
         assert_eq!(first.database_path, path.display().to_string());
         assert_eq!(first, second);
 

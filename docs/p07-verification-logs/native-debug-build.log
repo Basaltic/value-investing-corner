@@ -1,0 +1,55 @@
+        Info Looking up installed tauri packages to check mismatched versions...
+     Running beforeBuildCommand `corepack pnpm build`
+$ tsc && vite build
+vite v8.3.5 building client environment for production...
+transforming...
+✓ 992 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                               0.54 kB │ gzip:   0.36 kB
+dist/assets/pdf.worker.min-yatZIOMy.mjs   1,375.83 kB
+dist/assets/index-CRlc2Dwo.css                6.52 kB │ gzip:   1.93 kB
+dist/assets/materials-DdEYWmg3.js             0.80 kB │ gzip:   0.44 kB
+dist/assets/finance-series-bC-pPQYu.js        2.80 kB │ gzip:   1.53 kB
+dist/assets/jsx-runtime-Wy9s6hX0.js           8.91 kB │ gzip:   3.39 kB
+dist/assets/judgment-history-6goaw4WY.js     10.51 kB │ gzip:   4.21 kB
+dist/assets/dashboard-page-CSQNTfIt.js       19.31 kB │ gzip:   6.45 kB
+dist/assets/finance-page-B0zh73H1.js         21.80 kB │ gzip:   6.57 kB
+dist/assets/draft-workspace-DdrE974c.js      22.52 kB │ gzip:   6.59 kB
+dist/assets/materials-page-DcvMcfj8.js      128.50 kB │ gzip:  39.95 kB
+dist/assets/judgment-editor-DyPN6Erh.js     305.09 kB │ gzip:  91.96 kB
+dist/assets/pdf-preview-DCFO-h1k.js         330.20 kB │ gzip:  97.69 kB
+dist/assets/index-BAtwVN0S.js               406.89 kB │ gzip: 127.51 kB
+dist/assets/finance-trend-nPz1e6mz.js       479.51 kB │ gzip: 159.56 kB
+
+✓ built in 653ms
+   Compiling objc2-exception-helper v0.1.1
+   Compiling objc2 v0.6.5
+   Compiling libsqlite3-sys v0.30.1
+   Compiling value-investing-desktop v0.1.0 (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri)
+   Compiling objc2-foundation v0.3.2
+   Compiling wry v0.57.0
+   Compiling block2 v0.6.2
+   Compiling objc2-core-foundation v0.3.2
+   Compiling dispatch2 v0.3.1
+   Compiling sqlx-sqlite v0.8.6
+   Compiling sqlx v0.8.6
+   Compiling objc2-quartz-core v0.3.2
+   Compiling objc2-app-kit v0.3.2
+   Compiling objc2-web-kit v0.3.2
+   Compiling tao v0.37.1
+   Compiling window-vibrancy v0.8.1
+   Compiling muda v0.20.0
+   Compiling rfd v0.16.1
+   Compiling tauri-runtime v2.12.2
+   Compiling tauri-runtime-wry v2.12.3
+   Compiling tauri v2.12.5
+   Compiling tauri-plugin-fs v2.7.1
+   Compiling tauri-plugin-opener v2.7.2
+   Compiling tauri-plugin-dialog v2.8.3
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 40.76s
+       Built application at: /Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri/target/debug/value-investing-desktop
+    Bundling 价投小角落 P07验收.app (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P07验收.app)
+    Finished 1 bundle at:
+        /Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P07验收.app (35.31 MiB)
+

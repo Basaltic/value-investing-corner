@@ -91,7 +91,7 @@ fn version<T: DeserializeOwned>(r: sqlx::sqlite::SqliteRow) -> Result<Version<T>
         input: serde_json::from_str(r.get("payload")).map_err(error)?,
     })
 }
-fn date(s: &str) -> bool {
+pub(crate) fn date(s: &str) -> bool {
     if !s.is_ascii()
         || s.len() != 10
         || s.as_bytes()[4] != b'-'
@@ -1079,7 +1079,7 @@ mod tests {
                 .await
                 .unwrap()
                 .schema_version,
-            5
+            6
         );
         let restore = t.path().join("restore");
         restore_backup(&backup, &restore).await.unwrap();

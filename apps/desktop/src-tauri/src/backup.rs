@@ -511,7 +511,7 @@ mod tests {
                 .fetch_one(&mut restored)
                 .await
                 .unwrap(),
-            5
+            6
         );
         assert_eq!(
             std::fs::read_to_string(data.join("attachments/legacy.txt")).unwrap(),

@@ -1,0 +1,38 @@
+   Compiling objc2-exception-helper v0.1.1
+   Compiling objc2 v0.6.5
+   Compiling libsqlite3-sys v0.30.1
+   Compiling objc2-foundation v0.3.2
+   Compiling wry v0.57.0
+   Compiling block2 v0.6.2
+   Compiling objc2-core-foundation v0.3.2
+   Compiling dispatch2 v0.3.1
+   Compiling sqlx-sqlite v0.8.6
+   Compiling sqlx v0.8.6
+   Compiling objc2-quartz-core v0.3.2
+   Compiling objc2-app-kit v0.3.2
+   Compiling objc2-web-kit v0.3.2
+   Compiling tao v0.37.1
+   Compiling muda v0.20.0
+   Compiling window-vibrancy v0.8.1
+   Compiling rfd v0.16.1
+   Compiling tauri-runtime v2.12.2
+   Compiling tauri-runtime-wry v2.12.3
+   Compiling tauri v2.12.5
+   Compiling tauri-plugin-fs v2.7.1
+   Compiling tauri-plugin-opener v2.7.2
+   Compiling tauri-plugin-dialog v2.8.3
+   Compiling value-investing-desktop v0.1.0 (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 32.97s
+     Running unittests src/lib.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop_lib-c685be0dab19b320)
+
+running 1 test
+test dashboard::tests::create_p07_gui_fixture ... ok
+
+test result: ok. 1 passed; 0 failed; 0 ignored; 0 measured; 46 filtered out; finished in 0.09s
+
+     Running unittests src/main.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop-008d7c7b1b30b481)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

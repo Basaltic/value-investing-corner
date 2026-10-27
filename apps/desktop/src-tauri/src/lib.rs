@@ -1,5 +1,6 @@
 pub mod backup;
 mod companies;
+mod dashboard;
 mod finance;
 mod judgments;
 mod materials;
@@ -342,6 +343,46 @@ async fn finance_observe(
     .await
 }
 
+#[tauri::command]
+async fn dashboard_load(
+    status: State<'_, storage::StorageStatus>,
+) -> Result<dashboard::Saved, String> {
+    dashboard::load(std::path::Path::new(&status.database_path)).await
+}
+#[tauri::command]
+async fn dashboard_save(
+    status: State<'_, storage::StorageStatus>,
+    config: dashboard::Config,
+    expected_revision: i64,
+) -> Result<dashboard::Saved, String> {
+    dashboard::save(
+        std::path::Path::new(&status.database_path),
+        config,
+        expected_revision,
+    )
+    .await
+}
+#[tauri::command]
+async fn dashboard_items(
+    status: State<'_, storage::StorageStatus>,
+    company_id: String,
+) -> Result<Vec<dashboard::Item>, String> {
+    dashboard::items(std::path::Path::new(&status.database_path), &company_id).await
+}
+#[tauri::command]
+async fn dashboard_put_item(
+    status: State<'_, storage::StorageStatus>,
+    company_id: String,
+    input: dashboard::ItemInput,
+) -> Result<dashboard::Item, String> {
+    dashboard::put(
+        std::path::Path::new(&status.database_path),
+        &company_id,
+        input,
+    )
+    .await
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -385,7 +426,11 @@ pub fn run() {
             finance_state,
             finance_save_fact,
             finance_define,
-            finance_observe
+            finance_observe,
+            dashboard_load,
+            dashboard_save,
+            dashboard_items,
+            dashboard_put_item
         ])
         .run(tauri::generate_context!())
         .expect("无法启动价投小角落桌面端");
@@ -425,7 +470,11 @@ mod tests {
                 super::finance_state,
                 super::finance_save_fact,
                 super::finance_define,
-                super::finance_observe
+                super::finance_observe,
+                super::dashboard_load,
+                super::dashboard_save,
+                super::dashboard_items,
+                super::dashboard_put_item
             ])
             .build(mock_context(noop_assets()))
             .unwrap();
@@ -556,6 +605,32 @@ mod tests {
         assert_eq!(state["facts"].as_array().unwrap().len(), 1);
         assert_eq!(state["observations"][0]["input"]["text_value"], "测试观察");
         assert!(request("finance_observe",serde_json::json!({"companyId":id,"baseId":null,"input":{"definition_id":definition["id"],"date":"2025-02-29","numeric_value":1,"text_value":null,"reviewed":false,"source":"","tags":[]}})).is_err());
+        let dash = request("dashboard_load", serde_json::json!({})).unwrap();
+        assert_eq!(dash["revision"], 0);
+        let config = serde_json::json!({"groups":[{"id":"g","name":"关注","company_ids":[id]}],"cards":[{"id":"metric","company_id":id,"kind":"metric","visible":true,"selection":{"kind":"fact","metric":"revenue","anchor_id":fact["id"]},"from":"","to":"","show_pending":false}]});
+        let dash = request(
+            "dashboard_save",
+            serde_json::json!({"config":config,"expectedRevision":0}),
+        )
+        .unwrap();
+        assert_eq!(dash["revision"], 1);
+        assert!(
+            request(
+                "dashboard_save",
+                serde_json::json!({"config":config,"expectedRevision":0})
+            )
+            .is_err()
+        );
+        let item=request("dashboard_put_item",serde_json::json!({"companyId":id,"input":{"id":null,"kind":"supplement","material_id":null,"text":"补现金流","done":false,"expected_revision":0}})).unwrap();
+        assert_eq!(item["text"], "补现金流");
+        assert_eq!(
+            request("dashboard_items", serde_json::json!({"companyId":id}))
+                .unwrap()
+                .as_array()
+                .unwrap()
+                .len(),
+            1
+        );
         // MockRuntime tests command registration/current-window scope, not real macOS window destruction.
         request("judgment_close_window", serde_json::json!({})).unwrap();
         assert!(request("material_create",serde_json::json!({"companyId":id,"kind":"note","input":{"title":"","body":"","url":"","tags":[]}})).is_err());

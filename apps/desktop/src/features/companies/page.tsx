@@ -485,6 +485,9 @@ export function CompanyDetailPage() {
           >
             手工财务与指标观测
           </Link>
+          <Link className="action-link" to="/dashboard">
+            打开指标看板
+          </Link>
           <section className="panel">
             <h2>证券档案</h2>
             <p className="muted">
@@ -542,7 +545,7 @@ export function CompanyDetailPage() {
             )}
           </section>
           <p className="muted">
-            已接入档案、资料库、个人判断和手工财务/指标；自动采集与看板配置仍待后续阶段。
+            已接入档案、资料库、个人判断、手工财务/指标与指标看板；自动采集仍待后续阶段。
           </p>
         </>
       )}

@@ -1,0 +1,173 @@
+$ tsx --test src/adapters/native.test.ts src/adapters/companies.test.ts src/adapters/materials.test.ts src/adapters/judgments.test.ts src/features/companies/draft-session.test.ts src/adapters/finance.test.ts src/features/companies/finance-series.test.ts src/adapters/dashboard.test.ts src/features/companies/dashboard-model.test.ts
+TAP version 13
+# Subtest: 浏览器预览不能调用建档命令
+ok 1 - 浏览器预览不能调用建档命令
+  ---
+  duration_ms: 1.421625
+  type: 'test'
+  ...
+# Subtest: 建档与证券命令不携带路径或SQL并保留确认状态
+ok 2 - 建档与证券命令不携带路径或SQL并保留确认状态
+  ---
+  duration_ms: 0.783167
+  type: 'test'
+  ...
+# Subtest: browser dashboard does not invoke native state or save
+ok 3 - browser dashboard does not invoke native state or save
+  ---
+  duration_ms: 0.692916
+  type: 'test'
+  ...
+# Subtest: dashboard commands only carry typed config, IDs and revision
+ok 4 - dashboard commands only carry typed config, IDs and revision
+  ---
+  duration_ms: 0.628167
+  type: 'test'
+  ...
+# Subtest: browser finance rejects calls without native invoke
+ok 5 - browser finance rejects calls without native invoke
+  ---
+  duration_ms: 0.486833
+  type: 'test'
+  ...
+# Subtest: finance IPC carries only IDs and typed input, not SQL or paths
+ok 6 - finance IPC carries only IDs and typed input, not SQL or paths
+  ---
+  duration_ms: 0.407417
+  type: 'test'
+  ...
+# Subtest: browser judgment adapter rejects reads and writes without invoking
+ok 7 - browser judgment adapter rejects reads and writes without invoking
+  ---
+  duration_ms: 0.635
+  type: 'test'
+  ...
+# Subtest: judgment save, freeze and revisions carry IDs and revision but no paths
+ok 8 - judgment save, freeze and revisions carry IDs and revision but no paths
+  ---
+  duration_ms: 0.457375
+  type: 'test'
+  ...
+# Subtest: browser material access never invokes native commands
+ok 9 - browser material access never invokes native commands
+  ---
+  duration_ms: 1.209583
+  type: 'test'
+  ...
+# Subtest: file operations use IDs and native pickers, never paths or SQL
+ok 10 - file operations use IDs and native pickers, never paths or SQL
+  ---
+  duration_ms: 0.553917
+  type: 'test'
+  ...
+# Subtest: mapping and archive arguments match native contract
+ok 11 - mapping and archive arguments match native contract
+  ---
+  duration_ms: 0.162084
+  type: 'test'
+  ...
+# Subtest: 浏览器预览不调用原生命令
+ok 12 - 浏览器预览不调用原生命令
+  ---
+  duration_ms: 0.620542
+  type: 'test'
+  ...
+# Subtest: 原生窗口返回应用版本且处理连接失败
+ok 13 - 原生窗口返回应用版本且处理连接失败
+  ---
+  duration_ms: 0.154
+  type: 'test'
+  ...
+# Subtest: metric card keeps null periods and text never becomes numeric
+ok 14 - metric card keeps null periods and text never becomes numeric
+  ---
+  duration_ms: 0.946416
+  type: 'test'
+  ...
+# Subtest: deleted or missing references yield an explicit empty card
+ok 15 - deleted or missing references yield an explicit empty card
+  ---
+  duration_ms: 0.05675
+  type: 'test'
+  ...
+# Subtest: selected fact keeps latest pending revision and date range without filling zero
+ok 16 - selected fact keeps latest pending revision and date range without filling zero
+  ---
+  duration_ms: 0.095292
+  type: 'test'
+  ...
+# Subtest: custom missing units and duplicate date retain gaps
+ok 17 - custom missing units and duplicate date retain gaps
+  ---
+  duration_ms: 0.172708
+  type: 'test'
+  ...
+# Subtest: group order persists and ungrouped companies remain visible
+ok 18 - group order persists and ungrouped companies remain visible
+  ---
+  duration_ms: 0.143833
+  type: 'test'
+  ...
+# Subtest: autosave failure preserves all input and allows explicit retry
+ok 19 - autosave failure preserves all input and allows explicit retry
+  ---
+  duration_ms: 0.785667
+  type: 'test'
+  ...
+# Subtest: edits during save are serialized without stale overwrite
+ok 20 - edits during save are serialized without stale overwrite
+  ---
+  duration_ms: 0.188875
+  type: 'test'
+  ...
+# Subtest: discard waits for in-flight save even when new typing changed the status
+ok 21 - discard waits for in-flight save even when new typing changed the status
+  ---
+  duration_ms: 0.179667
+  type: 'test'
+  ...
+# Subtest: recovery write failure is exposed but does not discard in-memory text
+ok 22 - recovery write failure is exposed but does not discard in-memory text
+  ---
+  duration_ms: 0.1215
+  type: 'test'
+  ...
+# Subtest: different quarter and cumulative spans never share a trend
+ok 23 - different quarter and cumulative spans never share a trend
+  ---
+  duration_ms: 0.378417
+  type: 'test'
+  ...
+# Subtest: custom numeric series with missing units or basis stays ineligible
+ok 24 - custom numeric series with missing units or basis stays ineligible
+  ---
+  duration_ms: 0.0655
+  type: 'test'
+  ...
+# Subtest: empty numeric input stays null and malformed/nonfinite input is rejected
+ok 25 - empty numeric input stays null and malformed/nonfinite input is rejected
+  ---
+  duration_ms: 0.228917
+  type: 'test'
+  ...
+# Subtest: latest unreviewed revision does not fallback to old reviewed values
+ok 26 - latest unreviewed revision does not fallback to old reviewed values
+  ---
+  duration_ms: 0.391375
+  type: 'test'
+  ...
+# Subtest: missing and duplicate observations make gaps while real zero survives
+ok 27 - missing and duplicate observations make gaps while real zero survives
+  ---
+  duration_ms: 0.066125
+  type: 'test'
+  ...
+1..27
+# tests 27
+# suites 0
+# pass 27
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 353.476291
