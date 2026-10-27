@@ -14,7 +14,8 @@
 
 - 应用启动时由 Rust 原生侧打开数据库并运行内嵌迁移。
 - SQLite 使用 WAL 日志模式并开启外键约束。
-- P01 原始schema为1，P03为2，P04为3，P05当前为4（judgment_drafts/judgment_versions与正式只追加保护）。v1/v2/v3升级前按当前版本保存 `research.v1-backup.sqlite3`、`research.v2-backup.sqlite3` 或 `research.v3-backup.sqlite3`，事务失败回滚，已有同名快照不覆盖；旧版可升级到v4，旧迁移文件不改写。
+- P01原始schema为1，P03为2，P04为3，P05为4，P06当前为5（财务事实版本、自定义指标定义、观测版本和派生快照）。v1–v4升级前按当前版本保存对应 `research.vN-backup.sqlite3`，事务失败回滚，已有同名快照不覆盖；旧迁移不改写。P06新增v4成功迁移及冲突回滚保留旧判断测试。
+- 财务与指标命令边界见 `docs/desktop-finance-contract.md`；P05原生验收缺口不因升级被改写。
 - v2 完整命令与迁移边界见 `docs/desktop-company-contract.md`；P01 原始验收范围仍按下文保留。
 - 重复启动和重复运行迁移必须幂等，数据库版本保持一致。
 - 若数据库 `user_version` 高于应用支持版本，拒绝启动且不修改原库。

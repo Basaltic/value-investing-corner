@@ -1,0 +1,44 @@
+$ node scripts/verify-local.mjs check
+$ corepack pnpm lint && corepack pnpm types:check
+$ biome check .
+docs/_shots/report.json format ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Formatter would have printed the following content:
+  
+      3   3 │     "url": "file:///Users/bytedance/Desktop/work/code/value-investing-corner/docs/desktop-implementation-progress.html",
+      4   4 │     "outdir": "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots",
+      5     │ - ··"include":·[
+      6     │ - ····"lint",
+      7     │ - ····"screenshots",
+      8     │ - ····"structure"
+      9     │ - ··],
+          5 │ + ··"include":·["lint",·"screenshots",·"structure"],
+     10   6 │     "shots": {
+     11   7 │       "desktop": {
+    ······· │ 
+     60  56 │       "name": "chrome_cli",
+     61  57 │       "degraded": true,
+     62     │ - ····"degradedReasons":·[
+     63     │ - ······"playwright·未装"
+     64     │ - ····]
+         58 │ + ····"degradedReasons":·["playwright·未装"]
+     65  59 │     },
+     66  60 │     "input": {
+    ······· │ 
+    118 112 │     ],
+    119 113 │     "reportPath": "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/report.json"
+    120     │ - }
+        114 │ + }
+        115 │ + 
+  
+
+Checked 135 files in 143ms. No fixes applied.
+Found 1 error.
+check ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+  × Some errors were emitted while running checks.
+  
+
+[ELIFECYCLE] Command failed with exit code 1.
+[ELIFECYCLE] Command failed with exit code 1.
+[ELIFECYCLE] Command failed with exit code 1.

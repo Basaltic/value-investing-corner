@@ -21,6 +21,13 @@ const router = createHashRouter([
         }),
       },
       { path: "companies/:id/judgments", element: <JudgmentsPage /> },
+      {
+        path: "companies/:id/finance",
+        lazy: async () => ({
+          Component: (await import("./features/companies/finance-page"))
+            .FinancePage,
+        }),
+      },
       { path: "valuation", element: <ValuationPage /> },
       {
         path: "*",

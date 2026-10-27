@@ -369,6 +369,45 @@ dd {
 .leave-dialog button {
   margin: 6px;
 }
+.finance-chart {
+  width: 100%;
+  min-height: 320px;
+}
+.finance-scroll {
+  overflow: auto;
+}
+.finance-scroll table {
+  border-collapse: collapse;
+  width: 100%;
+}
+.finance-scroll th,
+.finance-scroll td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid var(--line);
+}
+.finance-records {
+  list-style: none;
+  padding: 0;
+}
+.finance-records li {
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  overflow-wrap: anywhere;
+}
+.finance-records li.muted {
+  opacity: 0.75;
+}
+.company-fields textarea {
+  width: 100%;
+  font: inherit;
+  padding: 10px;
+  min-height: 44px;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
 @media (max-width: 720px) {
   .app-shell {
     grid-template-columns: 1fr;

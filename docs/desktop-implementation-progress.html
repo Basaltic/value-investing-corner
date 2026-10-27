@@ -28,11 +28,11 @@ ul{margin:6px 0}
 <body>
 <div class="wrap">
 <h1>桌面工作台 · 实施进度与逐阶段确认记录</h1>
-<div class="sub">单一权威进度记录 · 最近执行轮：P05 自由判断与历史· 配套方案见 <code>desktop-research-plan.html</code><br>阶段必须逐一经用户确认后继续；本记录保留历史失败与未验证项，不用后续授权改写历史事实。</div>
+<div class="sub">单一权威进度记录 · 最近执行轮：P06 手工财务与指标（核心已实现，原生补验未完成）· 配套方案见 <code>desktop-research-plan.html</code><br>阶段必须逐一经用户确认后继续；本记录保留历史失败与未验证项，不用后续授权改写历史事实。</div>
 
 <h2>当前总状态</h2>
 <div class="card">
-<p><strong>当前方案（P00–P13）已获批准，执行授权逐阶段授予。用户已确认 P01 并放行 P02；P00 的原生窗口目视缺口保留在历史记录中。</strong>P04 已经用户确认；本轮授权仅 P05 自由判断与历史，核心已实现，最终原生补验未完成，停止等待用户验收。P06 及后续阶段未授权；未提交或推送。</p>
+<p><strong>当前方案（P00–P13）已获批准，执行授权逐阶段授予。用户已确认 P01 并放行 P02；P00 的原生窗口目视缺口保留在历史记录中。</strong>用户明确“进入 P06”，本轮只授权手工财务与指标；P05核心已实现但关闭/恢复补验缺口保留，不视作全项通过。P06核心已实现，自动验证与原生AX回读已完成；录入交互和趋势图形实看仍未完成，不标全项通过。停止等待用户验收，P07及后续未授权；commit描述已生成，不提交或推送。</p>
 <table>
 <tr><th>阶段</th><th>状态</th><th>说明</th></tr>
 <tr><td>P00 现有骨架（基线）</td><td><span class="badge b-warn">带已知缺口放行</span></td><td>测试、类型检查、构建与浏览器通道已验证；原生窗口目视受桌面控制入口阻塞，历史缺口继续保留。</td></tr>
@@ -40,13 +40,43 @@ ul{margin:6px 0}
 <tr><td>P02 基本备份 / 恢复</td><td><span class="badge b-green">已确认</span></td><td>内部核心已确认，P03新增公司与证券备份回归通过；尚无用户备份界面。</td></tr>
 <tr><td>P03 公司 / listing 档案</td><td><span class="badge b-green">已确认</span></td><td>本地建档、列表搜索、详情、多证券、重复确认与迁移备份验收已完成。原生跨市场下拉及ADR选择未完整实看，自动化仓储覆盖。</td></tr>
 <tr><td>P04 本地资料库</td><td><span class="badge b-green">已确认</span></td><td>文件、链接、文本笔记、标签、预览与备份回归已验收；保留未逐项GUI实看限制，停止等待确认。</td></tr>
-<tr><td>P05 自由判断与历史</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>v1→v2、差异、失败保护、重启判断页已实看；保存成功后关闭与恢复副本仍待补验，未进入P06。</td></tr>
-<tr><td>P06–P13</td><td><span class="badge b-gray">未开始</span></td><td>不预做、不跨阶段并行；后续按用户逐阶段放行。</td></tr>
+<tr><td>P05 自由判断与历史</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>v1→v2、差异、失败保护、重启判断页已实看；保存成功后关闭与恢复副本仍待补验；用户后来明确进入P06，历史缺口不改写。</td></tr>
+<tr><td>P06 手工财务与指标</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>自动回归和原生读数通过；手动录入/审核交互与图形实看仍待验证。停止待确认，不进入P07。</td></tr>
+<tr><td>P07–P13</td><td><span class="badge b-gray">未开始</span></td><td>不预做、不跨阶段并行；后续按用户逐阶段放行。</td></tr>
 </table>
 <p class="muted">计划本体（P00–P13 依赖、范围与验收边界）以 <code>desktop-research-plan.html</code> §9 为准；本文件只记录执行事实、逐阶段确认与工作区变化，不重复计划内容。历史文档 <code>tauri-monorepo-verification.md</code>（macOS ARM64 打包与窗口抽验）为更早迁移阶段的历史记录，不充当本轮 P00 证据。</p>
 </div>
 
-<h2>P05 自由判断与历史</h2>
+<h2>P06 手工财务与指标观测</h2>
+<div class="card">
+<p><strong>核心已实现，自动回归与原生读数通过；原生录入及图形实看验收未完成，不是全项通过。</strong>用户只授权P06，本轮停在待确认；P07看板、采集、AI均未实现，未提交或推送。</p>
+<ul>
+<li>schema v5：财务事实、指标定义、观测与派生快照入SQLite。事实/观测修订只追加；旧版与快照不能改删，当前最新待核不回退旧审核值。旧v1–v4升级留一致快照、冲突回滚保留旧判断；备份格式仍1、兼容schema1–5，全部新实体及版本/引用往返回归。</li>
+<li>10个原始科目映射不复制金额；5个固定纯函数：自由现金流、归母期末权益ROE、毛利率、净利率、资产负债率。输入币种/单位/准则/范围/期间/口径兼容且已审核才计算，公式p06-v1及输入具体版本可追溯。输入修订新快照，不改历史；缺口径/缺值/待核/重复/零分母/非有限计算显示未展示。</li>
+<li>自定义数值/文本观测直接存储、不参与派生。数值图保留null断点、已核对线和可切待核灰点；文本仅卡片。不同季度/累计月日跨度分开，单位或口径空的自定义数值不进图，非金额币种可空。财务图轴采用同口径已录入期间并集；未录入的年份不推测，不换汇、不年化、不做用户公式DSL。</li>
+<li>补测先发现跨季度串线与缺左输入期间消失，已修复后通过；下溢数值先失败后保护通过。修订入口滚动至对应表单；写入成功但列表刷新失败明确提示已保存、不要重复提交。手动财务提交不是P05自动保存，未提交离页不保证保留。派生快照暂无独立创建时间，不声称时间排序历史。</li>
+<li><strong>最新自动验证：</strong>Rust39通过/0失败，1个显式GUI夹具默认ignored（另行指定隔离路径运行通过）；桌面20/20、Web24/24、工作区3/3、共享估值8/8、元数据2/2。严格Clippy、check:local（135文件，类型/lint）、最终独立debug构建退出0。ECharts5.6.0按需本地打包，主chunk406.44kB、趋势479.51kB，无大chunk告警；未改变Web/共享包/正式identity/CSP/capabilities。</li>
+<li><strong>真实原生读取：</strong>最终包首页native正常且新能力说明正确；重启后1家虚构公司保留。财务页实际AX读到营收2023/2024/2025为100/缺值/140、成本84、毛利率40%、文本卡片和客户数10/14。测试夹具通过相同Rust业务函数写入空隔离库，不是前端录入验收；正式用户库不注入样例。</li>
+<li><strong>原生验收阻塞：</strong>名称输入返回no_on_screen_window，截图不可见；最终窗口公开Raise一次后截图先scene changed、再不可见，未取得图像。停止前置/输入循环。前端录入、修订/核对、筛选切换、ECharts实际绘制/断点/灰点及窄屏布局仍未实看，不以AX图容器、测试或包存在替代。旧窗口关闭返回uncertain，仅确认退出重启后内容保留。</li>
+<li>工作区附带变化：收尾git status发现1995年股东信 <code>content/knowledge/masters/warren-buffett/letters/zh/1990s/1995.md</code> 修改，非本阶段操作，未触碰、未回滚，也不归入P06 commit描述；此前工作区测试不据此扩称覆盖这批后来修改。进度预览报告仅等价格式化以满足lint，初次格式检查失败日志保存在 <a href="p06-verification-logs/check-document-format-failure.log">check-document-format-failure.log</a>，复跑135文件无error。HTML完整桌面预览无资源/控制台错误或横向溢出，仅非阻断favicon提示；该预览不替代原生应用图形验收。</li>
+<li>仅桌面源码/锁文件/合同/本记录/README变化；未修改批准方案本体，不重做P00，不等待已删除的在线方案。旧release/DMG不是P06版本；未安装、公证、发布或验证其它平台。P05历史缺口继续保留。</li>
+</ul>
+<p>合同：<a href="desktop-finance-contract.md">desktop-finance-contract.md</a>；<a href="p06-verification-logs/ui-observation.md">原生观察与缺口</a>；<a href="p06-verification-logs/rust-tests.log">Rust测试</a>、<a href="p06-verification-logs/rust-clippy.log">Clippy</a>、<a href="p06-verification-logs/frontend-tests.log">桌面测试</a>、<a href="p06-verification-logs/workspace-tests.log">工作区测试</a>、<a href="p06-verification-logs/check-local.log">类型/lint</a>、<a href="p06-verification-logs/native-debug-build.log">最终独立debug构建</a>、<a href="p06-verification-logs/fixture-tests.log">虚构夹具</a>。</p>
+<p><strong>打开方式：</strong>双击项目内 <code>apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P06验收.app</code>，进入虚构公司→手工财务与指标观测。正式开发使用 <code>corepack pnpm dev:desktop</code>，仅浏览器预览 <code>corepack pnpm dev:desktop:web</code>不读写SQLite。</p>
+<p><strong>Commit描述（自动生成，只描述、不提交）</strong></p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere;">feat(desktop): add manual financial facts and metric observations
+
+- add schema v5 append-only financial and observation versions
+- retain currency, units, periods, accounting scope and review status
+- derive fixed metrics from compatible reviewed input versions
+- preserve formula provenance and historical derived snapshots
+- add manual entry, revision, review filters and gap-aware trends
+- keep text observations separate from numeric chart series
+- verify native IPC, migration rollback and backup round trips
+- document P06 acceptance coverage and native UI limitations</pre>
+</div>
+
+<h2>P05 自由判断与历史（历史执行结果）</h2>
 <div class="card">
 <p><strong>当前结果：核心已实现，最终原生补验未完成；不是全项验收通过。</strong>用户只授权P05，P06未授权；每阶段生成commit描述，不代提交。</p>
 <ul>

@@ -1,5 +1,6 @@
 pub mod backup;
 mod companies;
+mod finance;
 mod judgments;
 mod materials;
 mod storage;
@@ -290,6 +291,57 @@ fn judgment_close_window<R: tauri::Runtime>(window: tauri::WebviewWindow<R>) -> 
     window.destroy().map_err(|e| e.to_string())
 }
 
+#[tauri::command]
+async fn finance_state(
+    status: State<'_, storage::StorageStatus>,
+    company_id: String,
+) -> Result<finance::FinanceState, String> {
+    finance::state(std::path::Path::new(&status.database_path), &company_id).await
+}
+#[tauri::command]
+async fn finance_save_fact(
+    status: State<'_, storage::StorageStatus>,
+    company_id: String,
+    input: finance::FactInput,
+    base_id: Option<String>,
+) -> Result<finance::Version<finance::FactInput>, String> {
+    finance::save_fact(
+        std::path::Path::new(&status.database_path),
+        &company_id,
+        input,
+        base_id.as_deref(),
+    )
+    .await
+}
+#[tauri::command]
+async fn finance_define(
+    status: State<'_, storage::StorageStatus>,
+    company_id: String,
+    input: finance::DefinitionInput,
+) -> Result<finance::Definition, String> {
+    finance::define(
+        std::path::Path::new(&status.database_path),
+        &company_id,
+        input,
+    )
+    .await
+}
+#[tauri::command]
+async fn finance_observe(
+    status: State<'_, storage::StorageStatus>,
+    company_id: String,
+    input: finance::ObservationInput,
+    base_id: Option<String>,
+) -> Result<finance::Version<finance::ObservationInput>, String> {
+    finance::observe(
+        std::path::Path::new(&status.database_path),
+        &company_id,
+        input,
+        base_id.as_deref(),
+    )
+    .await
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -329,7 +381,11 @@ pub fn run() {
             judgment_save,
             judgment_freeze,
             judgment_discard,
-            judgment_close_window
+            judgment_close_window,
+            finance_state,
+            finance_save_fact,
+            finance_define,
+            finance_observe
         ])
         .run(tauri::generate_context!())
         .expect("无法启动价投小角落桌面端");
@@ -365,7 +421,11 @@ mod tests {
                 super::judgment_save,
                 super::judgment_freeze,
                 super::judgment_discard,
-                super::judgment_close_window
+                super::judgment_close_window,
+                super::finance_state,
+                super::finance_save_fact,
+                super::finance_define,
+                super::finance_observe
             ])
             .build(mock_context(noop_assets()))
             .unwrap();
@@ -482,6 +542,20 @@ mod tests {
             request("judgment_state", serde_json::json!({"companyId":id})).unwrap()["draft"]
                 .is_null()
         );
+        let financial_input = serde_json::json!({"metric":"revenue","value":null,"currency":"CNY","unit":"元","period_kind":"annual","period_start":"2025-01-01","period_end":"2025-12-31","standard":"CAS","scope":"合并","basis":"虚构测试","reviewed":false,"source":"测试","tags":[]});
+        let fact = request(
+            "finance_save_fact",
+            serde_json::json!({"companyId":id,"input":financial_input,"baseId":null}),
+        )
+        .unwrap();
+        assert!(fact["input"]["value"].is_null());
+        assert_eq!(fact["version"], 1);
+        let definition=request("finance_define",serde_json::json!({"companyId":id,"input":{"name":"IPC文本","value_type":"text","unit":"","currency":"","basis":"个人观察"}})).unwrap();
+        request("finance_observe",serde_json::json!({"companyId":id,"baseId":null,"input":{"definition_id":definition["id"],"date":"2025-12-31","numeric_value":null,"text_value":"测试观察","reviewed":true,"source":"自己输入","tags":[]}})).unwrap();
+        let state = request("finance_state", serde_json::json!({"companyId":id})).unwrap();
+        assert_eq!(state["facts"].as_array().unwrap().len(), 1);
+        assert_eq!(state["observations"][0]["input"]["text_value"], "测试观察");
+        assert!(request("finance_observe",serde_json::json!({"companyId":id,"baseId":null,"input":{"definition_id":definition["id"],"date":"2025-02-29","numeric_value":1,"text_value":null,"reviewed":false,"source":"","tags":[]}})).is_err());
         // MockRuntime tests command registration/current-window scope, not real macOS window destruction.
         request("judgment_close_window", serde_json::json!({})).unwrap();
         assert!(request("material_create",serde_json::json!({"companyId":id,"kind":"note","input":{"title":"","body":"","url":"","tags":[]}})).is_err());

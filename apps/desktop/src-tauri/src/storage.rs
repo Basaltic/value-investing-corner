@@ -5,10 +5,11 @@ use sqlx::{
     sqlite::{SqliteConnectOptions, SqliteJournalMode},
 };
 
-pub(crate) const SUPPORTED_SCHEMA_VERSION: i64 = 4;
+pub(crate) const SUPPORTED_SCHEMA_VERSION: i64 = 5;
 const INITIAL_MIGRATION_SQL: &str = include_str!("../migrations/0001_storage_foundation.sql");
 const COMPANY_MIGRATION_SQL: &str = include_str!("../migrations/0002_company_archives.sql");
 const MATERIAL_MIGRATION_SQL: &str = include_str!("../migrations/0003_material_library.sql");
+const FINANCE_MIGRATION_SQL: &str = include_str!("../migrations/0005_finance_observations.sql");
 const JUDGMENT_MIGRATION_SQL: &str = include_str!("../migrations/0004_judgment_history.sql");
 
 #[derive(Debug, serde::Serialize, PartialEq, Eq)]
@@ -113,10 +114,16 @@ pub async fn initialize_database(path: &Path) -> Result<StorageStatus, String> {
                 .await
                 .map_err(|error| format!("资料库迁移失败，原库已保留：{error}"))?;
         }
-        sqlx::raw_sql(JUDGMENT_MIGRATION_SQL)
+        if current_version < 4 {
+            sqlx::raw_sql(JUDGMENT_MIGRATION_SQL)
+                .execute(&mut *transaction)
+                .await
+                .map_err(|error| format!("判断历史迁移失败，原库已保留：{error}"))?;
+        }
+        sqlx::raw_sql(FINANCE_MIGRATION_SQL)
             .execute(&mut *transaction)
             .await
-            .map_err(|error| format!("判断历史迁移失败，原库已保留：{error}"))?;
+            .map_err(|error| format!("财务观测迁移失败，原库已保留：{error}"))?;
         transaction
             .commit()
             .await
@@ -179,7 +186,7 @@ mod tests {
             .unwrap();
         drop(connection);
         let status = initialize_database(&path).await.unwrap();
-        assert_eq!(status.schema_version, 4);
+        assert_eq!(status.schema_version, 5);
         let mut current =
             SqliteConnection::connect_with(&SqliteConnectOptions::new().filename(&path))
                 .await
@@ -288,7 +295,7 @@ mod tests {
             .unwrap();
         sqlx::query("INSERT INTO companies (id,name,market,registration) VALUES ('same-id','keep','private','')").execute(&mut db).await.unwrap();
         drop(db);
-        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 4);
+        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 5);
         assert!(path.with_extension("v2-backup.sqlite3").exists());
         let mut db = SqliteConnection::connect_with(&SqliteConnectOptions::new().filename(&path))
             .await
@@ -300,7 +307,7 @@ mod tests {
                 .unwrap(),
             "same-id"
         );
-        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 4);
+        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 5);
     }
 
     #[tokio::test]
@@ -331,7 +338,7 @@ mod tests {
             .await
             .unwrap();
         drop(db);
-        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 4);
+        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 5);
         assert!(path.with_extension("v3-backup.sqlite3").exists());
         let mut db = SqliteConnection::connect_with(&SqliteConnectOptions::new().filename(&path))
             .await
@@ -343,7 +350,67 @@ mod tests {
                 .unwrap(),
             "keep-id"
         );
-        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 4);
+        assert_eq!(initialize_database(&path).await.unwrap().schema_version, 5);
+    }
+
+    #[tokio::test]
+    async fn upgrades_v4_keeps_judgment_history_and_rolls_back_conflicting_v5() {
+        for conflict in [false, true] {
+            let dir = tempdir().unwrap();
+            let path = dir.path().join("research.sqlite3");
+            let mut con = SqliteConnection::connect_with(
+                &SqliteConnectOptions::new()
+                    .filename(&path)
+                    .create_if_missing(true),
+            )
+            .await
+            .unwrap();
+            for sql in [
+                super::INITIAL_MIGRATION_SQL,
+                super::COMPANY_MIGRATION_SQL,
+                super::MATERIAL_MIGRATION_SQL,
+                super::JUDGMENT_MIGRATION_SQL,
+            ] {
+                sqlx::raw_sql(sql).execute(&mut con).await.unwrap();
+            }
+            sqlx::query("INSERT INTO companies(id,name,market) VALUES('c','keep','private')")
+                .execute(&mut con)
+                .await
+                .unwrap();
+            sqlx::query("INSERT INTO judgment_versions(id,company_id,document,text,revision,version,created_at,updated_at) VALUES('v','c','{}','旧判断',1,1,'old','old')").execute(&mut con).await.unwrap();
+            if conflict {
+                sqlx::query("CREATE TABLE financial_versions(keep TEXT)")
+                    .execute(&mut con)
+                    .await
+                    .unwrap();
+            }
+            drop(con);
+            let result = initialize_database(&path).await;
+            if conflict {
+                assert!(result.is_err());
+            } else {
+                assert_eq!(result.unwrap().schema_version, 5);
+            }
+            assert!(path.with_extension("v4-backup.sqlite3").exists());
+            let mut con =
+                SqliteConnection::connect_with(&SqliteConnectOptions::new().filename(&path))
+                    .await
+                    .unwrap();
+            assert_eq!(
+                sqlx::query_scalar::<_, String>("SELECT text FROM judgment_versions")
+                    .fetch_one(&mut con)
+                    .await
+                    .unwrap(),
+                "旧判断"
+            );
+            assert_eq!(
+                sqlx::query_scalar::<_, i64>("PRAGMA user_version")
+                    .fetch_one(&mut con)
+                    .await
+                    .unwrap(),
+                if conflict { 4 } else { 5 }
+            );
+        }
     }
 
     #[tokio::test]
@@ -354,8 +421,8 @@ mod tests {
         let first = initialize_database(&path).await.expect("first init");
         let second = initialize_database(&path).await.expect("second init");
 
-        assert_eq!(first.schema_version, 4);
-        assert_eq!(second.schema_version, 4);
+        assert_eq!(first.schema_version, 5);
+        assert_eq!(second.schema_version, 5);
         assert_eq!(first.database_path, path.display().to_string());
         assert_eq!(first, second);
 

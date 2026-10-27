@@ -479,6 +479,12 @@ export function CompanyDetailPage() {
           >
             个人判断与历史
           </Link>
+          <Link
+            className="action-link"
+            to={`/companies/${encodeURIComponent(id)}/finance`}
+          >
+            手工财务与指标观测
+          </Link>
           <section className="panel">
             <h2>证券档案</h2>
             <p className="muted">
@@ -536,7 +542,7 @@ export function CompanyDetailPage() {
             )}
           </section>
           <p className="muted">
-            本阶段只管理公司和证券档案；资料、判断、指标与自动采集将在后续经确认的阶段接入。
+            已接入档案、资料库、个人判断和手工财务/指标；自动采集与看板配置仍待后续阶段。
           </p>
         </>
       )}
