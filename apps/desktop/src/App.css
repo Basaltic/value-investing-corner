@@ -296,6 +296,79 @@ dd {
 .csv-scroll th {
   background: var(--soft);
 }
+.judgment-editor .tiptap {
+  min-height: 240px;
+  padding: 18px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  overflow-wrap: anywhere;
+}
+.judgment-editor .tiptap[contenteditable="false"] {
+  min-height: 0;
+  background: var(--paper);
+}
+.judgment-editor blockquote {
+  border-left: 2px solid var(--forest);
+  padding-left: 18px;
+  margin-left: 0;
+}
+.judgment-editor pre {
+  overflow: auto;
+}
+#judgment-reason,
+#judgment-compare {
+  width: 100%;
+  padding: 12px;
+  font: inherit;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 6px;
+}
+.judgment-timeline {
+  list-style: none;
+  padding: 0;
+}
+.judgment-timeline li {
+  display: grid;
+  gap: 8px;
+  border-left: 2px solid var(--line);
+  padding: 12px 18px;
+}
+.judgment-timeline button {
+  text-align: left;
+}
+.judgment-diff pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+  padding: 12px;
+  margin: 4px 0;
+}
+.diff-added {
+  background: var(--soft);
+}
+.diff-removed {
+  color: var(--error);
+  background: var(--surface);
+  text-decoration: line-through;
+}
+.leave-dialog {
+  position: fixed;
+  z-index: 20;
+  left: 50%;
+  top: 20%;
+  transform: translateX(-50%);
+  width: min(620px, 90vw);
+  background: var(--paper);
+  border: 2px solid var(--forest);
+  padding: 24px;
+  box-shadow: 0 12px 48px var(--muted);
+}
+.leave-dialog button {
+  margin: 6px;
+}
 @media (max-width: 720px) {
   .app-shell {
     grid-template-columns: 1fr;

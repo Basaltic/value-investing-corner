@@ -473,6 +473,12 @@ export function CompanyDetailPage() {
           >
             打开公司资料库
           </Link>
+          <Link
+            className="action-link"
+            to={`/companies/${encodeURIComponent(id)}/judgments`}
+          >
+            个人判断与历史
+          </Link>
           <section className="panel">
             <h2>证券档案</h2>
             <p className="muted">

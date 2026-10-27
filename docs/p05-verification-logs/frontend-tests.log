@@ -1,0 +1,83 @@
+$ tsx --test src/adapters/native.test.ts src/adapters/companies.test.ts src/adapters/materials.test.ts src/adapters/judgments.test.ts src/features/companies/draft-session.test.ts
+TAP version 13
+# Subtest: 浏览器预览不能调用建档命令
+ok 1 - 浏览器预览不能调用建档命令
+  ---
+  duration_ms: 0.956209
+  type: 'test'
+  ...
+# Subtest: 建档与证券命令不携带路径或SQL并保留确认状态
+ok 2 - 建档与证券命令不携带路径或SQL并保留确认状态
+  ---
+  duration_ms: 0.479042
+  type: 'test'
+  ...
+# Subtest: browser judgment adapter rejects reads and writes without invoking
+ok 3 - browser judgment adapter rejects reads and writes without invoking
+  ---
+  duration_ms: 0.54475
+  type: 'test'
+  ...
+# Subtest: judgment save, freeze and revisions carry IDs and revision but no paths
+ok 4 - judgment save, freeze and revisions carry IDs and revision but no paths
+  ---
+  duration_ms: 0.358
+  type: 'test'
+  ...
+# Subtest: browser material access never invokes native commands
+ok 5 - browser material access never invokes native commands
+  ---
+  duration_ms: 0.628042
+  type: 'test'
+  ...
+# Subtest: file operations use IDs and native pickers, never paths or SQL
+ok 6 - file operations use IDs and native pickers, never paths or SQL
+  ---
+  duration_ms: 0.461709
+  type: 'test'
+  ...
+# Subtest: mapping and archive arguments match native contract
+ok 7 - mapping and archive arguments match native contract
+  ---
+  duration_ms: 0.147125
+  type: 'test'
+  ...
+# Subtest: 浏览器预览不调用原生命令
+ok 8 - 浏览器预览不调用原生命令
+  ---
+  duration_ms: 0.678042
+  type: 'test'
+  ...
+# Subtest: 原生窗口返回应用版本且处理连接失败
+ok 9 - 原生窗口返回应用版本且处理连接失败
+  ---
+  duration_ms: 0.165667
+  type: 'test'
+  ...
+# Subtest: autosave failure preserves all input and allows explicit retry
+ok 10 - autosave failure preserves all input and allows explicit retry
+  ---
+  duration_ms: 0.761542
+  type: 'test'
+  ...
+# Subtest: edits during save are serialized without stale overwrite
+ok 11 - edits during save are serialized without stale overwrite
+  ---
+  duration_ms: 0.137208
+  type: 'test'
+  ...
+# Subtest: recovery write failure is exposed but does not discard in-memory text
+ok 12 - recovery write failure is exposed but does not discard in-memory text
+  ---
+  duration_ms: 0.144041
+  type: 'test'
+  ...
+1..12
+# tests 12
+# suites 0
+# pass 12
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 171.804125

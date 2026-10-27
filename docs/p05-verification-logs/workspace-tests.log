@@ -1,0 +1,360 @@
+$ node --test scripts/workspace.test.mjs scripts/verify-local.test.mjs && corepack pnpm -r test
+TAP version 13
+# Subtest: 本地验证隔离所有 Algolia 凭据，不修改原环境
+ok 1 - 本地验证隔离所有 Algolia 凭据，不修改原环境
+  ---
+  duration_ms: 0.363458
+  type: 'test'
+  ...
+# Subtest: Web 与桌面端是独立 workspace 应用
+ok 2 - Web 与桌面端是独立 workspace 应用
+  ---
+  duration_ms: 4.554292
+  type: 'test'
+  ...
+# Subtest: 网站保留独立搜索构建而桌面不触发远端同步
+ok 3 - 网站保留独立搜索构建而桌面不触发远端同步
+  ---
+  duration_ms: 2.055
+  type: 'test'
+  ...
+1..3
+# tests 3
+# suites 0
+# pass 3
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 64.278625
+Scope: 5 of 6 workspace projects
+packages/valuation test$ tsx --test src/dcf.test.ts
+packages/content-schema test$ tsx --test src/index.test.ts
+packages/content-schema test: TAP version 13
+packages/valuation test: TAP version 13
+packages/valuation test: # Subtest: FCFF 年末折现、N+1 终值和股权桥接与独立计算一致
+packages/valuation test: ok 1 - FCFF 年末折现、N+1 终值和股权桥接与独立计算一致
+packages/valuation test:   ---
+packages/valuation test:   duration_ms: 0.565083
+packages/valuation test:   type: 'test'
+packages/valuation test:   ...
+packages/valuation test: # Subtest: 零增长永续现金流现值恒为现金流除折现率，与预测年数无关
+packages/valuation test: ok 2 - 零增长永续现金流现值恒为现金流除折现率，与预测年数无关
+packages/valuation test:   ---
+packages/valuation test:   duration_ms: 0.133666
+packages/valuation test:   type: 'test'
+packages/valuation test:   ...
+packages/valuation test: # Subtest: 单位同时缩放不改变每股估值，现金债务不改变企业价值
+packages/valuation test: ok 3 - 单位同时缩放不改变每股估值，现金债务不改变企业价值
+packages/valuation test:   ---
+packages/valuation test:   duration_ms: 0.271542
+packages/valuation test:   type: 'test'
+packages/valuation test:   ...
+packages/valuation test: # Subtest: 较高折现率降低估值；较高增长率提高估值
+packages/valuation test: ok 4 - 较高折现率降低估值；较高增长率提高估值
+packages/valuation test:   ---
+packages/valuation test:   duration_ms: 0.084875
+packages/valuation test:   type: 'test'
+packages/valuation test:   ...
+packages/valuation test: # Subtest: 负增速、负股权价值保留真实计算，不截断为零
+packages/valuation test: ok 5 - 负增速、负股权价值保留真实计算，不截断为零
+packages/valuation test:   ---
+packages/valuation test:   duration_ms: 0.065875
+packages/valuation test:   type: 'test'
+packages/valuation test:   ...
+packages/valuation test: # Subtest: 折现率等于或低于永续增速时阻止计算
+packages/valuation test: ok 6 - 折现率等于或低于永续增速时阻止计算
+packages/valuation test:   ---
+packages/valuation test:   duration_ms: 0.063959
+packages/valuation test:   type: 'test'
+packages/valuation test:   ...
+packages/valuation test: # Subtest: 空输入、非有限值及非法范围均返回字段错误
+packages/valuation test: ok 7 - 空输入、非有限值及非法范围均返回字段错误
+packages/valuation test:   ---
+packages/valuation test:   duration_ms: 0.265208
+packages/valuation test:   type: 'test'
+packages/valuation test:   ...
+packages/valuation test: # Subtest: 溢出被阻止，极小正现金流仍可计算
+packages/valuation test: ok 8 - 溢出被阻止，极小正现金流仍可计算
+packages/valuation test:   ---
+packages/valuation test:   duration_ms: 0.0615
+packages/valuation test:   type: 'test'
+packages/valuation test:   ...
+packages/valuation test: 1..8
+packages/valuation test: # tests 8
+packages/valuation test: # suites 0
+packages/valuation test: # pass 8
+packages/valuation test: # fail 0
+packages/valuation test: # cancelled 0
+packages/valuation test: # skipped 0
+packages/valuation test: # todo 0
+packages/valuation test: # duration_ms 112.6375
+packages/valuation test: Done
+packages/content-schema test: # Subtest: 资料元数据保留原有字段并默认空标签
+packages/content-schema test: ok 1 - 资料元数据保留原有字段并默认空标签
+packages/content-schema test:   ---
+packages/content-schema test:   duration_ms: 1.363959
+packages/content-schema test:   type: 'test'
+packages/content-schema test:   ...
+packages/content-schema test: # Subtest: 博客必须提供日期且不接受错误类型
+packages/content-schema test: ok 2 - 博客必须提供日期且不接受错误类型
+packages/content-schema test:   ---
+packages/content-schema test:   duration_ms: 0.28175
+packages/content-schema test:   type: 'test'
+packages/content-schema test:   ...
+packages/content-schema test: 1..2
+packages/content-schema test: # tests 2
+packages/content-schema test: # suites 0
+packages/content-schema test: # pass 2
+packages/content-schema test: # fail 0
+packages/content-schema test: # cancelled 0
+packages/content-schema test: # skipped 0
+packages/content-schema test: # todo 0
+packages/content-schema test: # duration_ms 261.550625
+packages/content-schema test: Done
+apps/desktop test$ tsx --test src/adapters/native.test.ts src/adapters/companies.test.ts src/adapters/materials.test.ts src/adapters/judgments.test.ts src/features/companies/draft-session.test.ts
+apps/web test$ node --test scripts/sync-content.test.mjs scripts/algolia-layout.test.mjs
+apps/web test: TAP version 13
+apps/web test: # Subtest: Algolia 页脚必须嵌套在弹窗内容中，关闭后不能泄漏到页面
+apps/web test: ok 1 - Algolia 页脚必须嵌套在弹窗内容中，关闭后不能泄漏到页面
+apps/web test:   ---
+apps/web test:   duration_ms: 4.411875
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 页面标识只挂在首页末尾和知识库侧边栏 footer
+apps/web test: ok 2 - 页面标识只挂在首页末尾和知识库侧边栏 footer
+apps/web test:   ---
+apps/web test:   duration_ms: 2.054584
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 标识保留可访问的 Algolia 链接和本地图标
+apps/web test: ok 3 - 标识保留可访问的 Algolia 链接和本地图标
+apps/web test:   ---
+apps/web test:   duration_ms: 0.911584
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 构建显式生成独立索引，不依赖 Next 内部产物
+apps/web test: ok 4 - 构建显式生成独立索引，不依赖 Next 内部产物
+apps/web test:   ---
+apps/web test:   duration_ms: 12.164542
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 独立索引异常不能回退到旧平台文件
+apps/web test: ok 5 - 独立索引异常不能回退到旧平台文件
+apps/web test:   ---
+apps/web test:   duration_ms: 8.05
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/desktop test: TAP version 13
+apps/desktop test: # Subtest: 浏览器预览不能调用建档命令
+apps/desktop test: ok 1 - 浏览器预览不能调用建档命令
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 1.0135
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: # Subtest: 建档与证券命令不携带路径或SQL并保留确认状态
+apps/desktop test: ok 2 - 建档与证券命令不携带路径或SQL并保留确认状态
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 0.517333
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: # Subtest: browser judgment adapter rejects reads and writes without invoking
+apps/desktop test: ok 3 - browser judgment adapter rejects reads and writes without invoking
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 0.870042
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: # Subtest: judgment save, freeze and revisions carry IDs and revision but no paths
+apps/desktop test: ok 4 - judgment save, freeze and revisions carry IDs and revision but no paths
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 0.472791
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: # Subtest: browser material access never invokes native commands
+apps/desktop test: ok 5 - browser material access never invokes native commands
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 1.372666
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: # Subtest: file operations use IDs and native pickers, never paths or SQL
+apps/desktop test: ok 6 - file operations use IDs and native pickers, never paths or SQL
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 0.983291
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: # Subtest: mapping and archive arguments match native contract
+apps/desktop test: ok 7 - mapping and archive arguments match native contract
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 0.300208
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: # Subtest: 浏览器预览不调用原生命令
+apps/desktop test: ok 8 - 浏览器预览不调用原生命令
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 0.70575
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: # Subtest: 原生窗口返回应用版本且处理连接失败
+apps/desktop test: ok 9 - 原生窗口返回应用版本且处理连接失败
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 0.178167
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: # Subtest: autosave failure preserves all input and allows explicit retry
+apps/desktop test: ok 10 - autosave failure preserves all input and allows explicit retry
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 2.550917
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: # Subtest: edits during save are serialized without stale overwrite
+apps/desktop test: ok 11 - edits during save are serialized without stale overwrite
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 0.731875
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: # Subtest: discard waits for in-flight save even when new typing changed the status
+apps/desktop test: ok 12 - discard waits for in-flight save even when new typing changed the status
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 0.660166
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: # Subtest: recovery write failure is exposed but does not discard in-memory text
+apps/desktop test: ok 13 - recovery write failure is exposed but does not discard in-memory text
+apps/desktop test:   ---
+apps/desktop test:   duration_ms: 0.528583
+apps/desktop test:   type: 'test'
+apps/desktop test:   ...
+apps/desktop test: 1..13
+apps/desktop test: # tests 13
+apps/desktop test: # suites 0
+apps/desktop test: # pass 13
+apps/desktop test: # fail 0
+apps/desktop test: # cancelled 0
+apps/desktop test: # skipped 0
+apps/desktop test: # todo 0
+apps/desktop test: # duration_ms 218.401375
+apps/desktop test: Done
+apps/web test: # Subtest: 全新CI目录无Next产物和环境文件也能导出并校验
+apps/web test: ok 6 - 全新CI目录无Next产物和环境文件也能导出并校验
+apps/web test:   ---
+apps/web test:   duration_ms: 7527.85325
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 读取本地 Next.js 索引，不依赖进程工作目录
+apps/web test: ok 7 - 读取本地 Next.js 索引，不依赖进程工作目录
+apps/web test:   ---
+apps/web test:   duration_ms: 7.883917
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: Next 内部产物缺失时读取 Vercel 静态输出
+apps/web test: ok 8 - Next 内部产物缺失时读取 Vercel 静态输出
+apps/web test:   ---
+apps/web test:   duration_ms: 13.407083
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 支持 Vercel prerender body 和自定义索引文件
+apps/web test: ok 9 - 支持 Vercel prerender body 和自定义索引文件
+apps/web test:   ---
+apps/web test:   duration_ms: 11.274208
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 索引不存在时诊断所有路径，不能静默跳过
+apps/web test: ok 10 - 索引不存在时诊断所有路径，不能静默跳过
+apps/web test:   ---
+apps/web test:   duration_ms: 1.901
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 损坏的本地产物不能被旧 Vercel 文件掩盖
+apps/web test: ok 11 - 损坏的本地产物不能被旧 Vercel 文件掩盖
+apps/web test:   ---
+apps/web test:   duration_ms: 9.694667
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 显式索引路径错误时不读取默认产物
+apps/web test: ok 12 - 显式索引路径错误时不读取默认产物
+apps/web test:   ---
+apps/web test:   duration_ms: 7.08825
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: dry-run 在其他工作目录也能验证索引且不使用密钥
+apps/web test: ok 13 - dry-run 在其他工作目录也能验证索引且不使用密钥
+apps/web test:   ---
+apps/web test:   duration_ms: 89.200125
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 兼容现有变量名，默认 document 索引
+apps/web test: ok 14 - 兼容现有变量名，默认 document 索引
+apps/web test:   ---
+apps/web test:   duration_ms: 0.167459
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 文档变量名优先且支持独立索引
+apps/web test: ok 15 - 文档变量名优先且支持独立索引
+apps/web test:   ---
+apps/web test:   duration_ms: 0.042041
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 新的公开搜索变量优先于旧别名
+apps/web test: ok 16 - 新的公开搜索变量优先于旧别名
+apps/web test:   ---
+apps/web test:   duration_ms: 0.07575
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: Next.js 配置只映射两项安全凭据，写入密钥不公开
+apps/web test: ok 17 - Next.js 配置只映射两项安全凭据，写入密钥不公开
+apps/web test:   ---
+apps/web test:   duration_ms: 245.132458
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 没有凭据可回退，部分配置不能静默跳过
+apps/web test: ok 18 - 没有凭据可回退，部分配置不能静默跳过
+apps/web test:   ---
+apps/web test:   duration_ms: 0.13075
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 搜索密钥不得与写入密钥相同
+apps/web test: ok 19 - 搜索密钥不得与写入密钥相同
+apps/web test:   ---
+apps/web test:   duration_ms: 0.039125
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 有效文档保持原始段落与锚点
+apps/web test: ok 20 - 有效文档保持原始段落与锚点
+apps/web test:   ---
+apps/web test:   duration_ms: 0.138833
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 拒绝空索引、重复 ID 和 URL
+apps/web test: ok 21 - 拒绝空索引、重复 ID 和 URL
+apps/web test:   ---
+apps/web test:   duration_ms: 0.075917
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 拒绝异常结构、非站内链接及损坏段落
+apps/web test: ok 22 - 拒绝异常结构、非站内链接及损坏段落
+apps/web test:   ---
+apps/web test:   duration_ms: 0.104042
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: Fumadocs 同步正确转换标题、段落和章节字段
+apps/web test: ok 23 - Fumadocs 同步正确转换标题、段落和章节字段
+apps/web test:   ---
+apps/web test:   duration_ms: 0.170667
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: # Subtest: 预览构建默认跳过远端写入，无配置构建可运行
+apps/web test: ok 24 - 预览构建默认跳过远端写入，无配置构建可运行
+apps/web test:   ---
+apps/web test:   duration_ms: 214.720959
+apps/web test:   type: 'test'
+apps/web test:   ...
+apps/web test: 1..24
+apps/web test: # tests 24
+apps/web test: # suites 0
+apps/web test: # pass 24
+apps/web test: # fail 0
+apps/web test: # cancelled 0
+apps/web test: # skipped 0
+apps/web test: # todo 0
+apps/web test: # duration_ms 8312.296625
+apps/web test: Done

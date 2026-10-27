@@ -1,5 +1,6 @@
 pub mod backup;
 mod companies;
+mod judgments;
 mod materials;
 mod storage;
 
@@ -220,6 +221,75 @@ async fn material_open_source(
     tauri_plugin_opener::open_url(url.as_str(), None::<&str>).map_err(|e| e.to_string())
 }
 
+#[tauri::command]
+async fn judgment_state(
+    status: State<'_, storage::StorageStatus>,
+    company_id: String,
+) -> Result<judgments::JudgmentState, String> {
+    judgments::state(std::path::Path::new(&status.database_path), &company_id).await
+}
+#[tauri::command]
+async fn judgment_start(
+    status: State<'_, storage::StorageStatus>,
+    company_id: String,
+    base_id: Option<String>,
+) -> Result<judgments::Judgment, String> {
+    judgments::start(
+        std::path::Path::new(&status.database_path),
+        &company_id,
+        base_id.as_deref(),
+    )
+    .await
+}
+#[tauri::command]
+async fn judgment_save(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+    expected_revision: i64,
+    input: judgments::DraftInput,
+) -> Result<judgments::Judgment, String> {
+    judgments::save(
+        std::path::Path::new(&status.database_path),
+        &id,
+        expected_revision,
+        input,
+    )
+    .await
+}
+#[tauri::command]
+async fn judgment_freeze(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+    expected_revision: i64,
+) -> Result<judgments::Judgment, String> {
+    judgments::freeze(
+        std::path::Path::new(&status.database_path),
+        &id,
+        expected_revision,
+    )
+    .await
+}
+#[tauri::command]
+async fn judgment_discard(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+    expected_revision: i64,
+) -> Result<(), String> {
+    judgments::discard(
+        std::path::Path::new(&status.database_path),
+        &id,
+        expected_revision,
+    )
+    .await
+}
+
+#[tauri::command]
+fn judgment_close_window<R: tauri::Runtime>(window: tauri::WebviewWindow<R>) -> Result<(), String> {
+    // The frontend intercepts close requests and only calls this after saving or when clean.
+    // Do not rely on the SDK's generic destroy permission or recursively emit close events.
+    window.destroy().map_err(|e| e.to_string())
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -253,7 +323,13 @@ pub fn run() {
             material_import_file,
             material_relocate,
             material_reveal,
-            material_open_source
+            material_open_source,
+            judgment_state,
+            judgment_start,
+            judgment_save,
+            judgment_freeze,
+            judgment_discard,
+            judgment_close_window
         ])
         .run(tauri::generate_context!())
         .expect("无法启动价投小角落桌面端");
@@ -283,7 +359,13 @@ mod tests {
                 super::material_update,
                 super::material_archive,
                 super::material_preview,
-                super::material_csv_mapping
+                super::material_csv_mapping,
+                super::judgment_state,
+                super::judgment_start,
+                super::judgment_save,
+                super::judgment_freeze,
+                super::judgment_discard,
+                super::judgment_close_window
             ])
             .build(mock_context(noop_assets()))
             .unwrap();
@@ -350,6 +432,58 @@ mod tests {
             request("material_get", serde_json::json!({"id":material_id})).unwrap()["archived"],
             true
         );
+        let d = request(
+            "judgment_start",
+            serde_json::json!({"companyId":id,"baseId":null}),
+        )
+        .unwrap();
+        let did = d["id"].as_str().unwrap();
+        let doc = serde_json::json!({"document":{"type":"doc","content":[{"type":"paragraph","content":[{"type":"text","text":"IPC判断正文"}]}]},"reason":""});
+        let saved = request(
+            "judgment_save",
+            serde_json::json!({"id":did,"expectedRevision":0,"input":doc}),
+        )
+        .unwrap();
+        assert_eq!(saved["revision"], 1);
+        assert!(
+            request(
+                "judgment_freeze",
+                serde_json::json!({"id":did,"expectedRevision":0})
+            )
+            .is_err()
+        );
+        let v = request(
+            "judgment_freeze",
+            serde_json::json!({"id":did,"expectedRevision":1}),
+        )
+        .unwrap();
+        assert_eq!(v["version"], 1);
+        let history = request("judgment_state", serde_json::json!({"companyId":id})).unwrap();
+        assert_eq!(history["versions"][0]["text"], "IPC判断正文\n");
+        assert!(history["draft"].is_null());
+        assert!(
+            request(
+                "judgment_save",
+                serde_json::json!({"id":did,"expectedRevision":1,"input":doc})
+            )
+            .is_err()
+        );
+        let revision = request(
+            "judgment_start",
+            serde_json::json!({"companyId":id,"baseId":v["id"]}),
+        )
+        .unwrap();
+        request(
+            "judgment_discard",
+            serde_json::json!({"id":revision["id"],"expectedRevision":0}),
+        )
+        .unwrap();
+        assert!(
+            request("judgment_state", serde_json::json!({"companyId":id})).unwrap()["draft"]
+                .is_null()
+        );
+        // MockRuntime tests command registration/current-window scope, not real macOS window destruction.
+        request("judgment_close_window", serde_json::json!({})).unwrap();
         assert!(request("material_create",serde_json::json!({"companyId":id,"kind":"note","input":{"title":"","body":"","url":"","tags":[]}})).is_err());
         assert!(request("company_create", serde_json::json!({"input": {"name":"", "market":"private", "registration":"", "listings":[]}, "confirmDuplicates":false})).is_err());
     }
