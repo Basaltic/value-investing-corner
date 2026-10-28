@@ -1,5 +1,7 @@
 pub mod backup;
+mod collection;
 mod companies;
+mod credentials;
 mod dashboard;
 mod finance;
 mod judgments;
@@ -383,6 +385,124 @@ async fn dashboard_put_item(
     .await
 }
 
+#[tauri::command]
+async fn collection_sources(
+    status: State<'_, storage::StorageStatus>,
+) -> Result<Vec<collection::Source>, String> {
+    collection::sources(std::path::Path::new(&status.database_path)).await
+}
+#[tauri::command]
+async fn collection_save_source(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+    input: collection::SourceInput,
+    expected_revision: i64,
+) -> Result<collection::Source, String> {
+    collection::save_source(
+        std::path::Path::new(&status.database_path),
+        &id,
+        input,
+        expected_revision,
+    )
+    .await
+}
+#[tauri::command]
+async fn collection_enqueue(
+    status: State<'_, storage::StorageStatus>,
+    company_id: String,
+    source_id: String,
+    request_key: String,
+) -> Result<collection::Run, String> {
+    collection::enqueue(
+        std::path::Path::new(&status.database_path),
+        &company_id,
+        &source_id,
+        &request_key,
+    )
+    .await
+}
+#[tauri::command]
+async fn collection_runs(
+    status: State<'_, storage::StorageStatus>,
+) -> Result<Vec<collection::Run>, String> {
+    collection::runs(std::path::Path::new(&status.database_path)).await
+}
+#[tauri::command]
+async fn collection_events(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+) -> Result<Vec<collection::Event>, String> {
+    collection::events(std::path::Path::new(&status.database_path), &id).await
+}
+#[tauri::command]
+async fn collection_execute(
+    app: tauri::AppHandle,
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+) -> Result<collection::Run, String> {
+    let db = std::path::Path::new(&status.database_path);
+    let r = collection::get_run(db, &id).await?;
+    let registered = collection::sources(db).await?;
+    let allowed = registered
+        .iter()
+        .find(|s| s.id == r.source_id)
+        .is_some_and(|s| {
+            s.input.enabled
+                && s.input.level != "blocked"
+                && !s.input.evidence.is_empty()
+                && !s.input.evidence_url.is_empty()
+                && s.input.purpose_confirmed
+        });
+    let configured = if allowed && r.source_id == "gnews" {
+        let ns = app.config().identifier.clone();
+        tauri::async_runtime::spawn_blocking(move || credentials::status(&ns, "gnews"))
+            .await
+            .map_err(|_| "凭据检查未完成")??
+            .configured
+    } else {
+        false
+    };
+    collection::execute(db, &id, configured).await
+}
+#[tauri::command]
+async fn collection_retry(
+    status: State<'_, storage::StorageStatus>,
+    id: String,
+) -> Result<collection::Run, String> {
+    collection::retry(std::path::Path::new(&status.database_path), &id).await
+}
+#[tauri::command]
+async fn collection_credential_status(
+    app: tauri::AppHandle,
+    source_id: String,
+) -> Result<credentials::CredentialStatus, String> {
+    let ns = app.config().identifier.clone();
+    tauri::async_runtime::spawn_blocking(move || credentials::status(&ns, &source_id))
+        .await
+        .map_err(|_| "凭据检查未完成")?
+}
+#[tauri::command]
+async fn collection_credential_save(
+    app: tauri::AppHandle,
+    source_id: String,
+    secret: String,
+) -> Result<credentials::CredentialStatus, String> {
+    let ns = app.config().identifier.clone();
+    tauri::async_runtime::spawn_blocking(move || credentials::save(&ns, &source_id, &secret))
+        .await
+        .map_err(|_| "凭据保存未完成")?
+}
+#[tauri::command]
+async fn collection_credential_remove(
+    app: tauri::AppHandle,
+    source_id: String,
+) -> Result<credentials::CredentialStatus, String> {
+    let ns = app.config().identifier.clone();
+    tauri::async_runtime::spawn_blocking(move || credentials::remove(&ns, &source_id))
+        .await
+        .map_err(|_| "凭据删除未完成")?
+}
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
@@ -430,7 +550,17 @@ pub fn run() {
             dashboard_load,
             dashboard_save,
             dashboard_items,
-            dashboard_put_item
+            dashboard_put_item,
+            collection_sources,
+            collection_save_source,
+            collection_enqueue,
+            collection_runs,
+            collection_events,
+            collection_execute,
+            collection_retry,
+            collection_credential_status,
+            collection_credential_save,
+            collection_credential_remove
         ])
         .run(tauri::generate_context!())
         .expect("无法启动价投小角落桌面端");
@@ -474,7 +604,13 @@ mod tests {
                 super::dashboard_load,
                 super::dashboard_save,
                 super::dashboard_items,
-                super::dashboard_put_item
+                super::dashboard_put_item,
+                super::collection_sources,
+                super::collection_save_source,
+                super::collection_enqueue,
+                super::collection_runs,
+                super::collection_events,
+                super::collection_retry
             ])
             .build(mock_context(noop_assets()))
             .unwrap();
@@ -625,6 +761,42 @@ mod tests {
         assert_eq!(item["text"], "补现金流");
         assert_eq!(
             request("dashboard_items", serde_json::json!({"companyId":id}))
+                .unwrap()
+                .as_array()
+                .unwrap()
+                .len(),
+            1
+        );
+        assert_eq!(
+            request("collection_sources", serde_json::json!({}))
+                .unwrap()
+                .as_array()
+                .unwrap()
+                .len(),
+            3
+        );
+        let run = request(
+            "collection_enqueue",
+            serde_json::json!({"companyId":id,"sourceId":"sec_finance","requestKey":"ipc1"}),
+        )
+        .unwrap();
+        assert_eq!(run["state"], "queued");
+        let same = request(
+            "collection_enqueue",
+            serde_json::json!({"companyId":id,"sourceId":"sec_finance","requestKey":"ipc1"}),
+        )
+        .unwrap();
+        assert_eq!(same["id"], run["id"]);
+        assert_eq!(
+            request("collection_runs", serde_json::json!({}))
+                .unwrap()
+                .as_array()
+                .unwrap()
+                .len(),
+            1
+        );
+        assert_eq!(
+            request("collection_events", serde_json::json!({"id":run["id"]}))
                 .unwrap()
                 .as_array()
                 .unwrap()

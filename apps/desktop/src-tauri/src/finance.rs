@@ -1079,7 +1079,7 @@ mod tests {
                 .await
                 .unwrap()
                 .schema_version,
-            6
+            7
         );
         let restore = t.path().join("restore");
         restore_backup(&backup, &restore).await.unwrap();

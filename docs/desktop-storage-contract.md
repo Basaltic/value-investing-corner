@@ -14,6 +14,7 @@
 
 - 应用启动时由 Rust 原生侧打开数据库并运行内嵌迁移。
 - SQLite 使用 WAL 日志模式并开启外键约束。
+- P08当前schema为7：新增source_registrations、collection_runs、collection_events、collection_quota。来源登记revision比较交换，任务三元键幂等，事件有稳定sequence与UTC时间且禁止改删；SEC双通道共享配额。v6升级保留看板/旧库快照，冲突回滚；旧1–6迁移不改。详见 `docs/desktop-collection-contract.md`。Keychain不在SQLite内。
 - P07当前schema为6：新增dashboard_config配置单例与research_items研究事项；v1–v5升级前按当前版本留一致快照，冲突回滚，旧迁移不修改。P07新增v5成功与v6冲突保留财务记录测试；详细接口见 `docs/desktop-dashboard-contract.md`。
 - P01原始schema为1，P03为2，P04为3，P05为4，P06为5（财务事实版本、自定义指标定义、观测版本和派生快照）。v1–v4升级前按当前版本保存对应 `research.vN-backup.sqlite3`，事务失败回滚，已有同名快照不覆盖；旧迁移不改写。P06新增v4成功迁移及冲突回滚保留旧判断测试。
 - 财务与指标命令边界见 `docs/desktop-finance-contract.md`；P05原生验收缺口不因升级被改写。

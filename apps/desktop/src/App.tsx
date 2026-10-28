@@ -35,6 +35,13 @@ const router = createHashRouter([
             .DashboardPage,
         }),
       },
+      {
+        path: "collection",
+        lazy: async () => ({
+          Component: (await import("./features/companies/collection-page"))
+            .CollectionPage,
+        }),
+      },
       { path: "valuation", element: <ValuationPage /> },
       {
         path: "*",

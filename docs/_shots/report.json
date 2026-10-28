@@ -1,14 +1,15 @@
 {
-  "src": "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/desktop-implementation-progress.html",
+  "src": "docs/desktop-implementation-progress.html",
   "url": "file:///Users/bytedance/Desktop/work/code/value-investing-corner/docs/desktop-implementation-progress.html",
   "outdir": "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots",
   "include": ["lint", "screenshots", "structure"],
   "shots": {
     "desktop": {
       "slices": [
-        "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p1of3.jpg",
-        "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p2of3.jpg",
-        "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p3of3.jpg"
+        "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p1of4.jpg",
+        "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p2of4.jpg",
+        "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p3of4.jpg",
+        "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p4of4.jpg"
       ],
       "sliceHint": "按顺序 Read slices 里的各分片。",
       "truncated": false,
@@ -21,16 +22,16 @@
         },
         "fullpage": {
           "w": 1440,
-          "h": 12973
+          "h": 14909
         },
         "counts": {
           "section": 0,
           "h1": 1,
-          "h2": 12,
+          "h2": 13,
           "img": 0,
           "canvas": 0,
           "svg": 0,
-          "links": 50,
+          "links": 60,
           "buttons": 0
         }
       },
@@ -49,7 +50,7 @@
   "chromiumExec": "/Users/bytedance/Library/Caches/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-mac-arm64/chrome-headless-shell",
   "engineDegraded": true,
   "engineDegradedReason": "playwright 未装",
-  "elapsedSec": 4.98,
+  "elapsedSec": 4.25,
   "schemaVersion": 2,
   "status": "warning",
   "engineInfo": {
@@ -58,7 +59,7 @@
     "degradedReasons": ["playwright 未装"]
   },
   "input": {
-    "original": "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/desktop-implementation-progress.html",
+    "original": "docs/desktop-implementation-progress.html",
     "resolvedPath": "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/desktop-implementation-progress.html",
     "baseUrl": "file:///Users/bytedance/Desktop/work/code/value-investing-corner/docs/desktop-implementation-progress.html",
     "protocol": "file",
@@ -72,9 +73,10 @@
       {
         "viewport": "desktop",
         "tiles": [
-          "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p1of3.jpg",
-          "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p2of3.jpg",
-          "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p3of3.jpg"
+          "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p1of4.jpg",
+          "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p2of4.jpg",
+          "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p3of4.jpg",
+          "/Users/bytedance/Desktop/work/code/value-investing-corner/docs/_shots/desktop-implementation-progress_desktop_p4of4.jpg"
         ],
         "visualCoverage": {
           "complete": true,

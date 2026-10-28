@@ -1,0 +1,11 @@
+   Compiling value-investing-desktop v0.1.0 (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri)
+error[E0425]: cannot find value `last` in this scope
+   --> src/collection.rs:369:19
+    |
+369 |         } else if last.is_some_and(|last| now - last < shared.1) {
+    |                   ^^^^ not found in this scope
+
+For more information about this error, try `rustc --explain E0425`.
+error: could not compile `value-investing-desktop` (lib) due to 1 previous error
+warning: build failed, waiting for other jobs to finish...
+error: could not compile `value-investing-desktop` (lib test) due to 1 previous error

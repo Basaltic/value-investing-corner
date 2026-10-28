@@ -1,0 +1,15 @@
+$ node scripts/verify-local.mjs check
+$ corepack pnpm lint && corepack pnpm types:check
+$ biome check .
+Checked 147 files in 140ms. No fixes applied.
+$ corepack pnpm -r types:check
+packages/content-schema types:check$ tsc --noEmit
+packages/valuation types:check$ tsc --noEmit
+packages/valuation types:check: Done
+packages/content-schema types:check: Done
+apps/desktop types:check$ tsc --noEmit && tsc -p tsconfig.node.json --noEmit
+apps/web types:check$ next typegen && tsc --noEmit
+apps/desktop types:check: Done
+apps/web types:check: Generating route types...
+apps/web types:check: ✓ Types generated successfully
+apps/web types:check: Done

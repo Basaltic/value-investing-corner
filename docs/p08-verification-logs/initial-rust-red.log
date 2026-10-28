@@ -1,0 +1,128 @@
+ Downloading crates ...
+  Downloaded security-framework-sys v2.17.0
+  Downloaded security-framework v3.7.0
+   Compiling core-foundation-sys v0.8.7
+   Compiling core-foundation v0.10.1
+   Compiling security-framework-sys v2.17.0
+   Compiling core-graphics-types v0.2.0
+   Compiling security-framework v3.7.0
+   Compiling core-graphics v0.25.0
+   Compiling keyring v3.6.3
+   Compiling tao v0.37.1
+   Compiling tauri-runtime-wry v2.12.3
+   Compiling tauri v2.12.5
+   Compiling tauri-plugin-fs v2.7.1
+   Compiling tauri-plugin-opener v2.7.2
+   Compiling tauri-plugin-dialog v2.8.3
+   Compiling value-investing-desktop v0.1.0 (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri)
+warning: struct `SourceInput` is never constructed
+ --> src/collection.rs:5:12
+  |
+5 | pub struct SourceInput{pub enabled:bool,pub level:String,pub evidence_url:String,pub evidence:String,pub purpose:String,pub purpose_c...
+  |            ^^^^^^^^^^^
+  |
+  = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: struct `Source` is never constructed
+ --> src/collection.rs:7:12
+  |
+7 | pub struct Source{pub id:String,pub revision:i64,pub input:SourceInput}
+  |            ^^^^^^
+
+warning: struct `Run` is never constructed
+ --> src/collection.rs:9:12
+  |
+9 | pub struct Run{pub id:String,pub company_id:String,pub source_id:String,pub request_key:String,pub state:String,pub attempts:i64,pub ...
+  |            ^^^
+
+warning: struct `Event` is never constructed
+  --> src/collection.rs:11:12
+   |
+11 | pub struct Event{pub run_id:String,pub state:String,pub attempt:i64,pub reason:String}
+   |            ^^^^^
+
+warning: function `sources` is never used
+  --> src/collection.rs:12:14
+   |
+12 | pub async fn sources(_db:&Path)->Result<Vec<Source>,String>{Err("未实现来源登记".into())}
+   |              ^^^^^^^
+
+warning: function `save_source` is never used
+  --> src/collection.rs:13:14
+   |
+13 | pub async fn save_source(_db:&Path,_id:&str,_input:SourceInput,_expected:i64)->Result<Source,String>{Err("未实现来源登记".into())}
+   |              ^^^^^^^^^^^
+
+warning: function `enqueue` is never used
+  --> src/collection.rs:14:14
+   |
+14 | pub async fn enqueue(_db:&Path,_company:&str,_source:&str,_key:&str)->Result<Run,String>{Err("未实现队列".into())}
+   |              ^^^^^^^
+
+warning: function `runs` is never used
+  --> src/collection.rs:15:14
+   |
+15 | pub async fn runs(_db:&Path)->Result<Vec<Run>,String>{Err("未实现队列".into())}
+   |              ^^^^
+
+warning: function `events` is never used
+  --> src/collection.rs:16:14
+   |
+16 | pub async fn events(_db:&Path,_id:&str)->Result<Vec<Event>,String>{Err("未实现队列".into())}
+   |              ^^^^^^
+
+warning: function `execute` is never used
+  --> src/collection.rs:17:14
+   |
+17 | pub async fn execute(_db:&Path,_id:&str,_credential:bool)->Result<Run,String>{Err("未实现队列".into())}
+   |              ^^^^^^^
+
+warning: function `retry` is never used
+  --> src/collection.rs:18:14
+   |
+18 | pub async fn retry(_db:&Path,_id:&str)->Result<Run,String>{Err("未实现队列".into())}
+   |              ^^^^^
+
+warning: `value-investing-desktop` (lib) generated 11 warnings
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 32.39s
+     Running unittests src/lib.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop_lib-d9ee591623e753b3)
+
+running 4 tests
+test collection::tests::source_conflicts_invalid_inputs_and_unknown_company_do_not_write ... FAILED
+test collection::tests::registry_runs_events_roundtrip_without_credentials ... FAILED
+test collection::tests::registered_source_without_adapter_never_becomes_success ... FAILED
+test collection::tests::no_license_skips_without_fetch_and_duplicates_keep_same_run ... FAILED
+
+failures:
+
+---- collection::tests::source_conflicts_invalid_inputs_and_unknown_company_do_not_write stdout ----
+
+thread 'collection::tests::source_conflicts_invalid_inputs_and_unknown_company_do_not_write' (61432179) panicked at src/collection.rs:25:207:
+called `Result::unwrap()` on an `Err` value: "未实现来源登记"
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- collection::tests::registry_runs_events_roundtrip_without_credentials stdout ----
+
+thread 'collection::tests::registry_runs_events_roundtrip_without_credentials' (61432178) panicked at src/collection.rs:26:184:
+called `Result::unwrap()` on an `Err` value: "未实现来源登记"
+
+---- collection::tests::registered_source_without_adapter_never_becomes_success stdout ----
+
+thread 'collection::tests::registered_source_without_adapter_never_becomes_success' (61432177) panicked at src/collection.rs:24:183:
+called `Result::unwrap()` on an `Err` value: "未实现来源登记"
+
+---- collection::tests::no_license_skips_without_fetch_and_duplicates_keep_same_run stdout ----
+
+thread 'collection::tests::no_license_skips_without_fetch_and_duplicates_keep_same_run' (61432176) panicked at src/collection.rs:23:176:
+called `Result::unwrap()` on an `Err` value: "未实现来源登记"
+
+
+failures:
+    collection::tests::no_license_skips_without_fetch_and_duplicates_keep_same_run
+    collection::tests::registered_source_without_adapter_never_becomes_success
+    collection::tests::registry_runs_events_roundtrip_without_credentials
+    collection::tests::source_conflicts_invalid_inputs_and_unknown_company_do_not_write
+
+test result: FAILED. 0 passed; 4 failed; 0 ignored; 0 measured; 47 filtered out; finished in 0.03s
+
+error: test failed, to rerun pass `--lib`

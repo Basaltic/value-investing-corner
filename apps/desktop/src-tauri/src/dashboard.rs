@@ -471,7 +471,7 @@ mod tests {
                 .await
                 .unwrap()
                 .schema_version,
-            6
+            7
         );
         let restore = t.path().join("restore");
         restore_backup(&b, &restore).await.unwrap();
@@ -682,7 +682,7 @@ mod tests {
             if conflict {
                 assert!(result.is_err());
             } else {
-                assert_eq!(result.unwrap().schema_version, 6);
+                assert_eq!(result.unwrap().schema_version, 7);
             }
             assert!(db.with_extension("v5-backup.sqlite3").is_file());
             let mut con =
@@ -693,7 +693,7 @@ mod tests {
                 .fetch_one(&mut con)
                 .await
                 .unwrap();
-            assert_eq!(v, if conflict { 5 } else { 6 });
+            assert_eq!(v, if conflict { 5 } else { 7 });
             let count: i64 =
                 sqlx::query_scalar("SELECT COUNT(*) FROM financial_versions WHERE id='fact'")
                     .fetch_one(&mut con)

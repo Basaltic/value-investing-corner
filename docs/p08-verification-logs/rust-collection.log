@@ -1,0 +1,35 @@
+   Compiling value-investing-desktop v0.1.0 (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri)
+warning: variants `Network`, `Parsing`, and `Persistence` are never constructed
+   --> src/collection.rs:275:5
+    |
+274 | pub enum Failure {
+    |          ------- variants in this enum
+275 |     Network,
+    |     ^^^^^^^
+276 |     Parsing,
+    |     ^^^^^^^
+277 |     Persistence,
+    |     ^^^^^^^^^^^
+    |
+    = note: `Failure` has a derived impl for the trait `Clone`, but this is intentionally ignored during dead code analysis
+    = note: `#[warn(dead_code)]` (part of `#[warn(unused)]`) on by default
+
+warning: `value-investing-desktop` (lib test) generated 1 warning (1 duplicate)
+warning: `value-investing-desktop` (lib) generated 1 warning
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 13.48s
+     Running unittests src/lib.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop_lib-d9ee591623e753b3)
+
+running 4 tests
+test collection::tests::source_conflicts_invalid_inputs_and_unknown_company_do_not_write ... ok
+test collection::tests::no_license_skips_without_fetch_and_duplicates_keep_same_run ... ok
+test collection::tests::registered_source_without_adapter_never_becomes_success ... ok
+test collection::tests::registry_runs_events_roundtrip_without_credentials ... ok
+
+test result: ok. 4 passed; 0 failed; 0 ignored; 0 measured; 49 filtered out; finished in 0.12s
+
+     Running unittests src/main.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop-ea830e444146ef4c)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
