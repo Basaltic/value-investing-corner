@@ -28,11 +28,11 @@ ul{margin:6px 0}
 <body>
 <div class="wrap">
 <h1>桌面工作台 · 实施进度与逐阶段确认记录</h1>
-<div class="sub">单一权威进度记录 · 最近执行轮：P08 来源/凭据/手动任务（核心已实现，原生全流程待补验）· 配套方案见 <code>desktop-research-plan.html</code><br>阶段必须逐一经用户确认后继续；本记录保留历史失败与未验证项，不用后续授权改写历史事实。</div>
+<div class="sub">单一权威进度记录 · 最近执行轮：P09 第三方存储与安全恢复（核心验收完成，待确认）· 配套方案见 <code>desktop-research-plan.html</code><br>阶段必须逐一经用户确认后继续；本记录保留历史失败与未验证项，不用后续授权改写历史事实。</div>
 
 <h2>当前总状态</h2>
 <div class="card">
-<p><strong>当前方案（P00–P13）已获批准，执行授权逐阶段授予。用户已确认 P01 并放行 P02；P00 的原生窗口目视缺口保留在历史记录中。</strong>用户明确“继续进入 P08”，本轮只授权来源登记、系统凭据和统一手动任务；P07已获继续放行，P05/P06历史缺口保留。P08核心已实现且自动回归通过，原生全流程仍待补验，停止等待用户确认；P09–P13未授权，不接外部源/AI、不提交或推送。</p>
+<p><strong>当前方案（P00–P13）已获批准，执行授权逐阶段授予。用户已确认 P01 并放行 P02；P00 的原生窗口目视缺口保留在历史记录中。</strong>用户明确“继续进入 P09”，本轮仅授权第三方负载准入、独立撤销清单与三分支安全恢复；P08带原生全流程缺口放行，P05/P06历史缺口保留。P09核心实现与约定安全分支验收完成，停止等待确认；P10–P13未授权，不接外部源/AI、不提交或推送。</p>
 <table>
 <tr><th>阶段</th><th>状态</th><th>说明</th></tr>
 <tr><td>P00 现有骨架（基线）</td><td><span class="badge b-warn">带已知缺口放行</span></td><td>测试、类型检查、构建与浏览器通道已验证；原生窗口目视受桌面控制入口阻塞，历史缺口继续保留。</td></tr>
@@ -43,13 +43,43 @@ ul{margin:6px 0}
 <tr><td>P05 自由判断与历史</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>v1→v2、差异、失败保护、重启判断页已实看；保存成功后关闭与恢复副本仍待补验；用户后来明确进入P06，历史缺口不改写。</td></tr>
 <tr><td>P06 手工财务与指标</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>自动回归和原生读数通过；手动录入/审核交互与图形实看仍待验证。用户后来明确继续P07；本阶段原生未全验限制保留。</td></tr>
 <tr><td>P07 指标看板</td><td><span class="badge b-green">已确认继续</span></td><td>配置、模板卡、分组、显隐排序、研究事项与重启保持实测；用户已放行P08，不宣称GUI逐项全覆盖。</td></tr>
-<tr><td>P08 来源/凭据/手动任务</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>来源登记、系统钥匙串、许可闸门与共享队列已实现；自动回归通过。原生任务/凭据全流程与重启未实看，不能标全项通过；停止等待确认。</td></tr>
-<tr><td>P09–P13</td><td><span class="badge b-gray">未开始</span></td><td>不预做、不跨阶段并行；后续按用户逐阶段放行。</td></tr>
+<tr><td>P08 来源/凭据/手动任务</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>来源登记、系统钥匙串、许可闸门与共享队列已实现；自动回归通过。原生任务/凭据全流程与重启未实看，不能标全项通过；用户后来已明确放行P09，缺口保留。</td></tr>
+<tr><td>P09 第三方存储与安全恢复</td><td><span class="badge b-green">核心验收完成，待确认</span></td><td>准入、restricted指针、独立清单和三分支真实库/包验收完成；无新增备份页面，不声称GUI恢复全链路。</td></tr>
+<tr><td>P10–P13</td><td><span class="badge b-gray">未开始</span></td><td>不预做、不跨阶段并行；后续按用户逐阶段放行。</td></tr>
 </table>
 <p class="muted">计划本体（P00–P13 依赖、范围与验收边界）以 <code>desktop-research-plan.html</code> §9 为准；本文件只记录执行事实、逐阶段确认与工作区变化，不重复计划内容。历史文档 <code>tauri-monorepo-verification.md</code>（macOS ARM64 打包与窗口抽验）为更早迁移阶段的历史记录，不充当本轮 P00 证据。</p>
 </div>
 
-<h2>P08 来源、系统凭据与手动任务</h2>
+<h2>P09 第三方存储边界与安全恢复</h2>
+<div class="card">
+<p><strong>核心实现与批准的三分支安全恢复验收完成，停止等待用户确认。</strong>本阶段是Rust技术底座，无新增备份/采集/解除隔离页面；P10–P13未授权，实际源、AI和调度均不接入，不提交/推送。</p>
+<ul>
+<li>schema v8：独立third_party_payloads保存metadata与可选正文BLOB，takedown_events只追加。来源当前开关/等级/许可摘录/用途同事务核对，无许可连元数据不落盘；metadata_only丢弃正文，full必须实际有bytes。保存URL/发布时间/首次时间/登记revision/hash和许可指纹；正文不执行，URL不接受账号/查询参数/片段；重复company/source/URLhash/内容hash/模式幂等。</li>
+<li>撤销仅对来源+hash第三方负载，正文/metadata清理，保留restricted缺证指针、最小事件；不回写个人正式判断/草稿批注/原因/笔记/财务。独立限制SQLite为数据目录同级固定文件，不进普通包、不随目录恢复切换；先写限制后清主库，清理失败业务读取仍不可取得正文，新快照仍能过滤。</li>
+<li><strong>分支1：</strong>包hash/结构通过后，仅staging升级，当前独立限制、当前主库事件与旧包事件取并集；撤销命中不复活，其余切换。新快照清理BLOB后VACUUM/checkpoint再算hash，唯一第三方marker不在新SQLite字节，旧源包字节保持。</li>
+<li><strong>分支2：</strong>清单缺失/损坏/新机，只隔离本机许可无法确认的第三方；个人正式正文、草稿/批注/原因、自写笔记和同hash附件正常恢复。损坏限制库不覆写；缺失且有历史事件可重建限制，不使用旧包登记当当前许可。当前来源改变/关闭、重建无对应来源确认均不能读旧正文；不提供解除隔离静默复活。</li>
+<li><strong>分支3：</strong>hash不符、未知格式、未来schema或不兼容数据库切换前拒绝，保留当前库与限制。v7升级成功/冲突回滚保留旧任务与一致快照；旧1–7迁移不改。基本备份format仍1/schema1–8，Keychain继续不备份。</li>
+<li><strong>测试先行与修正：</strong>首批4项因未实现失败后通过；清单缺失/损坏、旧许可回滚3项与当前事件合并/读取掩码2项、重建清单1项均先失败后修复。物理快照排除/清理失败限制先落盘、v7迁移/同机正常恢复是后补首次即通过，不称全套红灯。Clippy初次2项样式错误已修，原失败日志保留。</li>
+<li><strong>最终验证：</strong>P09专项14项通过；完整Rust69通过/0失败、3项默认ignored；桌面29/29、Web24/24、workspace3/3、估值8/8、元数据2/2。严格Clippy、类型/lint、独立P09 debug构建退出0，36.05MiB；前端未改，主chunk407.22kB。真实临时SQLite/目录操作覆盖三分支，不用空库冒充个人内容往返。</li>
+<li><strong>原生观察与限制：</strong>隔离P09包工作台实际native正常、旧入口保留；最后清单重建保护修订后已重新构建，未再次GUI重启。无新增页面或前端任意路径/SQL命令，故不声称用户备份GUI已完成。仅macOS ARM64；并发恢复与实时写入、断电跨两个SQLite事务、恶意文件篡改/磁盘擦除不在已验证范围，操作应停止写入；旧包/rollback/迁移快照不自动清除。</li>
+<li>工作区开工HEAD61d7f2d且干净（P08由用户外部提交）；只Rust存储/备份集成、版本期望与配套合同/README/记录/日志变化。无Web/共享包/内容/正式CSP/capabilities/identifier/依赖修改，批准方案未改；P05/P06/P08历史缺口保留。未提交、推送、安装到Applications、签名公证、release/DMG或远端写入。</li>
+</ul>
+<p>合同：<a href="desktop-third-party-contract.md">desktop-third-party-contract.md</a>；<a href="p09-verification-logs/acceptance.md">验收覆盖与原生观察</a>；<a href="p09-verification-logs/rust-tests.log">Rust测试</a>、<a href="p09-verification-logs/rust-clippy.log">Clippy</a>、<a href="p09-verification-logs/workspace-tests.log">工作区测试</a>、<a href="p09-verification-logs/check-local.log">类型/lint</a>、<a href="p09-verification-logs/native-debug-build.log">独立debug构建</a>、<a href="p09-verification-logs/initial-rust-red.log">首批失败</a>、<a href="p09-verification-logs/ledger-edge-red.log">清单边界失败</a>、<a href="p09-verification-logs/tombstone-edge-red.log">事件合并失败</a>、<a href="p09-verification-logs/recreated-ledger-red.log">重建清单失败</a>、<a href="p09-verification-logs/clippy-style-failure.log">样式失败</a>。</p>
+<p><strong>打开方式：</strong>双击项目内 <code>apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P09验收.app</code> 查看既有工作台；安全分支需运行 <code>cargo test --manifest-path apps/desktop/src-tauri/Cargo.toml third_party::tests</code>，不修改真实用户库。正式开发仍使用 <code>corepack pnpm dev:desktop</code>，旧release不含P09。</p>
+<p><strong>Commit描述（自动生成，不提交）</strong></p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere;">feat(desktop): add third-party payload controls and safe restore filtering
+
+- add schema v8 payload records and append-only takedown events
+- gate metadata and full payload storage on current source registrations
+- keep cumulative restrictions outside replaceable backup data directories
+- preserve restricted pointers without rewriting personal research history
+- filter revoked payloads from new snapshots and old backup restores
+- restore personal content when the local restriction ledger is unavailable
+- verify migration rollback, tombstone persistence and restore safety branches
+- document acceptance scope without adding source adapters, scheduling or AI</pre>
+</div>
+
+<h2>P08 来源、系统凭据与手动任务（历史结果，后已获继续放行）</h2>
 <div class="card">
 <p><strong>核心已实现，自动回归和独立原生构建通过；原生完整任务与凭据链路补验未完成，不是全项通过。</strong>用户只授权P08，停止等待确认；P09–P13未开始，不联网采集、AI、调度、发布或代提交。每阶段commit描述自动生成。</p>
 <ul>

@@ -1,0 +1,25 @@
+   Compiling value-investing-desktop v0.1.0 (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.82s
+     Running unittests src/lib.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop_lib-d9ee591623e753b3)
+
+running 11 tests
+test third_party::tests::admission_metadata_and_full_are_distinct_and_idempotent ... ok
+test third_party::tests::source_changes_mask_live_payload_and_tombstones_are_append_only ... ok
+test third_party::tests::new_snapshots_do_not_contain_deleted_blob_bytes ... ok
+test third_party::tests::failed_payload_clear_leaves_tombstone_and_filtered_backup ... ok
+test third_party::tests::bad_hash_keeps_current_database_and_independent_restrictions ... ok
+test third_party::tests::ledger_with_missing_tables_quarantines_without_overwriting_corrupt_file ... ok
+test third_party::tests::new_machine_or_missing_ledger_quarantines_only_third_party ... ok
+test third_party::tests::current_disabled_source_cannot_be_reenabled_by_old_backup ... ok
+test third_party::tests::missing_ledger_merges_current_tombstones_before_restore_and_reimport ... ok
+test third_party::tests::takedown_filters_new_and_old_backups_without_rewriting_personal_content ... ok
+test third_party::tests::missing_or_corrupt_ledger_never_exposes_live_payload_or_blocks_personal_restore ... ok
+
+test result: ok. 11 passed; 0 failed; 0 ignored; 0 measured; 58 filtered out; finished in 0.49s
+
+     Running unittests src/main.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop-ea830e444146ef4c)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

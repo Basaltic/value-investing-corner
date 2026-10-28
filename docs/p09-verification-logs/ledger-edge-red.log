@@ -1,0 +1,40 @@
+   Compiling value-investing-desktop v0.1.0 (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 9.63s
+     Running unittests src/lib.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop_lib-d9ee591623e753b3)
+
+running 7 tests
+test third_party::tests::admission_metadata_and_full_are_distinct_and_idempotent ... ok
+test third_party::tests::missing_or_corrupt_ledger_never_exposes_live_payload_or_blocks_personal_restore ... FAILED
+test third_party::tests::bad_hash_keeps_current_database_and_independent_restrictions ... ok
+test third_party::tests::ledger_with_missing_tables_quarantines_without_overwriting_corrupt_file ... FAILED
+test third_party::tests::new_machine_or_missing_ledger_quarantines_only_third_party ... ok
+test third_party::tests::current_disabled_source_cannot_be_reenabled_by_old_backup ... FAILED
+test third_party::tests::takedown_filters_new_and_old_backups_without_rewriting_personal_content ... ok
+
+failures:
+
+---- third_party::tests::missing_or_corrupt_ledger_never_exposes_live_payload_or_blocks_personal_restore stdout ----
+
+thread 'third_party::tests::missing_or_corrupt_ledger_never_exposes_live_payload_or_blocks_personal_restore' (61598092) panicked at src/third_party.rs:540:54:
+assertion failed: hidden.body.is_none()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- third_party::tests::ledger_with_missing_tables_quarantines_without_overwriting_corrupt_file stdout ----
+
+thread 'third_party::tests::ledger_with_missing_tables_quarantines_without_overwriting_corrupt_file' (61598091) panicked at src/third_party.rs:563:60:
+called `Result::unwrap()` on an `Err` value: "第三方存储操作失败：error returned from database: (code: 1) no such table: confirmed_licenses"
+
+---- third_party::tests::current_disabled_source_cannot_be_reenabled_by_old_backup stdout ----
+
+thread 'third_party::tests::current_disabled_source_cannot_be_reenabled_by_old_backup' (61598090) panicked at src/third_party.rs:553:9:
+assertion failed: get(&db, &f.id).await.unwrap().body.is_none()
+
+
+failures:
+    third_party::tests::current_disabled_source_cannot_be_reenabled_by_old_backup
+    third_party::tests::ledger_with_missing_tables_quarantines_without_overwriting_corrupt_file
+    third_party::tests::missing_or_corrupt_ledger_never_exposes_live_payload_or_blocks_personal_restore
+
+test result: FAILED. 4 passed; 3 failed; 0 ignored; 0 measured; 58 filtered out; finished in 0.33s
+
+error: test failed, to rerun pass `--lib`

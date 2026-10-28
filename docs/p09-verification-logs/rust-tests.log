@@ -1,0 +1,92 @@
+   Compiling value-investing-desktop v0.1.0 (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 8.89s
+     Running unittests src/lib.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop_lib-d9ee591623e753b3)
+
+running 72 tests
+test collection::tests::enabled_without_evidence_skips_before_adapter_call ... ok
+test backup::tests::v1_backup_restores_and_migrates_only_staging ... ok
+test backup::tests::rejects_tampered_payload_without_changing_current_data ... ok
+test collection::tests::no_license_skips_without_fetch_and_duplicates_keep_same_run ... ok
+test backup::tests::rejects_unknown_format_and_future_schema_without_changing_current_data ... ok
+test backup::tests::includes_committed_wal_data_and_rejects_path_traversal ... ok
+test collection::tests::registered_source_without_adapter_never_becomes_success ... ok
+test credentials::tests::credential_status_never_serializes_secret ... ok
+test credentials::tests::isolated_keychain_roundtrip ... ignored, explicit macOS keychain probe only
+test collection::tests::source_conflicts_invalid_inputs_and_unknown_company_do_not_write ... ok
+test dashboard::tests::create_p07_gui_fixture ... ignored, explicit isolated P07 GUI fixture only
+test collection::tests::adapter_failures_quota_and_simultaneous_claims_use_single_pipeline ... ok
+test companies::tests::rejects_empty_name_invalid_listing_and_unknown_parent_without_partial_data ... ok
+test collection::tests::quota_interval_survives_day_rollover_and_backup ... ok
+test companies::tests::independent_ids_and_multiple_listings_survive_reopen_and_search ... ok
+test companies::tests::duplicate_name_and_code_require_confirmation_and_never_merge ... ok
+test finance::tests::build_isolated_gui_fixture ... ignored, explicit isolated UI fixture only
+test collection::tests::registry_runs_events_roundtrip_without_credentials ... ok
+test dashboard::tests::empty_load_is_read_only_and_config_reopens_with_order_and_visibility ... ok
+test collection::tests::v6_migration_keeps_dashboard_or_rolls_back_conflict ... ok
+test backup::tests::round_trips_database_and_attachments_and_keeps_rollback ... ok
+test dashboard::tests::config_backup_preserves_groups_cards_ranges_and_revision ... ok
+test companies::tests::company_and_listing_backup_round_trip_keeps_ids_and_foreign_keys ... ok
+test collection::tests::failure_classes_and_invalid_receipts_are_never_success ... ok
+test dashboard::tests::stale_and_invalid_config_never_overwrite_saved_config ... ok
+test finance::tests::missing_unreviewed_and_incompatible_data_never_become_zero_or_ratios ... ok
+test dashboard::tests::v5_migration_keeps_finance_and_conflicting_v6_rolls_back ... ok
+test finance::tests::missing_left_input_keeps_derived_period_as_explicit_gap ... ok
+test finance::tests::numeric_and_text_observations_keep_empty_values_and_immutable_history ... ok
+test finance::tests::zero_denominators_and_duplicate_metrics_are_explicit_gaps ... ok
+test finance::tests::rejects_invalid_dates_values_types_and_cross_company_revisions ... ok
+test judgments::tests::rejects_malformed_editor_structure_without_changing_draft ... ok
+test judgments::tests::official_rows_are_immutable_even_through_raw_sql ... ok
+test dashboard::tests::metric_reference_ownership_and_limits_preserve_prior_configuration ... ok
+test dashboard::tests::reading_and_supplement_items_are_explicit_and_backup_safe ... ok
+test finance::tests::fixed_formulas_use_compatible_reviewed_inputs_and_keep_version_provenance ... ok
+test finance::tests::finance_and_observation_backup_round_trip_preserves_all_versions ... ok
+test judgments::tests::blank_freeze_invalid_doc_and_cross_company_base_are_rejected ... ok
+test judgments::tests::draft_freezes_and_revision_copies_without_rewriting_official ... ok
+test storage::tests::conflicting_v1_schema_rolls_back_migration_and_preserves_data ... ok
+test materials::tests::changed_external_content_is_not_silently_adopted ... ok
+test storage::tests::refuses_an_unknown_future_schema_without_modifying_it ... ok
+test storage::tests::refuses_an_inconsistent_schema_without_repairing_it ... ok
+test storage::tests::initializes_and_reopens_the_same_schema ... ok
+test judgments::tests::stale_save_and_freeze_never_lose_latest_draft ... ok
+test storage::tests::upgrades_v1_with_data_and_keeps_pre_upgrade_snapshot ... ok
+test tests::native_info_matches_package_version ... ok
+test judgments::tests::draft_and_versions_backup_round_trip_keeps_history ... ok
+test materials::tests::symlinks_and_path_tampering_are_rejected ... ok
+test storage::tests::upgrades_v2_and_preserves_snapshot_and_company_ids ... ok
+test materials::tests::csv_requires_mapping_and_keeps_strings_quotes_and_empty_values ... ok
+test storage::tests::upgrades_v3_and_preserves_pre_upgrade_data ... ok
+test materials::tests::external_missing_relocates_and_unsupported_stays_metadata_only ... ok
+test materials::tests::notes_links_tags_edit_and_archive_round_trip ... ok
+test materials::tests::copied_file_survives_source_move_and_backup ... ok
+test storage::tests::upgrades_v4_keeps_judgment_history_and_rolls_back_conflicting_v5 ... ok
+test third_party::tests::admission_metadata_and_full_are_distinct_and_idempotent ... ok
+test third_party::tests::recreated_ledger_does_not_authorize_unconfirmed_old_payloads ... ok
+test third_party::tests::bad_hash_keeps_current_database_and_independent_restrictions ... ok
+test materials::tests::all_material_metadata_and_mapping_survive_backup_restore ... ok
+test third_party::tests::failed_payload_clear_leaves_tombstone_and_filtered_backup ... ok
+test third_party::tests::ledger_with_missing_tables_quarantines_without_overwriting_corrupt_file ... ok
+test third_party::tests::new_snapshots_do_not_contain_deleted_blob_bytes ... ok
+test third_party::tests::current_disabled_source_cannot_be_reenabled_by_old_backup ... ok
+test third_party::tests::new_machine_or_missing_ledger_quarantines_only_third_party ... ok
+test third_party::tests::source_changes_mask_live_payload_and_tombstones_are_append_only ... ok
+test third_party::tests::missing_ledger_merges_current_tombstones_before_restore_and_reimport ... ok
+test tests::company_commands_use_fixed_storage_and_return_confirmation ... ok
+test third_party::tests::v7_migration_preserves_tasks_and_conflicting_v8_rolls_back ... ok
+test third_party::tests::valid_same_machine_backup_preserves_full_payload_and_invalid_url_never_writes ... ok
+test third_party::tests::missing_or_corrupt_ledger_never_exposes_live_payload_or_blocks_personal_restore ... ok
+test third_party::tests::takedown_filters_new_and_old_backups_without_rewriting_personal_content ... ok
+
+test result: ok. 69 passed; 0 failed; 3 ignored; 0 measured; 0 filtered out; finished in 2.03s
+
+     Running unittests src/main.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop-ea830e444146ef4c)
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+
+   Doc-tests value_investing_desktop_lib
+
+running 0 tests
+
+test result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s
+

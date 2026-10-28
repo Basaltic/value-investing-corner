@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>桌面工作台 · 实施进度与逐阶段确认记录</title>
+<style>
+:root{--paper:#f4f1e8;--surface:#ebe5d8;--panel:#fbf9f3;--ink:#17251d;--muted:#617066;--forest:#1d4a35;--soft:#dce8df;--line:#cbd2c8;--error:#8d482f;--warn-bg:#f3e7dd}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:"PingFang SC","Songti SC",serif;line-height:1.75}
+.wrap{max-width:860px;margin:0 auto;padding:48px 24px 96px}
+h1{font-size:26px;margin:0 0 4px}
+.sub{color:var(--muted);font-size:14px;margin-bottom:32px}
+h2{font-size:19px;margin:40px 0 12px;padding-top:16px;border-top:1px solid var(--line)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0}
+table{width:100%;border-collapse:collapse;font-size:14px;background:var(--panel)}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{background:var(--soft)}
+.badge{display:inline-block;padding:1px 10px;border-radius:999px;font-size:12px;border:1px solid var(--line)}
+.b-green{background:var(--soft);color:var(--forest);border-color:var(--forest)}
+.b-warn{background:var(--warn-bg);color:var(--error);border-color:var(--error)}
+.b-gray{background:var(--surface);color:var(--muted)}
+code{background:var(--surface);padding:1px 6px;border-radius:4px;font-size:13px}
+ul{margin:6px 0}
+.muted{color:var(--muted);font-size:13px}
+</style>
+</head>
+<body>
+<div class="wrap">
+<h1>桌面工作台 · 实施进度与逐阶段确认记录</h1>
+<div class="sub">单一权威进度记录 · 最近执行轮：P08 来源/凭据/手动任务（核心已实现，原生全流程待补验）· 配套方案见 <code>desktop-research-plan.html</code><br>阶段必须逐一经用户确认后继续；本记录保留历史失败与未验证项，不用后续授权改写历史事实。</div>
+
+<h2>当前总状态</h2>
+<div class="card">
+<p><strong>当前方案（P00–P13）已获批准，执行授权逐阶段授予。用户已确认 P01 并放行 P02；P00 的原生窗口目视缺口保留在历史记录中。</strong>用户明确“继续进入 P08”，本轮只授权来源登记、系统凭据和统一手动任务；P07已获继续放行，P05/P06历史缺口保留。P08核心已实现且自动回归通过，原生全流程仍待补验，停止等待用户确认；P09–P13未授权，不接外部源/AI、不提交或推送。</p>
+<table>
+<tr><th>阶段</th><th>状态</th><th>说明</th></tr>
+<tr><td>P00 现有骨架（基线）</td><td><span class="badge b-warn">带已知缺口放行</span></td><td>测试、类型检查、构建与浏览器通道已验证；原生窗口目视受桌面控制入口阻塞，历史缺口继续保留。</td></tr>
+<tr><td>P01 本地存储与迁移安全</td><td><span class="badge b-green">已确认</span></td><td>SQLite 初始化、schema v1 迁移、异常版本保护与只读状态命令已完成。</td></tr>
+<tr><td>P02 基本备份 / 恢复</td><td><span class="badge b-green">已确认</span></td><td>内部核心已确认，P03新增公司与证券备份回归通过；尚无用户备份界面。</td></tr>
+<tr><td>P03 公司 / listing 档案</td><td><span class="badge b-green">已确认</span></td><td>本地建档、列表搜索、详情、多证券、重复确认与迁移备份验收已完成。原生跨市场下拉及ADR选择未完整实看，自动化仓储覆盖。</td></tr>
+<tr><td>P04 本地资料库</td><td><span class="badge b-green">已确认</span></td><td>文件、链接、文本笔记、标签、预览与备份回归已验收；保留未逐项GUI实看限制，停止等待确认。</td></tr>
+<tr><td>P05 自由判断与历史</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>v1→v2、差异、失败保护、重启判断页已实看；保存成功后关闭与恢复副本仍待补验；用户后来明确进入P06，历史缺口不改写。</td></tr>
+<tr><td>P06 手工财务与指标</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>自动回归和原生读数通过；手动录入/审核交互与图形实看仍待验证。用户后来明确继续P07；本阶段原生未全验限制保留。</td></tr>
+<tr><td>P07 指标看板</td><td><span class="badge b-green">已确认继续</span></td><td>配置、模板卡、分组、显隐排序、研究事项与重启保持实测；用户已放行P08，不宣称GUI逐项全覆盖。</td></tr>
+<tr><td>P08 来源/凭据/手动任务</td><td><span class="badge b-warn">核心已实现，补验未完成</span></td><td>来源登记、系统钥匙串、许可闸门与共享队列已实现；自动回归通过。原生任务/凭据全流程与重启未实看，不能标全项通过；停止等待确认。</td></tr>
+<tr><td>P09–P13</td><td><span class="badge b-gray">未开始</span></td><td>不预做、不跨阶段并行；后续按用户逐阶段放行。</td></tr>
+</table>
+<p class="muted">计划本体（P00–P13 依赖、范围与验收边界）以 <code>desktop-research-plan.html</code> §9 为准；本文件只记录执行事实、逐阶段确认与工作区变化，不重复计划内容。历史文档 <code>tauri-monorepo-verification.md</code>（macOS ARM64 打包与窗口抽验）为更早迁移阶段的历史记录，不充当本轮 P00 证据。</p>
+</div>
+
+<h2>P08 来源、系统凭据与手动任务</h2>
+<div class="card">
+<p><strong>核心已实现，自动回归和独立原生构建通过；原生完整任务与凭据链路补验未完成，不是全项通过。</strong>用户只授权P08，停止等待确认；P09–P13未开始，不联网采集、AI、调度、发布或代提交。每阶段commit描述自动生成。</p>
+<ul>
+<li>新增“来源与任务”导航。三个固定后续通道（SEC财务/公告、GNews）缺省关闭；可保存等级、许可URL/摘录、用途确认、限额和间隔。登记是本人陈述，不是系统法律认证；无依据连元数据也不取。依据URL拒绝账号/查询参数/片段，文本仅部分敏感模式保护，不保证识别所有误贴密钥。</li>
+<li>schema v7：source_registrations修订比较交换、collection_runs公司/来源/请求标识唯一、collection_events稳定sequence及UTC时间只追加、collection_quota共享限额。旧v1–v6升级留当前版本快照、冲突回滚保留旧看板，旧迁移不改；基本备份格式仍1/schema1–7保留登记/任务/事件/配额，不含Keychain。</li>
+<li>统一排队/运行/成功/失败/跳过状态及原因；手动排队、执行一次准入检查、重试回队列、历史查看。并发领取全库最多一个running、重复同任务返回原状态不增尝试；同任务最多3次执行，失败/跳过才重试，成功不能重做。生产始终未注册实际适配器，完整登记也明确跳过，不伪造归档成功。</li>
+<li>SEC两通道共享最低已登记每日额度/最大间隔，GNews跨公司共享；UTC日配额重置不重置最小间隔。当前配额按适配器调用计数，尚非内部逐HTTP请求计数；实际接入时须补逐请求限制。生产无适配器，不消耗外部配额。内部Probe只验证成功/分类失败/无效回执和并发路径，hex回执格式不是原文存在或许可真实性证明。</li>
+<li>macOS keyring3.6.3明确apple-native，密钥仅系统Keychain；窄命令保存/状态/删除只返回configured布尔值，保存成功清密码框。不落SQLite/日志/普通备份，不另建密钥备份、不回退文件或mock；非macOS明确未支持。Keychain检查失败会在领取前报错，任务仍排队；不伪造成功或跳过事件。</li>
+<li><strong>测试证据：</strong>首批4项来源/队列/往返测试因未实现失败后通过；前端2项边界测试及后补跨日/错误分类测试首次即通过，不说全套红灯。最近Rust55通过/0失败、3项默认ignored；独立随机Keychain另显式1通过，测试条目已删除。桌面29/29、Web24/24、workspace3/3、估值8/8、元数据2/2。严格Clippy、check:local（最终147文件，类型/lint）、独立debug构建退出0；包36.05MiB，来源页10.69kB。跨日变量缺失曾编译失败，已修后完整回归；失败日志保留。最终新增仅测试代码，不改变已构建包的生产逻辑。</li>
+<li><strong>原生已实看：</strong>最终P08隔离包工作台native正常；真实输入创建虚构公司0→1；三个来源v0/开关关闭/等级禁止；SEC财务勾准入后保存空依据登记v1，页面反馈正确。任务区截图文字和控件可读；密码入口空输入保存禁用。未注入正式库或索取用户真实key。</li>
+<li><strong>验收限制：</strong>访问等级键盘、公司下拉和窗口公开Raise多次USER_CONTROL_ACTIVE，伴随CELL_CANCELLED/state_reset/uncertain；每次先观察、不重放原批次，之后停止GUI。公司菜单虽读到选项，实际仍“请选择公司”，不能当选择成功。前端任务排队→跳过→历史/重试、GNews公开IPC界面保存/状态/删除、重启保持、完整页/窄屏未实看；原生Keychain函数测试与MockRuntime不替代GUI/IPC全链路。</li>
+<li>来源表单手动保存，未保存离页不保证恢复；冲突保留输入，但须重新载入核对。适配器超时、结果持久化异常后running解除、退出/崩溃自动恢复未实现/验收，P13后置；遗留running会阻塞其它领取，当前无恢复命令。P09第三方负载隔离/撤销恢复尚未实现，不以普通备份冒充。</li>
+<li>工作区：开工HEAD b7bb008且干净；仅桌面、配套文档/README与日志变化。Web、共享包、正式CSP/capabilities/identifier、旧迁移、批准方案均未改。未提交/推送、安装到Applications、重打release/DMG、签名公证或远端写入；P05/P06历史缺口保留。最终记录桌面4片完整预览无阻断/错误，仅非阻断favicon提示；预览脚本更新生成主图/报告并把旧3片替换为4片，不涉及用户业务或资料文件。该HTML预览不替代原生任务全流程验收。</li>
+</ul>
+<p>合同：<a href="desktop-collection-contract.md">desktop-collection-contract.md</a>；<a href="p08-verification-logs/ui-observation.md">原生观察与缺口</a>；<a href="p08-verification-logs/rust-tests.log">Rust测试</a>、<a href="p08-verification-logs/rust-clippy.log">Clippy</a>、<a href="p08-verification-logs/keychain-tests.log">真实Keychain测试</a>、<a href="p08-verification-logs/workspace-tests.log">工作区测试</a>、<a href="p08-verification-logs/check-local.log">类型/lint</a>、<a href="p08-verification-logs/native-debug-build.log">独立debug构建</a>、<a href="p08-verification-logs/initial-rust-red.log">初始失败</a>、<a href="p08-verification-logs/interval-compile-failure.log">间隔变量编译失败</a>。</p>
+<p><strong>打开方式：</strong>双击项目内 <code>apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P08验收.app</code>，进入“来源与任务”；仅虚构隔离数据，不与正式库互通。正式开发使用 <code>corepack pnpm dev:desktop</code>；浏览器预览不能管理SQLite或系统凭据，旧release不含P08。</p>
+<p><strong>Commit描述（自动生成，不提交）</strong></p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere;">feat(desktop): add source registry and manual collection task channel
+
+- add schema v7 source registrations, runs, immutable events and shared quotas
+- persist revision-checked source evidence, purpose and disabled-by-default gates
+- store GNews credentials in macOS Keychain without exposing or backing up secrets
+- add manual enqueue, admission checks, idempotent execution and bounded retries
+- share SEC channel quotas and preserve minimum intervals across UTC day changes
+- add native-only source and task management with explicit skip reasons
+- verify migration rollback, backup round trips and classified adapter outcomes
+- document native UI verification gaps without enabling external adapters or AI</pre>
+</div>
+
+<h2>P07 指标看板（历史执行结果，后已获用户继续放行）</h2>
+<div class="card">
+<p><strong>实现与核心验收完成，停止等待用户确认。</strong>只执行P07；P08–P13未授权，不做采集、AI、低代码拖拽或发布，自动生成commit描述但不提交。</p>
+<ul>
+<li>新增独立指标看板入口与公司详情跳转。全局配置按公司分组，支持组/组内公司/卡片按钮排序、模板卡显隐、指标选择、时间范围和待核设置。未分组新公司保持可见，空公司/空卡片/无数据明确引导，不制造推荐。</li>
+<li>schema v6：dashboard_config配置单例（revision比较交换）与research_items显式待读/待补状态。组和卡片存配置，不复制财务值；指标引用具体原始事实/固定派生口径/自定义定义，数值依P06规则保留null断点，文本仅卡片。最近正式判断取最大正式version，不展示草稿冒充正式。</li>
+<li>同一公司最多一个自定义组，卡片顺序数组保存。旧版配置/过期事项修订、非法日期/范围、未知公司/跨公司指标锚点、重复卡ID/分组公司拒绝写入；保存成功但刷新失败明确区分。待读仅由本人显式标记、待补本人输入/勾完成；所选指标的数据缺口单独显示为“不是自动任务”。移除卡不删事项。</li>
+<li>旧v1–v5升级先留当前版本一致快照，事务冲突回滚，旧迁移不改；v5成功与v6冲突保留旧财务测试已运行。配置revision、组/公司顺序、卡显隐/所选指标/日期/待核及研究事项完成状态全进入基本备份；格式仍1、兼容schema1–6，源备份只staging升级、不改原包。</li>
+<li><strong>测试先行：</strong>原生首批4个配置/迁移/备份测试首次因未实现失败；另1个显式事项测试首次失败，实现后通过。前端数据模型2个断点/分组断言首次因空实现失败后通过；适配边界与缺引用测试当时已通过，不把它们说成红灯。后补指标归属、日期/修订空值和保存读状态断言通过。</li>
+<li><strong>自动验证：</strong>Rust45通过/0失败、2个GUI夹具默认ignored；P07夹具显式隔离运行1/1通过。桌面27/27、Web24/24、workspace3/3、共享估值8/8、元数据2/2；严格Clippy、check:local（142文件，类型/lint）、独立debug构建退出0，主chunk406.89kB、看板19.31kB、趋势479.51kB，无大chunk警告。未扩正式CSP/capabilities/identifier或新增依赖。</li>
+<li><strong>原生实测主路径：</strong>虚构看板v1→指标卡上移/待读隐藏→保存v2→重新载入保持；实际截图确认2023/2024/2025营收100/缺值/140及缺值处无跨点连线。新增“需要补证”组、公司移入、待核显示/待读恢复显示保存v3，标记资料已完成，输入新增待补。退出重启后v3、分组/卡顺序/待核列/资料完成状态/新增事项/正式v1实际回读保留。</li>
+<li><strong>验收限制：</strong>指标菜单指针项点击被控制工具归属检查拒绝（not_dispatched），关闭菜单后公司组通过当前菜单键盘选择成功；不把打开菜单当全部指标选择通过。日期控件逐项输入、自定义数值/文本指标原生菜单切换、多公司组内排序、非空待核灰点与窄屏未逐项GUI验证，自动回归覆盖数据路径。关闭动作回执uncertain，只确认随后无运行实例并重启数据保留，不回写P05/P06旧缺口。收尾一次点击遇桌面锁屏状态变化，已停止GUI，不重放；不影响之前保存重启证据。</li>
+<li>配置手动保存，未保存导航有阻断与关闭前提示，不承诺Cmd+Q/强制退出不丢配置；未提交事项输入不保证跨分组/重新载入保留。只测试macOS ARM64标准窗口，不重打release/DMG、安装、公证或发布。</li>
+<li>工作区保护：开工HEAD为P06外部提交，Main未提交；初始用户1990.md修改及期间1990–1999股东信变化均未触碰/回滚、不归入P07，测试仅代表命令执行时状态，不覆盖随后并发改动。Web/共享包/批准方案本体未改；本轮仅桌面、合同/记录/README和预览产物。</li>
+</ul>
+<p>合同：<a href="desktop-dashboard-contract.md">desktop-dashboard-contract.md</a>；<a href="p07-verification-logs/ui-observation.md">原生观察及覆盖边界</a>；<a href="p07-verification-logs/rust-tests.log">Rust测试</a>、<a href="p07-verification-logs/rust-clippy.log">Clippy</a>、<a href="p07-verification-logs/frontend-tests.log">桌面测试</a>、<a href="p07-verification-logs/workspace-tests.log">工作区测试</a>、<a href="p07-verification-logs/check-local.log">类型/lint</a>、<a href="p07-verification-logs/native-debug-build.log">独立debug构建</a>、<a href="p07-verification-logs/fixture-tests.log">虚构隔离夹具</a>。</p>
+<p><strong>打开方式：</strong>双击项目内 <code>apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P07验收.app</code>，点击“指标看板”验收虚构数据；正式开发使用 <code>corepack pnpm dev:desktop</code>，浏览器预览不能读写SQLite，旧release不含P07。</p>
+<p><strong>Commit描述（自动生成，不提交）</strong></p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere;">feat(desktop): add configurable local research dashboard
+
+- persist dashboard groups, company order and card configuration in schema v6
+- add metric, reading, supplement and latest official judgment cards
+- retain metric references, time ranges and review-aware gap trends
+- support explicit reading status and personal research follow-up items
+- protect configuration and item updates with revision checks
+- verify native IPC, v5 migration rollback and backup round trips
+- validate card visibility, ordering, grouping and restart persistence
+- document acceptance coverage without adding collection or AI</pre>
+</div>
+
+<h2>P06 手工财务与指标观测（历史执行结果）</h2>
+<div class="card">
+<p><strong>核心已实现，自动回归与原生读数通过；原生录入及图形实看验收未完成，不是全项通过。</strong>用户只授权P06，本轮停在待确认；P07看板、采集、AI均未实现，未提交或推送。</p>
+<ul>
+<li>schema v5：财务事实、指标定义、观测与派生快照入SQLite。事实/观测修订只追加；旧版与快照不能改删，当前最新待核不回退旧审核值。旧v1–v4升级留一致快照、冲突回滚保留旧判断；备份格式仍1、兼容schema1–5，全部新实体及版本/引用往返回归。</li>
+<li>10个原始科目映射不复制金额；5个固定纯函数：自由现金流、归母期末权益ROE、毛利率、净利率、资产负债率。输入币种/单位/准则/范围/期间/口径兼容且已审核才计算，公式p06-v1及输入具体版本可追溯。输入修订新快照，不改历史；缺口径/缺值/待核/重复/零分母/非有限计算显示未展示。</li>
+<li>自定义数值/文本观测直接存储、不参与派生。数值图保留null断点、已核对线和可切待核灰点；文本仅卡片。不同季度/累计月日跨度分开，单位或口径空的自定义数值不进图，非金额币种可空。财务图轴采用同口径已录入期间并集；未录入的年份不推测，不换汇、不年化、不做用户公式DSL。</li>
+<li>补测先发现跨季度串线与缺左输入期间消失，已修复后通过；下溢数值先失败后保护通过。修订入口滚动至对应表单；写入成功但列表刷新失败明确提示已保存、不要重复提交。手动财务提交不是P05自动保存，未提交离页不保证保留。派生快照暂无独立创建时间，不声称时间排序历史。</li>
+<li><strong>最新自动验证：</strong>Rust39通过/0失败，1个显式GUI夹具默认ignored（另行指定隔离路径运行通过）；桌面20/20、Web24/24、工作区3/3、共享估值8/8、元数据2/2。严格Clippy、check:local（135文件，类型/lint）、最终独立debug构建退出0。ECharts5.6.0按需本地打包，主chunk406.44kB、趋势479.51kB，无大chunk告警；未改变Web/共享包/正式identity/CSP/capabilities。</li>
+<li><strong>真实原生读取：</strong>最终包首页native正常且新能力说明正确；重启后1家虚构公司保留。财务页实际AX读到营收2023/2024/2025为100/缺值/140、成本84、毛利率40%、文本卡片和客户数10/14。测试夹具通过相同Rust业务函数写入空隔离库，不是前端录入验收；正式用户库不注入样例。</li>
+<li><strong>原生验收阻塞：</strong>名称输入返回no_on_screen_window，截图不可见；最终窗口公开Raise一次后截图先scene changed、再不可见，未取得图像。停止前置/输入循环。前端录入、修订/核对、筛选切换、ECharts实际绘制/断点/灰点及窄屏布局仍未实看，不以AX图容器、测试或包存在替代。旧窗口关闭返回uncertain，仅确认退出重启后内容保留。</li>
+<li>工作区附带变化：收尾git status发现1995年股东信 <code>content/knowledge/masters/warren-buffett/letters/zh/1990s/1995.md</code> 修改，非本阶段操作，未触碰、未回滚，也不归入P06 commit描述；此前工作区测试不据此扩称覆盖这批后来修改。进度预览报告仅等价格式化以满足lint，初次格式检查失败日志保存在 <a href="p06-verification-logs/check-document-format-failure.log">check-document-format-failure.log</a>，复跑135文件无error。HTML完整桌面预览无资源/控制台错误或横向溢出，仅非阻断favicon提示；该预览不替代原生应用图形验收。</li>
+<li>仅桌面源码/锁文件/合同/本记录/README变化；未修改批准方案本体，不重做P00，不等待已删除的在线方案。旧release/DMG不是P06版本；未安装、公证、发布或验证其它平台。P05历史缺口继续保留。</li>
+</ul>
+<p>合同：<a href="desktop-finance-contract.md">desktop-finance-contract.md</a>；<a href="p06-verification-logs/ui-observation.md">原生观察与缺口</a>；<a href="p06-verification-logs/rust-tests.log">Rust测试</a>、<a href="p06-verification-logs/rust-clippy.log">Clippy</a>、<a href="p06-verification-logs/frontend-tests.log">桌面测试</a>、<a href="p06-verification-logs/workspace-tests.log">工作区测试</a>、<a href="p06-verification-logs/check-local.log">类型/lint</a>、<a href="p06-verification-logs/native-debug-build.log">最终独立debug构建</a>、<a href="p06-verification-logs/fixture-tests.log">虚构夹具</a>。</p>
+<p><strong>打开方式：</strong>双击项目内 <code>apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P06验收.app</code>，进入虚构公司→手工财务与指标观测。正式开发使用 <code>corepack pnpm dev:desktop</code>，仅浏览器预览 <code>corepack pnpm dev:desktop:web</code>不读写SQLite。</p>
+<p><strong>Commit描述（自动生成，只描述、不提交）</strong></p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere;">feat(desktop): add manual financial facts and metric observations
+
+- add schema v5 append-only financial and observation versions
+- retain currency, units, periods, accounting scope and review status
+- derive fixed metrics from compatible reviewed input versions
+- preserve formula provenance and historical derived snapshots
+- add manual entry, revision, review filters and gap-aware trends
+- keep text observations separate from numeric chart series
+- verify native IPC, migration rollback and backup round trips
+- document P06 acceptance coverage and native UI limitations</pre>
+</div>
+
+<h2>P05 自由判断与历史（历史执行结果）</h2>
+<div class="card">
+<p><strong>当前结果：核心已实现，最终原生补验未完成；不是全项验收通过。</strong>用户只授权P05，P06未授权；每阶段生成commit描述，不代提交。</p>
+<ul>
+<li>schema v4：每公司一个可修改草稿，正式判断只追加；版本号、基版、正文、原因、开始/冻结时间入SQLite。旧库升级先留一致快照，旧迁移不改。草稿与正式链备份往返通过，未保存localStorage恢复副本不在基本备份中。</li>
+<li>Tiptap自由正文与可选提纲；停笔约900ms写入、手动重试、恢复待处理提示、转正式双确认、删除草稿等待在途保存结束。修订复制新草稿，v1不可回写。正文差异逐行展示，格式差异需看原版。</li>
+<li>已实看：虚构公司→草稿两段正文自动保存→无证据/无提纲冻结v1→键入旧版不变→修订正文及原因→冻结v2→新增/删除/保留与原因差异正确。正式用户库未访问。</li>
+<li>失败实测：仅隔离库临时触发器模拟保存失败，最新正文/原因保留；导航与普通关窗出现保护提示，失败时不能离开。清除触发器后重试保存成功，独立只读SQLite回读确认失败新增正文、原因与2个正式版保留。临时失败触发器已清除。</li>
+<li>初版成功保存后窗口未关闭，不算通过。检查SDK默认关闭后调用通用destroy的路径，已改为主动拦截＋无参数当前窗口Rust destroy，未扩大通用窗口权限，重新debug构建成功。已退出保存后的旧进程并重启，原生状态及同公司详情可见。</li>
+<li><strong>2026-10-27 补验：</strong>重启后判断页已实际读取，草稿修订号1、失败后保存的正文和原因、v1/v2正式链及差异均保留。干净草稿关窗后工具返回进程失效、动作结果不确定；后续窗口发现及只读进程核对确认应用已退出，重新启动后判断页内容仍在。这证明退出后的保留，不将不确定动作回执算作成功关闭验收。</li>
+<li><strong>剩余缺口：</strong>恢复补验在隔离库建立临时失败触发器后，输入步骤再次返回USER_CONTROL_ACTIVE，立即停止GUI；当次输入是否完成不能确认，临时触发器已撤除、正常保存恢复。保存成功后关闭完整流程、恢复副本选择、全部富文本工具按钮、资料/DCF新路由目视仍未完成。未保存Cmd+Q/强制终止未验收，不承诺绝对防丢。P05仍未全项通过，P06未授权。</li>
+<li><strong>本次续接的客观阻塞：</strong>当前窗口可读AX正文；输入首次因控件中心不在窗口范围被拒绝，截图随后提示窗口不可见。按窗口公开Raise动作前置后可看到截图，但键盘仍返回no_on_screen_window、not_dispatched。已撤除隔离库临时失败模拟，再请用户显示窗口；用户完成并交回控制后，滚动仍返回同类not_dispatched拒绝。停止重复前置与输入，不绕过窗口检查，不把用户交回控制当作验收通过。正常保存未被临时触发器阻断；v1/v2保留。未修改业务代码或重跑P00/全量回归，P05仍待补验、P06未开始。</li>
+<li>自动验证最终结果见下方链接：Rust31/31（含判断/IPC/备份），桌面13/13，Web24/24；严格Clippy、check:local、桌面构建通过。主包已按需加载资料页，最终构建无大chunk告警。最后关闭包装修改另补MockRuntime命令验证，不当真实macOS关闭目视。</li>
+<li>仅桌面业务/锁文件/配套文档变化；Web、共享packages、正式identifier、capabilities未改。git diff --check通过。旧release/DMG不是P05产物；未安装、提交、推送或发布。</li>
+</ul>
+<p>合同：<a href="desktop-judgment-contract.md">desktop-judgment-contract.md</a>；原生记录：<a href="p05-verification-logs/ui-observation.md">ui-observation.md</a>；<a href="p05-verification-logs/rust-tests.log">Rust测试</a>、<a href="p05-verification-logs/rust-clippy.log">Clippy</a>、<a href="p05-verification-logs/workspace-tests.log">工作区测试</a>、<a href="p05-verification-logs/check-local.log">类型/lint</a>、<a href="p05-verification-logs/native-debug-build.log">独立debug构建</a>。</p>
+<p><strong>打开方式：</strong>双击项目内 <code>apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P05验收.app</code>，公司研究→虚构公司→个人判断与历史。正式开发用 <code>corepack pnpm dev:desktop</code>。隔离数据不与正式应用共享。</p>
+<p><strong>Commit描述（自动生成，不提交）</strong></p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere;">feat(desktop): add personal judgment drafts and immutable history
+
+- add schema v4 judgment drafts and append-only official versions
+- implement revision-checked save, freeze, revise and discard commands
+- add Tiptap free-form writing, draft autosave and recovery prompts
+- protect unsaved navigation and handle current-window close requests
+- show read-only version timeline and line-based text/reason differences
+- verify judgment IPC, migration and backup round trips
+- document native acceptance evidence and remaining verification gaps</pre>
+</div>
+
+<h2>P04 本地资料库（2026-10-26）</h2>
+<div class="card">
+<p><strong>交付：</strong>公司详情新增资料库入口；手动文件、链接、文本笔记可添加、编辑、挂标签、标题/标签搜索、归档与恢复在用。内部复制进入附件备份；外部引用只记录位置，失效提示重新定位同内容文件。手动笔记不等同 P05 正式判断历史。</p>
+<ul>
+<li>schema v3 新增资料与标签表；v1/v2升级前保存当前版本快照，不覆盖同名旧快照，事务迁移及重启幂等。备份格式仍v1、schema兼容v1–v3，资料ID/正文/来源链接/标签/归档/CSV映射/复制件往返已测试；外部原件不在备份中。</li>
+<li>PDF、PNG/JPEG/GIF/WebP、UTF-8 TXT/Markdown本地预览；CSV真实解析、列映射确认，保留前导零/空值/引号，不执行公式、不写财务或指标。未知格式只提供文件位置。单文件50 MiB，预览20 MiB；不做OCR或全文搜索。</li>
+<li>前端只传资料ID，不传任意路径/SQL；文件选择由Rust原生对话框完成，取消不写。内部复制路径与hash校验、引用内容变化拒绝静默采用、符号链接/路径越界拒绝。通用前端fs/dialog/opener权限未授予，capabilities仍core:default；CSP仅增加本地blob/字体/worker及同源资源读取，不开放远程网络。</li>
+<li>自动验证：Rust24/24（含真实Tauri IPC JSON与SQLite）、桌面适配7/7、Web24/24、Clippy -D warnings、类型/lint、前端与独立debug构建通过。PDF按需加载，原大chunk warning已消除。</li>
+<li>原生实看：虚构公司→笔记保存/标签→原生文件选择框→导入PDF。路径快捷键两次无效，由用户接管选虚构sample.pdf后，实际资料数1→2。首次PDF缺字被发现，不算通过；补本地字体/CMap后重新打包、退出重启，同资料第一页文字与第二页翻页正常。笔记Markdown和归档/恢复正常。</li>
+<li><strong>验收限制：</strong>图片、CSV列映射、TXT、外部引用重定位未逐一GUI实看，真实文件/SQLite测试覆盖。浏览器控制两次仅返回completed，未提供DOM/截图，所以不声称浏览器目视通过；前端无原生命令的browser边界有单测与禁用代码。无签名公证、release/DMG或其他系统验收。</li>
+<li>未改Web、共享包或正式应用标识，未安装到Applications；P05–P13未开始，AI不入本期。未提交、推送、发布。</li>
+<li>工作区附带变化：旧P03预览进程继续向p03-verification-logs/browser-dev.log写P04热更新与中间JSX报错，日志原文保留；全树diff --check因该新增日志尾空格失败，不删改日志。P04源码/合同限定diff检查另行通过。旧_shots/report.json仅等价JSON格式化满足lint，结论未改。</li>
+</ul>
+<p>合同：<a href="desktop-material-contract.md">desktop-material-contract.md</a>。核心观察：<a href="p04-verification-logs/ui-observation.md">ui-observation.md</a>；<a href="p04-verification-logs/rust-tests.log">Rust测试</a>、<a href="p04-verification-logs/rust-clippy.log">Clippy</a>、<a href="p04-verification-logs/workspace-tests.log">工作区测试</a>、<a href="p04-verification-logs/check-local.log">类型/lint</a>、<a href="p04-verification-logs/native-debug-build.log">隔离debug构建</a>。</p>
+<p><strong>打开方式：</strong>正式本地开发执行<code>corepack pnpm dev:desktop</code>；隔离验收应用位于<code>apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P04验收.app</code>，双击后进入公司研究→公司档案→资料库；数据与正式应用不相通。</p>
+<p><strong>Commit描述（自动生成，不提交）：</strong></p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere;">feat(desktop): add local company material library
+
+- add file, link and note entries with tags and archive controls
+- support ID-scoped local previews and CSV column mapping
+- preserve copied files and safely relocate external references
+- migrate schema v3 and verify material backup round trips
+- bundle offline PDF fonts and document P04 acceptance limits</pre>
+</div>
+
+<h2>P03 公司与证券档案（2026-10-26）</h2>
+<div class="card">
+<p><strong>交付：</strong>新增公司研究入口、名称/代码搜索、创建公司、公司详情及同公司多证券；分类覆盖 A股/港股/美股/非上市。名称必填、注册地和证券可空；独立 UUID，不自动归并，不接行情。</p>
+<ul>
+<li>同名/同市场重复代码返回确认状态，尚未写入；界面核对后“确认仍然保存”创建独立记录，取消不清空输入。空名称/非法证券/不存在父公司明确失败，无部分数据。</li>
+<li>schema v2 新增公司与证券外键；v1升级前保存一致性快照，事务迁移冲突回滚。旧备份先核对真实schema，再仅在暂存目录升级；原备份不改。</li>
+<li>已运行：Rust 16/16（含真实 Tauri IPC JSON/命令包装、测试 SQLite），桌面适配4/4、Web24/24，Clippy -D warnings、类型/lint（111文件无warning）、桌面构建、git diff --check 均通过。</li>
+<li>原生实看：隔离 debug应用创建虚构公司，同名确认后1→2档案，同公司两证券；退出重启后仍2档案，代码搜索返回相应公司。工作台 native状态可见。测试数据仅在独立验收标识的数据目录，正式配置不变。</li>
+<li>浏览器实看：公司页正常渲染；创建、输入与搜索禁用，明确只可预览、不读写SQLite。没有浏览器假数据替代。</li>
+<li>限制：原生辅助下拉选择未切换，跨市场/ADR选择未完整实看；HK/US/ADR存储有Rust测试。未公开签名公证、未重打release/DMG、未验证其他平台。</li>
+<li>Web、共享packages、正式Tauri标识、CSP和capabilities均未修改；仍core:default。资料/判断/指标/采集/AI/备份页面不入本期，P04未开始。</li>
+</ul>
+<p>合同：<a href="desktop-company-contract.md">desktop-company-contract.md</a>。原生日志：<a href="p03-verification-logs/ui-observation.md">ui-observation.md</a>。自动化证据：<a href="p03-verification-logs/rust-tests.log">Rust测试</a>、<a href="p03-verification-logs/rust-clippy.log">Clippy</a>、<a href="p03-verification-logs/workspace-tests.log">workspace测试</a>、<a href="p03-verification-logs/check-local.log">类型/lint</a>、<a href="p03-verification-logs/desktop-build.log">桌面构建</a>。</p>
+<p><strong>Commit 描述（自动生成，不提交）：</strong></p>
+<pre style="white-space:pre-wrap;overflow-wrap:anywhere;">feat(desktop): add local company and listing archives
+
+- add company creation, detail, search, and multiple securities
+- keep UUID identities independent from names and ticker codes
+- require explicit confirmation for duplicate records without merging
+- migrate v1 databases to v2 with a pre-upgrade snapshot and rollback
+- preserve company and listing data through backup and restore
+- validate native IPC, input errors, and browser preview boundaries
+- document contracts and P03 acceptance evidence</pre>
+</div>
+
+<h2>P02 基本备份 / 恢复（2026-10-26）</h2>
+<div class="card">
+<p><strong>阶段范围：</strong>实现 Rust 内部的数据库＋附件通用快照和恢复核心，用代表夹具验收；不提供备份页面或前端任意路径命令，不处理 P09 的第三方受限负载。</p>
+<table>
+<tr><th>验收项</th><th>结果</th><th>证据</th></tr>
+<tr><td>测试先行</td><td><span class="badge b-green">通过</span></td><td>往返、损坏负载、未知格式 / 未来 schema 三类测试首次因备份函数未实现而 3/3 失败；实现后通过。</td></tr>
+<tr><td>一致性快照</td><td><span class="badge b-green">通过</span></td><td>SQLite 使用 <code>VACUUM INTO</code> 生成独立副本，测试确认已提交的 WAL 数据进入快照；附件递归复制并拒绝符号链接。</td></tr>
+<tr><td>清单与安全</td><td><span class="badge b-green">通过</span></td><td>清单记录格式版本、schema 版本、相对路径、大小和 SHA-256；拒绝路径穿越、越界路径、重复路径、未声明文件及 hash / 大小不一致。</td></tr>
+<tr><td>暂存恢复与回滚</td><td><span class="badge b-green">通过</span></td><td>负载先恢复到暂存目录并执行 schema 校验；通过后整体切换，原数据目录保留为 <code>.rollback</code>；不做部分合并。</td></tr>
+<tr><td>失败保护与幂等</td><td><span class="badge b-green">通过</span></td><td>损坏负载、未知格式、未来 schema 均在切换前拒绝且当前数据不变；重复恢复得到相同内容，不产生额外业务记录。</td></tr>
+<tr><td>权限边界</td><td><span class="badge b-green">通过</span></td><td>Tauri capabilities 仍只有 <code>core:default</code>；备份核心未注册前端命令，未新增文件、网络或 shell 插件。</td></tr>
+<tr><td>自动化回归</td><td><span class="badge b-green">通过</span></td><td>Rust 8/8 测试、Clippy <code>-D warnings</code>、workspace 测试、<code>check:local</code>、桌面构建和 <code>git diff --check</code> 均通过；Web 24/24，Biome 108 文件 0 warning。</td></tr>
+</table>
+<p class="muted">实现：<code>src-tauri/src/backup.rs</code>、<code>sha2</code> 依赖；合同：<code>docs/desktop-backup-contract.md</code>。P02 只验证代表夹具，不能据此声称覆盖尚未实现的业务实体；P03 及以后每新增实体都需复跑备份回归。</p>
+</div>
+
+<h2>P01 本地存储与迁移安全（2026-10-26）</h2>
+<div class="card">
+<p><strong>阶段范围：</strong>只建设 Rust 侧 SQLite 技术底座，不含公司、资料、判断、指标等业务表或页面，不增加网络、文件或 shell 插件权限。</p>
+<table>
+<tr><th>验收项</th><th>结果</th><th>证据</th></tr>
+<tr><td>测试先行</td><td><span class="badge b-green">通过</span></td><td>新测试首次运行因 <code>initialize_database</code> 未实现而 2/2 失败；实现后通过，证明测试能够捕获缺失能力。</td></tr>
+<tr><td>新库与重复迁移</td><td><span class="badge b-green">通过</span></td><td>同一路径连续初始化两次均返回 schema v1；WAL 模式生效。</td></tr>
+<tr><td>错误版本保护</td><td><span class="badge b-green">通过</span></td><td>未来版本 <code>user_version=99</code> 被拒绝且保持 99；版本为 1 但缺少元数据表的库被拒绝且不被自动修复。</td></tr>
+<tr><td>命令合同</td><td><span class="badge b-green">通过</span></td><td>新增无参数、只读 <code>storage_status</code>，仅返回 schema version 与应用数据目录中的数据库路径；前端不能传路径或执行 SQL。</td></tr>
+<tr><td>权限边界</td><td><span class="badge b-green">通过</span></td><td><code>capabilities/default.json</code> 未修改，仍只有 <code>core:default</code>；未增加网络、文件或 shell 插件。</td></tr>
+<tr><td>Rust 验证</td><td><span class="badge b-green">通过</span></td><td><code>cargo fmt</code>、<code>cargo clippy --all-targets -- -D warnings</code>、<code>cargo test</code> 退出 0；Rust 4/4 测试通过。</td></tr>
+<tr><td>仓库回归</td><td><span class="badge b-green">通过</span></td><td><code>pnpm test</code>、<code>check:local</code>、<code>build:desktop</code> 与 <code>git diff --check</code> 退出 0；Web 24/24、Biome 108 文件 0 warning。</td></tr>
+</table>
+<p class="muted">实现文件：<code>src-tauri/src/storage.rs</code>、<code>src-tauri/migrations/0001_storage_foundation.sql</code>、<code>src-tauri/src/lib.rs</code>、<code>src-tauri/Cargo.toml</code> / <code>Cargo.lock</code>。合同：<code>docs/desktop-storage-contract.md</code>。本阶段没有业务页面，因此没有新增界面可视验收；原生窗口目视仍保留为 P00 历史缺口。</p>
+</div>
+
+<h2>P00 首轮验证记录（2026-10-26，历史结果；第二轮复跑见上方段落）</h2>
+<div class="card">
+<p><strong>第二轮补验（记录整理期）</strong>：在当前工作树重跑 <code>test</code> / <code>check:local</code> / <code>build:desktop</code>，全部退出 0（apps/web 本轮实跑 24/24，含新增的 algolia-layout 测试）；首版 6 条 biome <code>noDescendingSpecificity</code> 警告经定位确认全部位于本仓库文档 <code>desktop-research-plan.html</code> 的样式块（非用户业务源码），已做最小等价重排修复，复跑后警告消除（Checked 108 files，0 warnings）。日志：<a href="p00-verification-logs/p00-rerun-test.log">p00-rerun-test.log</a>、<a href="p00-verification-logs/p00-rerun-check-local.log">p00-rerun-check-local.log</a>、<a href="p00-verification-logs/p00-rerun-build-desktop.log">p00-rerun-build-desktop.log</a>。浏览器通道补验：工作台 browser 态提示、连接重检、估值工具空态与导航已观察确认，转录见 <a href="p00-verification-logs/browser-observation-2026-10-26.md">browser-observation-2026-10-26.md</a>。<strong>桌面原生窗口观察：原生窗口及其导航仍待实际观察；当前不能宣告 P00 通过，不要求用户代做。</strong></p>
+<table>
+<tr><th>#</th><th>命令 / 入口</th><th>结果</th><th>说明</th></tr>
+<tr><td>1</td><td><code>corepack pnpm test</code></td><td><span class="badge b-green">退出 0</span></td><td>workspace 节点测试 3/3；valuation 8/8；content-schema 2/2；desktop 原生适配单测 2/2；<strong>apps/web 21/21</strong> 全部通过。</td></tr>
+<tr><td>2</td><td><code>corepack pnpm types:check</code></td><td><span class="badge b-warn">失败（环境保护）</span></td><td>仅 apps/web <code>next typegen</code> 触发 <code>next.config.mjs</code> 保护：“Algolia 搜索密钥不能与写入密钥相同”。此为仓库既定凭据保护，非代码缺陷；不修、不绕过。改用 README 规定的隔离入口。</td></tr>
+<tr><td>3</td><td><code>corepack pnpm check:local</code></td><td><span class="badge b-green">退出 0</span></td><td>隔离 Algolia 凭据后执行：biome 检查 104 文件（<strong>当时 6 项告警，后核实均为本任务方案 <code>desktop-research-plan.html</code> 自身样式规则，并在第二轮修复消除</strong>）；全部 workspace 类型检查通过，apps/web 路由类型生成成功。</td></tr>
+<tr><td>4</td><td><code>corepack pnpm build:desktop</code></td><td><span class="badge b-green">退出 0</span></td><td>仅构建桌面前端 dist（不调用网站同步、不写远端）；vite 126 模块，输出 index.js 344.88 kB。</td></tr>
+<tr><td>5</td><td><code>corepack pnpm dev:desktop:web</code>（localhost:28743 浏览器预览）</td><td><span class="badge b-green">本轮实读确认</span></td><td>页面实读文本：“浏览器预览：原生功能仅在 Tauri 窗口中可用”——browser 态提示正常显示。</td></tr>
+<tr><td>6</td><td><code>PATH=/opt/homebrew/bin:$PATH corepack pnpm dev:desktop</code>（原生窗口）</td><td><span class="badge b-green">debug 构建 / 进程启动成功</span> / <span class="badge b-warn">窗口界面未验证</span></td><td>首次启动因预览服务占用 28743 报 beforeDevCommand 端口冲突（首轮日志未单独留存，此为操作观察）；停预览后重启，debug 编译 1m12s，窗口进程 <code>target/debug/value-investing-desktop</code> 正常运行后关闭。<strong>原生窗口内 native 态的目视验证本轮未完成</strong>；浏览器/原生三态区分逻辑由单测 #1 覆盖。</td></tr>
+</table>
+<p class="muted">日志（相对本记录同目录）：<a href="p00-verification-logs/p00-test.log">p00-test.log</a>、<a href="p00-verification-logs/p00-types.log">p00-types.log</a>、<a href="p00-verification-logs/p00-check-local.log">p00-check-local.log</a>、<a href="p00-verification-logs/p00-build-desktop.log">p00-build-desktop.log</a>、<a href="p00-verification-logs/p00-dev-desktop-web.log">p00-dev-desktop-web.log</a>、<a href="p00-verification-logs/p00-dev-desktop.log">p00-dev-desktop.log</a>。日志保留原始错误输出，未做结果改动；已检查无凭据值。</p>
+</div>
+
+<h2>未验证项与边界（如实保留）</h2>
+<div class="card">
+<ul>
+<li>原生窗口内 native 状态（app_info 返回）的目视抽看：本轮未完成，仅进程启动 + 单测覆盖；原生窗口及其导航仍待实际观察，不要求用户代做。<strong>主会话按公开桌面工具调用重试两个入口：① 应用枚举后按 <code>value-investing</code> / <code>价投</code> / <code>tauri</code> 筛选；② 按 <code>cu.get_app_state('/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri/target/release/bundle/macos/价投小角落.app', screenshot=True)</code> 取窗口状态与截图。</strong>两者控制层均返回原文「Subagent暂不支持操作电脑相关操作，请在MainAgent完成」，未返回应用列表、AX 树或截图——这是桌面控制入口的能力层阻塞，非应用错误；原生工作台 app_info / native 状态与导航观察未完成，当前不能宣告 P00 通过。</li>
+<li>release 重打包 / DMG：本轮未执行（历史产物签名口径：adhoc/linker-signed，未 Developer ID 签名、未公证）。</li>
+<li>Intel / Windows / Linux：未验证，维持历史口径。</li>
+<li>未新增网络 / 文件权限、未装依赖、未改业务代码；未提交、未推送、未发布、未安装到 Applications。</li>
+</ul>
+</div>
+
+<h2>工作区变化核对</h2>
+<div class="card">
+<p>执行前 <code>git status</code>：仅用户既有 <code>M content/knowledge/masters/warren-buffett/letters/zh/1980s/1983.md</code> 与未跟踪 <code>docs/desktop-research-plan.html</code>。</p>
+<p>执行后 <code>git status</code>：在上述基础上新增未跟踪 <code>docs/desktop-implementation-progress.html</code>（本记录）与 <code>docs/p00-verification-logs/</code>（6 份日志副本）。<strong>本阶段（P00 执行期间）无业务代码 diff</strong>；构建产物落于 gitignore 的 <code>node_modules</code> / <code>apps/desktop/src-tauri/target</code> / <code>dist</code>，不影响版本库。</p>
+<p><strong>检查完成后、记录整理期间，观察到额外的 Web / Algolia 修改（来源未确认，非本阶段修改）：</strong>已修改 <code>apps/web/app/(home)/layout.tsx</code>、<code>apps/web/app/knowledge/layout.tsx</code>、<code>apps/web/components/providers.tsx</code>、<code>apps/web/package.json</code>；新增未跟踪 <code>apps/web/components/algolia-attribution.tsx</code>、<code>apps/web/components/algolia-search-dialog.tsx</code>、<code>apps/web/scripts/algolia-layout.test.mjs</code>。<strong>（首轮当时结论）</strong>该批变更未经回滚或修复；<strong>第二轮测试 / 类型 / 桌面构建在当时工作树执行</strong>；另以 12 个关键配置和变更文件哈希核对复跑窗口稳定性，未对整树作完整快照，不能声称整树未变。</p>
+<p class="muted">其它来源的工作区变化（本阶段未修改；第二轮命令覆盖按上文，未做超出 P00 的业务验收）：上述 apps/web Algolia 相关 4 项修改 + 3 项新增文件，以及用户既有 <code>M content/knowledge/masters/warren-buffett/letters/zh/1980s/1983.md</code> 与未跟踪 <code>docs/desktop-research-plan.html</code>。</p>
+
+<h2>复跑时源码指纹（sha256，采样集合）</h2>
+<div class="card">
+<p class="muted">仅采样本轮相关的已变更源码 / 配置集合（12 个文件），并把未跟踪的 web 源码一并纳入；<strong>不是整树全量枚举，不能据此声称整树无变化</strong>。记录复跑执行前后该采样集合哈希一致、未再变动；排除生成物目录（node_modules / target / dist），不输出内容，仅记录哈希。</p>
+<table>
+<tr><th>文件</th><th>sha256（前 12 位）</th></tr>
+<tr><td>package.json</td><td><code>41c2725217bd</code></td></tr>
+<tr><td>pnpm-workspace.yaml</td><td><code>e2ec20dcb5c6</code></td></tr>
+<tr><td>biome.json</td><td><code>98fd2cd6a9b0</code></td></tr>
+<tr><td>apps/web/package.json</td><td><code>1c08c37b35f5</code></td></tr>
+<tr><td>apps/web/components/providers.tsx</td><td><code>46037b694efd</code></td></tr>
+<tr><td>apps/web/app/(home)/layout.tsx</td><td><code>ed6a499f6a10</code></td></tr>
+<tr><td>apps/web/app/knowledge/layout.tsx</td><td><code>3b39677a4613</code></td></tr>
+<tr><td>apps/web/components/algolia-attribution.tsx</td><td><code>c70cd6fd7c56</code></td></tr>
+<tr><td>apps/web/components/algolia-search-dialog.tsx</td><td><code>c82bc2733902</code></td></tr>
+<tr><td>apps/web/scripts/algolia-layout.test.mjs</td><td><code>d5ea9f44837f</code></td></tr>
+<tr><td>apps/desktop/src-tauri/tauri.conf.json</td><td><code>8ee4109af352</code></td></tr>
+<tr><td>apps/desktop/package.json</td><td><code>a52ea90b13a2</code></td></tr>
+</table>
+</div>
+</div>
+</div>
+</body>
+</html>

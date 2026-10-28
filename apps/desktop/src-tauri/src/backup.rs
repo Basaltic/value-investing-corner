@@ -71,6 +71,7 @@ async fn create_backup_in_staging(
         .await
         .map_err(|error| format!("无法生成一致数据库快照：{error}"))?;
     drop(connection);
+    crate::third_party::sanitize_snapshot(&snapshot_path, data_dir).await?;
 
     let attachments = data_dir.join("attachments");
     if attachments.exists() {
@@ -106,6 +107,12 @@ pub async fn restore_backup(backup_dir: &Path, data_dir: &Path) -> Result<(), St
     std::fs::create_dir_all(&staging).map_err(|error| format!("无法创建恢复暂存目录：{error}"))?;
 
     let restore_result = restore_into_staging(backup_dir, &manifest, &staging).await;
+    let restore_result = match restore_result {
+        Ok(()) => {
+            crate::third_party::sanitize_snapshot(&staging.join(DATABASE_FILE), data_dir).await
+        }
+        Err(error) => Err(error),
+    };
     if let Err(error) = restore_result {
         let _ = remove_if_exists(&staging);
         return Err(error);
@@ -511,7 +518,7 @@ mod tests {
                 .fetch_one(&mut restored)
                 .await
                 .unwrap(),
-            7
+            8
         );
         assert_eq!(
             std::fs::read_to_string(data.join("attachments/legacy.txt")).unwrap(),

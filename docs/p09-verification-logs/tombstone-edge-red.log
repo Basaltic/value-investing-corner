@@ -1,0 +1,40 @@
+   Compiling value-investing-desktop v0.1.0 (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 8.57s
+     Running unittests src/lib.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop_lib-d9ee591623e753b3)
+
+running 11 tests
+test third_party::tests::source_changes_mask_live_payload_and_tombstones_are_append_only ... FAILED
+test third_party::tests::admission_metadata_and_full_are_distinct_and_idempotent ... ok
+test third_party::tests::failed_payload_clear_leaves_tombstone_and_filtered_backup ... ok
+test third_party::tests::new_snapshots_do_not_contain_deleted_blob_bytes ... ok
+test third_party::tests::bad_hash_keeps_current_database_and_independent_restrictions ... ok
+test third_party::tests::current_disabled_source_cannot_be_reenabled_by_old_backup ... ok
+test third_party::tests::new_machine_or_missing_ledger_quarantines_only_third_party ... ok
+test third_party::tests::ledger_with_missing_tables_quarantines_without_overwriting_corrupt_file ... ok
+test third_party::tests::missing_ledger_merges_current_tombstones_before_restore_and_reimport ... FAILED
+test third_party::tests::takedown_filters_new_and_old_backups_without_rewriting_personal_content ... ok
+test third_party::tests::missing_or_corrupt_ledger_never_exposes_live_payload_or_blocks_personal_restore ... ok
+
+failures:
+
+---- third_party::tests::source_changes_mask_live_payload_and_tombstones_are_append_only stdout ----
+
+thread 'third_party::tests::source_changes_mask_live_payload_and_tombstones_are_append_only' (61607425) panicked at src/third_party.rs:635:66:
+assertion failed: get(&db, &f.id).await.unwrap().body.is_none()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+---- third_party::tests::missing_ledger_merges_current_tombstones_before_restore_and_reimport stdout ----
+
+thread 'third_party::tests::missing_ledger_merges_current_tombstones_before_restore_and_reimport' (61607421) panicked at src/third_party.rs:628:9:
+assertion `left == right` failed
+  left: 0
+ right: 1
+
+
+failures:
+    third_party::tests::missing_ledger_merges_current_tombstones_before_restore_and_reimport
+    third_party::tests::source_changes_mask_live_payload_and_tombstones_are_append_only
+
+test result: FAILED. 9 passed; 2 failed; 0 ignored; 0 measured; 58 filtered out; finished in 0.46s
+
+error: test failed, to rerun pass `--lib`

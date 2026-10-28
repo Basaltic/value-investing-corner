@@ -7,6 +7,7 @@ mod finance;
 mod judgments;
 mod materials;
 mod storage;
+pub mod third_party;
 
 use tauri::{Manager, State};
 

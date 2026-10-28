@@ -1,0 +1,22 @@
+   Compiling value-investing-desktop v0.1.0 (/Users/bytedance/Desktop/work/code/value-investing-corner/apps/desktop/src-tauri)
+    Finished `test` profile [unoptimized + debuginfo] target(s) in 11.70s
+     Running unittests src/lib.rs (apps/desktop/src-tauri/target/debug/deps/value_investing_desktop_lib-d9ee591623e753b3)
+
+running 1 test
+test third_party::tests::recreated_ledger_does_not_authorize_unconfirmed_old_payloads ... FAILED
+
+failures:
+
+---- third_party::tests::recreated_ledger_does_not_authorize_unconfirmed_old_payloads stdout ----
+
+thread 'third_party::tests::recreated_ledger_does_not_authorize_unconfirmed_old_payloads' (61647416) panicked at src/third_party.rs:902:34:
+assertion failed: get(&db, &f.id).await.unwrap().body.is_none()
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+
+failures:
+    third_party::tests::recreated_ledger_does_not_authorize_unconfirmed_old_payloads
+
+test result: FAILED. 0 passed; 1 failed; 0 ignored; 0 measured; 71 filtered out; finished in 0.06s
+
+error: test failed, to rerun pass `--lib`

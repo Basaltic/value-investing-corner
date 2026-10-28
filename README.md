@@ -45,7 +45,9 @@ P06新增手工财务事实、审核/修订、10个原始科目与5个固定派�
 
 P07新增指标看板（导航 `/dashboard`）：模板卡显隐/排序、公司分组、指标选择/时间范围/待核设置保存SQLite，schema v6；显式待读状态、个人待补及最近正式判断接入，不制造推荐。配置revision冲突拒绝覆盖，事项单独即时保存；未提交配置离开有提示，关闭前需保存。合同 `docs/desktop-dashboard-contract.md`，实际验收范围以进度记录为准；P07已获继续放行，P08只授权来源/凭据/手动任务，不接实际源或AI、不提交。
 
-P08新增“来源与任务”（`/collection`）：三类后续固定通道登记、默认关闭的许可/用途闸门、macOS系统Keychain保存/状态/删除、统一手动队列及只追加状态历史，schema v7。任务三元键去重、最多3次手动执行、SEC共享UTC日调用配额与跨日最小间隔；当前生产未注册适配器，不联网、不伪报归档成功。凭据只回传配置布尔值、不进普通备份、不回退文件。合同 `docs/desktop-collection-contract.md`；原生建档与无依据来源登记保存已实看，任务完整交互/凭据IPC界面/重启仍未完成（用户控制中断），不能标全项通过。隔离debug包 `apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P08验收.app` 双击进入“来源与任务”，不与正式库互通。P09–P13未授权；commit描述自动生成但不提交。
+P08新增“来源与任务”（`/collection`）：三类后续固定通道登记、默认关闭的许可/用途闸门、macOS系统Keychain保存/状态/删除、统一手动队列及只追加状态历史，schema v7。任务三元键去重、最多3次手动执行、SEC共享UTC日调用配额与跨日最小间隔；当前生产未注册适配器，不联网、不伪报归档成功。凭据只回传配置布尔值、不进普通备份、不回退文件。合同 `docs/desktop-collection-contract.md`；原生建档与无依据来源登记保存已实看，任务完整交互/凭据IPC界面/重启仍未完成（用户控制中断），不能标全项通过。隔离debug包 `apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P08验收.app` 双击进入“来源与任务”，不与正式库互通。P08已带历史GUI缺口放行P09；commit描述自动生成但不提交。
+
+P09新增第三方存储/撤销与安全备份恢复核心，schema v8：正文与个人资料分开保存，许可不足不落元数据，metadata_only不存正文；独立限制SQLite＋只追加撤销事件＋restricted指针。新快照排除撤销bytes，旧包恢复先合并本机/快照事件；清单缺失/损坏或新机仅隔离第三方，个人判断/草稿/笔记/附件正常恢复，hash失败拒绝切换。合同 `docs/desktop-third-party-contract.md`，验收见权威记录；本阶段无新增采集或备份页面、前端写入命令，实际源仍未接入。隔离包 `apps/desktop/src-tauri/target/debug/bundle/macos/价投小角落 P09验收.app` 可双击查看既有工作台，安全分支通过Rust真实临时库验收。P10–P13未授权，AI后置、不提交。
 
 P04历史验收：Rust24/24、桌面适配7/7、Web24/24、Clippy、类型/lint及桌面前端/debug构建通过；原生实看建档、笔记保存/Markdown、PDF导入与字体修复、两页翻页、重启保留与归档恢复。图片/CSV/外部重定位未逐项GUI实看，文件与SQLite测试覆盖数据路径；当轮浏览器控制未返回观察。capabilities仍core:default，CSP仅扩展本地blob/同源字体与worker，不开放远程网络。资料笔记手动保存，与P05正式判断独立。
 

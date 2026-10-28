@@ -727,14 +727,14 @@ mod tests {
             if conflict {
                 assert!(result.is_err());
             } else {
-                assert_eq!(result.unwrap().schema_version, 7);
+                assert_eq!(result.unwrap().schema_version, 8);
             }
             let mut con = connect(&db).await.unwrap();
             let version: i64 = sqlx::query_scalar("PRAGMA user_version")
                 .fetch_one(&mut con)
                 .await
                 .unwrap();
-            assert_eq!(version, if conflict { 6 } else { 7 });
+            assert_eq!(version, if conflict { 6 } else { 8 });
             let revision: i64 = sqlx::query_scalar("SELECT revision FROM dashboard_config")
                 .fetch_one(&mut con)
                 .await
@@ -756,7 +756,7 @@ mod tests {
                 .await
                 .unwrap()
                 .schema_version,
-            7
+            8
         );
         let restore = t.path().join("restore");
         restore_backup(&b, &restore).await.unwrap();

@@ -22,16 +22,16 @@
         },
         "fullpage": {
           "w": 1440,
-          "h": 14909
+          "h": 16567
         },
         "counts": {
           "section": 0,
           "h1": 1,
-          "h2": 13,
+          "h2": 14,
           "img": 0,
           "canvas": 0,
           "svg": 0,
-          "links": 60,
+          "links": 72,
           "buttons": 0
         }
       },
@@ -50,7 +50,7 @@
   "chromiumExec": "/Users/bytedance/Library/Caches/ms-playwright/chromium_headless_shell-1248/chrome-headless-shell-mac-arm64/chrome-headless-shell",
   "engineDegraded": true,
   "engineDegradedReason": "playwright 未装",
-  "elapsedSec": 4.25,
+  "elapsedSec": 5.34,
   "schemaVersion": 2,
   "status": "warning",
   "engineInfo": {
