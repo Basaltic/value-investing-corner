@@ -4,12 +4,8 @@
   "scripts": {
     "dev": "corepack pnpm --filter @value-investing/web dev",
     "dev:web": "corepack pnpm --filter @value-investing/web dev",
-    "dev:desktop": "corepack pnpm --filter @value-investing/desktop tauri dev",
-    "dev:desktop:web": "corepack pnpm --filter @value-investing/desktop dev",
     "build": "corepack pnpm --filter @value-investing/web build",
     "build:web": "corepack pnpm --filter @value-investing/web build",
-    "build:desktop": "corepack pnpm --filter @value-investing/desktop build",
-    "bundle:desktop": "corepack pnpm --filter @value-investing/desktop tauri build",
     "start": "corepack pnpm --filter @value-investing/web start",
     "search:export": "corepack pnpm --filter @value-investing/web search:export",
     "search:sync": "corepack pnpm --filter @value-investing/web search:sync",

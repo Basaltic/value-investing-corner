@@ -13,9 +13,7 @@
       "!**/.next",
       "!**/dist",
       "!**/build",
-      "!**/.source",
-      "!**/target",
-      "!**/gen"
+      "!**/.source"
     ]
   },
   "formatter": {
