@@ -13,6 +13,7 @@ export const knowledgeContentRoute = "/llms.mdx/knowledge";
 export const blogContentRoute = "/llms.mdx/blog";
 export const toolsRoute = "/tools";
 export const dcfRoute = `${toolsRoute}/dcf`;
+export const reverseDcfRoute = `${toolsRoute}/reverse-dcf`;
 
 export const siteSections = [
   { label: "知识库", url: knowledgeRoute },

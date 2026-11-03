@@ -1,7 +1,7 @@
-import { ArrowUpRight, Calculator } from "lucide-react";
+import { ArrowUpRight, Calculator, RotateCcw } from "lucide-react";
 import type { Metadata } from "next";
 import Link from "next/link";
-import { dcfRoute } from "@/lib/shared";
+import { dcfRoute, reverseDcfRoute } from "@/lib/shared";
 
 export const metadata: Metadata = {
   title: "小工具",
@@ -36,6 +36,29 @@ export default function ToolsPage() {
           </h2>
           <p className="site-muted mt-4 text-sm leading-7">
             输入基础现金流、增长和折现假设，快速计算企业价值、股权价值与每股估值。每一步计算都可以回看。
+          </p>
+          <span className="site-forest mt-6 inline-flex items-center gap-2 text-sm font-medium">
+            打开工具
+            <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+          </span>
+        </div>
+      </Link>
+      <Link
+        href={reverseDcfRoute}
+        className="group site-rule mt-6 flex max-w-3xl flex-col gap-8 rounded-2xl border bg-[var(--paper-deep)] p-7 transition-colors hover:border-[var(--forest)] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[var(--forest)] sm:flex-row sm:items-start md:p-9"
+      >
+        <span className="site-forest grid size-12 shrink-0 place-items-center rounded-full border border-[var(--line)] bg-[var(--paper)]">
+          <RotateCcw className="size-5" />
+        </span>
+        <div className="flex-1">
+          <p className="site-muted text-xs tracking-[0.16em]">
+            REVERSE DCF / 价格隐含的增长
+          </p>
+          <h2 className="site-serif mt-3 text-2xl font-medium md:text-3xl">
+            反向 DCF
+          </h2>
+          <p className="site-muted mt-4 text-sm leading-7">
+            固定其他估值假设，从当前股价反推预测期现金流年增长率，看看这份价格需要怎样的增长。
           </p>
           <span className="site-forest mt-6 inline-flex items-center gap-2 text-sm font-medium">
             打开工具

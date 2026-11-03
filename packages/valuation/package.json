@@ -4,10 +4,11 @@
   "version": "0.1.0",
   "type": "module",
   "exports": {
-    ".": "./src/dcf.ts"
+    ".": "./src/dcf.ts",
+    "./reverse-dcf": "./src/reverse-dcf.ts"
   },
   "scripts": {
-    "test": "tsx --test src/dcf.test.ts",
+    "test": "tsx --test src/*.test.ts",
     "types:check": "tsc --noEmit"
   },
   "devDependencies": {
