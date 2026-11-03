@@ -14,6 +14,7 @@ export const blogContentRoute = "/llms.mdx/blog";
 export const toolsRoute = "/tools";
 export const dcfRoute = `${toolsRoute}/dcf`;
 export const reverseDcfRoute = `${toolsRoute}/reverse-dcf`;
+export const annualReturnRoute = `${toolsRoute}/annual-return`;
 
 export const siteSections = [
   { label: "知识库", url: knowledgeRoute },

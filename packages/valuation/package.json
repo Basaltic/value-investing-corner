@@ -5,7 +5,8 @@
   "type": "module",
   "exports": {
     ".": "./src/dcf.ts",
-    "./reverse-dcf": "./src/reverse-dcf.ts"
+    "./reverse-dcf": "./src/reverse-dcf.ts",
+    "./annual-return": "./src/annual-return.ts"
   },
   "scripts": {
     "test": "tsx --test src/*.test.ts",
