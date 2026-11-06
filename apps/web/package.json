@@ -15,9 +15,12 @@
     "format": "biome format --write",
     "check": "biome check && corepack pnpm types:check",
     "check:fix": "biome check --write",
-    "test": "node --test scripts/sync-content.test.mjs scripts/algolia-layout.test.mjs"
+    "test": "node --test scripts/sync-content.test.mjs scripts/algolia-layout.test.mjs && tsx --test lib/thesis/*.test.ts"
   },
   "dependencies": {
+    "@value-investing/content": "workspace:*",
+    "@value-investing/content-schema": "workspace:*",
+    "@value-investing/valuation": "workspace:*",
     "@vercel/analytics": "^2.0.1",
     "@vercel/speed-insights": "^2.0.0",
     "algoliasearch": "^5.60.0",
@@ -28,10 +31,7 @@
     "next": "16.3.8",
     "react": "^19.3.0",
     "react-dom": "^19.3.0",
-    "zod": "^4.6.7",
-    "@value-investing/valuation": "workspace:*",
-    "@value-investing/content-schema": "workspace:*",
-    "@value-investing/content": "workspace:*"
+    "zod": "^4.6.7"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.3.3",
@@ -39,6 +39,7 @@
     "@types/node": "^26.6.4",
     "@types/react": "^19.3.0",
     "@types/react-dom": "^19.3.0",
+    "fake-indexeddb": "^6.2.7",
     "postcss": "^8.5.28",
     "tailwindcss": "^4.3.3",
     "typescript": "^7.0.2"
