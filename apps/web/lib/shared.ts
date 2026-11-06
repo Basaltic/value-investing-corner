@@ -18,9 +18,9 @@ export const annualReturnRoute = `${toolsRoute}/annual-return`;
 export const thesesRoute = "/theses";
 
 export const siteSections = [
+  { label: "投资论点", url: thesesRoute },
   { label: "知识库", url: knowledgeRoute },
   { label: "小工具", url: toolsRoute },
-  { label: "投资论点", url: thesesRoute },
 ];
 
 const getKnowledgeContentUrl = createGetUrl(knowledgeContentRoute);

@@ -1,6 +1,6 @@
-import { ArrowUpRight, BookOpen, Calculator } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
-import { toolsRoute } from "@/lib/shared";
+import { knowledgeRoute, thesesRoute, toolsRoute } from "@/lib/shared";
 
 export default function HomePage() {
   return (
@@ -26,10 +26,24 @@ export default function HomePage() {
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <Link
-                href="/knowledge"
+                href={knowledgeRoute}
                 className="inline-flex items-center gap-2 rounded-full bg-[var(--ink)] px-6 py-3 text-sm font-medium text-[var(--paper)] transition-transform hover:-translate-y-0.5"
               >
                 浏览知识库
+                <ArrowUpRight className="size-4" />
+              </Link>
+              <Link
+                href={thesesRoute}
+                className="site-rule inline-flex items-center gap-2 rounded-full border bg-[var(--paper)] px-6 py-3 text-sm font-medium transition-transform hover:-translate-y-0.5 hover:border-[var(--forest)]"
+              >
+                投资论点
+                <ArrowUpRight className="size-4" />
+              </Link>
+              <Link
+                href={toolsRoute}
+                className="site-rule inline-flex items-center gap-2 rounded-full border bg-[var(--paper)] px-6 py-3 text-sm font-medium transition-transform hover:-translate-y-0.5 hover:border-[var(--forest)]"
+              >
+                小工具
                 <ArrowUpRight className="size-4" />
               </Link>
             </div>
@@ -86,63 +100,6 @@ export default function HomePage() {
               </p>
             </article>
           ))}
-        </div>
-      </section>
-
-      <section className="relative mx-auto w-full max-w-6xl px-6 py-20 md:px-10 md:py-28">
-        <div className="mb-10 flex items-end justify-between gap-6">
-          <div>
-            <p className="site-muted text-[11px] uppercase tracking-[0.22em]">
-              Explore the archive
-            </p>
-            <h2 className="site-serif mt-3 text-3xl font-medium md:text-4xl">
-              两种方式，一个长期目标
-            </h2>
-          </div>
-        </div>
-
-        <div className="grid gap-5 lg:grid-cols-2">
-          <Link
-            href="/knowledge"
-            className="group site-rule flex min-h-64 flex-col justify-between rounded-3xl border bg-[var(--paper-deep)] p-7 transition-colors hover:border-[var(--forest)] md:p-9"
-          >
-            <div className="flex items-start justify-between">
-              <span className="grid size-11 place-items-center rounded-full border border-[var(--line)] bg-[var(--paper)]">
-                <BookOpen className="site-forest size-5" />
-              </span>
-              <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-            </div>
-            <div>
-              <span className="site-muted text-xs tracking-[0.16em]">
-                01 / KNOWLEDGE
-              </span>
-              <h3 className="site-serif mt-3 text-3xl font-medium">知识库</h3>
-              <p className="site-muted mt-3 max-w-md text-sm leading-7">
-                从投资人物、核心思想与原始资料出发，沿着清晰的学习路径进入价值投资。
-              </p>
-            </div>
-          </Link>
-
-          <Link
-            href={toolsRoute}
-            className="group site-rule flex min-h-64 flex-col justify-between rounded-3xl border bg-[var(--paper-deep)] p-7 transition-colors hover:border-[var(--forest)] md:p-9"
-          >
-            <div className="flex items-start justify-between">
-              <span className="grid size-11 place-items-center rounded-full border border-[var(--line)] bg-[var(--paper)]">
-                <Calculator className="site-forest size-5" />
-              </span>
-              <ArrowUpRight className="size-5 transition-transform group-hover:-translate-y-1 group-hover:translate-x-1" />
-            </div>
-            <div>
-              <span className="site-muted text-xs tracking-[0.16em]">
-                02 / TOOLS
-              </span>
-              <h3 className="site-serif mt-3 text-3xl font-medium">小工具</h3>
-              <p className="site-muted mt-3 max-w-md text-sm leading-7">
-                用方便的小工具辅助独立判断，从现金流折现估值开始，让计算有据可查。
-              </p>
-            </div>
-          </Link>
         </div>
       </section>
     </main>
