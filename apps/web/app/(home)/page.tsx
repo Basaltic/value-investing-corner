@@ -26,15 +26,8 @@ export default function HomePage() {
             </p>
             <div className="mt-10 flex flex-wrap gap-3">
               <Link
-                href={knowledgeRoute}
-                className="inline-flex items-center gap-2 rounded-full bg-[var(--ink)] px-6 py-3 text-sm font-medium text-[var(--paper)] transition-transform hover:-translate-y-0.5"
-              >
-                浏览知识库
-                <ArrowUpRight className="size-4" />
-              </Link>
-              <Link
                 href={thesesRoute}
-                className="site-rule inline-flex items-center gap-2 rounded-full border bg-[var(--paper)] px-6 py-3 text-sm font-medium transition-transform hover:-translate-y-0.5 hover:border-[var(--forest)]"
+                className="inline-flex items-center gap-2 rounded-full bg-[var(--ink)] px-6 py-3 text-sm font-medium text-[var(--paper)] transition-transform hover:-translate-y-0.5"
               >
                 投资论点
                 <ArrowUpRight className="size-4" />
@@ -44,6 +37,13 @@ export default function HomePage() {
                 className="site-rule inline-flex items-center gap-2 rounded-full border bg-[var(--paper)] px-6 py-3 text-sm font-medium transition-transform hover:-translate-y-0.5 hover:border-[var(--forest)]"
               >
                 小工具
+                <ArrowUpRight className="size-4" />
+              </Link>
+              <Link
+                href={knowledgeRoute}
+                className="site-rule inline-flex items-center gap-2 rounded-full border bg-[var(--paper)] px-6 py-3 text-sm font-medium transition-transform hover:-translate-y-0.5 hover:border-[var(--forest)]"
+              >
+                资料库
                 <ArrowUpRight className="size-4" />
               </Link>
             </div>
